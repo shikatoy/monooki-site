@@ -796,10 +796,10 @@ const QUESTION_SETS = {
     label:'Approach 02 — サイズで選ぶ',
     ai:'設置スペースに合わせて、質問をご用意しています',
     questions: [
-      { type:'slider', q:'設置できるスペースを教えてください。', hint:'スライダーを動かすと、右の図が変わります。' },
-      { q:'高さに制限はありますか？', hint:'設置時は本体の下に約10cmの基礎用ブロックを敷くため、「本体高さ＋約10cm」でお考えください。', options:[
-        { label:'窓の下に収めたい ── 約1.2m以下', tags:{ low:3, small:1 } },
-        { label:'一般的な高さまで ── 約2.2m', tags:{ medium:1 } },
+      { type:'slider', q:'設置できるスペースを教えてください。', hint:'スライダーを動かすと、右の図が変わります。判定では屋根の張り出しと作業スペース（左右・背面 各約10cm）も自動で見込みます。' },
+      { q:'高さに制限はありますか？', hint:'設置時は本体の下に約10cmの基礎用ブロックを敷くため、「本体高さ＋約10cm」で判定します。', options:[
+        { label:'窓の下に収めたい ── 約1.2m以下', tags:{ low:3, small:1 }, hMax:1200 },
+        { label:'一般的な高さまで ── 約2.4m', tags:{ medium:1 }, hMax:2400 },
         { label:'制限なし ── 背の高い物置もOK', tags:{ tall:3 } } ] },
       { q:'扉のタイプにご希望はありますか？', hint:'扉の前のスペースや、出し入れする物の大きさで選ぶのがおすすめです。', options:[
         { label:'引き戸 ── 扉の前が狭くてもOK', tags:{ slide:3 } },
@@ -859,9 +859,17 @@ function sizeRangeLabel(p){
   const label = p.sizesComplete ? `全${s.length}種` : `${s.length}種（代表）`;
   return `サイズ展開 ${label} / 間口 ${fmtNum(wMin)}〜${fmtNum(wMax)} mm`;
 }
-/* ユーザーの設置スペース(mm)に収まる最大サイズを返す */
-function bestFitSize(p, wMM, dMM){
-  const c = sortedSizes(p).filter(s => s.w <= wMM && s.d <= dMM);
+/* ユーザーの設置スペース(mm)に収まる最大サイズを返す（実務基準の判定）
+   ・屋根の張り出し: 本体寸法の約+5%で判定
+   ・作業スペース: 左右 各100mm＋背面100mm を確保
+   ・高さ制限がある場合: 基礎用ブロック分 +100mm を加えて判定 */
+function bestFitSize(p, wMM, dMM, hMM){
+  const c = sortedSizes(p).filter(s => {
+    const reqW = Math.round(s.w * 1.05) + 200;
+    const reqD = Math.round(s.d * 1.05) + 100;
+    const okH = !hMM || (s.h + 100) <= hMM;
+    return reqW <= wMM && reqD <= dMM && okH;
+  });
   return c.length ? c[c.length - 1] : null;
 }
 
@@ -1046,7 +1054,7 @@ function renderStep(){
   quizBody.querySelectorAll('.opt-row').forEach(btn => {
     btn.addEventListener('click', () => {
       const o = q.options[Number(btn.dataset.opt)];
-      state.answers.push({ label:o.label, tags:o.tags });
+      state.answers.push({ label:o.label, tags:o.tags, hMax:o.hMax });
       state.step++;
       transitionTo(renderStep);
     });
@@ -1172,13 +1180,16 @@ function renderResults(){
     return { p, score, matched };
   }).sort((a, b) => b.score - a.score);
 
-  /* サイズ診断の場合: 入力スペースに収まるサイズを持つシリーズを優先（全サイズがマッチング対象） */
-  const space = state.mode === 'size' ? { w: state.sizeSel.w * 10, d: state.sizeSel.d * 10 } : null;
+  /* サイズ診断の場合: 入力スペースに収まるサイズを持つシリーズを優先（全サイズがマッチング対象）
+     判定は屋根張り出し＋作業スペース＋高さ制限（ブロック分込み）を考慮した実務基準 */
+  const hLimit = state.mode === 'size' ? (state.answers.map(a => a.hMax).filter(Boolean)[0] || null) : null;
+  const space = state.mode === 'size' ? { w: state.sizeSel.w * 10, d: state.sizeSel.d * 10, h: hLimit } : null;
   let pool = scored.filter(r => r.score > 0);
   if(pool.length === 0) pool = scored.slice(0, 1);
+  let noFit = false;
   if(space){
-    const fitted = pool.filter(r => bestFitSize(r.p, space.w, space.d));
-    if(fitted.length) pool = fitted;
+    const fitted = pool.filter(r => bestFitSize(r.p, space.w, space.d, space.h));
+    if(fitted.length) pool = fitted; else noFit = true;
   }
   let results = pool.slice(0, 3);
   const maxScore = results[0].score || 1;
@@ -1191,18 +1202,19 @@ function renderResults(){
       <p class="font-mono text-[11px] tracking-widest2 uppercase text-rust">Diagnosis Result</p>
       <h3 class="mt-5 font-serif font-extrabold text-3xl md:text-5xl leading-snug">おすすめの物置、${results.length}件です。</h3>
       <p class="mt-4 text-[13px] text-neutral-500">ご回答との相性が良い順にご紹介します。寸法・仕様は代表的な参考値です。</p>
+      ${noFit ? `<p class="mt-3 text-[12px] font-bold text-rust">※ ご入力のスペースに（屋根の張り出し・作業スペースの余裕込みで）収まるサイズが見つかりませんでした。条件の近い候補を参考として表示しています。</p>` : ''}
 
       <div class="mt-12 space-y-10">
         ${results.map((r, i) => {
           const pct = Math.min(98, Math.round(58 + 40 * (r.score / maxScore) * Math.min(1, r.score / totalWeight / 1.2)));
           const reasons = r.matched.sort((a, b) => b.w - a.w).slice(0, 3).map(x => TAG_REASONS[x.tag]).filter(Boolean);
-          const fit = space ? bestFitSize(r.p, space.w, space.d) : null;
+          const fit = space ? bestFitSize(r.p, space.w, space.d, space.h) : null;
           const ds = fit || repSize(r.p);
           const sizeCount = (r.p.sizes || []).length;
           const dimsLabel = ds
             ? `${esc(ds.code)}： ${esc(fmtDims(ds))}${sizeCount > 1 ? `（ほか全${sizeCount}サイズ展開）` : ''}`
             : '公式カタログ参照';
-          const fitNote = fit ? ` お選びのスペース（間口${fmtNum(space.w)}×奥行${fmtNum(space.d)}mm）には「${esc(fit.code)}」が収まります。` : '';
+          const fitNote = fit ? ` お選びのスペース（間口${fmtNum(space.w)}×奥行${fmtNum(space.d)}mm）には、屋根の張り出しと作業スペース（左右・背面 各約10cm）${space.h ? '、高さ制限（ブロック約10cm込み）' : ''}を見込んでも「${esc(fit.code)}」が収まります。` : '';
           return `
           <article class="border border-line">
             <div class="flex items-stretch border-b border-line">
