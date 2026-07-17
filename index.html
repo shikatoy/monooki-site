@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物置どれがいい？ ─ 空間と用途を美しく調和させる、物置のコンシェルジュ。</title>
+<meta name="description" content="タクボ・イナバ・ヨドコウの3大メーカーから、あなたにぴったりの物置を1分で診断。用途・サイズ・メーカーの3つの入口から選べるマッチング診断と、全製品索引・更新履歴・コラムをお届けします。">
+<meta name="theme-color" content="#101010">
+<!-- OGP/canonical: 公開URL設定済み（https://shikatoy.github.io/monooki-site/） -->
+<link rel="canonical" href="https://shikatoy.github.io/monooki-site/">
+<meta property="og:url" content="https://shikatoy.github.io/monooki-site/">
+<meta property="og:image" content="https://shikatoy.github.io/monooki-site/images/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="物置どれがいい？｜1分でわかる物置マッチング診断">
+<meta property="og:description" content="タクボ・イナバ・ヨドコウの3大メーカーから、あなたにぴったりの物置を1分で診断します。">
+<meta property="og:site_name" content="物置どれがいい？">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "物置どれがいい？",
+  "alternateName": "Storage Concierge Archive",
+  "url": "https://shikatoy.github.io/monooki-site/",
+  "description": "タクボ・イナバ・ヨドコウの3大メーカーから、あなたにぴったりの物置を1分で診断する物置比較メディア。物置・バイク車庫・ガレージの製品索引と更新履歴、コラムを掲載。",
+  "inLanguage": "ja"
+}
+</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23101010'/%3E%3Ctext x='32' y='45' font-family='serif' font-size='34' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3E倉%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700;800&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        serif: ['"Shippori Mincho B1"', 'serif'],
+        mono: ['"IBM Plex Mono"', 'monospace']
+      },
+      colors: {
+        ink: '#101010',
+        paper: '#ffffff',
+        line: '#171717',
+        linesoft: '#dcdcd8',
+        rust: '#a3512b'
+      },
+      letterSpacing: { widest2: '.28em' }
+    }
+  }
+}
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { -webkit-font-smoothing: antialiased; }
+  section[id] { scroll-margin-top: 64px; }
+  ::selection { background: #a3512b; color: #fff; }
+
+  .tate { writing-mode: vertical-rl; text-orientation: mixed; }
+
+  /* ───── マーキー ───── */
+  .marquee { overflow: hidden; white-space: nowrap; }
+  .marquee-inner { display: inline-block; animation: marq 36s linear infinite; }
+  @keyframes marq { to { transform: translateX(-50%); } }
+
+  /* ───── モーダル ───── */
+  .modal { transition: opacity .4s ease, visibility .4s ease; }
+  .modal-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  .step-enter { animation: stepIn .5s cubic-bezier(.22,1,.36,1) both; }
+  @keyframes stepIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  .step-leave { opacity: 0; transform: translateY(-14px); transition: all .22s ease; }
+
+  /* ───── 罫線ホバー（選択肢） ───── */
+  .opt-row { position: relative; transition: color .25s ease; }
+  .opt-row::before { content: ''; position: absolute; inset: 0; background: #101010; transform: scaleY(0); transform-origin: bottom; transition: transform .28s cubic-bezier(.22,1,.36,1); z-index: 0; }
+  .opt-row:hover::before { transform: scaleY(1); }
+  .opt-row:hover { color: #fff; }
+  .opt-row > * { position: relative; z-index: 1; }
+
+  /* ───── エントリーバナー ───── */
+  .entry-banner { position: relative; overflow: hidden; transition: color .3s ease; }
+  .entry-banner::before { content: ''; position: absolute; inset: 0; background: #101010; transform: translateY(101%); transition: transform .38s cubic-bezier(.22,1,.36,1); }
+  .entry-banner:hover::before { transform: translateY(0); }
+  .entry-banner:hover { color: #fff; }
+  .entry-banner > * { position: relative; }
+  .entry-banner .arrow { transition: transform .35s cubic-bezier(.22,1,.36,1); display: inline-block; }
+  .entry-banner:hover .arrow { transform: translateX(14px); }
+  .entry-banner:hover .entry-desc { color: #a3a3a3; }
+  .entry-banner:hover .entry-num { color: #a3512b; }
+
+  /* ───── アコーディオン ───── */
+  .qa-panel { max-height: 0; overflow: hidden; transition: max-height .45s cubic-bezier(.22,1,.36,1); }
+  .qa-open .qa-panel { max-height: 420px; }
+  .qa-cross { position: relative; width: 14px; height: 14px; }
+  .qa-cross::before, .qa-cross::after { content: ''; position: absolute; background: currentColor; transition: transform .35s ease; }
+  .qa-cross::before { left: 0; top: 6px; width: 14px; height: 2px; }
+  .qa-cross::after { left: 6px; top: 0; width: 2px; height: 14px; }
+  .qa-open .qa-cross::after { transform: rotate(90deg) scaleY(0); }
+  .qa-open .qa-cross::before { transform: rotate(180deg); }
+  .qa-item.col-item.qa-open .qa-panel { max-height: 2400px; }
+
+  /* ───── 図版（ハッチ地） ───── */
+  .hatch-bg { background-image: repeating-linear-gradient(45deg, transparent, transparent 7px, rgba(16,16,16,.05) 7px, rgba(16,16,16,.05) 8px); }
+
+  /* ───── 図版リンク（公式ページ） ───── */
+  .vis-link { position: relative; display: block; cursor: pointer; }
+  .vis-link .vis-tag { position: absolute; top: 8px; right: 8px; opacity: 0; transition: opacity .3s ease; }
+  .vis-link:hover .vis-tag { opacity: 1; }
+
+  /* ───── スクロール演出 ───── */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .75s cubic-bezier(.22,1,.36,1), transform .75s cubic-bezier(.22,1,.36,1); }
+  .reveal.revealed { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+  /* ───── ナビ現在地ハイライト ───── */
+  header nav a.nav-active { color: #a3512b; }
+  .u-link.nav-active::after { transform: scaleX(1); transform-origin: left; background: #a3512b; }
+
+  /* ───── 索引フィルタ ───── */
+  .idx-filter { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; border: 1px solid #171717; padding: 6px 14px; transition: all .25s ease; }
+  .idx-filter:hover { background: #f0f0ec; }
+  .idx-filter.active { background: #101010; color: #ffffff; }
+
+  /* ───── アウトライン文字 ───── */
+  .outline-w { -webkit-text-stroke: 1px rgba(255,255,255,.55); color: transparent; }
+  .outline-k { -webkit-text-stroke: 1px rgba(16,16,16,.35); color: transparent; }
+
+  /* ───── フォーム下線 ───── */
+  .ed-input { background: transparent; border: 0; border-bottom: 1px solid #171717; border-radius: 0; padding: 12px 0; width: 100%; font-size: 15px; outline: none; transition: border-color .3s ease; }
+  .ed-input:focus { border-bottom-color: #a3512b; border-bottom-width: 2px; margin-bottom: -1px; }
+  .ed-input::placeholder { color: #b9b9b4; }
+
+  /* ───── スライダー（設計図風） ───── */
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 1px; background: #171717; outline: none; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; background: #101010; border: none; border-radius: 0; cursor: ew-resize; transition: background .2s; }
+  input[type=range]::-webkit-slider-thumb:hover { background: #a3512b; }
+  input[type=range]::-moz-range-thumb { width: 16px; height: 16px; background: #101010; border: none; border-radius: 0; cursor: ew-resize; }
+  #size-box { transition: width .2s ease, height .2s ease; background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(16,16,16,.08) 5px, rgba(16,16,16,.08) 6px); }
+
+  /* ───── 汎用アニメーション ───── */
+  .fade-up { animation: fadeUp .7s cubic-bezier(.22,1,.36,1) both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  .u-link { position: relative; }
+  .u-link::after { content: ''; position: absolute; left: 0; bottom: -3px; width: 100%; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .3s cubic-bezier(.22,1,.36,1); }
+  .u-link:hover::after { transform: scaleX(1); transform-origin: left; }
+</style>
+</head>
+<body class="bg-paper text-ink font-sans">
+
+<!-- ═══════════ ヘッダー ═══════════ -->
+<header class="fixed top-0 inset-x-0 z-40 bg-paper/95 backdrop-blur-sm border-b border-line">
+  <div class="max-w-[1440px] mx-auto px-5 md:px-10 h-16 flex items-center justify-between gap-4">
+    <a href="#top" class="flex items-center gap-3 shrink-0">
+      <span class="w-8 h-8 bg-ink text-paper font-serif font-bold text-sm flex items-center justify-center select-none">倉</span>
+      <span class="font-serif font-bold text-base md:text-lg tracking-wide">物置どれがいい？</span>
+    </a>
+    <nav class="flex items-center gap-4 md:gap-8 font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase">
+      <a href="#shindan" class="u-link hidden sm:block">診断</a>
+      <a href="#makers" class="u-link hidden sm:block">メーカー</a>
+      <a href="#archive" class="u-link hidden sm:block">索引</a>
+      <a href="#column" class="u-link hidden sm:block">コラム</a>
+      <a href="#faq" class="u-link hidden sm:block">Q&amp;A</a>
+      <a href="#journal" class="u-link hidden sm:block">更新履歴</a>
+      <a href="contact.html" class="hidden sm:block border border-line px-4 py-2 hover:bg-ink hover:text-paper transition-colors duration-300">CONTACT</a>
+      <button id="menu-btn" class="sm:hidden border border-line px-4 py-2 font-mono text-[11px] tracking-widest2 uppercase" aria-label="メニューを開閉">MENU</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══════════ モバイルメニュー ═══════════ -->
+<div id="mobile-menu" class="hidden sm:hidden fixed inset-x-0 top-16 bottom-0 z-40 bg-paper border-t border-line overflow-y-auto">
+  <nav class="px-5 py-4">
+    <a href="#shindan" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">01</span><span class="font-serif font-bold text-2xl">診断</span></a>
+    <a href="#makers" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">02</span><span class="font-serif font-bold text-2xl">メーカー</span></a>
+    <a href="#archive" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">03</span><span class="font-serif font-bold text-2xl">索引</span></a>
+    <a href="#column" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">04</span><span class="font-serif font-bold text-2xl">コラム</span></a>
+    <a href="#faq" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">05</span><span class="font-serif font-bold text-2xl">よくあるご質問</span></a>
+    <a href="#journal" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">06</span><span class="font-serif font-bold text-2xl">更新履歴</span></a>
+    <a href="contact.html" class="flex items-baseline gap-5 py-5"><span class="font-mono text-[11px] text-neutral-400">07</span><span class="font-serif font-bold text-2xl">お問い合わせ</span></a>
+  </nav>
+  <p class="px-5 pb-8 font-mono text-[10px] tracking-widest2 uppercase text-neutral-400">物置どれがいい？ — Storage Concierge</p>
+</div>
+
+<!-- ═══════════ ヒーロー ═══════════ -->
+<section id="top" class="pt-16">
+  <div class="border-b border-line">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 grid md:grid-cols-12">
+      <div class="md:col-span-9 py-14 md:py-24 md:pr-14">
+        <div class="flex items-center justify-between font-mono text-[10px] md:text-[11px] tracking-widest2 text-neutral-500 uppercase">
+          <span>Storage Concierge — Archive</span>
+          <span class="hidden md:inline">Vol.01 / 2026</span>
+          <span class="text-rust">JP</span>
+        </div>
+        <h1 class="mt-10 md:mt-14 font-serif font-extrabold leading-[0.98] tracking-tight" style="font-size:clamp(3.2rem, 10.5vw, 9.5rem)">
+          物置<br>どれがいい？
+        </h1>
+        <div class="mt-10 md:mt-16 flex flex-wrap items-end justify-between gap-6">
+          <p class="max-w-md text-sm leading-loose text-neutral-600">
+            タクボ・イナバ・ヨドコウ。定番3メーカーの中から、収納したい物や設置スペースにぴったり合う一台を、いっしょにお探しします。質問は3〜4問、1分ほどで終わりますので、お気軽にお試しください。
+          </p>
+          <a href="#shindan" class="font-mono text-[11px] tracking-widest2 uppercase u-link">Select Your Approach ↓</a>
+        </div>
+      </div>
+      <div class="hidden md:flex md:col-span-3 border-l border-line items-center justify-center py-24">
+        <p class="tate font-serif font-bold text-xl leading-[2.4] tracking-[.35em]">
+          空間と用途を美しく調和させる、<br>物置のコンシェルジュ。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- マーキー -->
+  <div class="marquee border-b border-line py-4 select-none" aria-hidden="true">
+    <div class="marquee-inner font-mono text-lg md:text-2xl tracking-[.3em] uppercase">
+      <span class="outline-k">Takubo</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span>Inaba</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span class="outline-k">Yodoko</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span>物置</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span class="outline-k">バイク車庫</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span>ガレージ</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span class="outline-k">Takubo</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span>Inaba</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span class="outline-k">Yodoko</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span>物置</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span class="outline-k">バイク車庫</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span>ガレージ</span>&nbsp;&nbsp;■&nbsp;&nbsp;
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 診断エントリー（分割バナー） ═══════════ -->
+<section id="shindan">
+  <div class="border-b border-line">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-5 flex items-center justify-between font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">
+      <span>Matching System / 物置マッチング診断</span>
+      <span class="text-rust">AI Assisted</span>
+    </div>
+  </div>
+
+  <button data-mode="use" class="entry-banner block w-full text-left border-b border-line">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-10 md:py-16 grid grid-cols-12 items-center gap-3 md:gap-6">
+      <span class="entry-num col-span-3 md:col-span-1 font-mono text-sm md:text-base text-neutral-400 transition-colors">[ 01 ]</span>
+      <span class="col-span-9 md:col-span-4 font-serif font-bold text-3xl md:text-5xl tracking-wide">用途で選ぶ</span>
+      <span class="entry-desc hidden md:block col-span-5 text-[13px] leading-relaxed text-neutral-500 transition-colors">「何を、どのくらいの頻度でしまうか」から、ぴったりの構造や扉のタイプを一緒に考える、いちばん定番の選び方です。</span>
+      <span class="col-span-12 md:col-span-2 text-right font-mono text-2xl"><span class="arrow">→</span></span>
+    </div>
+  </button>
+
+  <button data-mode="size" class="entry-banner block w-full text-left border-b border-line">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-10 md:py-16 grid grid-cols-12 items-center gap-3 md:gap-6">
+      <span class="entry-num col-span-3 md:col-span-1 font-mono text-sm md:text-base text-neutral-400 transition-colors">[ 02 ]</span>
+      <span class="col-span-9 md:col-span-4 font-serif font-bold text-3xl md:text-5xl tracking-wide">サイズで選ぶ</span>
+      <span class="entry-desc hidden md:block col-span-5 text-[13px] leading-relaxed text-neutral-500 transition-colors">設置できるスペースが決まっている方はこちら。間口・奥行・高さをスライダーで入力すると、無理なく収まるサイズをご案内します。</span>
+      <span class="col-span-12 md:col-span-2 text-right font-mono text-2xl"><span class="arrow">→</span></span>
+    </div>
+  </button>
+
+  <button data-mode="maker" class="entry-banner block w-full text-left border-b border-line">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-10 md:py-16 grid grid-cols-12 items-center gap-3 md:gap-6">
+      <span class="entry-num col-span-3 md:col-span-1 font-mono text-sm md:text-base text-neutral-400 transition-colors">[ 03 ]</span>
+      <span class="col-span-9 md:col-span-4 font-serif font-bold text-3xl md:text-5xl tracking-wide">メーカーで選ぶ</span>
+      <span class="entry-desc hidden md:block col-span-5 text-[13px] leading-relaxed text-neutral-500 transition-colors">扉の軽さのタクボ、頑丈さのイナバ、サビに強いヨドコウ。それぞれの持ち味から、相性のよいメーカーを見つける選び方です。</span>
+      <span class="col-span-12 md:col-span-2 text-right font-mono text-2xl"><span class="arrow">→</span></span>
+    </div>
+  </button>
+</section>
+
+<!-- ═══════════ 診断モーダル ═══════════ -->
+<div id="quiz-modal" class="modal modal-hidden fixed inset-0 z-50 bg-paper flex flex-col">
+  <div class="border-b border-line shrink-0">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 h-16 flex items-center justify-between">
+      <span id="modal-label" class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase">Matching System</span>
+      <button id="modal-close" class="font-mono text-[11px] tracking-widest2 uppercase hover:text-rust transition-colors">Close ×</button>
+    </div>
+  </div>
+  <div class="h-[2px] bg-neutral-200 shrink-0"><div id="quiz-progress" class="h-full bg-rust transition-all duration-700" style="width:0%"></div></div>
+  <div class="flex-1 overflow-y-auto">
+    <div id="quiz-body" class="max-w-3xl mx-auto px-5 md:px-10 py-12 md:py-20"></div>
+  </div>
+  <div class="border-t border-line shrink-0 bg-paper">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 h-14 flex items-center justify-between">
+      <button id="quiz-back" class="font-mono text-[11px] tracking-widest2 uppercase hover:text-rust transition-colors">← Back</button>
+      <span id="quiz-step-label" class="font-mono text-[11px] tracking-widest2 uppercase text-neutral-400"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ 広告欄 1 ═══════════ -->
+<!-- AD_SLOT_1_START: 広告タグ（Google AdSense等）は下の .ad-slot 内に貼り付けてください。中のプレースホルダー表示は削除してOKです -->
+<aside class="border-b border-line" aria-label="広告">
+  <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-8">
+    <p class="font-mono text-[9px] tracking-widest2 uppercase text-neutral-400 mb-3">AD — 広告</p>
+    <div class="ad-slot border border-dashed border-neutral-300 min-h-[100px] md:min-h-[120px] flex items-center justify-center">
+      <span class="font-mono text-[10px] tracking-widest text-neutral-300 uppercase">Advertisement Space</span>
+    </div>
+  </div>
+</aside>
+<!-- AD_SLOT_1_END -->
+
+<!-- ═══════════ 三大構法（モノリス） ═══════════ -->
+<section id="makers" class="bg-ink text-paper">
+  <div class="border-b border-neutral-700">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-16 md:py-24 grid md:grid-cols-12 gap-8 items-end">
+      <div class="md:col-span-8">
+        <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">The Big Three — Monoliths</p>
+        <h2 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">三大メーカー。</h2>
+      </div>
+      <p class="md:col-span-4 text-[13px] leading-loose text-neutral-400">
+        国内の物置市場を支えている、定番の3社をご紹介します。それぞれ得意分野がはっきり分かれているので、ぜひ見比べてみてください。
+      </p>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 md:divide-x divide-y md:divide-y-0 divide-neutral-700 border-b border-neutral-700">
+
+    <!-- タクボ -->
+    <article class="group px-5 md:px-10 py-14 md:py-20 transition-colors duration-500 hover:bg-neutral-900">
+      <p class="font-mono text-[11px] tracking-widest2 text-neutral-500">01</p>
+      <p class="mt-8 font-mono uppercase tracking-[.12em] outline-w leading-none group-hover:text-paper transition-colors duration-500" style="font-size:clamp(2.6rem,4.5vw,4rem);-webkit-text-stroke-color:rgba(255,255,255,.5)">TAKUBO</p>
+      <h3 class="mt-3 font-serif font-bold text-2xl">タクボ物置<span class="ml-3 text-xs font-sans font-normal text-neutral-500">田窪工業所</span></h3>
+      <p class="mt-8 text-[13px] leading-loose text-neutral-300">
+        扉の開け閉めのしやすさに、とことんこだわるメーカーです。重さを上のレールで支える吊り戸構造のおかげで、開閉はとても静かで、指一本でもすっと動きます。毎日使うものだからこその、うれしい工夫です。
+      </p>
+      <dl class="mt-10 border-t border-neutral-700 text-[12px]">
+        <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">開閉機構</dt><dd class="col-span-2 leading-relaxed">吊り戸構造による摩擦ゼロの軽い開閉感。レールに砂がたまりにくいのも安心です</dd></div>
+        <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">表面処理</dt><dd class="col-span-2 leading-relaxed">耐食性に優れた特殊焼付塗装。色あせや小さな傷に強い、きれいが長持ちする仕上がりです</dd></div>
+        <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">骨格</dt><dd class="col-span-2 leading-relaxed">柱と梁でしっかり支える軸組フレーム。長く使っても歪みにくい構造です</dd></div>
+      </dl>
+      <div class="mt-10 space-y-0 text-[13px]">
+        <div class="flex items-baseline justify-between py-3 border-b border-neutral-800"><span class="font-mono text-[11px] text-neutral-500">物置</span><span class="text-right">グランプレステージ／Mr.ストックマン／Mr.トールマン</span></div>
+        <div class="flex items-baseline justify-between py-3 border-b border-neutral-800"><span class="font-mono text-[11px] text-neutral-500">バイク車庫</span><span class="text-right">バイクシャッターマン</span></div>
+        <div class="flex items-baseline justify-between py-3"><span class="font-mono text-[11px] text-neutral-500">ガレージ</span><span class="text-right">ベルフォーマ／カールフォーマ</span></div>
+      </div>
+    </article>
+
+    <!-- イナバ -->
+    <article class="group px-5 md:px-10 py-14 md:py-20 transition-colors duration-500 hover:bg-neutral-900">
+      <p class="font-mono text-[11px] tracking-widest2 text-neutral-500">02</p>
+      <p class="mt-8 font-mono uppercase tracking-[.12em] outline-w leading-none group-hover:text-paper transition-colors duration-500" style="font-size:clamp(2.6rem,4.5vw,4rem);-webkit-text-stroke-color:rgba(255,255,255,.5)">INABA</p>
+      <h3 class="mt-3 font-serif font-bold text-2xl">イナバ物置<span class="ml-3 text-xs font-sans font-normal text-neutral-500">稲葉製作所</span></h3>
+      <p class="mt-8 text-[13px] leading-loose text-neutral-300">
+        「100人乗っても大丈夫。」のフレーズでおなじみ、頑丈さが自慢のメーカーです。実際に屋根の上に人が乗る荷重試験を行っているほどで、防犯面の作り込みにも定評があります。長く安心して使いたい方にぴったりです。
+      </p>
+      <dl class="mt-10 border-t border-neutral-700 text-[12px]">
+        <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">骨格</dt><dd class="col-span-2 leading-relaxed">荷重試験に裏付けられた堅牢フレーム。雪の重みや経年の歪みにも強い構造です</dd></div>
+        <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">防犯</dt><dd class="col-span-2 leading-relaxed">複製されにくいディンプルキーを採用。こじ開けに強い、頼もしい錠前です</dd></div>
+        <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">展開</dt><dd class="col-span-2 leading-relaxed">バイク保管庫・ガレージの種類は業界トップクラス。多雪地域向けも揃っています</dd></div>
+      </dl>
+      <div class="mt-10 space-y-0 text-[13px]">
+        <div class="flex items-baseline justify-between py-3 border-b border-neutral-800"><span class="font-mono text-[11px] text-neutral-500">物置</span><span class="text-right">シンプリー／ネクスタ／フォルタ</span></div>
+        <div class="flex items-baseline justify-between py-3 border-b border-neutral-800"><span class="font-mono text-[11px] text-neutral-500">バイク車庫</span><span class="text-right">バイク保管庫（床付・土間）</span></div>
+        <div class="flex items-baseline justify-between py-3"><span class="font-mono text-[11px] text-neutral-500">ガレージ</span><span class="text-right">ガレーディア／アルシア</span></div>
+      </div>
+    </article>
+
+    <!-- ヨドコウ -->
+    <article class="group px-5 md:px-10 py-14 md:py-20 transition-colors duration-500 hover:bg-neutral-900">
+      <p class="font-mono text-[11px] tracking-widest2 text-neutral-500">03</p>
+      <p class="mt-8 font-mono uppercase tracking-[.12em] outline-w leading-none group-hover:text-paper transition-colors duration-500" style="font-size:clamp(2.6rem,4.5vw,4rem);-webkit-text-stroke-color:rgba(255,255,255,.5)">YODOKO</p>
+      <h3 class="mt-3 font-serif font-bold text-2xl">ヨド物置<span class="ml-3 text-xs font-sans font-normal text-neutral-500">淀川製鋼所</span></h3>
+      <p class="mt-8 text-[13px] leading-loose text-neutral-300">
+        もともと鉄鋼メーカーというだけあって、素材の良さが光ります。自社製の高耐久ガルバリウム鋼板はサビにとても強く、海の近くでも安心。独自の3枚扉は開口部が広く、大きな荷物の出し入れもらくらくです。
+      </p>
+      <dl class="mt-10 border-t border-neutral-700 text-[12px]">
+        <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">素材</dt><dd class="col-span-2 leading-relaxed">高耐久ガルバリウム鋼板。サビにとても強く、塩害のある地域でも長持ちします</dd></div>
+        <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">開口</dt><dd class="col-span-2 leading-relaxed">開口部を広く使える独自の3枚扉。大きな物の出し入れがしやすい設計です</dd></div>
+        <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">断熱</dt><dd class="col-span-2 leading-relaxed">断熱構造の「ヨド蔵」シリーズも。結露を抑えて、湿気に弱い物を守ります</dd></div>
+      </dl>
+      <div class="mt-10 space-y-0 text-[13px]">
+        <div class="flex items-baseline justify-between py-3 border-b border-neutral-800"><span class="font-mono text-[11px] text-neutral-500">物置</span><span class="text-right">エスモ／エルモ／ヨド蔵MD</span></div>
+        <div class="flex items-baseline justify-between py-3 border-b border-neutral-800"><span class="font-mono text-[11px] text-neutral-500">バイク車庫</span><span class="text-right">エルモ シャッタータイプ</span></div>
+        <div class="flex items-baseline justify-between py-3"><span class="font-mono text-[11px] text-neutral-500">ガレージ</span><span class="text-right">ラヴィージュ／ヨドガレージ</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ═══════════ 全製品索引 ═══════════ -->
+<section id="archive">
+  <div class="border-b border-line">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-16 md:py-24 grid md:grid-cols-12 gap-8 items-end">
+      <div class="md:col-span-8">
+        <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">Product Index — 図版付</p>
+        <h2 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">索引。</h2>
+      </div>
+      <p class="md:col-span-4 text-[13px] leading-loose text-neutral-500">
+        掲載中の全製品を一覧でご覧いただけます。図版は寸法データから自動で描いた正面図です（写真ではありません。縮尺は製品ごとに異なります）。寸法は本体のみのため、設置時は下に敷く基礎用ブロック分（基本 高さ約10cm）を加えてお考えください。
+      </p>
+    </div>
+  </div>
+  <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-10 md:py-14">
+    <div class="flex flex-wrap items-center gap-x-10 gap-y-4 pb-8">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-400 mr-2">Maker</span>
+        <button class="idx-filter" data-group="maker" data-val="all">All</button>
+        <button class="idx-filter" data-group="maker" data-val="takubo">タクボ</button>
+        <button class="idx-filter" data-group="maker" data-val="inaba">イナバ</button>
+        <button class="idx-filter" data-group="maker" data-val="yodoko">ヨドコウ</button>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-400 mr-2">Type</span>
+        <button class="idx-filter" data-group="cat" data-val="all">All</button>
+        <button class="idx-filter" data-group="cat" data-val="物置">物置</button>
+        <button class="idx-filter" data-group="cat" data-val="バイク車庫">バイク車庫</button>
+        <button class="idx-filter" data-group="cat" data-val="ガレージ">ガレージ</button>
+      </div>
+      <span id="idx-count" class="md:ml-auto font-mono text-[11px] text-neutral-400"></span>
+    </div>
+    <div id="index-grid" class="grid md:grid-cols-3 border-t border-l border-line"></div>
+  </div>
+  <div class="border-b border-line"></div>
+</section>
+
+<!-- ═══════════ 施工技術 Q&A ═══════════ -->
+<section id="faq">
+  <div class="border-b border-line">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-16 md:py-24 grid md:grid-cols-12 gap-8 items-end">
+      <div class="md:col-span-8">
+        <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">Technical Notes</p>
+        <h2 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">よくあるご質問。</h2>
+      </div>
+      <p class="md:col-span-4 text-[13px] leading-loose text-neutral-500">
+        設置前に気になる基礎・寸法・法規のポイントを、こちらで順次ご紹介していく予定です。ただいま内容を準備中です。
+      </p>
+    </div>
+  </div>
+
+  <!-- QA_HTML: 質問と回答は下部スクリプト内の QA_ITEMS 配列で管理（現在は空欄・準備中表示） -->
+  <div id="qa-list" class="max-w-[1440px] mx-auto px-5 md:px-10"></div>
+  <div class="border-b border-line py-14"></div>
+</section>
+
+<!-- ═══════════ コラム（論考） ═══════════ -->
+<section id="column">
+  <div class="border-b border-line">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-16 md:py-24 grid md:grid-cols-12 gap-8 items-end">
+      <div class="md:col-span-8">
+        <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">Editorial Column — 読みもの</p>
+        <h2 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">コラム。</h2>
+      </div>
+      <p class="md:col-span-4 text-[13px] leading-loose text-neutral-500">
+        物置や外構にまつわる読みものコーナーです。見出しをクリックすると全文をお読みいただけます。新しい記事は随時こちらに追加していきます。
+      </p>
+    </div>
+  </div>
+  <div class="max-w-[1440px] mx-auto px-5 md:px-10">
+    <div id="column-list"></div>
+  </div>
+  <div class="border-b border-line py-14"></div>
+</section>
+
+<!-- ═══════════ 広告欄 2 ═══════════ -->
+<!-- AD_SLOT_2_START: 広告タグ（Google AdSense等）は下の .ad-slot 内に貼り付けてください。中のプレースホルダー表示は削除してOKです -->
+<aside class="border-b border-line" aria-label="広告">
+  <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-8">
+    <p class="font-mono text-[9px] tracking-widest2 uppercase text-neutral-400 mb-3">AD — 広告</p>
+    <div class="ad-slot border border-dashed border-neutral-300 min-h-[100px] md:min-h-[120px] flex items-center justify-center">
+      <span class="font-mono text-[10px] tracking-widest text-neutral-300 uppercase">Advertisement Space</span>
+    </div>
+  </div>
+</aside>
+<!-- AD_SLOT_2_END -->
+
+<!-- ═══════════ 更新履歴（ジャーナル） ═══════════ -->
+<section id="journal">
+  <div class="border-b border-line">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-16 md:py-24 grid md:grid-cols-12 gap-8 items-end">
+      <div class="md:col-span-8">
+        <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">Journal — Site Updates</p>
+        <h2 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">更新履歴。</h2>
+      </div>
+      <p class="md:col-span-4 text-[13px] leading-loose text-neutral-500">
+        自動巡回システムが毎朝8:00に3社の新商品・廃盤・モデルチェンジ情報をチェックし、サイトへの追加・削除・入替をこちらに記録しています。<span class="text-rust font-mono text-[11px]">● NEW</span> の印は追加から45日間表示されます。
+      </p>
+    </div>
+  </div>
+  <div class="max-w-[1440px] mx-auto px-5 md:px-10">
+    <div id="journal-list"></div>
+  </div>
+  <div class="border-b border-line py-14"></div>
+</section>
+
+<!-- ═══════════ お問い合わせ（専用ページへの導線） ═══════════ -->
+<section>
+  <a href="contact.html" class="group block border-b border-line hover:bg-ink hover:text-paper transition-colors duration-300">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-16 md:py-20 flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">Correspondence</p>
+        <h2 class="mt-4 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2rem, 5vw, 4rem)">お問い合わせはこちら。</h2>
+        <p class="mt-4 text-[13px] leading-loose text-neutral-500 group-hover:text-neutral-400 transition-colors">物置選びの迷いや設置場所のお悩み、掲載内容へのご意見など、専用ページで受け付けています。</p>
+      </div>
+      <span class="font-mono text-3xl md:text-4xl transition-transform duration-300 group-hover:translate-x-3">→</span>
+    </div>
+  </a>
+</section>
+
+<!-- ═══════════ フッター ═══════════ -->
+<footer class="bg-ink text-paper">
+  <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-16 md:py-20">
+    <!-- 注意書き -->
+    <div class="border border-neutral-500 p-7 md:p-10">
+      <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-rust">Disclaimer — 注意書き</p>
+      <p class="mt-5 font-serif font-bold text-base md:text-xl leading-loose">
+        ※当サイトは物置選びの参考としてご利用ください。実際の設置スペースやサイズ違いによるトラブルの責任は負いかねます。ご購入前には、必ず専門業者による現地の設置・測量調査をご依頼ください。
+      </p>
+      <p class="mt-4 pt-4 border-t border-neutral-700 font-serif font-bold text-sm md:text-base leading-loose text-neutral-300">
+        ※設置の際は、本体の下に基礎用コンクリートブロック（基本 高さ約10cm）を敷きます。実際の高さは<span class="text-paper">「本体高さ＋約10cm」</span>となるため、窓下や軒下など高さに制限のある場所では、ブロック分を含めた収まりをご確認ください。
+      </p>
+    </div>
+
+    <!-- 免責事項 -->
+    <div class="mt-4 border border-neutral-700 p-6 md:p-8">
+      <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">Site Policy — 免責事項</p>
+      <div class="mt-4 grid md:grid-cols-2 gap-x-10 gap-y-3 text-[12px] leading-relaxed text-neutral-400">
+        <p>掲載の製品情報は各メーカーの公式発表をもとに更新していますが、内容の正確性・完全性・最新性を保証するものではありません。仕様・寸法・価格・販売状況は、必ず各メーカーの公式サイト・最新カタログでご確認ください。</p>
+        <p>当サイトからリンクする外部サイト（メーカー公式サイトを含む）の内容について、当サイトは一切の責任を負いません。リンク先のご利用は各サイトの規約に従ってください。</p>
+        <p>当サイトの情報のご利用により生じたいかなる損害についても、当サイトは責任を負いかねますので、あらかじめご了承ください。</p>
+        <p>お問い合わせの際にいただいたお名前・メールアドレスは、お問い合わせへの回答のみに使用し、それ以外の目的では利用しません。</p>
+      </div>
+    </div>
+
+    <div class="mt-14 md:mt-16 flex flex-col md:flex-row md:items-end justify-between gap-10">
+      <div>
+        <p class="font-serif font-extrabold text-3xl md:text-4xl">物置どれがいい？</p>
+        <p class="mt-3 font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">Storage Concierge — Archive / Vol.01</p>
+      </div>
+      <nav class="flex flex-wrap gap-x-10 gap-y-3 font-mono text-[11px] tracking-widest2 uppercase text-neutral-400">
+        <a href="#shindan" class="u-link hover:text-paper transition-colors">診断</a>
+        <a href="#makers" class="u-link hover:text-paper transition-colors">メーカー</a>
+        <a href="#archive" class="u-link hover:text-paper transition-colors">索引</a>
+        <a href="#column" class="u-link hover:text-paper transition-colors">コラム</a>
+        <a href="#faq" class="u-link hover:text-paper transition-colors">Q&amp;A</a>
+        <a href="#journal" class="u-link hover:text-paper transition-colors">更新履歴</a>
+        <a href="contact.html" class="u-link hover:text-paper transition-colors">Contact</a>
+      </nav>
+    </div>
+    <div class="mt-12 pt-8 border-t border-neutral-800 flex flex-col md:flex-row justify-between gap-3 font-mono text-[10px] tracking-widest text-neutral-600">
+      <span>© 2026 物置どれがいい？ — 非公式情報比較メディア</span>
+      <span>各メーカー名・商品名は各社の商標または登録商標です。</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════════════
+   物置どれがいい？ — Matching System
+   ════════════════════════════════════════════════ */
+
+const MAKERS = { takubo:'タクボ / TAKUBO', inaba:'イナバ / INABA', yodoko:'ヨドコウ / YODOKO' };
+
+/* ---------- 製品アーカイブ ---------- */
+/* ===== PRODUCTS_START =====
+   自動巡回システムへ: 新商品は必ずこのブロック内（配列末尾）に、
+   既存要素と同一スキーマで追加すること。新商品には added:'YYYY-MM-DD' を必ず付与。
+   廃盤・モデルチェンジ時は、該当する製品オブジェクト1件のみをカンマ整合性を
+   保って削除すること。このブロック外のコードは一切変更しないこと。 */
+const PRODUCTS = [
+  { id:'t-gp', maker:'takubo', name:'グランプレステージ ジャンプ GP-137CF', cat:'小型物置',
+    dims:'W1,372 × D750 × H1,100 mm', steel:'特殊焼付塗装鋼板', door:'引き戸（2枚）', found:'ブロック基礎 対応',
+    tags:{ small:3, low:3, cheap:2, garden:2, slide:2, design:1, daily:1 },
+    features:['窓下に収まるロータイプ','軽い引き戸','棚板標準装備'],
+    base:'窓の下にすっきり収まる、うれしいロータイプ。狭いスペースの第一候補です。',
+    link:'https://www.e-ty.co.jp/seihin/gp/' },
+  { id:'t-nd', maker:'takubo', name:'Mr.ストックマン ダンディ ND-2515', cat:'中型物置',
+    dims:'W2,532 × D1,590 × H2,110 mm', steel:'高級2コート焼付塗装鋼板', door:'吊り戸式引き戸（3枚）', found:'ブロック基礎 対応',
+    tags:{ medium:3, slide:3, daily:3, garden:2, tires:2, design:1, premium:1 },
+    features:['摩擦ゼロの吊り戸','高級2コート焼付塗装','可動棚で自在に整理'],
+    base:'毎日出し入れする方にこそ、吊り戸構造の扉の軽さを体感していただきたい定番モデルです。',
+    link:'https://www.e-ty.co.jp/seihin/nd/' },
+  { id:'t-jn', maker:'takubo', name:'Mr.トールマン ダンディ JN-2519', cat:'大型物置',
+    dims:'W2,532 × D1,922 × H2,570 mm', steel:'高級2コート焼付塗装鋼板', door:'吊り戸式引き戸（3枚）', found:'ブロック基礎＋アンカー必須',
+    tags:{ large:2, tall:3, long:3, slide:2, daily:1, premium:1, medium:1 },
+    features:['H2.5m超の背高設計','長尺物を立てたまま収納','摩擦ゼロの吊り戸'],
+    base:'脚立や板材、スキー板も立てたまま収納できる、頼れる背高タイプです。',
+    link:'https://www.e-ty.co.jp/seihin/jn/' },
+  { id:'t-bs', maker:'takubo', name:'バイクシャッターマン BS-1809', cat:'バイク車庫',
+    dims:'W1,800 × D2,600 × H2,110 mm', steel:'焼付塗装鋼板', door:'巻上げシャッター', found:'土間コンクリート 推奨',
+    tags:{ bike:3, shutter:3, garage:1, sturdy:1, large:1 },
+    features:['前面フルオープン','スロープ対応','工具棚オプション'],
+    base:'前面シャッターでバイクをまっすぐ格納できます。雨の日の出し入れもらくらくです。',
+    link:'https://www.e-ty.co.jp/seihin/nde-jne/' },
+  { id:'i-mjx', maker:'inaba', name:'シンプリー MJX-095D', cat:'小型物置',
+    dims:'W950 × D548 × H1,103 mm', steel:'溶融亜鉛メッキ鋼板', door:'引き戸（2枚）', found:'ブロック基礎 対応',
+    tags:{ small:3, cheap:3, garden:1, design:1, low:2 },
+    features:['玄関脇・ベランダ対応','ディンプルキー錠','最小フットプリント'],
+    base:'玄関脇のわずかなスペースにも置ける、イナバ品質のコンパクトモデルです。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/mjx/' },
+  { id:'i-fs14', maker:'inaba', name:'フォルタ FS-2614S', cat:'中型物置', added:'2026-07-09',
+    dims:'W2,630 × D1,370 × H2,085 mm', steel:'指定建築材料使用の高耐食鋼板', door:'引き戸（3枚）＋ディンプルキー、現地で開き方向変更可', found:'ブロック基礎 対応（HSマーク無し機種は耐風・耐震補強セット要）',
+    tags:{ medium:3, sturdy:2, tires:2, garden:1, daily:1, snow:1, cheap:1, slide:1 },
+    features:['意匠性の高いリブ形状の扉','現地で扉の開き方向を変更可能','半開き防止の仮ロック機能'],
+    base:'定番だったネクスタの実質的な後継機です。頑丈さはそのままに、扉のデザイン性がぐっと高まった新しい標準機です。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/fs/' },
+  { id:'i-fs', maker:'inaba', name:'フォルタ FS-2626', cat:'大型物置',
+    dims:'W2,630 × D2,630 × H2,303 mm', steel:'高耐食溶融亜鉛メッキ鋼板 t0.6', door:'引き戸（3枚）＋ディンプルキー', found:'ブロック基礎＋アンカー必須',
+    tags:{ large:3, sturdy:3, tires:2, long:1, snow:2, premium:1 },
+    features:['圧倒的堅牢フレーム','多雪型仕様あり','家財を一括収蔵'],
+    base:'「100人乗っても大丈夫」の試験をくぐり抜けた頑丈さ。雪の多い地域でも安心の大容量です。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/fs/' },
+  { id:'i-fxn', maker:'inaba', name:'バイク保管庫 FXN-1730HY', cat:'バイク車庫',
+    dims:'W1,790 × D3,050 × H2,375 mm', steel:'高耐食溶融亜鉛メッキ鋼板', door:'シャッター＋床付タイプ', found:'土間コンクリート 推奨',
+    tags:{ bike:3, garage:2, sturdy:2, shutter:2, large:1, daily:1 },
+    features:['床付で湿気・盗難に強い','ハイルーフで大型車対応','業界随一の型式展開'],
+    base:'床付き構造とディンプルキーで、大切な愛車をしっかり守るバイク保管庫です。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/fm/' },
+  { id:'i-grn', maker:'inaba', name:'ガレーディア GRN-3157', cat:'ガレージ',
+    dims:'W3,100 × D5,700 × H2,450 mm', steel:'高耐食溶融亜鉛メッキ鋼板', door:'巻上げシャッター', found:'土間コンクリート 必須',
+    tags:{ garage:3, large:3, bike:2, shutter:3, sturdy:2, snow:1 },
+    features:['車1台＋作業空間','堅牢シャッター','趣味室としても機能'],
+    base:'車もバイクも趣味の道具も、まるごと収まるゆとりの本格ガレージです。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/grn/' },
+  { id:'y-ese', maker:'yodoko', name:'エスモ ESE-1607A', cat:'小型物置',
+    dims:'W1,650 × D750 × H1,959 mm', steel:'ガルバリウム鋼板', door:'3枚扉', found:'ブロック基礎 対応',
+    tags:{ small:2, medium:1, door3:3, cheap:1, design:2, rustproof:2, daily:1 },
+    features:['開口2/3を確保する3枚扉','ガルバリウム鋼板','奥行750mmの省スペース'],
+    base:'奥行75cmの省スペースでも、3枚扉で開口部は広々。通路脇にも置きやすいモデルです。',
+    link:'https://www.yodomonooki.jp/products/lumberroom/esumo/' },
+  { id:'y-lmd', maker:'yodoko', name:'エルモ LMD-2218', cat:'中型物置',
+    dims:'W2,220 × D1,870 × H2,120 mm', steel:'高耐久ガルバリウム鋼板', door:'3枚扉（有効開口 最大化）', found:'ブロック基礎 対応',
+    tags:{ medium:3, door3:3, rustproof:3, coastal:3, premium:2, design:1, tires:1, garden:1 },
+    features:['サビへの圧倒的耐性','有効開口最大化の3枚扉','塩害地域でも長寿命'],
+    base:'サビに強いガルバリウム鋼板で、海の近くでも長く安心してお使いいただけます。',
+    link:'https://www.yodomonooki.jp/products/lumberroom/erumo/' },
+  { id:'y-vgc', maker:'yodoko', name:'ラヴィージュ VGC-3059', cat:'ガレージ',
+    dims:'W3,000 × D5,900 × H2,560 mm', steel:'高耐久ガルバリウム鋼板', door:'巻上げシャッター', found:'土間コンクリート 必須',
+    tags:{ garage:3, large:3, shutter:2, rustproof:2, coastal:2, premium:1 },
+    features:['高耐食素材で長寿命','車1台＋収納空間','塩害・積雪地に強い'],
+    base:'高耐食素材で長持ち。建てたあとも長く安心が続く、本格派のガレージです。',
+    link:'https://www.yodomonooki.jp/products/garage/ravige/' },
+  { id:'t-belos', maker:'takubo', name:'BELOS B-2518', cat:'中型物置', added:'2026-07-09',
+    dims:'W2,530 × D1,800 × H2,160 mm', steel:'高耐食鋼板ZAM＋粉体塗装', door:'連動吊り戸式扉（開き方向選択可）', found:'ブロック基礎 対応（豪雪型は公式カタログ参照）',
+    tags:{ medium:3, design:3, premium:2, daily:2, rustproof:2, slide:1 },
+    features:['プロダクトデザイナー日原佐知夫が手掛ける意匠','独自壁パネル構造で雨水侵入を軽減','床耐荷重1.5倍(9000N/㎡)の頑丈設計'],
+    base:'デザイナーズ物置「BELOS」。お住まいと美しく調和するデザインに、頑丈な基本性能も兼ね備えています。',
+    link:'https://www.e-ty.co.jp/belos/' },
+  { id:'i-tbj', maker:'inaba', name:'宅配ボックス TBJ-065C', cat:'小型物置', added:'2026-07-09',
+    dims:'W620 × D548 × H1,303 mm', steel:'塗装鋼板', door:'前面開口扉（上段:宅配ボックス／下段:収納庫）', found:'ブロック基礎 対応（アンカー工事必須）',
+    tags:{ small:3, daily:2, cheap:1, design:1 },
+    features:['上段は宅配ボックス、下段は収納庫の二段構成','宅配ボックスは裏面ボタン施錠+鍵解錠のみ','全面開口扉で出し入れしやすい'],
+    base:'荷物の受け取りと収納がこれ一台に。宅配ボックスと収納庫が一体になった便利な新製品です。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/tbj/' },
+  { id:'i-smx', maker:'inaba', name:'ナイソー SMX', cat:'断熱物置', added:'2026-07-11',
+    dims:'公式カタログ参照', steel:'公式カタログ参照', door:'公式カタログ参照', found:'公式カタログ参照',
+    tags:{ insulation:3, medium:2, sturdy:2, premium:1 },
+    features:['断熱シリーズ「ナイソー」の新型（2026年9月1日発売）','旧SMK型は2026年8月31日をもって生産終了','寸法・扉形式など詳細仕様は公式カタログ参照'],
+    base:'断熱物置「ナイソー」の新型です。湿気に弱い大切な物の保管に、心強い選択肢です。' },
+  { id:'i-sml', maker:'inaba', name:'como lite SML', cat:'断熱物置', added:'2026-07-12',
+    dims:'公式カタログ参照', steel:'公式カタログ参照', door:'公式カタログ参照', found:'公式カタログ参照',
+    tags:{ insulation:2, medium:2, design:2, premium:1 },
+    features:['断熱マルチスペース「コモ」系譜の新型ライト版（2026年9月1日発売）','ナイソーSMX型と同一リリースで発表された新製品','寸法・扉形式など詳細仕様は公式カタログ参照'],
+    base:'収納にとどまらない「もう一室」を気軽に実現できる、コモ系譜の新型です。詳細は公式カタログをお待ちください。' },
+  { id:'i-dm', maker:'inaba', name:'アルシアフィット DM-2235HDA', cat:'バイク車庫', added:'2026-07-13',
+    dims:'W2,290 × D3,575 × H2,391 mm', steel:'公式カタログ参照', door:'巻上げシャッター（シャッターケース標準装備）', found:'土間タイプ／床付タイプ 選択可',
+    tags:{ bike:3, design:3, shutter:2, premium:2, garage:1, sturdy:1 },
+    features:['住宅と調和する上質デザインのバイクガレージ','2段錠ディンプルキーとシャッターケースを標準装備','2026年1月、設置容易な床付タイプを追加'],
+    base:'デザインで選べるバイクガレージです。床付きタイプの追加で、土間工事なしでも導入しやすくなりました。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/dm/' },
+  { id:'t-lsn', maker:'takubo', name:'リジュー LSN-1815', cat:'小型物置', added:'2026-07-16',
+    dims:'W1,832 × D1,540 × H2,212 mm', steel:'ZAM／ガルバリウム鋼板＋高級焼付塗装', door:'吊り戸式引き戸＋仮ロック錠', found:'ブロック基礎 対応（一般・多雪兼用）',
+    tags:{ garden:3, design:3, slide:2, small:2, snow:1, daily:1 },
+    features:['大手物置初の切妻三角屋根デザイン','摩擦の少ない吊り戸＋仮止め機能付き錠','ガーデングリーン／アイボリーブラックの2色・一般多雪兼用'],
+    base:'大手では珍しい三角屋根がかわいい新シリーズ。軽い吊り戸はそのままに、お庭の景色になじむデザインです。',
+    link:'https://www.e-ty.co.jp/seihin/ls/' }
+];
+/* ===== PRODUCTS_END ===== */
+
+/* ---------- 更新履歴 ---------- */
+/* ===== UPDATE_LOG_START =====
+   自動巡回システムへ: 新しい記録は必ずこの配列の【先頭】に追加すること。
+   type は '公開' | '新商品' | '廃盤' | '入替' | '改定' のいずれか。
+   （廃盤=生産終了による削除、入替=モデルチェンジによる新旧交代）
+   既存の記録は削除・改変しないこと（この台帳は追記のみ）。 */
+const UPDATE_LOG = [
+  { date:'2026-07-16', type:'新商品', title:'『リジュー LSN-1815』をアーカイブに追加',
+    body:'タクボ（田窪工業所）公式サイト掲載の新シリーズです。大手物置では初めての切妻三角屋根を採用したガーデニング物置で、吊り戸式扉とガーデングリーン／アイボリーブラックの2色展開。一般・多雪兼用です。' },
+  { date:'2026-07-13', type:'新商品', title:'『アルシアフィット DM-2235HDA』をアーカイブに追加',
+    body:'イナバ（稲葉製作所）公式発表（2026年1月5日付）に基づきます。デザイナーズバイクガレージ「ARCIAFIT」に床付きタイプが追加され、土間・床付きの両方から選べるようになりました。' },
+  { date:'2026-07-12', type:'新商品', title:'『como lite SML』をアーカイブに追加',
+    body:'イナバ（稲葉製作所）公式ニュースリリース（2026年7月6日付）に基づきます。断熱マルチスペース「コモ」系譜の新型で、ナイソーSMX型と同時に2026年9月1日発売予定。詳しい仕様は公式カタログの公開をお待ちください。' },
+  { date:'2026-07-11', type:'新商品', title:'『ナイソー SMX』をアーカイブに追加',
+    body:'イナバ（稲葉製作所）公式ニュースリリース（2026年7月6日付）に基づきます。断熱物置ナイソーの新型で2026年9月1日発売予定、旧SMK型は同年8月31日で生産終了となります。詳しい仕様は公式カタログの公開をお待ちください。' },
+  { date:'2026-07-09', type:'新商品', title:'『BELOS B-2518』をアーカイブに追加',
+    body:'タクボ（田窪工業所）のデザイナーズ物置ブランド「BELOS」の中型モデルです。プロダクトデザイナー監修のデザインと、独自壁パネル構造・床耐荷重1.5倍の頑丈設計を両立しています。' },
+  { date:'2026-07-09', type:'新商品', title:'『宅配ボックス TBJ-065C』をアーカイブに追加',
+    body:'イナバ（稲葉製作所）が2026年2月に発売した新製品です。上段が宅配ボックス、下段が収納庫の二段構成で、荷物の受け取りと収納をこれ一台にまとめられます。' },
+  { date:'2026-07-09', type:'入替', title:'『ネクスタ NXN-70S』→『フォルタ FS-2614S』へモデルチェンジ',
+    body:'イナバ公式発表（2021年5月）により、定番中型物置ネクスタはフォルタへ全面切替済みであることを確認しました。同等サイズ帯（W2630×D1370）の後継機に掲載を更新しています。' },
+  { date:'2026-07-09', type:'廃盤', title:'『ヨド蔵MD DZB-2111HW』をアーカイブから削除',
+    body:'ヨドコウ公式の廃番案内（2024年1月付）により、ヨド蔵MD・ヨド蔵SA（品番DZB）は2024年3月末受注をもって生産終了となりました。現行ラインアップにも掲載がなく、後継の断熱物置はまだ発表されていません。' },
+  { date:'2026-07-07', type:'公開', title:'「物置どれがいい？」を公開しました',
+    body:'タクボ・イナバ・ヨドコウの3メーカー・13製品でサイトをオープンしました。マッチング診断やメーカー紹介を掲載しています。今後は毎朝8:00の自動チェックで新商品を追加していきます。' }
+];
+/* ===== UPDATE_LOG_END ===== */
+
+/* ---------- コラム ---------- */
+/* ---------- Q&A（よくあるご質問） ---------- */
+/* ===== QA_ITEMS_START =====
+   Q&Aはこの配列に追加すること。スキーマ: { q:'質問文', a:'回答文' }
+   空の場合はサイト上に「準備中」と表示される。 */
+const QA_ITEMS = [];
+/* ===== QA_ITEMS_END ===== */
+
+/* ===== COLUMNS_START =====
+   コラム投稿はこの配列の【先頭】に追加すること。
+   スキーマ: { id:'col-通し番号', date:'YYYY-MM-DD', tag:'分類ラベル', title:'題', lead:'導入文（1〜2文）', body:['段落1','段落2',…] }
+   既存コラムの削除・改変は行わないこと。 */
+const COLUMNS = [
+  { id:'col-002', date:'2026-07-16', tag:'選定論',
+    title:'「一回り大きく」を疑ってみる',
+    lead:'物置選びの合言葉「迷ったら一回り大きく」。とても頼りになる言葉ですが、実はちょっとした落とし穴もあるんです。',
+    body:[
+      '購入後の後悔で多いのは、やはり「小さすぎた」というもの。収納する物は年々増えていくので、容量に余裕を持たせておくこと自体は、間違いなく良い考えです。',
+      'ただし、気をつけたいのが設置スペースとのバランスです。奥行が20cm増えるということは、通路が20cm狭くなるということ。自転車の取り回しや室外機との距離、組み立て作業のスペースなど、物置のまわりには意外と余白が必要です。',
+      'おすすめは「収納量は一回り大きく、設置計画は一回り慎重に」。当サイトの診断で最初に間口と奥行をお聞きするのも、この順番で考えるのが失敗しないコツだからです。' ] },
+  { id:'col-001', date:'2026-07-07', tag:'創刊',
+    title:'物置は、外構の主役になれるか',
+    lead:'家の顔は玄関、庭の顔は植栽。では、物置はどうでしょうか。つい「見なかったことにされる箱」になりがちな存在です。',
+    body:[
+      '敷地の一角にどっしりと置かれ、10年以上そこに在り続ける物置。せっかくなら、お庭の景色に気持ちよくなじんでほしいものです。けれど物置は長いあいだ、性能表の中だけで語られてきました。',
+      '最近の3メーカーのカタログを見比べると、物置が「見られること」を意識し始めているのがよく分かります。落ち着いたマットカラーにフラットなパネル、すっきりした直線的なかたち。道具置き場から、外構の一部へと変わりつつあるのです。',
+      '当サイトが性能だけでなく見た目や佇まいについても触れているのは、そんな理由からです。物置選びは収納量の計算であると同時に、お庭の風景をひとつ決める、楽しい買い物でもあります。' ] }
+];
+/* ===== COLUMNS_END ===== */
+
+/* ---------- タグ → 選定根拠 ---------- */
+const TAG_REASONS = {
+  bike:'二輪の格納を前提とした動線設計', garden:'園芸用具の整理に適した棚構成',
+  tires:'タイヤ等の重量物に耐える床構造', long:'長尺物を立てて収める垂直余裕',
+  insulation:'断熱層による結露・湿気への応答', daily:'高頻度の開閉に耐える扉機構',
+  coastal:'塩害環境を想定した高耐食鋼板', snow:'積雪荷重を見込んだ堅牢骨格',
+  small:'制約された敷地に収まる最小外形', medium:'汎用性の高い中型ボリューム',
+  large:'家財を一括で受ける大容量', tall:'背高収納を可能にする天井高',
+  low:'窓下寸法に収まる低全高', slide:'軽く滑らかな引き戸機構',
+  door3:'有効開口を最大化する3枚扉', shutter:'全面開放を実現するシャッター',
+  cheap:'抑制された価格設定', premium:'素材・塗装の上位仕様',
+  sturdy:'荷重試験に裏付けられた堅牢性', rustproof:'サビへの高い耐性',
+  design:'住宅外構と調和する意匠', garage:'ガレージ級の空間ボリューム'
+};
+
+/* ---------- 設問セット ---------- */
+const QUESTION_SETS = {
+  use: {
+    label:'Approach 01 — 用途で選ぶ',
+    ai:'収納したい物に合わせて、質問をご用意しています',
+    questions: [
+      { q:'主に収納したい物は何ですか？', hint:'いちばん近いものをお選びください。', options:[
+        { label:'自転車・バイク', tags:{ bike:3, large:1, shutter:1 } },
+        { label:'園芸用品・ガーデニング道具', tags:{ garden:3, small:1, medium:1 } },
+        { label:'タイヤ・アウトドア用品', tags:{ tires:3, medium:2 } },
+        { label:'長尺物 ── 脚立・スキー板・木材', tags:{ long:3, tall:2 } } ] },
+      { q:'断熱・結露対策は必要ですか？', hint:'湿気に弱い物をしまう場合は、断熱仕様がおすすめです。', options:[
+        { label:'必要 ── 湿気に弱い物を保管したい', tags:{ insulation:3, premium:1 } },
+        { label:'あれば安心', tags:{ insulation:1 } },
+        { label:'特に必要ない', tags:{} } ] },
+      { q:'どのくらいの頻度で出し入れしますか？', hint:'頻度が高いほど、扉の開けやすさが大切になります。', options:[
+        { label:'ほぼ毎日', tags:{ daily:3, slide:1 } },
+        { label:'週に1〜2回', tags:{ daily:1 } },
+        { label:'月に数回以下', tags:{} } ] },
+      { q:'設置予定の環境に近いものはどれですか？', hint:'環境に合わせて、最適な素材や構造が変わってきます。', options:[
+        { label:'一般的な住宅の庭・駐車場脇', tags:{ design:1 } },
+        { label:'海の近く ── 潮風が当たる', tags:{ coastal:3, rustproof:2 } },
+        { label:'雪が多い地域', tags:{ snow:3, sturdy:1 } },
+        { label:'狭いスペース・ベランダ', tags:{ small:3, low:1 } } ] }
+    ]
+  },
+  size: {
+    label:'Approach 02 — サイズで選ぶ',
+    ai:'設置スペースに合わせて、質問をご用意しています',
+    questions: [
+      { type:'slider', q:'設置できるスペースを教えてください。', hint:'スライダーを動かすと、右の図が変わります。' },
+      { q:'高さに制限はありますか？', hint:'設置時は本体の下に約10cmの基礎用ブロックを敷くため、「本体高さ＋約10cm」でお考えください。', options:[
+        { label:'窓の下に収めたい ── 約1.2m以下', tags:{ low:3, small:1 } },
+        { label:'一般的な高さまで ── 約2.2m', tags:{ medium:1 } },
+        { label:'制限なし ── 背の高い物置もOK', tags:{ tall:3 } } ] },
+      { q:'扉のタイプにご希望はありますか？', hint:'扉の前のスペースや、出し入れする物の大きさで選ぶのがおすすめです。', options:[
+        { label:'引き戸 ── 扉の前が狭くてもOK', tags:{ slide:3 } },
+        { label:'3枚扉 ── 開口部を広く使いたい', tags:{ door3:3 } },
+        { label:'シャッター ── バイクや大きな物に', tags:{ shutter:3, bike:1, garage:1 } },
+        { label:'特にこだわらない', tags:{} } ] },
+      { q:'設置場所の環境を教えてください。', hint:'鋼板の長持ち具合に関わる、大切なポイントです。', options:[
+        { label:'一般地域', tags:{} },
+        { label:'海沿い ── 塩害が心配', tags:{ coastal:3, rustproof:2 } },
+        { label:'積雪地域', tags:{ snow:3, sturdy:1 } } ] }
+    ]
+  },
+  maker: {
+    label:'Approach 03 — メーカーで選ぶ',
+    ai:'お好みに合わせて、質問をご用意しています',
+    questions: [
+      { q:'お好みのデザインはどれですか？', hint:'お庭や外構との調和も、性能と同じくらい大切です。', options:[
+        { label:'シンプルですっきりしたもの', tags:{ design:3, premium:1 } },
+        { label:'重厚感があって頑丈そうなもの', tags:{ sturdy:3 } },
+        { label:'落ち着いた色で、庭になじむもの', tags:{ design:2, rustproof:1 } } ] },
+      { q:'いちばん重視したいポイントは？', hint:'3社の得意分野が分かれる、大事な質問です。', options:[
+        { label:'扉の開けやすさ ── 毎日の使いやすさ', tags:{ slide:3, daily:2 } },
+        { label:'頑丈さ ── 耐久性・雪への強さ', tags:{ sturdy:3, snow:1 } },
+        { label:'サビへの強さ ── 長持ちする素材', tags:{ rustproof:3, coastal:2, premium:1 } } ] },
+      { q:'ご予算のお考えは？', hint:'同じサイズでも、グレードによって価格が変わります。', options:[
+        { label:'できるだけ抑えたい', tags:{ cheap:3, small:1 } },
+        { label:'標準的な価格帯で', tags:{ medium:1 } },
+        { label:'品質重視で、予算は柔軟に', tags:{ premium:3 } } ] },
+      { q:'収納したい物の量はどのくらいですか？', hint:'迷ったら少し大きめを選ぶのが、後悔しないコツです。', options:[
+        { label:'少なめ ── 小物が中心', tags:{ small:3 } },
+        { label:'標準的 ── 家庭の屋外用品ひと通り', tags:{ medium:3 } },
+        { label:'たっぷり ── バイクや大型の物も', tags:{ large:2, garage:2, shutter:1, bike:1 } } ] }
+    ]
+  }
+};
+
+/* ---------- ステート ---------- */
+const state = { mode:null, step:0, answers:[], sizeSel:{ w:180, d:120 } };
+const $ = s => document.querySelector(s);
+const modal = $('#quiz-modal'), quizBody = $('#quiz-body');
+const progressBar = $('#quiz-progress'), stepLabel = $('#quiz-step-label'), modalLabel = $('#modal-label');
+const ABC = ['A','B','C','D'];
+
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function isNew(p){ return !!p.added && (Date.now() - new Date(p.added).getTime()) < 45 * 24 * 3600 * 1000; }
+
+/* ---------- 製品図版（寸法データから正面図を自動生成） ----------
+   W1 = 屋根幅（本体より張り出す。実寸非公表のため本体+約5%の参考値）
+   W2 = 間口（本体幅・カタログ値）／ H = 総高
+   取っ手の位置ルール:
+   ・物置（背の高い引き戸タイプ）= 左扉の左端・高さ中央に1本
+   ・収納庫（小型・ロータイプ、目安H<1,400mm）= 両扉の両端・高さ中央に2本 */
+function svgElevation(p){
+  const mW = (p.dims.match(/W([\d,]+)/) || [])[1];
+  const mH = (p.dims.match(/H([\d,]+)/) || [])[1];
+  const W = mW ? parseInt(mW.replace(/,/g, ''), 10) : 1800;
+  const H = mH ? parseInt(mH.replace(/,/g, ''), 10) : 2000;
+  const roofWmm = Math.round(W * 1.05 / 10) * 10;
+  const gy = 235, cx = 185;
+  const s = Math.min(250 / roofWmm, 165 / H);
+  const rw = roofWmm * s, w = W * s, h = H * s;
+  const y = gy - h;
+  const slab = Math.max(8, Math.min(12, h * 0.08));
+  const bx1 = cx - w / 2, bx2 = cx + w / 2;
+  const rx1 = cx - rw / 2, rx2 = cx + rw / 2;
+  const railY = y + slab + Math.min(9, (gy - y - slab) * 0.09);
+  const baseY = gy - Math.min(8, (gy - y - slab) * 0.08);
+  let inner = '';
+  if(/シャッター/.test(p.door || '')){
+    const n = Math.max(5, Math.floor((baseY - railY) / 11));
+    for(let i = 1; i < n; i++){
+      const yy = railY + (baseY - railY) * i / n;
+      inner += `<line x1="${(bx1 + 5).toFixed(1)}" y1="${yy.toFixed(1)}" x2="${(bx2 - 5).toFixed(1)}" y2="${yy.toFixed(1)}" opacity=".55"/>`;
+    }
+  } else {
+    const n = /3枚/.test(p.door || '') ? 3 : 2;
+    for(let i = 1; i < n; i++){
+      const xx = bx1 + w * i / n;
+      inner += `<line x1="${xx.toFixed(1)}" y1="${railY.toFixed(1)}" x2="${xx.toFixed(1)}" y2="${baseY.toFixed(1)}"/>`;
+    }
+    const hy1 = railY + (baseY - railY) * 0.42, hy2 = railY + (baseY - railY) * 0.58;
+    const grip = gx => `<line x1="${gx.toFixed(1)}" y1="${hy1.toFixed(1)}" x2="${gx.toFixed(1)}" y2="${hy2.toFixed(1)}" stroke-width="3"/>`;
+    if(H < 1400){
+      inner += grip(bx1 + 5) + grip(bx2 - 5);
+    } else {
+      inner += grip(bx1 + 5);
+    }
+  }
+  const fmt = n => n.toLocaleString();
+  const labelW1 = mW ? '約' + fmt(roofWmm) : '—';
+  const labelW2 = mW ? fmt(W) : '—';
+  const labelH = mH ? fmt(H) : '—';
+  return `<svg viewBox="0 0 400 300" class="w-full h-full text-ink" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="${esc(p.name)} 正面図">
+    <line x1="20" y1="${gy}" x2="380" y2="${gy}" stroke-width="2"/>
+    <rect x="${rx1.toFixed(1)}" y="${y.toFixed(1)}" width="${rw.toFixed(1)}" height="${slab.toFixed(1)}"/>
+    <path d="M${bx1.toFixed(1)} ${(y + slab).toFixed(1)} V${gy} M${bx2.toFixed(1)} ${(y + slab).toFixed(1)} V${gy}"/>
+    <line x1="${bx1.toFixed(1)}" y1="${railY.toFixed(1)}" x2="${bx2.toFixed(1)}" y2="${railY.toFixed(1)}"/>
+    <line x1="${bx1.toFixed(1)}" y1="${baseY.toFixed(1)}" x2="${bx2.toFixed(1)}" y2="${baseY.toFixed(1)}"/>
+    <g>${inner}</g>
+    <g opacity=".55" stroke-width="1.2">
+      <line x1="${rx1.toFixed(1)}" y1="${(y - 14).toFixed(1)}" x2="${rx2.toFixed(1)}" y2="${(y - 14).toFixed(1)}"/>
+      <line x1="${rx1.toFixed(1)}" y1="${(y - 19).toFixed(1)}" x2="${rx1.toFixed(1)}" y2="${(y - 9).toFixed(1)}"/>
+      <line x1="${rx2.toFixed(1)}" y1="${(y - 19).toFixed(1)}" x2="${rx2.toFixed(1)}" y2="${(y - 9).toFixed(1)}"/>
+      <line x1="${bx1.toFixed(1)}" y1="${gy + 16}" x2="${bx2.toFixed(1)}" y2="${gy + 16}"/>
+      <line x1="${bx1.toFixed(1)}" y1="${gy + 11}" x2="${bx1.toFixed(1)}" y2="${gy + 21}"/>
+      <line x1="${bx2.toFixed(1)}" y1="${gy + 11}" x2="${bx2.toFixed(1)}" y2="${gy + 21}"/>
+      <line x1="${(rx2 + 16).toFixed(1)}" y1="${y.toFixed(1)}" x2="${(rx2 + 16).toFixed(1)}" y2="${gy}"/>
+      <line x1="${(rx2 + 11).toFixed(1)}" y1="${y.toFixed(1)}" x2="${(rx2 + 21).toFixed(1)}" y2="${y.toFixed(1)}"/>
+      <line x1="${(rx2 + 11).toFixed(1)}" y1="${gy}" x2="${(rx2 + 21).toFixed(1)}" y2="${gy}"/>
+    </g>
+    <g font-family="IBM Plex Mono, monospace" font-size="11" fill="currentColor" stroke="none" opacity=".75">
+      <text x="${cx}" y="${(y - 24).toFixed(1)}" text-anchor="middle">W1 ${labelW1}（屋根）</text>
+      <text x="${cx}" y="${gy + 36}" text-anchor="middle">W2 ${labelW2}（間口）</text>
+      <text x="${(rx2 + 26).toFixed(1)}" y="${(y + h / 2 + 4).toFixed(1)}" text-anchor="start">H ${labelH}</text>
+    </g>
+  </svg>`;
+}
+function productVisual(p){
+  return p.img
+    ? `<img src="${esc(p.img)}" alt="${esc(p.name)}" class="w-full h-full object-cover">`
+    : svgElevation(p);
+}
+
+/* ---------- モーダル開閉 ---------- */
+function openModal(mode){
+  state.mode = mode; state.step = 0; state.answers = [];
+  modalLabel.textContent = QUESTION_SETS[mode].label;
+  modal.classList.remove('modal-hidden');
+  document.body.style.overflow = 'hidden';
+  showAiLoading(QUESTION_SETS[mode].ai, renderStep);
+}
+function closeModal(){
+  modal.classList.add('modal-hidden');
+  document.body.style.overflow = '';
+  progressBar.style.width = '0%';
+}
+document.querySelectorAll('.entry-banner').forEach(b => b.addEventListener('click', () => openModal(b.dataset.mode)));
+$('#modal-close').addEventListener('click', closeModal);
+document.addEventListener('keydown', e => { if(e.key === 'Escape' && !modal.classList.contains('modal-hidden')) closeModal(); });
+
+/* ---------- 生成演出 ---------- */
+function showAiLoading(message, cb){
+  quizBody.innerHTML = `
+    <div class="step-enter flex flex-col items-start justify-center min-h-[40vh]">
+      <p class="font-mono text-[11px] tracking-widest2 uppercase text-rust">System Processing</p>
+      <p class="mt-6 font-serif font-bold text-2xl md:text-3xl">${esc(message)}<span class="ai-dots"></span></p>
+      <div class="mt-10 w-full max-w-md h-px bg-neutral-200 relative overflow-hidden">
+        <span class="absolute inset-y-0 left-0 w-1/3 bg-ink" style="animation:scan 1.1s ease-in-out infinite alternate"></span>
+      </div>
+    </div>
+    <style>@keyframes scan{from{transform:translateX(0)}to{transform:translateX(200%)}}</style>`;
+  const dots = quizBody.querySelector('.ai-dots');
+  let n = 0;
+  const t = setInterval(() => { n = (n + 1) % 4; dots.textContent = '.'.repeat(n); }, 320);
+  updateProgress();
+  setTimeout(() => { clearInterval(t); cb(); }, 1000 + Math.random() * 500);
+}
+
+function updateProgress(){
+  if(!state.mode) return;
+  const total = QUESTION_SETS[state.mode].questions.length + 1;
+  progressBar.style.width = Math.min(100, Math.round(state.step / total * 100)) + '%';
+  stepLabel.textContent = state.step < total - 1
+    ? `Step ${String(Math.min(state.step + 1, total - 1)).padStart(2,'0')} / ${String(total - 1).padStart(2,'0')}`
+    : 'Ready';
+}
+
+/* ---------- 設問描画 ---------- */
+function renderStep(){
+  const qs = QUESTION_SETS[state.mode].questions;
+  updateProgress();
+  if(state.step >= qs.length){ renderPreResult(); return; }
+  const q = qs[state.step];
+  if(q.type === 'slider'){ renderSliderStep(q); return; }
+
+  quizBody.innerHTML = `
+    <div class="step-enter">
+      <p class="font-mono text-[11px] tracking-widest2 uppercase text-rust">Q.${String(state.step + 1).padStart(2,'0')}</p>
+      <h3 class="mt-5 font-serif font-extrabold text-3xl md:text-5xl leading-snug tracking-wide">${esc(q.q)}</h3>
+      <p class="mt-4 text-[13px] text-neutral-500">${esc(q.hint)}</p>
+      <div class="mt-10 border-t border-line">
+        ${q.options.map((o, i) => `
+          <button data-opt="${i}" class="opt-row w-full flex items-center gap-5 md:gap-8 py-5 md:py-6 border-b border-linesoft text-left">
+            <span class="font-mono text-[12px] text-neutral-400 w-6">${ABC[i]}</span>
+            <span class="font-medium text-base md:text-lg tracking-wide">${esc(o.label)}</span>
+            <span class="ml-auto font-mono text-lg opacity-0 opt-arrow">→</span>
+          </button>`).join('')}
+      </div>
+    </div>
+    <style>.opt-row:hover .opt-arrow{opacity:1}</style>`;
+
+  quizBody.querySelectorAll('.opt-row').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const o = q.options[Number(btn.dataset.opt)];
+      state.answers.push({ label:o.label, tags:o.tags });
+      state.step++;
+      transitionTo(renderStep);
+    });
+  });
+}
+
+/* ---------- 寸法入力（平面図スライダー） ---------- */
+function renderSliderStep(q){
+  quizBody.innerHTML = `
+    <div class="step-enter">
+      <p class="font-mono text-[11px] tracking-widest2 uppercase text-rust">Q.01 — Dimensions</p>
+      <h3 class="mt-5 font-serif font-extrabold text-3xl md:text-5xl leading-snug tracking-wide">${esc(q.q)}</h3>
+      <p class="mt-4 text-[13px] text-neutral-500">${esc(q.hint)}</p>
+
+      <div class="mt-10 grid md:grid-cols-2 gap-10 items-start">
+        <div class="space-y-10 pt-2">
+          <div>
+            <div class="flex items-baseline justify-between font-mono text-[12px]">
+              <span class="tracking-widest2 uppercase text-neutral-500">Width — 間口</span>
+              <span id="w-val" class="text-base"></span>
+            </div>
+            <input id="w-range" type="range" min="80" max="320" step="5" value="${state.sizeSel.w}" class="mt-4">
+            <div class="flex justify-between font-mono text-[10px] text-neutral-400 mt-2"><span>800</span><span>3,200 mm</span></div>
+          </div>
+          <div>
+            <div class="flex items-baseline justify-between font-mono text-[12px]">
+              <span class="tracking-widest2 uppercase text-neutral-500">Depth — 奥行</span>
+              <span id="d-val" class="text-base"></span>
+            </div>
+            <input id="d-range" type="range" min="50" max="280" step="5" value="${state.sizeSel.d}" class="mt-4">
+            <div class="flex justify-between font-mono text-[10px] text-neutral-400 mt-2"><span>500</span><span>2,800 mm</span></div>
+          </div>
+          <p id="size-summary" class="font-mono text-[12px] text-neutral-600 border-t border-line pt-5"></p>
+        </div>
+
+        <div>
+          <div class="relative w-full max-w-[320px] aspect-square border border-line mx-auto">
+            <span class="absolute -top-px -left-px w-3 h-3 border-t-2 border-l-2 border-ink"></span>
+            <span class="absolute -top-px -right-px w-3 h-3 border-t-2 border-r-2 border-ink"></span>
+            <span class="absolute -bottom-px -left-px w-3 h-3 border-b-2 border-l-2 border-ink"></span>
+            <span class="absolute -bottom-px -right-px w-3 h-3 border-b-2 border-r-2 border-ink"></span>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div id="size-box" class="border-2 border-ink relative">
+                <span id="dim-w" class="absolute -top-7 left-1/2 -translate-x-1/2 font-mono text-[10px] whitespace-nowrap">← W →</span>
+                <span id="dim-d" class="absolute top-1/2 -right-8 -translate-y-1/2 font-mono text-[10px] tate">← D →</span>
+              </div>
+            </div>
+          </div>
+          <p class="mt-4 text-center font-mono text-[10px] tracking-widest text-neutral-400 uppercase">Plan View — 上面図 / Scale approx.</p>
+        </div>
+      </div>
+
+      <button id="size-next" class="mt-12 w-full border border-line py-5 font-serif font-bold text-xl hover:bg-ink hover:text-paper transition-colors duration-300">このサイズで進む →</button>
+    </div>`;
+
+  const wR = $('#w-range'), dR = $('#d-range');
+  const update = () => {
+    const w = Number(wR.value), d = Number(dR.value);
+    state.sizeSel = { w, d };
+    $('#w-val').textContent = (w * 10).toLocaleString() + ' mm';
+    $('#d-val').textContent = (d * 10).toLocaleString() + ' mm';
+    const scale = 260 / 320;
+    const box = $('#size-box');
+    box.style.width  = Math.max(28, w * scale) + 'px';
+    box.style.height = Math.max(24, d * scale) + 'px';
+    $('#dim-w').textContent = `← ${(w*10).toLocaleString()} →`;
+    $('#dim-d').textContent = `← ${(d*10).toLocaleString()} →`;
+    const area = (w / 100) * (d / 100);
+    $('#size-summary').textContent = `設置面積 ≈ ${area.toFixed(2)} m²（畳 約${(area / 1.62).toFixed(1)}帖）`;
+  };
+  wR.addEventListener('input', update);
+  dR.addEventListener('input', update);
+  update();
+
+  $('#size-next').addEventListener('click', () => {
+    const { w, d } = state.sizeSel;
+    let tags, sizeName;
+    if(w <= 160 && d <= 100){ tags = { small:3, low:1, cheap:1 }; sizeName = '小型'; }
+    else if(w >= 280 || (w / 100) * (d / 100) >= 4.5){ tags = { large:3, garage:1, medium:1 }; sizeName = '大型'; }
+    else { tags = { medium:3 }; sizeName = '中型'; }
+    state.answers.push({ label:`W${w*10}mm × D${d*10}mm ── ${sizeName}級`, tags });
+    state.step++;
+    transitionTo(renderStep);
+  });
+}
+
+/* ---------- 結果直前 ---------- */
+function renderPreResult(){
+  quizBody.innerHTML = `
+    <div class="step-enter min-h-[40vh] flex flex-col justify-center">
+      <p class="font-mono text-[11px] tracking-widest2 uppercase text-rust">All Queries Answered</p>
+      <h3 class="mt-5 font-serif font-extrabold text-3xl md:text-5xl leading-snug">ご回答ありがとうございました。</h3>
+      <div class="mt-8 border-t border-line">
+        ${state.answers.map((a, i) => `
+          <div class="flex items-baseline gap-5 py-3.5 border-b border-linesoft text-[13px]">
+            <span class="font-mono text-[11px] text-neutral-400">${String(i+1).padStart(2,'0')}</span>
+            <span>${esc(a.label)}</span>
+          </div>`).join('')}
+      </div>
+      <button id="show-results" class="mt-12 w-full bg-ink text-paper py-6 font-serif font-bold text-xl md:text-2xl hover:bg-rust transition-colors duration-300">診断結果を見る →</button>
+    </div>`;
+  $('#show-results').addEventListener('click', () => {
+    showAiLoading('ご回答をもとに、ぴったりの物置をお探ししています', renderResults);
+  });
+}
+
+/* ---------- 照合・結果 ---------- */
+function computeUserTags(){
+  const t = {};
+  state.answers.forEach(a => { for(const k in a.tags) t[k] = (t[k] || 0) + a.tags[k]; });
+  return t;
+}
+
+function renderResults(){
+  const userTags = computeUserTags();
+  const totalWeight = Object.values(userTags).reduce((s, v) => s + v, 0) || 1;
+
+  const scored = PRODUCTS.map(p => {
+    let score = 0; const matched = [];
+    for(const k in p.tags){
+      if(userTags[k]){ score += p.tags[k] * userTags[k]; matched.push({ tag:k, w:userTags[k] }); }
+    }
+    return { p, score, matched };
+  }).sort((a, b) => b.score - a.score);
+
+  let results = scored.filter(r => r.score > 0).slice(0, 3);
+  if(results.length === 0) results = scored.slice(0, 1);
+  const maxScore = results[0].score || 1;
+
+  progressBar.style.width = '100%';
+  stepLabel.textContent = 'Complete';
+
+  quizBody.innerHTML = `
+    <div class="step-enter">
+      <p class="font-mono text-[11px] tracking-widest2 uppercase text-rust">Diagnosis Result</p>
+      <h3 class="mt-5 font-serif font-extrabold text-3xl md:text-5xl leading-snug">おすすめの物置、${results.length}件です。</h3>
+      <p class="mt-4 text-[13px] text-neutral-500">ご回答との相性が良い順にご紹介します。寸法・仕様は代表的な参考値です。</p>
+
+      <div class="mt-12 space-y-10">
+        ${results.map((r, i) => {
+          const pct = Math.min(98, Math.round(58 + 40 * (r.score / maxScore) * Math.min(1, r.score / totalWeight / 1.2)));
+          const reasons = r.matched.sort((a, b) => b.w - a.w).slice(0, 3).map(x => TAG_REASONS[x.tag]).filter(Boolean);
+          return `
+          <article class="border border-line">
+            <div class="flex items-stretch border-b border-line">
+              <div class="px-5 md:px-7 py-5 border-r border-line flex flex-col justify-center min-w-[110px]">
+                <span class="font-mono text-[10px] tracking-widest2 uppercase ${i === 0 ? 'text-rust' : 'text-neutral-400'}">${i === 0 ? 'Prime' : 'No.' + String(i+1).padStart(2,'0')}</span>
+                <span class="mt-1 font-serif font-extrabold text-3xl md:text-4xl">${pct}<span class="text-sm font-mono">%</span></span>
+              </div>
+              <div class="px-5 md:px-7 py-5 flex-1">
+                <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">${MAKERS[r.p.maker]} — ${esc(r.p.cat)}${isNew(r.p) ? ' <span class="text-rust">● NEW</span>' : ''}</p>
+                <h4 class="mt-1.5 font-serif font-bold text-xl md:text-2xl leading-snug">${esc(r.p.name)}</h4>
+              </div>
+            </div>
+            <div class="border-b border-line hatch-bg">
+              ${r.p.link
+                ? `<a href="${esc(r.p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="h-44 md:h-56 flex items-center justify-center px-6 py-3">${productVisual(r.p)}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">公式ページ →</span></a>`
+                : `<div class="h-44 md:h-56 flex items-center justify-center px-6 py-3">${productVisual(r.p)}</div>`}
+            </div>
+            <dl class="text-[12px] md:text-[13px]">
+              <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 px-5 md:px-7 py-3 font-mono text-[11px] text-neutral-500 border-r border-linesoft">外形寸法</dt><dd class="col-span-8 md:col-span-9 px-5 md:px-7 py-3 font-mono">${esc(r.p.dims)}</dd></div>
+              <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 px-5 md:px-7 py-3 font-mono text-[11px] text-neutral-500 border-r border-linesoft">主要鋼板</dt><dd class="col-span-8 md:col-span-9 px-5 md:px-7 py-3">${esc(r.p.steel)}</dd></div>
+              <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 px-5 md:px-7 py-3 font-mono text-[11px] text-neutral-500 border-r border-linesoft">扉形式</dt><dd class="col-span-8 md:col-span-9 px-5 md:px-7 py-3">${esc(r.p.door)}</dd></div>
+              <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 px-5 md:px-7 py-3 font-mono text-[11px] text-neutral-500 border-r border-linesoft">推奨基礎</dt><dd class="col-span-8 md:col-span-9 px-5 md:px-7 py-3">${esc(r.p.found)}</dd></div>
+              <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 px-5 md:px-7 py-3 font-mono text-[11px] text-neutral-500 border-r border-linesoft">特記事項</dt><dd class="col-span-8 md:col-span-9 px-5 md:px-7 py-3">${r.p.features.map(esc).join(' ／ ')}</dd></div>
+            </dl>
+            <div class="px-5 md:px-7 py-5">
+              <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">Rationale — おすすめの理由</p>
+              <p class="mt-2.5 text-sm leading-loose text-neutral-700">${esc(r.p.base)}${reasons.length ? ' 今回のご回答では「' + reasons.map(esc).join('」「') + '」があなたの条件にマッチしました。' : ''}</p>
+            </div>
+            <div class="border-t border-line grid grid-cols-2 divide-x divide-line">
+              <button class="goto-maker py-4 font-mono text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300" data-brand="${r.p.maker}">メーカー詳細 →</button>
+              <button class="quiz-restart py-4 font-mono text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">↻ もう一度診断する</button>
+            </div>
+          </article>`;
+        }).join('')}
+      </div>
+      <p class="mt-10 font-mono text-[10px] leading-relaxed text-neutral-400">※ 掲載の寸法・仕様は代表的な参考値です。設置時は本体の下に基礎用コンクリートブロック（基本 高さ約10cm）を敷くため、実際の高さは「本体高さ＋約10cm」となります。ご購入前には必ず最新のメーカーカタログと現地調査でご確認ください。</p>
+    </div>`;
+
+  quizBody.querySelectorAll('.goto-maker').forEach(b => {
+    b.addEventListener('click', () => {
+      closeModal();
+      setTimeout(() => $('#makers').scrollIntoView({ behavior:'smooth' }), 150);
+    });
+  });
+  quizBody.querySelectorAll('.quiz-restart').forEach(b => {
+    b.addEventListener('click', () => openModal(state.mode));
+  });
+  $('#quiz-body').parentElement.scrollTop = 0;
+}
+
+/* ---------- 遷移・戻る ---------- */
+function transitionTo(renderFn){
+  quizBody.classList.add('step-leave');
+  setTimeout(() => { quizBody.classList.remove('step-leave'); renderFn(); }, 220);
+}
+
+$('#quiz-back').addEventListener('click', () => {
+  if(state.step === 0 || state.answers.length === 0){ closeModal(); return; }
+  state.answers.pop();
+  state.step = Math.max(0, state.step - 1);
+  transitionTo(renderStep);
+});
+
+/* ---------- 更新履歴レンダリング ---------- */
+function renderJournal(){
+  const list = document.querySelector('#journal-list');
+  if(!list) return;
+  const HOT_TYPES = ['新商品', '入替'];
+  const fresh = UPDATE_LOG.some(e => (Date.now() - new Date(e.date).getTime()) < 45 * 24 * 3600 * 1000 && HOT_TYPES.includes(e.type));
+  list.innerHTML = UPDATE_LOG.map(e => {
+    const isFreshEntry = HOT_TYPES.includes(e.type) && (Date.now() - new Date(e.date).getTime()) < 45 * 24 * 3600 * 1000;
+    return `
+    <div class="grid grid-cols-12 items-baseline gap-3 md:gap-4 py-6 md:py-8 border-b border-line">
+      <span class="col-span-5 md:col-span-2 font-mono text-[12px] text-neutral-500">${esc(e.date)}</span>
+      <span class="col-span-4 md:col-span-2 font-mono text-[10px] tracking-widest2 uppercase ${HOT_TYPES.includes(e.type) ? 'text-rust' : 'text-neutral-400'}">${esc(e.type)}${isFreshEntry ? ' ●' : ''}</span>
+      <div class="col-span-12 md:col-span-8">
+        <p class="font-serif font-bold text-base md:text-xl leading-snug">${esc(e.title)}</p>
+        ${e.body ? `<p class="mt-2 text-[13px] leading-loose text-neutral-500">${esc(e.body)}</p>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+  if(!fresh && UPDATE_LOG.length === 1){
+    list.innerHTML += `
+    <div class="py-6 md:py-8 border-b border-linesoft">
+      <p class="font-mono text-[11px] tracking-widest text-neutral-400">SYSTEM STANDBY ── 巡回システムは稼働中です。新商品・廃盤・モデルチェンジが見つかり次第、こちらに追加されます。</p>
+    </div>`;
+  }
+}
+renderJournal();
+
+/* ---------- 索引レンダリング（フィルタ対応） ---------- */
+const idxFilter = { maker:'all', cat:'all' };
+function renderIndex(){
+  const grid = document.querySelector('#index-grid');
+  if(!grid) return;
+  const items = PRODUCTS.filter(p =>
+    (idxFilter.maker === 'all' || p.maker === idxFilter.maker) &&
+    (idxFilter.cat === 'all' || (p.cat || '').includes(idxFilter.cat)));
+  const count = document.querySelector('#idx-count');
+  if(count) count.textContent = `${items.length} / ${PRODUCTS.length} 点を表示`;
+  grid.innerHTML = items.length ? items.map(p => `
+    <div class="border-r border-b border-line p-6 md:p-8 group fade-up">
+      ${p.link
+        ? `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-neutral-50">${productVisual(p)}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">公式ページ →</span></a>`
+        : `<div class="aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-neutral-50">${productVisual(p)}</div>`}
+      <p class="mt-5 font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">${MAKERS[p.maker]} — ${esc(p.cat)}${isNew(p) ? ' <span class="text-rust">● NEW</span>' : ''}</p>
+      <h4 class="mt-2 font-serif font-bold text-lg leading-snug">${esc(p.name)}</h4>
+      <p class="mt-2 font-mono text-[11px] text-neutral-400">${esc(p.dims)}</p>
+    </div>`).join('')
+  : `<div class="col-span-full border-r border-b border-line p-12 text-center font-mono text-[11px] tracking-widest text-neutral-400">NO RESULT ── 該当する製品が見つかりませんでした。</div>`;
+}
+renderIndex();
+document.querySelectorAll('.idx-filter').forEach(b => {
+  b.addEventListener('click', () => {
+    idxFilter[b.dataset.group] = b.dataset.val;
+    document.querySelectorAll(`.idx-filter[data-group="${b.dataset.group}"]`).forEach(x => x.classList.toggle('active', x === b));
+    renderIndex();
+  });
+});
+document.querySelectorAll('.idx-filter[data-val="all"]').forEach(x => x.classList.add('active'));
+
+/* ---------- コラムレンダリング ---------- */
+function renderColumns(){
+  const list = document.querySelector('#column-list');
+  if(!list) return;
+  list.innerHTML = COLUMNS.map(c => `
+    <div class="qa-item col-item border-b border-line">
+      <button class="qa-btn w-full grid grid-cols-12 items-baseline gap-4 py-8 md:py-10 text-left group">
+        <span class="col-span-11 md:col-span-2 font-mono text-[11px] text-neutral-400">${esc(c.date)}<span class="block mt-1 text-rust uppercase tracking-widest2 text-[10px]">${esc(c.tag)}</span></span>
+        <span class="col-span-12 md:col-span-9 order-last md:order-none">
+          <span class="block font-serif font-bold text-xl md:text-3xl leading-snug group-hover:text-rust transition-colors duration-300">${esc(c.title)}</span>
+          <span class="mt-3 block text-[13px] leading-loose text-neutral-500">${esc(c.lead)}</span>
+        </span>
+        <span class="col-span-1 justify-self-end self-center"><span class="qa-cross"></span></span>
+      </button>
+      <div class="qa-panel">
+        <div class="grid grid-cols-12 gap-4 pb-10">
+          <span class="hidden md:block md:col-span-2"></span>
+          <div class="col-span-12 md:col-span-8 space-y-5">
+            ${c.body.map(par => `<p class="text-sm leading-loose text-neutral-600">${esc(par)}</p>`).join('')}
+            <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-400 pt-3">Text — 編集部</p>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+renderColumns();
+
+/* ---------- Q&Aレンダリング ---------- */
+function renderQA(){
+  const list = document.querySelector('#qa-list');
+  if(!list) return;
+  list.innerHTML = QA_ITEMS.length ? QA_ITEMS.map((it, i) => `
+    <div class="qa-item border-b border-line">
+      <button class="qa-btn w-full grid grid-cols-12 items-baseline gap-4 py-7 md:py-9 text-left group">
+        <span class="col-span-2 md:col-span-1 font-mono text-[11px] text-neutral-400">Q.${String(i + 1).padStart(2, '0')}</span>
+        <span class="col-span-9 md:col-span-10 font-serif font-bold text-lg md:text-2xl group-hover:text-rust transition-colors duration-300">${esc(it.q)}</span>
+        <span class="col-span-1 justify-self-end self-center"><span class="qa-cross"></span></span>
+      </button>
+      <div class="qa-panel">
+        <div class="grid grid-cols-12 gap-4 pb-9">
+          <span class="hidden md:block md:col-span-1"></span>
+          <p class="col-span-12 md:col-span-8 text-sm leading-loose text-neutral-600">${esc(it.a)}</p>
+        </div>
+      </div>
+    </div>`).join('')
+  : `<div class="border-b border-line py-14 text-center">
+      <p class="font-mono text-[11px] tracking-widest text-neutral-400 uppercase">Coming Soon ── ただいま準備中です。もうしばらくお待ちください。</p>
+    </div>`;
+}
+renderQA();
+
+/* ---------- Q&A ---------- */
+document.querySelectorAll('.qa-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.qa-item');
+    const wasOpen = item.classList.contains('qa-open');
+    document.querySelectorAll('.qa-item').forEach(i => i.classList.remove('qa-open'));
+    if(!wasOpen) item.classList.add('qa-open');
+  });
+});
+
+/* ---------- モバイルメニュー ---------- */
+const mmBtn = $('#menu-btn'), mmPanel = $('#mobile-menu');
+function toggleMenu(open){
+  const willOpen = open !== undefined ? open : mmPanel.classList.contains('hidden');
+  mmPanel.classList.toggle('hidden', !willOpen);
+  document.body.style.overflow = willOpen ? 'hidden' : '';
+  mmBtn.textContent = willOpen ? 'CLOSE ×' : 'MENU';
+}
+mmBtn.addEventListener('click', () => toggleMenu());
+mmPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape' && !mmPanel.classList.contains('hidden')) toggleMenu(false);
+});
+
+/* ---------- スクロール演出（表示時にふわっと立ち上がる） ---------- */
+(function(){
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const targets = document.querySelectorAll(
+    '.entry-banner, section div[class*="py-16"], #makers article, #qa-list > div, #column-list > div, #journal-list > div, aside .ad-slot'
+  );
+  targets.forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i % 3) * 90 + 'ms';
+  });
+  if(prefersReduced || !('IntersectionObserver' in window)){
+    targets.forEach(el => el.classList.add('revealed'));
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('revealed'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+  targets.forEach(el => io.observe(el));
+})();
+
+/* ---------- ナビ現在地ハイライト（スクロールスパイ） ---------- */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  const navLinks = document.querySelectorAll('header nav a[href^="#"]');
+  const map = {};
+  navLinks.forEach(a => { map[a.getAttribute('href').slice(1)] = a; });
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(!e.isIntersecting) return;
+      navLinks.forEach(a => a.classList.remove('nav-active'));
+      const link = map[e.target.id];
+      if(link) link.classList.add('nav-active');
+    });
+  }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+  ['shindan', 'makers', 'archive', 'column', 'faq', 'journal'].forEach(id => {
+    const s = document.getElementById(id);
+    if(s) spy.observe(s);
+  });
+})();
+
+/* ---------- 構造化データの自動生成（SEO・AEO対策） ----------
+   PRODUCTS / QA_ITEMS / COLUMNS の内容から JSON-LD を組み立てて
+   <head> に注入する。データが更新されれば構造化データも自動で追随する。 */
+(function(){
+  const data = [];
+  data.push({
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: '物置 製品アーカイブ（タクボ・イナバ・ヨドコウ）',
+    numberOfItems: PRODUCTS.length,
+    itemListElement: PRODUCTS.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: Object.assign({
+        '@type': 'Product',
+        name: p.name,
+        brand: { '@type': 'Brand', name: MAKERS[p.maker].split(' /')[0] },
+        category: p.cat,
+        description: p.base
+      }, p.link ? { url: p.link } : {})
+    }))
+  });
+  if(QA_ITEMS.length){
+    data.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: QA_ITEMS.map(it => ({
+        '@type': 'Question',
+        name: it.q,
+        acceptedAnswer: { '@type': 'Answer', text: it.a }
+      }))
+    });
+  }
+  if(COLUMNS.length){
+    data.push({
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      name: '物置どれがいい？ コラム',
+      blogPost: COLUMNS.map(c => ({
+        '@type': 'BlogPosting',
+        headline: c.title,
+        datePublished: c.date,
+        description: c.lead,
+        articleBody: c.body.join(' '),
+        author: { '@type': 'Organization', name: '物置どれがいい？ 編集部' }
+      }))
+    });
+  }
+  const s = document.createElement('script');
+  s.type = 'application/ld+json';
+  s.textContent = JSON.stringify(data);
+  document.head.appendChild(s);
+})();
+</script>
+
+</body>
+</html>

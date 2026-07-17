@@ -1,0 +1,24 @@
+# 物置どれがいい？ — robots.txt
+Sitemap: https://shikatoy.github.io/monooki-site/sitemap.xml
+
+User-agent: *
+Allow: /
+
+# AI検索エンジン（AEO: Answer Engine Optimization）にも明示的に公開
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
