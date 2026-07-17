@@ -6,6 +6,7 @@
 <title>物置どれがいい？ ─ 空間と用途を美しく調和させる、物置のコンシェルジュ。</title>
 <meta name="description" content="タクボ・イナバ・ヨドコウの3大メーカーから、あなたにぴったりの物置を1分で診断。用途・サイズ・メーカーの3つの入口から選べるマッチング診断と、全製品索引・更新履歴・コラムをお届けします。">
 <meta name="theme-color" content="#101010">
+<meta name="google-site-verification" content="UyOuUgdHmuNVYiGnNzDQvFTut000UJ1k8QNdAMbVAC8" />
 <!-- OGP/canonical: 公開URL設定済み（https://shikatoy.github.io/monooki-site/） -->
 <link rel="canonical" href="https://shikatoy.github.io/monooki-site/">
 <meta property="og:url" content="https://shikatoy.github.io/monooki-site/">
@@ -103,6 +104,12 @@ tailwind.config = {
 
   /* ───── 図版（ハッチ地） ───── */
   .hatch-bg { background-image: repeating-linear-gradient(45deg, transparent, transparent 7px, rgba(16,16,16,.05) 7px, rgba(16,16,16,.05) 8px); }
+
+  /* ───── 更新履歴 → 商品カードへのリンク ───── */
+  .journal-link { color: #a3512b; border-bottom: 1px solid currentColor; transition: opacity .25s ease; }
+  .journal-link:hover { opacity: .65; }
+  [id^="product-"] { scroll-margin-top: 90px; }
+  [id^="product-"]:target { outline: 2px solid #a3512b; outline-offset: -2px; }
 
   /* ───── 図版リンク（公式ページ） ───── */
   .vis-link { position: relative; display: block; cursor: pointer; }
@@ -1163,6 +1170,16 @@ $('#quiz-back').addEventListener('click', () => {
 });
 
 /* ---------- 更新履歴レンダリング ---------- */
+/* 履歴タイトル内の商品名を、索引の該当商品カードへのリンクに自動変換する */
+function linkifyJournalTitle(title){
+  let out = esc(title);
+  for(const p of PRODUCTS){
+    if(title.includes(p.name)){
+      out = out.replace(esc(p.name), `<a href="#product-${p.id}" class="journal-link" title="索引の該当商品へ移動">${esc(p.name)}</a>`);
+    }
+  }
+  return out;
+}
 function renderJournal(){
   const list = document.querySelector('#journal-list');
   if(!list) return;
@@ -1175,7 +1192,7 @@ function renderJournal(){
       <span class="col-span-5 md:col-span-2 font-mono text-[12px] text-neutral-500">${esc(e.date)}</span>
       <span class="col-span-4 md:col-span-2 font-mono text-[10px] tracking-widest2 uppercase ${HOT_TYPES.includes(e.type) ? 'text-rust' : 'text-neutral-400'}">${esc(e.type)}${isFreshEntry ? ' ●' : ''}</span>
       <div class="col-span-12 md:col-span-8">
-        <p class="font-serif font-bold text-base md:text-xl leading-snug">${esc(e.title)}</p>
+        <p class="font-serif font-bold text-base md:text-xl leading-snug">${linkifyJournalTitle(e.title)}</p>
         ${e.body ? `<p class="mt-2 text-[13px] leading-loose text-neutral-500">${esc(e.body)}</p>` : ''}
       </div>
     </div>`;
@@ -1200,7 +1217,7 @@ function renderIndex(){
   const count = document.querySelector('#idx-count');
   if(count) count.textContent = `${items.length} / ${PRODUCTS.length} 点を表示`;
   grid.innerHTML = items.length ? items.map(p => `
-    <div class="border-r border-b border-line p-6 md:p-8 group fade-up">
+    <div id="product-${p.id}" class="border-r border-b border-line p-6 md:p-8 group fade-up">
       ${p.link
         ? `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-neutral-50">${productVisual(p)}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">公式ページ →</span></a>`
         : `<div class="aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-neutral-50">${productVisual(p)}</div>`}
