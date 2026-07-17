@@ -286,6 +286,19 @@ tailwind.config = {
   </div>
 </div>
 
+<!-- ═══════════ 商品詳細モーダル（サイズ選択） ═══════════ -->
+<div id="detail-modal" class="modal modal-hidden fixed inset-0 z-[60] bg-paper flex flex-col">
+  <div class="border-b border-line shrink-0">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 h-16 flex items-center justify-between">
+      <span class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase">Product Detail — サイズ展開</span>
+      <button id="detail-close" class="font-mono text-[11px] tracking-widest2 uppercase hover:text-rust transition-colors">Close ×</button>
+    </div>
+  </div>
+  <div class="flex-1 overflow-y-auto">
+    <div id="detail-body" class="max-w-3xl mx-auto px-5 md:px-10 py-10 md:py-14"></div>
+  </div>
+</div>
+
 <!-- ═══════════ 広告欄 1 ═══════════ -->
 <!-- AD_SLOT_1_START: 広告タグ（Google AdSense等）は下の .ad-slot 内に貼り付けてください。中のプレースホルダー表示は削除してOKです -->
 <aside class="border-b border-line" aria-label="広告">
@@ -385,7 +398,7 @@ tailwind.config = {
         <h2 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">索引。</h2>
       </div>
       <p class="md:col-span-4 text-[13px] leading-loose text-neutral-500">
-        掲載中の全製品を、更新（追加）が新しい順にご覧いただけます。図版は寸法データから自動で描いた正面図です（写真ではありません。縮尺は製品ごとに異なります）。寸法は本体のみのため、設置時は下に敷く基礎用ブロック分（基本 高さ約10cm）を加えてお考えください。
+        掲載中の全製品を、更新（追加）が新しい順にご覧いただけます。図版は各製品の形状を自動で描いた正面図です（写真ではありません）。寸法・サイズ展開は「詳細を見る」からご確認ください。
       </p>
     </div>
   </div>
@@ -551,117 +564,132 @@ const MAKERS = { takubo:'タクボ / TAKUBO', inaba:'イナバ / INABA', yodoko:
 
 /* ---------- 製品アーカイブ ---------- */
 /* ===== PRODUCTS_START =====
-   自動巡回システムへ: 新商品は必ずこのブロック内（配列末尾）に、
-   既存要素と同一スキーマで追加すること。新商品には added:'YYYY-MM-DD' を必ず付与。
-   廃盤・モデルチェンジ時は、該当する製品オブジェクト1件のみをカンマ整合性を
-   保って削除すること。このブロック外のコードは一切変更しないこと。 */
+   自動巡回システムへ: 商品は「シリーズ」単位で管理する。
+   ・新商品は必ずこのブロック内（配列末尾）に、既存要素と同一スキーマで追加すること
+   ・name はシリーズ名（型番なし）。added:'YYYY-MM-DD' を必ず付与
+   ・sizes は公式で確認できたサイズ（型番・間口w・奥行d・高さh、単位mm）。
+     全型番を網羅できたシリーズには sizesComplete:true を付与する。
+     寸法未公表なら sizes:[] とする
+   ・廃盤・モデルチェンジ時は該当シリーズ1件のみをカンマ整合性を保って削除すること
+   ・このブロック外のコードは一切変更しないこと */
 const PRODUCTS = [
-  { id:'t-gp', maker:'takubo', name:'グランプレステージ ジャンプ GP-137CF', cat:'小型物置',
-    dims:'W1,372 × D750 × H1,100 mm', steel:'特殊焼付塗装鋼板', door:'引き戸（2枚）', found:'ブロック基礎 対応',
+  { id:'t-gp', maker:'takubo', name:'グランプレステージ ジャンプ', cat:'小型物置',
+    steel:'特殊焼付塗装鋼板', door:'引き戸（2枚）', found:'ブロック基礎 対応',
     tags:{ small:3, low:3, cheap:2, garden:2, slide:2, design:1, daily:1 },
     features:['窓下に収まるロータイプ','軽い引き戸','棚板標準装備'],
     base:'窓の下にすっきり収まる、うれしいロータイプ。狭いスペースの第一候補です。',
-    link:'https://www.e-ty.co.jp/seihin/gp/' },
-  { id:'t-nd', maker:'takubo', name:'Mr.ストックマン ダンディ ND-2515', cat:'中型物置',
-    dims:'W2,532 × D1,590 × H2,110 mm', steel:'高級2コート焼付塗装鋼板', door:'吊り戸式引き戸（3枚）', found:'ブロック基礎 対応',
-    tags:{ medium:3, slide:3, daily:3, garden:2, tires:2, design:1, premium:1 },
+    link:'https://www.e-ty.co.jp/seihin/gp/',
+    sizes:[ { code:'GP-95AF', w:920, d:530, h:1100 }, { code:'GP-117CF', w:1120, d:750, h:1100 }, { code:'GP-137CF', w:1372, d:750, h:1100 }, { code:'GP-137DF', w:1372, d:750, h:1400 }, { code:'GP-155CF', w:1550, d:750, h:1100 }, { code:'GP-177CF', w:1772, d:750, h:1100 }, { code:'GP-195CF', w:1950, d:750, h:1100 } ] },
+  { id:'t-nd', maker:'takubo', name:'Mr.ストックマン ダンディ', cat:'中・大型物置',
+    steel:'高級2コート焼付塗装鋼板', door:'吊り戸式引き戸（2〜3枚）', found:'ブロック基礎 対応',
+    tags:{ medium:3, large:1, slide:3, daily:3, garden:2, tires:2, design:1, premium:1 },
     features:['摩擦ゼロの吊り戸','高級2コート焼付塗装','可動棚で自在に整理'],
     base:'毎日出し入れする方にこそ、吊り戸構造の扉の軽さを体感していただきたい定番モデルです。',
-    link:'https://www.e-ty.co.jp/seihin/nd/' },
-  { id:'t-jn', maker:'takubo', name:'Mr.トールマン ダンディ JN-2519', cat:'大型物置',
-    dims:'W2,532 × D1,922 × H2,570 mm', steel:'高級2コート焼付塗装鋼板', door:'吊り戸式引き戸（3枚）', found:'ブロック基礎＋アンカー必須',
+    link:'https://www.e-ty.co.jp/seihin/nd/',
+    sizes:[ { code:'ND-1510', w:1568, d:1090, h:2110 }, { code:'ND-2210', w:2196, d:1090, h:2110 }, { code:'ND-2215', w:2196, d:1590, h:2110 }, { code:'ND-2515', w:2532, d:1590, h:2110 }, { code:'ND-2519', w:2532, d:1922, h:2110 }, { code:'ND-2915', w:2932, d:1590, h:2110 }, { code:'ND-2922', w:2932, d:2242, h:2110 } ] },
+  { id:'t-jn', maker:'takubo', name:'Mr.トールマン ダンディ', cat:'大型物置',
+    steel:'高級2コート焼付塗装鋼板', door:'吊り戸式引き戸（3枚）', found:'ブロック基礎＋アンカー必須',
     tags:{ large:2, tall:3, long:3, slide:2, daily:1, premium:1, medium:1 },
-    features:['H2.5m超の背高設計','長尺物を立てたまま収納','摩擦ゼロの吊り戸'],
+    features:['天井の高い背高設計','長尺物を立てたまま収納','摩擦ゼロの吊り戸'],
     base:'脚立や板材、スキー板も立てたまま収納できる、頼れる背高タイプです。',
-    link:'https://www.e-ty.co.jp/seihin/jn/' },
-  { id:'t-bs', maker:'takubo', name:'バイクシャッターマン BS-1809', cat:'バイク車庫',
-    dims:'W1,800 × D2,600 × H2,110 mm', steel:'焼付塗装鋼板', door:'巻上げシャッター', found:'土間コンクリート 推奨',
+    link:'https://www.e-ty.co.jp/seihin/jn/',
+    sizes:[ { code:'JN-2215', w:2196, d:1590, h:2570 }, { code:'JN-2519', w:2532, d:1922, h:2570 }, { code:'JN-2919', w:2932, d:1922, h:2570 }, { code:'JN-2922', w:2932, d:2242, h:2570 } ] },
+  { id:'t-bs', maker:'takubo', name:'バイクシャッターマン', cat:'バイク車庫',
+    steel:'焼付塗装鋼板', door:'巻上げシャッター', found:'土間コンクリート 推奨',
     tags:{ bike:3, shutter:3, garage:1, sturdy:1, large:1 },
     features:['前面フルオープン','スロープ対応','工具棚オプション'],
     base:'前面シャッターでバイクをまっすぐ格納できます。雨の日の出し入れもらくらくです。',
-    link:'https://www.e-ty.co.jp/seihin/nde-jne/' },
-  { id:'i-mjx', maker:'inaba', name:'シンプリー MJX-095D', cat:'小型物置',
-    dims:'W950 × D548 × H1,103 mm', steel:'溶融亜鉛メッキ鋼板', door:'引き戸（2枚）', found:'ブロック基礎 対応',
-    tags:{ small:3, cheap:3, garden:1, design:1, low:2 },
-    features:['玄関脇・ベランダ対応','ディンプルキー錠','最小フットプリント'],
-    base:'玄関脇のわずかなスペースにも置ける、イナバ品質のコンパクトモデルです。',
-    link:'https://www.inaba-ss.co.jp/monooki/lineup/mjx/' },
-  { id:'i-fs14', maker:'inaba', name:'フォルタ FS-2614S', cat:'中型物置', added:'2026-07-09',
-    dims:'W2,630 × D1,370 × H2,085 mm', steel:'指定建築材料使用の高耐食鋼板', door:'引き戸（3枚）＋ディンプルキー、現地で開き方向変更可', found:'ブロック基礎 対応（HSマーク無し機種は耐風・耐震補強セット要）',
-    tags:{ medium:3, sturdy:2, tires:2, garden:1, daily:1, snow:1, cheap:1, slide:1 },
-    features:['意匠性の高いリブ形状の扉','現地で扉の開き方向を変更可能','半開き防止の仮ロック機能'],
-    base:'定番だったネクスタの実質的な後継機です。頑丈さはそのままに、扉のデザイン性がぐっと高まった新しい標準機です。',
-    link:'https://www.inaba-ss.co.jp/monooki/lineup/fs/' },
-  { id:'i-fs', maker:'inaba', name:'フォルタ FS-2626', cat:'大型物置',
-    dims:'W2,630 × D2,630 × H2,303 mm', steel:'高耐食溶融亜鉛メッキ鋼板 t0.6', door:'引き戸（3枚）＋ディンプルキー', found:'ブロック基礎＋アンカー必須',
-    tags:{ large:3, sturdy:3, tires:2, long:1, snow:2, premium:1 },
-    features:['圧倒的堅牢フレーム','多雪型仕様あり','家財を一括収蔵'],
-    base:'「100人乗っても大丈夫」の試験をくぐり抜けた頑丈さ。雪の多い地域でも安心の大容量です。',
-    link:'https://www.inaba-ss.co.jp/monooki/lineup/fs/' },
-  { id:'i-fxn', maker:'inaba', name:'バイク保管庫 FXN-1730HY', cat:'バイク車庫',
-    dims:'W1,790 × D3,050 × H2,375 mm', steel:'高耐食溶融亜鉛メッキ鋼板', door:'シャッター＋床付タイプ', found:'土間コンクリート 推奨',
-    tags:{ bike:3, garage:2, sturdy:2, shutter:2, large:1, daily:1 },
-    features:['床付で湿気・盗難に強い','ハイルーフで大型車対応','業界随一の型式展開'],
-    base:'床付き構造とディンプルキーで、大切な愛車をしっかり守るバイク保管庫です。',
-    link:'https://www.inaba-ss.co.jp/monooki/lineup/fm/' },
-  { id:'i-grn', maker:'inaba', name:'ガレーディア GRN-3157', cat:'ガレージ',
-    dims:'W3,100 × D5,700 × H2,450 mm', steel:'高耐食溶融亜鉛メッキ鋼板', door:'巻上げシャッター', found:'土間コンクリート 必須',
-    tags:{ garage:3, large:3, bike:2, shutter:3, sturdy:2, snow:1 },
-    features:['車1台＋作業空間','堅牢シャッター','趣味室としても機能'],
-    base:'車もバイクも趣味の道具も、まるごと収まるゆとりの本格ガレージです。',
-    link:'https://www.inaba-ss.co.jp/monooki/lineup/grn/' },
-  { id:'y-ese', maker:'yodoko', name:'エスモ ESE-1607A', cat:'小型物置',
-    dims:'W1,650 × D750 × H1,959 mm', steel:'ガルバリウム鋼板', door:'3枚扉', found:'ブロック基礎 対応',
-    tags:{ small:2, medium:1, door3:3, cheap:1, design:2, rustproof:2, daily:1 },
-    features:['開口2/3を確保する3枚扉','ガルバリウム鋼板','奥行750mmの省スペース'],
-    base:'奥行75cmの省スペースでも、3枚扉で開口部は広々。通路脇にも置きやすいモデルです。',
-    link:'https://www.yodomonooki.jp/products/lumberroom/esumo/' },
-  { id:'y-lmd', maker:'yodoko', name:'エルモ LMD-2218', cat:'中型物置',
-    dims:'W2,220 × D1,870 × H2,120 mm', steel:'高耐久ガルバリウム鋼板', door:'3枚扉（有効開口 最大化）', found:'ブロック基礎 対応',
-    tags:{ medium:3, door3:3, rustproof:3, coastal:3, premium:2, design:1, tires:1, garden:1 },
-    features:['サビへの圧倒的耐性','有効開口最大化の3枚扉','塩害地域でも長寿命'],
-    base:'サビに強いガルバリウム鋼板で、海の近くでも長く安心してお使いいただけます。',
-    link:'https://www.yodomonooki.jp/products/lumberroom/erumo/' },
-  { id:'y-vgc', maker:'yodoko', name:'ラヴィージュ VGC-3059', cat:'ガレージ',
-    dims:'W3,000 × D5,900 × H2,560 mm', steel:'高耐久ガルバリウム鋼板', door:'巻上げシャッター', found:'土間コンクリート 必須',
-    tags:{ garage:3, large:3, shutter:2, rustproof:2, coastal:2, premium:1 },
-    features:['高耐食素材で長寿命','車1台＋収納空間','塩害・積雪地に強い'],
-    base:'高耐食素材で長持ち。建てたあとも長く安心が続く、本格派のガレージです。',
-    link:'https://www.yodomonooki.jp/products/garage/ravige/' },
-  { id:'t-belos', maker:'takubo', name:'BELOS B-2518', cat:'中型物置', added:'2026-07-09',
-    dims:'W2,530 × D1,800 × H2,160 mm', steel:'高耐食鋼板ZAM＋粉体塗装', door:'連動吊り戸式扉（開き方向選択可）', found:'ブロック基礎 対応（豪雪型は公式カタログ参照）',
+    link:'https://www.e-ty.co.jp/seihin/nde-jne/',
+    sizes:[ { code:'BS-1509', w:1500, d:2600, h:2110 }, { code:'BS-1809', w:1800, d:2600, h:2110 }, { code:'BS-2209', w:2200, d:2600, h:2110 } ] },
+  { id:'t-belos', maker:'takubo', name:'BELOS', cat:'中型物置', added:'2026-07-09',
+    steel:'高耐食鋼板ZAM＋粉体塗装', door:'連動吊り戸式扉（開き方向選択可）', found:'ブロック基礎 対応（豪雪型は公式カタログ参照）',
     tags:{ medium:3, design:3, premium:2, daily:2, rustproof:2, slide:1 },
     features:['プロダクトデザイナー日原佐知夫が手掛ける意匠','独自壁パネル構造で雨水侵入を軽減','床耐荷重1.5倍(9000N/㎡)の頑丈設計'],
     base:'デザイナーズ物置「BELOS」。お住まいと美しく調和するデザインに、頑丈な基本性能も兼ね備えています。',
-    link:'https://www.e-ty.co.jp/belos/' },
-  { id:'i-tbj', maker:'inaba', name:'宅配ボックス TBJ-065C', cat:'小型物置', added:'2026-07-09',
-    dims:'W620 × D548 × H1,303 mm', steel:'塗装鋼板', door:'前面開口扉（上段:宅配ボックス／下段:収納庫）', found:'ブロック基礎 対応（アンカー工事必須）',
-    tags:{ small:3, daily:2, cheap:1, design:1 },
-    features:['上段は宅配ボックス、下段は収納庫の二段構成','宅配ボックスは裏面ボタン施錠+鍵解錠のみ','全面開口扉で出し入れしやすい'],
-    base:'荷物の受け取りと収納がこれ一台に。宅配ボックスと収納庫が一体になった便利な新製品です。',
-    link:'https://www.inaba-ss.co.jp/monooki/lineup/tbj/' },
-  { id:'i-smx', maker:'inaba', name:'ナイソー SMX', cat:'断熱物置', added:'2026-07-11',
-    dims:'公式カタログ参照', steel:'公式カタログ参照', door:'公式カタログ参照', found:'公式カタログ参照',
-    tags:{ insulation:3, medium:2, sturdy:2, premium:1 },
-    features:['断熱シリーズ「ナイソー」の新型（2026年9月1日発売）','旧SMK型は2026年8月31日をもって生産終了','寸法・扉形式など詳細仕様は公式カタログ参照'],
-    base:'断熱物置「ナイソー」の新型です。湿気に弱い大切な物の保管に、心強い選択肢です。' },
-  { id:'i-sml', maker:'inaba', name:'como lite SML', cat:'断熱物置', added:'2026-07-12',
-    dims:'公式カタログ参照', steel:'公式カタログ参照', door:'公式カタログ参照', found:'公式カタログ参照',
-    tags:{ insulation:2, medium:2, design:2, premium:1 },
-    features:['断熱マルチスペース「コモ」系譜の新型ライト版（2026年9月1日発売）','ナイソーSMX型と同一リリースで発表された新製品','寸法・扉形式など詳細仕様は公式カタログ参照'],
-    base:'収納にとどまらない「もう一室」を気軽に実現できる、コモ系譜の新型です。詳細は公式カタログをお待ちください。' },
-  { id:'i-dm', maker:'inaba', name:'アルシアフィット DM-2235HDA', cat:'バイク車庫', added:'2026-07-13',
-    dims:'W2,290 × D3,575 × H2,391 mm', steel:'公式カタログ参照', door:'巻上げシャッター（シャッターケース標準装備）', found:'土間タイプ／床付タイプ 選択可',
-    tags:{ bike:3, design:3, shutter:2, premium:2, garage:1, sturdy:1 },
-    features:['住宅と調和する上質デザインのバイクガレージ','2段錠ディンプルキーとシャッターケースを標準装備','2026年1月、設置容易な床付タイプを追加'],
-    base:'デザインで選べるバイクガレージです。床付きタイプの追加で、土間工事なしでも導入しやすくなりました。',
-    link:'https://www.inaba-ss.co.jp/monooki/lineup/dm/' },
-  { id:'t-lsn', maker:'takubo', name:'リジュー LSN-1815', cat:'小型物置', added:'2026-07-16',
-    dims:'W1,832 × D1,540 × H2,212 mm', steel:'ZAM／ガルバリウム鋼板＋高級焼付塗装', door:'吊り戸式引き戸＋仮ロック錠', found:'ブロック基礎 対応（一般・多雪兼用）',
+    link:'https://www.e-ty.co.jp/belos/',
+    sizes:[ { code:'B-2215', w:2230, d:1500, h:2160 }, { code:'B-2518', w:2530, d:1800, h:2160 }, { code:'B-2922', w:2930, d:2200, h:2160 } ] },
+  { id:'t-lsn', maker:'takubo', name:'リジュー', cat:'小型物置', added:'2026-07-16',
+    steel:'ZAM／ガルバリウム鋼板＋高級焼付塗装', door:'吊り戸式引き戸＋仮ロック錠', found:'ブロック基礎 対応（一般・多雪兼用）',
     tags:{ garden:3, design:3, slide:2, small:2, snow:1, daily:1 },
     features:['大手物置初の切妻三角屋根デザイン','摩擦の少ない吊り戸＋仮止め機能付き錠','ガーデングリーン／アイボリーブラックの2色・一般多雪兼用'],
     base:'大手では珍しい三角屋根がかわいい新シリーズ。軽い吊り戸はそのままに、お庭の景色になじむデザインです。',
-    link:'https://www.e-ty.co.jp/seihin/ls/' }
+    link:'https://www.e-ty.co.jp/seihin/ls/',
+    sizes:[ { code:'LSN-1811', w:1832, d:1140, h:2212 }, { code:'LSN-1815', w:1832, d:1540, h:2212 }, { code:'LSN-2215', w:2232, d:1540, h:2212 } ] },
+  { id:'i-mjx', maker:'inaba', name:'シンプリー', cat:'小型物置',
+    steel:'溶融亜鉛メッキ鋼板', door:'引き戸（2枚）', found:'ブロック基礎 対応',
+    tags:{ small:3, cheap:3, garden:1, design:1, low:2 },
+    features:['玄関脇・ベランダ対応','ディンプルキー錠','最小フットプリント'],
+    base:'玄関脇のわずかなスペースにも置ける、イナバ品質のコンパクトモデルです。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/mjx/',
+    sizes:[ { code:'MJX-092C', w:920, d:520, h:1003 }, { code:'MJX-095D', w:950, d:548, h:1103 }, { code:'MJX-115D', w:1120, d:548, h:1103 }, { code:'MJX-135E', w:1320, d:548, h:1303 }, { code:'MJX-155E', w:1520, d:548, h:1303 }, { code:'MJX-176F', w:1740, d:615, h:1603 } ] },
+  { id:'i-fs', maker:'inaba', name:'フォルタ', cat:'中・大型物置', added:'2026-07-09',
+    steel:'指定建築材料使用の高耐食鋼板', door:'引き戸（3枚）＋ディンプルキー、現地で開き方向変更可', found:'ブロック基礎 対応（大型はアンカー必須）',
+    tags:{ medium:3, large:3, sturdy:3, tires:2, snow:2, garden:1, daily:1, slide:1, long:1, premium:1, cheap:1 },
+    features:['意匠性の高いリブ形状の扉','荷重試験に裏付けられた堅牢フレーム','多雪型仕様あり'],
+    base:'定番だったネクスタの実質的な後継機です。頑丈さと使いやすさを兼ね備えた、イナバの新しい標準機です。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/fs/',
+    sizes:[ { code:'FS-1814', w:1790, d:1370, h:2085 }, { code:'FS-2214', w:2210, d:1370, h:2085 }, { code:'FS-2614', w:2630, d:1370, h:2085 }, { code:'FS-2618', w:2630, d:1790, h:2303 }, { code:'FS-2626', w:2630, d:2630, h:2303 }, { code:'FS-3026', w:3050, d:2630, h:2303 } ] },
+  { id:'i-fxn', maker:'inaba', name:'バイク保管庫', cat:'バイク車庫',
+    steel:'高耐食溶融亜鉛メッキ鋼板', door:'シャッター＋床付タイプ', found:'土間コンクリート 推奨',
+    tags:{ bike:3, garage:2, sturdy:2, shutter:2, large:1, daily:1 },
+    features:['床付で湿気・盗難に強い','ハイルーフで大型車対応','業界随一の型式展開'],
+    base:'床付き構造とディンプルキーで、大切な愛車をしっかり守るバイク保管庫です。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/fm/',
+    sizes:[ { code:'FXN-1330S', w:1370, d:3050, h:2155 }, { code:'FXN-1530S', w:1530, d:3050, h:2155 }, { code:'FXN-1730HY', w:1790, d:3050, h:2375 }, { code:'FXN-2230HY', w:2210, d:3050, h:2375 } ] },
+  { id:'i-grn', maker:'inaba', name:'ガレーディア', cat:'ガレージ',
+    steel:'高耐食溶融亜鉛メッキ鋼板', door:'巻上げシャッター', found:'土間コンクリート 必須',
+    tags:{ garage:3, large:3, bike:2, shutter:3, sturdy:2, snow:1 },
+    features:['車1台＋作業空間','堅牢シャッター','趣味室としても機能'],
+    base:'車もバイクも趣味の道具も、まるごと収まるゆとりの本格ガレージです。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/grn/',
+    sizes:[ { code:'GRN-2142', w:2180, d:4240, h:2450 }, { code:'GRN-2652', w:2630, d:5240, h:2450 }, { code:'GRN-3157', w:3100, d:5700, h:2450 }, { code:'GRN-3652', w:3630, d:5240, h:2450 } ] },
+  { id:'i-tbj', maker:'inaba', name:'宅配ボックス', cat:'小型物置', added:'2026-07-09',
+    steel:'塗装鋼板', door:'前面開口扉（上段:宅配ボックス／下段:収納庫）', found:'ブロック基礎 対応（アンカー工事必須）',
+    tags:{ small:3, daily:2, cheap:1, design:1 },
+    features:['上段は宅配ボックス、下段は収納庫の二段構成','宅配ボックスは裏面ボタン施錠+鍵解錠のみ','全面開口扉で出し入れしやすい'],
+    base:'荷物の受け取りと収納がこれ一台に。宅配ボックスと収納庫が一体になった便利な新製品です。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/tbj/',
+    sizes:[ { code:'TBJ-065C', w:620, d:548, h:1303 } ] },
+  { id:'i-smx', maker:'inaba', name:'ナイソー SMX', cat:'断熱物置', added:'2026-07-11',
+    steel:'公式カタログ参照', door:'公式カタログ参照', found:'公式カタログ参照',
+    tags:{ insulation:3, medium:2, sturdy:2, premium:1 },
+    features:['断熱シリーズ「ナイソー」の新型（2026年9月1日発売）','旧SMK型は2026年8月31日をもって生産終了','寸法・扉形式など詳細仕様は公式カタログ参照'],
+    base:'断熱物置「ナイソー」の新型です。湿気に弱い大切な物の保管に、心強い選択肢です。',
+    sizes:[] },
+  { id:'i-sml', maker:'inaba', name:'como lite', cat:'断熱物置', added:'2026-07-12',
+    steel:'公式カタログ参照', door:'公式カタログ参照', found:'公式カタログ参照',
+    tags:{ insulation:2, medium:2, design:2, premium:1 },
+    features:['断熱マルチスペース「コモ」系譜の新型ライト版（2026年9月1日発売）','ナイソーSMX型と同一リリースで発表された新製品','寸法・扉形式など詳細仕様は公式カタログ参照'],
+    base:'収納にとどまらない「もう一室」を気軽に実現できる、コモ系譜の新型です。詳細は公式カタログをお待ちください。',
+    sizes:[] },
+  { id:'i-dm', maker:'inaba', name:'アルシアフィット', cat:'バイク車庫', added:'2026-07-13',
+    steel:'公式カタログ参照', door:'巻上げシャッター（シャッターケース標準装備）', found:'土間タイプ／床付タイプ 選択可',
+    tags:{ bike:3, design:3, shutter:2, premium:2, garage:1, sturdy:1 },
+    features:['住宅と調和する上質デザインのバイクガレージ','2段錠ディンプルキーとシャッターケースを標準装備','2026年1月、設置容易な床付タイプを追加'],
+    base:'デザインで選べるバイクガレージです。床付きタイプの追加で、土間工事なしでも導入しやすくなりました。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/dm/',
+    sizes:[ { code:'DM-1835HDA', w:1830, d:3575, h:2391 }, { code:'DM-2235HDA', w:2290, d:3575, h:2391 } ] },
+  { id:'y-ese', maker:'yodoko', name:'エスモ', cat:'小型物置',
+    steel:'ガルバリウム鋼板', door:'3枚扉', found:'ブロック基礎 対応',
+    tags:{ small:2, medium:1, door3:3, cheap:1, design:2, rustproof:2, daily:1 },
+    features:['開口2/3を確保する3枚扉','ガルバリウム鋼板','奥行が浅く通路脇にも置きやすい'],
+    base:'奥行きの浅い省スペースでも、3枚扉で開口部は広々。通路脇にも置きやすいモデルです。',
+    link:'https://www.yodomonooki.jp/products/lumberroom/esumo/',
+    sizes:[ { code:'ESE-1105E', w:1120, d:520, h:1606 }, { code:'ESE-1305A', w:1350, d:520, h:1959 }, { code:'ESE-1606D', w:1650, d:620, h:1959 }, { code:'ESE-1607A', w:1650, d:750, h:1959 }, { code:'ESE-2107A', w:2100, d:750, h:1959 } ] },
+  { id:'y-lmd', maker:'yodoko', name:'エルモ', cat:'中・大型物置',
+    steel:'高耐久ガルバリウム鋼板', door:'3枚扉（有効開口 最大化）', found:'ブロック基礎 対応',
+    tags:{ medium:3, large:1, door3:3, rustproof:3, coastal:3, premium:2, design:1, tires:1, garden:1 },
+    features:['サビへの圧倒的耐性','有効開口最大化の3枚扉','塩害地域でも長寿命'],
+    base:'サビに強いガルバリウム鋼板で、海の近くでも長く安心してお使いいただけます。',
+    link:'https://www.yodomonooki.jp/products/lumberroom/erumo/',
+    sizes:[ { code:'LMD-1811', w:1800, d:1170, h:2120 }, { code:'LMD-2211', w:2220, d:1170, h:2120 }, { code:'LMD-2215', w:2220, d:1570, h:2120 }, { code:'LMD-2218', w:2220, d:1870, h:2120 }, { code:'LMD-2511', w:2540, d:1170, h:2120 }, { code:'LMD-2918', w:2900, d:1870, h:2120 }, { code:'LMD-2925', w:2900, d:2570, h:2120 } ] },
+  { id:'y-vgc', maker:'yodoko', name:'ラヴィージュ', cat:'ガレージ',
+    steel:'高耐久ガルバリウム鋼板', door:'巻上げシャッター', found:'土間コンクリート 必須',
+    tags:{ garage:3, large:3, shutter:2, rustproof:2, coastal:2, premium:1 },
+    features:['高耐食素材で長寿命','車1台＋収納空間','塩害・積雪地に強い'],
+    base:'高耐食素材で長持ち。建てたあとも長く安心が続く、本格派のガレージです。',
+    link:'https://www.yodomonooki.jp/products/garage/ravige/',
+    sizes:[ { code:'VGC-2642', w:2650, d:4240, h:2560 }, { code:'VGC-3049', w:3000, d:4980, h:2560 }, { code:'VGC-3059', w:3000, d:5900, h:2560 }, { code:'VGC-3359', w:3350, d:5900, h:2560 } ] }
 ];
 /* ===== PRODUCTS_END ===== */
 
@@ -818,17 +846,37 @@ const ABC = ['A','B','C','D'];
 function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function isNew(p){ return !!p.added && (Date.now() - new Date(p.added).getTime()) < 45 * 24 * 3600 * 1000; }
 
+/* ---------- サイズ展開ヘルパー ---------- */
+function fmtNum(n){ return Number(n).toLocaleString(); }
+function fmtDims(s){ return s ? `W${fmtNum(s.w)} × D${fmtNum(s.d)} × H${fmtNum(s.h)} mm` : '公式カタログ参照'; }
+function sortedSizes(p){ return (p.sizes || []).slice().sort((a, b) => (a.w * a.d) - (b.w * b.d)); }
+function repSize(p){ const s = sortedSizes(p); return s.length ? s[Math.floor((s.length - 1) / 2)] : null; }
+function sizeRangeLabel(p){
+  const s = sortedSizes(p);
+  if(!s.length) return 'サイズ: 公式カタログ参照';
+  if(s.length === 1) return `サイズ展開 1種 / ${fmtDims(s[0])}`;
+  const wMin = Math.min(...s.map(x => x.w)), wMax = Math.max(...s.map(x => x.w));
+  const label = p.sizesComplete ? `全${s.length}種` : `${s.length}種（代表）`;
+  return `サイズ展開 ${label} / 間口 ${fmtNum(wMin)}〜${fmtNum(wMax)} mm`;
+}
+/* ユーザーの設置スペース(mm)に収まる最大サイズを返す */
+function bestFitSize(p, wMM, dMM){
+  const c = sortedSizes(p).filter(s => s.w <= wMM && s.d <= dMM);
+  return c.length ? c[c.length - 1] : null;
+}
+
 /* ---------- 製品図版（寸法データから正面図を自動生成） ----------
    W1 = 屋根幅（本体より張り出す。実寸非公表のため本体+約5%の参考値）
    W2 = 間口（本体幅・カタログ値）／ H = 総高
    取っ手の位置ルール:
    ・物置（背の高い引き戸タイプ）= 左扉の左端・高さ中央に1本
    ・収納庫（小型・ロータイプ、目安H<1,400mm）= 両扉の両端・高さ中央に2本 */
-function svgElevation(p){
-  const mW = (p.dims.match(/W([\d,]+)/) || [])[1];
-  const mH = (p.dims.match(/H([\d,]+)/) || [])[1];
-  const W = mW ? parseInt(mW.replace(/,/g, ''), 10) : 1800;
-  const H = mH ? parseInt(mH.replace(/,/g, ''), 10) : 2000;
+function svgElevation(p, size, showDims = true){
+  const s0 = size || repSize(p);
+  const mW = s0 ? String(s0.w) : null;
+  const mH = s0 ? String(s0.h) : null;
+  const W = s0 ? s0.w : 1800;
+  const H = s0 ? s0.h : 2000;
   const roofWmm = Math.round(W * 1.05 / 10) * 10;
   const gy = 235, cx = 185;
   const s = Math.min(250 / roofWmm, 165 / H);
@@ -871,7 +919,7 @@ function svgElevation(p){
     <line x1="${bx1.toFixed(1)}" y1="${railY.toFixed(1)}" x2="${bx2.toFixed(1)}" y2="${railY.toFixed(1)}"/>
     <line x1="${bx1.toFixed(1)}" y1="${baseY.toFixed(1)}" x2="${bx2.toFixed(1)}" y2="${baseY.toFixed(1)}"/>
     <g>${inner}</g>
-    <g opacity=".55" stroke-width="1.2">
+    ${showDims ? `<g opacity=".55" stroke-width="1.2">
       <line x1="${rx1.toFixed(1)}" y1="${(y - 14).toFixed(1)}" x2="${rx2.toFixed(1)}" y2="${(y - 14).toFixed(1)}"/>
       <line x1="${rx1.toFixed(1)}" y1="${(y - 19).toFixed(1)}" x2="${rx1.toFixed(1)}" y2="${(y - 9).toFixed(1)}"/>
       <line x1="${rx2.toFixed(1)}" y1="${(y - 19).toFixed(1)}" x2="${rx2.toFixed(1)}" y2="${(y - 9).toFixed(1)}"/>
@@ -886,13 +934,13 @@ function svgElevation(p){
       <text x="${cx}" y="${(y - 24).toFixed(1)}" text-anchor="middle">W1 ${labelW1}（屋根）</text>
       <text x="${cx}" y="${gy + 36}" text-anchor="middle">W2 ${labelW2}（間口）</text>
       <text x="${(rx2 + 26).toFixed(1)}" y="${(y + h / 2 + 4).toFixed(1)}" text-anchor="start">H ${labelH}</text>
-    </g>
+    </g>` : ''}
   </svg>`;
 }
-function productVisual(p){
+function productVisual(p, size, showDims = true){
   return p.img
     ? `<img src="${esc(p.img)}" alt="${esc(p.name)}" class="w-full h-full object-cover">`
-    : svgElevation(p);
+    : svgElevation(p, size, showDims);
 }
 
 /* ---------- モーダル開閉 ---------- */
@@ -923,6 +971,12 @@ function closeModal(){
   }
 }
 window.addEventListener('popstate', () => {
+  const dm = document.querySelector('#detail-modal');
+  if(dm && !dm.classList.contains('modal-hidden')){
+    detailGuard = false;                                   // ガードはこのpopstateで消費済み
+    hideDetailUI();                                        // 詳細モーダルを閉じてサイトに留まる
+    return;
+  }
   if(modal.classList.contains('modal-hidden')) return;   // 診断中でなければ通常の「戻る」
   if(state.step === 0 || state.answers.length === 0){
     historyGuard = false;                                  // ガードはこのpopstateで消費済み
@@ -1118,8 +1172,15 @@ function renderResults(){
     return { p, score, matched };
   }).sort((a, b) => b.score - a.score);
 
-  let results = scored.filter(r => r.score > 0).slice(0, 3);
-  if(results.length === 0) results = scored.slice(0, 1);
+  /* サイズ診断の場合: 入力スペースに収まるサイズを持つシリーズを優先（全サイズがマッチング対象） */
+  const space = state.mode === 'size' ? { w: state.sizeSel.w * 10, d: state.sizeSel.d * 10 } : null;
+  let pool = scored.filter(r => r.score > 0);
+  if(pool.length === 0) pool = scored.slice(0, 1);
+  if(space){
+    const fitted = pool.filter(r => bestFitSize(r.p, space.w, space.d));
+    if(fitted.length) pool = fitted;
+  }
+  let results = pool.slice(0, 3);
   const maxScore = results[0].score || 1;
 
   progressBar.style.width = '100%';
@@ -1135,6 +1196,13 @@ function renderResults(){
         ${results.map((r, i) => {
           const pct = Math.min(98, Math.round(58 + 40 * (r.score / maxScore) * Math.min(1, r.score / totalWeight / 1.2)));
           const reasons = r.matched.sort((a, b) => b.w - a.w).slice(0, 3).map(x => TAG_REASONS[x.tag]).filter(Boolean);
+          const fit = space ? bestFitSize(r.p, space.w, space.d) : null;
+          const ds = fit || repSize(r.p);
+          const sizeCount = (r.p.sizes || []).length;
+          const dimsLabel = ds
+            ? `${esc(ds.code)}： ${esc(fmtDims(ds))}${sizeCount > 1 ? `（ほか全${sizeCount}サイズ展開）` : ''}`
+            : '公式カタログ参照';
+          const fitNote = fit ? ` お選びのスペース（間口${fmtNum(space.w)}×奥行${fmtNum(space.d)}mm）には「${esc(fit.code)}」が収まります。` : '';
           return `
           <article class="border border-line">
             <div class="flex items-stretch border-b border-line">
@@ -1149,11 +1217,11 @@ function renderResults(){
             </div>
             <div class="border-b border-line hatch-bg">
               ${r.p.link
-                ? `<a href="${esc(r.p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="h-44 md:h-56 flex items-center justify-center px-6 py-3">${productVisual(r.p)}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">公式ページ →</span></a>`
-                : `<div class="h-44 md:h-56 flex items-center justify-center px-6 py-3">${productVisual(r.p)}</div>`}
+                ? `<a href="${esc(r.p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="h-44 md:h-56 flex items-center justify-center px-6 py-3">${productVisual(r.p, ds)}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">公式ページ →</span></a>`
+                : `<div class="h-44 md:h-56 flex items-center justify-center px-6 py-3">${productVisual(r.p, ds)}</div>`}
             </div>
             <dl class="text-[12px] md:text-[13px]">
-              <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 px-5 md:px-7 py-3 font-mono text-[11px] text-neutral-500 border-r border-linesoft">外形寸法</dt><dd class="col-span-8 md:col-span-9 px-5 md:px-7 py-3 font-mono">${esc(r.p.dims)}</dd></div>
+              <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 px-5 md:px-7 py-3 font-mono text-[11px] text-neutral-500 border-r border-linesoft">外形寸法</dt><dd class="col-span-8 md:col-span-9 px-5 md:px-7 py-3 font-mono">${dimsLabel}</dd></div>
               <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 px-5 md:px-7 py-3 font-mono text-[11px] text-neutral-500 border-r border-linesoft">主要鋼板</dt><dd class="col-span-8 md:col-span-9 px-5 md:px-7 py-3">${esc(r.p.steel)}</dd></div>
               <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 px-5 md:px-7 py-3 font-mono text-[11px] text-neutral-500 border-r border-linesoft">扉形式</dt><dd class="col-span-8 md:col-span-9 px-5 md:px-7 py-3">${esc(r.p.door)}</dd></div>
               <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 px-5 md:px-7 py-3 font-mono text-[11px] text-neutral-500 border-r border-linesoft">推奨基礎</dt><dd class="col-span-8 md:col-span-9 px-5 md:px-7 py-3">${esc(r.p.found)}</dd></div>
@@ -1161,11 +1229,12 @@ function renderResults(){
             </dl>
             <div class="px-5 md:px-7 py-5">
               <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">Rationale — おすすめの理由</p>
-              <p class="mt-2.5 text-sm leading-loose text-neutral-700">${esc(r.p.base)}${reasons.length ? ' 今回のご回答では「' + reasons.map(esc).join('」「') + '」があなたの条件にマッチしました。' : ''}</p>
+              <p class="mt-2.5 text-sm leading-loose text-neutral-700">${esc(r.p.base)}${reasons.length ? ' 今回のご回答では「' + reasons.map(esc).join('」「') + '」があなたの条件にマッチしました。' : ''}${fitNote}</p>
             </div>
-            <div class="border-t border-line grid grid-cols-2 divide-x divide-line">
-              <button class="goto-maker py-4 font-mono text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300" data-brand="${r.p.maker}">メーカー詳細 →</button>
-              <button class="quiz-restart py-4 font-mono text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">↻ もう一度診断する</button>
+            <div class="border-t border-line grid grid-cols-3 divide-x divide-line">
+              <button class="size-open py-4 font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300" data-pid="${r.p.id}">サイズ展開 →</button>
+              <button class="goto-maker py-4 font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300" data-brand="${r.p.maker}">メーカー詳細 →</button>
+              <button class="quiz-restart py-4 font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">↻ もう一度</button>
             </div>
           </article>`;
         }).join('')}
@@ -1181,6 +1250,9 @@ function renderResults(){
   });
   quizBody.querySelectorAll('.quiz-restart').forEach(b => {
     b.addEventListener('click', () => openModal(state.mode));
+  });
+  quizBody.querySelectorAll('.size-open').forEach(b => {
+    b.addEventListener('click', () => openDetail(b.dataset.pid));
   });
   $('#quiz-body').parentElement.scrollTop = 0;
 }
@@ -1250,13 +1322,15 @@ function renderIndex(){
   grid.innerHTML = items.length ? items.map(p => `
     <div id="product-${p.id}" class="border-r border-b border-line p-6 md:p-8 group fade-up">
       ${p.link
-        ? `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-white/60">${productVisual(p)}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">公式ページ →</span></a>`
-        : `<div class="aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-white/60">${productVisual(p)}</div>`}
+        ? `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-white/60">${productVisual(p, null, false)}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">公式ページ →</span></a>`
+        : `<div class="aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-white/60">${productVisual(p, null, false)}</div>`}
       <p class="mt-5 font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">${MAKERS[p.maker]} — ${esc(p.cat)}${isNew(p) ? ' <span class="text-rust">● NEW</span>' : ''}</p>
       <h4 class="mt-2 font-serif font-bold text-lg leading-snug">${esc(p.name)}</h4>
-      <p class="mt-2 font-mono text-[11px] text-neutral-400">${esc(p.dims)}</p>
+      <p class="mt-2 text-[12px] leading-relaxed text-neutral-500">${p.features.map(esc).join('・')}</p>
+      <button class="size-open mt-4 w-full border border-line py-2.5 font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300" data-pid="${p.id}">詳細を見る →</button>
     </div>`).join('')
   : `<div class="col-span-full border-r border-b border-line p-12 text-center font-mono text-[11px] tracking-widest text-neutral-400">NO RESULT ── 該当する製品が見つかりませんでした。</div>`;
+  grid.querySelectorAll('.size-open').forEach(b => b.addEventListener('click', () => openDetail(b.dataset.pid)));
 }
 renderIndex();
 document.querySelectorAll('.idx-filter').forEach(b => {
@@ -1328,6 +1402,70 @@ document.querySelectorAll('.qa-btn').forEach(btn => {
     if(!wasOpen) item.classList.add('qa-open');
   });
 });
+
+/* ---------- 商品詳細（サイズ選択）モーダル ---------- */
+const detailModal = $('#detail-modal');
+let detailGuard = false;
+
+function openDetail(pid){
+  const p = PRODUCTS.find(x => x.id === pid);
+  if(!p) return;
+  renderDetail(p, null);
+  detailModal.classList.remove('modal-hidden');
+  document.body.style.overflow = 'hidden';
+  if(!detailGuard){
+    try { history.pushState({ detailGuard: true }, ''); detailGuard = true; } catch(e){}
+  }
+}
+function hideDetailUI(){
+  detailModal.classList.add('modal-hidden');
+  if(modal.classList.contains('modal-hidden')) document.body.style.overflow = '';
+}
+function closeDetail(){
+  hideDetailUI();
+  if(detailGuard){
+    detailGuard = false;
+    try { history.back(); } catch(e){}
+  }
+}
+$('#detail-close').addEventListener('click', closeDetail);
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape' && !detailModal.classList.contains('modal-hidden')) closeDetail();
+});
+
+function renderDetail(p, sizeIdx){
+  const sizes = sortedSizes(p);
+  let si = (sizeIdx === null || sizeIdx === undefined)
+    ? (sizes.length ? sizes.findIndex(s => s === repSize(p)) : -1)
+    : sizeIdx;
+  const cur = si >= 0 ? sizes[si] : null;
+  document.querySelector('#detail-body').innerHTML = `
+    <div class="step-enter">
+      <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">${MAKERS[p.maker]} — ${esc(p.cat)}${isNew(p) ? ' <span class="text-rust">● NEW</span>' : ''}</p>
+      <h3 class="mt-2 font-serif font-extrabold text-3xl md:text-4xl leading-snug">${esc(p.name)}</h3>
+      <p class="mt-4 text-sm leading-loose text-neutral-600">${esc(p.base)}</p>
+      <div class="mt-6 border border-line hatch-bg"><div class="h-48 md:h-60 flex items-center justify-center px-6 py-3">${productVisual(p, cur)}</div></div>
+      ${sizes.length ? `
+      <p class="mt-8 font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">Size — サイズを選択（${p.sizesComplete ? '全' + sizes.length + '種' : '代表 ' + sizes.length + '種'}）</p>
+      <div class="mt-3 flex flex-wrap gap-2">
+        ${sizes.map((s, i) => `<button class="size-chip idx-filter ${i === si ? 'active' : ''}" data-i="${i}">${esc(s.code)}</button>`).join('')}
+      </div>` : `
+      <p class="mt-8 font-mono text-[11px] tracking-widest text-neutral-400">サイズ情報は公式カタログの公開をお待ちください。</p>`}
+      <dl class="mt-6 border-t border-line text-[12px] md:text-[13px]">
+        <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 py-3 pr-3 font-mono text-[11px] text-neutral-500">外形寸法</dt><dd class="col-span-8 md:col-span-9 py-3 font-mono">${cur ? esc(cur.code) + '： ' : ''}${esc(fmtDims(cur))}</dd></div>
+        <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 py-3 pr-3 font-mono text-[11px] text-neutral-500">主要鋼板</dt><dd class="col-span-8 md:col-span-9 py-3">${esc(p.steel)}</dd></div>
+        <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 py-3 pr-3 font-mono text-[11px] text-neutral-500">扉形式</dt><dd class="col-span-8 md:col-span-9 py-3">${esc(p.door)}</dd></div>
+        <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 py-3 pr-3 font-mono text-[11px] text-neutral-500">推奨基礎</dt><dd class="col-span-8 md:col-span-9 py-3">${esc(p.found)}</dd></div>
+        <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 py-3 pr-3 font-mono text-[11px] text-neutral-500">特記事項</dt><dd class="col-span-8 md:col-span-9 py-3">${p.features.map(esc).join(' ／ ')}</dd></div>
+      </dl>
+      <div class="mt-6 flex flex-wrap gap-3">
+        ${p.link ? `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="border border-line px-5 py-3 font-mono text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">公式ページで全サイズを見る →</a>` : ''}
+      </div>
+      <p class="mt-6 font-mono text-[10px] leading-relaxed text-neutral-400">※ 掲載サイズは公式ラインナップに基づく代表的な参考値です。全サイズ展開・最新仕様は公式ページをご確認ください。設置時は本体の下に基礎用ブロック（基本 高さ約10cm）を敷きます。</p>
+    </div>`;
+  document.querySelectorAll('#detail-body .size-chip').forEach(b =>
+    b.addEventListener('click', () => renderDetail(p, Number(b.dataset.i))));
+}
 
 /* ---------- モバイルメニュー ---------- */
 const mmBtn = $('#menu-btn'), mmPanel = $('#mobile-menu');
