@@ -896,18 +896,44 @@ function productVisual(p){
 }
 
 /* ---------- モーダル開閉 ---------- */
+/* 履歴ガード: 診断中にスマホ・ブラウザの「戻る」を押しても
+   サイトから離れず、診断内で1問戻る（先頭なら診断を閉じる）ようにする */
+let historyGuard = false;
+
 function openModal(mode){
   state.mode = mode; state.step = 0; state.answers = [];
   modalLabel.textContent = QUESTION_SETS[mode].label;
   modal.classList.remove('modal-hidden');
   document.body.style.overflow = 'hidden';
+  if(!historyGuard){
+    try { history.pushState({ quizGuard: true }, ''); historyGuard = true; } catch(e){}
+  }
   showAiLoading(QUESTION_SETS[mode].ai, renderStep);
 }
-function closeModal(){
+function hideModalUI(){
   modal.classList.add('modal-hidden');
   document.body.style.overflow = '';
   progressBar.style.width = '0%';
 }
+function closeModal(){
+  hideModalUI();
+  if(historyGuard){
+    historyGuard = false;
+    try { history.back(); } catch(e){}   // ガード用の履歴を消費（popstateはモーダル非表示のため無視される）
+  }
+}
+window.addEventListener('popstate', () => {
+  if(modal.classList.contains('modal-hidden')) return;   // 診断中でなければ通常の「戻る」
+  if(state.step === 0 || state.answers.length === 0){
+    historyGuard = false;                                  // ガードはこのpopstateで消費済み
+    hideModalUI();                                         // 先頭まで戻っていたら診断を閉じてサイトに留まる
+  } else {
+    state.answers.pop();
+    state.step = Math.max(0, state.step - 1);
+    transitionTo(renderStep);
+    try { history.pushState({ quizGuard: true }, ''); } catch(e){}   // ガードを張り直す
+  }
+});
 document.querySelectorAll('.entry-banner').forEach(b => b.addEventListener('click', () => openModal(b.dataset.mode)));
 $('#modal-close').addEventListener('click', closeModal);
 document.addEventListener('keydown', e => { if(e.key === 'Escape' && !modal.classList.contains('modal-hidden')) closeModal(); });
