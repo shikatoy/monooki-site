@@ -43,7 +43,7 @@ tailwind.config = {
       },
       colors: {
         ink: '#101010',
-        paper: '#ffffff',
+        paper: '#f8f6f0',
         line: '#171717',
         linesoft: '#dcdcd8',
         rust: '#a3512b'
@@ -58,6 +58,9 @@ tailwind.config = {
   body { -webkit-font-smoothing: antialiased; }
   section[id] { scroll-margin-top: 64px; }
   ::selection { background: #a3512b; color: #fff; }
+
+  /* ───── 配色（案C ベージュ基調）: 診断・索引・コラムを一段濃い生成りに ───── */
+  #shindan, #archive, #column { background: #efe9dc; }
 
   .tate { writing-mode: vertical-rl; text-orientation: mixed; }
 
@@ -127,7 +130,7 @@ tailwind.config = {
 
   /* ───── 索引フィルタ ───── */
   .idx-filter { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; border: 1px solid #171717; padding: 6px 14px; transition: all .25s ease; }
-  .idx-filter:hover { background: #f0f0ec; }
+  .idx-filter:hover { background: #e6dfd0; }
   .idx-filter.active { background: #101010; color: #ffffff; }
 
   /* ───── アウトライン文字 ───── */
@@ -1219,8 +1222,8 @@ function renderIndex(){
   grid.innerHTML = items.length ? items.map(p => `
     <div id="product-${p.id}" class="border-r border-b border-line p-6 md:p-8 group fade-up">
       ${p.link
-        ? `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-neutral-50">${productVisual(p)}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">公式ページ →</span></a>`
-        : `<div class="aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-neutral-50">${productVisual(p)}</div>`}
+        ? `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-white/60">${productVisual(p)}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">公式ページ →</span></a>`
+        : `<div class="aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-white/60">${productVisual(p)}</div>`}
       <p class="mt-5 font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">${MAKERS[p.maker]} — ${esc(p.cat)}${isNew(p) ? ' <span class="text-rust">● NEW</span>' : ''}</p>
       <h4 class="mt-2 font-serif font-bold text-lg leading-snug">${esc(p.name)}</h4>
       <p class="mt-2 font-mono text-[11px] text-neutral-400">${esc(p.dims)}</p>
