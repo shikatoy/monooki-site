@@ -385,7 +385,7 @@ tailwind.config = {
         <h2 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">索引。</h2>
       </div>
       <p class="md:col-span-4 text-[13px] leading-loose text-neutral-500">
-        掲載中の全製品を一覧でご覧いただけます。図版は寸法データから自動で描いた正面図です（写真ではありません。縮尺は製品ごとに異なります）。寸法は本体のみのため、設置時は下に敷く基礎用ブロック分（基本 高さ約10cm）を加えてお考えください。
+        掲載中の全製品を、更新（追加）が新しい順にご覧いただけます。図版は寸法データから自動で描いた正面図です（写真ではありません。縮尺は製品ごとに異なります）。寸法は本体のみのため、設置時は下に敷く基礎用ブロック分（基本 高さ約10cm）を加えてお考えください。
       </p>
     </div>
   </div>
@@ -1243,6 +1243,8 @@ function renderIndex(){
   const items = PRODUCTS.filter(p =>
     (idxFilter.maker === 'all' || p.maker === idxFilter.maker) &&
     (idxFilter.cat === 'all' || (p.cat || '').includes(idxFilter.cat)));
+  /* 更新（追加）が新しい順に並べる。added未設定の初期掲載品はサイト公開日扱い */
+  items.sort((a, b) => new Date(b.added || '2026-07-07') - new Date(a.added || '2026-07-07'));
   const count = document.querySelector('#idx-count');
   if(count) count.textContent = `${items.length} / ${PRODUCTS.length} 点を表示`;
   grid.innerHTML = items.length ? items.map(p => `
