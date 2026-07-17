@@ -573,7 +573,7 @@ const MAKERS = { takubo:'タクボ / TAKUBO', inaba:'イナバ / INABA', yodoko:
    ・廃盤・モデルチェンジ時は該当シリーズ1件のみをカンマ整合性を保って削除すること
    ・このブロック外のコードは一切変更しないこと */
 const PRODUCTS = [
-  { id:'t-gp', maker:'takubo', name:'グランプレステージ ジャンプ', cat:'小型物置',
+  { id:'t-gp', maker:'takubo', name:'グランプレステージ ジャンプ', cat:'小型物置', drawRef:'y-ese',
     steel:'特殊焼付塗装鋼板', door:'引き戸2枚・両開き', found:'ブロック基礎 対応',
     doorSpec:{ front:['door','door'], handles:[{p:0,e:'l'},{p:1,e:'r'}], opening:'両開き' },
     tags:{ small:3, low:3, cheap:2, garden:2, slide:2, design:1, daily:1 },
@@ -582,14 +582,16 @@ const PRODUCTS = [
     link:'https://www.e-ty.co.jp/seihin/gp/',
     sizes:[ { code:'GP-95AF', w:920, d:530, h:1100 }, { code:'GP-117CF', w:1120, d:750, h:1100 }, { code:'GP-137CF', w:1372, d:750, h:1100 }, { code:'GP-137DF', w:1372, d:750, h:1400 }, { code:'GP-155CF', w:1550, d:750, h:1100 }, { code:'GP-177CF', w:1772, d:750, h:1100 }, { code:'GP-195CF', w:1950, d:750, h:1100 } ] },
   { id:'t-nd', maker:'takubo', name:'Mr.ストックマン ダンディ', cat:'中・大型物置',
-    steel:'高級2コート焼付塗装鋼板', door:'吊り戸式引き戸（2〜3枚）', found:'ブロック基礎 対応',
+    steel:'高級2コート焼付塗装鋼板', door:'吊り戸式引き戸2枚・片開き（右側固定パネル）', found:'ブロック基礎 対応',
+    doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
     tags:{ medium:3, large:1, slide:3, daily:3, garden:2, tires:2, design:1, premium:1 },
     features:['摩擦ゼロの吊り戸','高級2コート焼付塗装','可動棚で自在に整理'],
     base:'毎日出し入れする方にこそ、吊り戸構造の扉の軽さを体感していただきたい定番モデルです。',
     link:'https://www.e-ty.co.jp/seihin/nd/',
     sizes:[ { code:'ND-1510', w:1568, d:1090, h:2110 }, { code:'ND-2210', w:2196, d:1090, h:2110 }, { code:'ND-2215', w:2196, d:1590, h:2110 }, { code:'ND-2515', w:2532, d:1590, h:2110 }, { code:'ND-2519', w:2532, d:1922, h:2110 }, { code:'ND-2915', w:2932, d:1590, h:2110 }, { code:'ND-2922', w:2932, d:2242, h:2110 } ] },
   { id:'t-jn', maker:'takubo', name:'Mr.トールマン ダンディ', cat:'大型物置',
-    steel:'高級2コート焼付塗装鋼板', door:'吊り戸式引き戸（3枚）', found:'ブロック基礎＋アンカー必須',
+    steel:'高級2コート焼付塗装鋼板', door:'吊り戸式引き戸2枚・片開き（右側固定パネル）', found:'ブロック基礎＋アンカー必須',
+    doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
     tags:{ large:2, tall:3, long:3, slide:2, daily:1, premium:1, medium:1 },
     features:['天井の高い背高設計','長尺物を立てたまま収納','摩擦ゼロの吊り戸'],
     base:'脚立や板材、スキー板も立てたまま収納できる、頼れる背高タイプです。',
@@ -610,7 +612,7 @@ const PRODUCTS = [
     base:'デザイナーズ物置「BELOS」。お住まいと美しく調和するデザインに、頑丈な基本性能も兼ね備えています。',
     link:'https://www.e-ty.co.jp/belos/',
     sizes:[ { code:'B-2215', w:2230, d:1500, h:2160 }, { code:'B-2518', w:2530, d:1800, h:2160 }, { code:'B-2922', w:2930, d:2200, h:2160 } ] },
-  { id:'t-lsn', maker:'takubo', name:'リジュー', cat:'小型物置', added:'2026-07-16',
+  { id:'t-lsn', maker:'takubo', name:'リジュー', cat:'小型物置', added:'2026-07-16', roof:'gable',
     steel:'ZAM／ガルバリウム鋼板＋高級焼付塗装', door:'吊り戸式引き戸2枚・両開き（両端は固定パネル）＋仮ロック錠', found:'ブロック基礎 対応（一般・多雪兼用）',
     doorSpec:{ front:['fix','door','door','fix'], handles:[{p:1,e:'r'},{p:2,e:'l'}], opening:'両開き' },
     tags:{ garden:3, design:3, slide:2, small:2, snow:1, daily:1 },
@@ -618,7 +620,7 @@ const PRODUCTS = [
     base:'大手では珍しい三角屋根がかわいい新シリーズ。軽い吊り戸はそのままに、お庭の景色になじむデザインです。',
     link:'https://www.e-ty.co.jp/seihin/ls/',
     sizes:[ { code:'LSN-1811', w:1832, d:1140, h:2212 }, { code:'LSN-1815', w:1832, d:1540, h:2212 }, { code:'LSN-2215', w:2232, d:1540, h:2212 } ] },
-  { id:'i-mjx', maker:'inaba', name:'シンプリー', cat:'小型物置',
+  { id:'i-mjx', maker:'inaba', name:'シンプリー', cat:'小型物置', drawRef:'y-ese',
     steel:'溶融亜鉛メッキ鋼板', door:'引き戸（2枚）', found:'ブロック基礎 対応',
     tags:{ small:3, cheap:3, garden:1, design:1, low:2 },
     features:['玄関脇・ベランダ対応','ディンプルキー錠','最小フットプリント'],
@@ -626,7 +628,8 @@ const PRODUCTS = [
     link:'https://www.inaba-ss.co.jp/monooki/lineup/mjx/',
     sizes:[ { code:'MJX-092C', w:920, d:520, h:1003 }, { code:'MJX-095D', w:950, d:548, h:1103 }, { code:'MJX-115D', w:1120, d:548, h:1103 }, { code:'MJX-135E', w:1320, d:548, h:1303 }, { code:'MJX-155E', w:1520, d:548, h:1303 }, { code:'MJX-176F', w:1740, d:615, h:1603 } ] },
   { id:'i-fs', maker:'inaba', name:'フォルタ', cat:'中・大型物置', added:'2026-07-09',
-    steel:'指定建築材料使用の高耐食鋼板', door:'引き戸（3枚）＋ディンプルキー、現地で開き方向変更可', found:'ブロック基礎 対応（大型はアンカー必須）',
+    steel:'指定建築材料使用の高耐食鋼板', door:'引き戸2枚・片開き（右側固定パネル）＋ディンプルキー、現地で開き方向変更可', found:'ブロック基礎 対応（大型はアンカー必須）',
+    doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
     tags:{ medium:3, large:3, sturdy:3, tires:2, snow:2, garden:1, daily:1, slide:1, long:1, premium:1, cheap:1 },
     features:['意匠性の高いリブ形状の扉','荷重試験に裏付けられた堅牢フレーム','多雪型仕様あり'],
     base:'定番だったネクスタの実質的な後継機です。頑丈さと使いやすさを兼ね備えた、イナバの新しい標準機です。',
@@ -648,14 +651,15 @@ const PRODUCTS = [
     sizes:[ { code:'GRN-2142', w:2180, d:4240, h:2450 }, { code:'GRN-2652', w:2630, d:5240, h:2450 }, { code:'GRN-3157', w:3100, d:5700, h:2450 }, { code:'GRN-3652', w:3630, d:5240, h:2450 } ] },
   { id:'i-tbj', maker:'inaba', name:'宅配ボックス', cat:'小型物置', added:'2026-07-09',
     steel:'塗装鋼板', door:'前開き扉・上下2段（上1/3:宅配ボックス／下2/3:収納庫）', found:'ブロック基礎 対応（アンカー工事必須）',
-    doorSpec:{ hingedRows:[0.34, 0.66], opening:'前開き' },
+    doorSpec:{ hingedRows:[0.34, 0.66], handleSide:'l', opening:'前開き' },
     tags:{ small:3, daily:2, cheap:1, design:1 },
     features:['上段は宅配ボックス、下段は収納庫の二段構成','宅配ボックスは裏面ボタン施錠+鍵解錠のみ','全面開口扉で出し入れしやすい'],
     base:'荷物の受け取りと収納がこれ一台に。宅配ボックスと収納庫が一体になった便利な新製品です。',
     link:'https://www.inaba-ss.co.jp/monooki/lineup/tbj/',
     sizes:[ { code:'TBJ-065C', w:620, d:548, h:1303 } ] },
   { id:'i-smx', maker:'inaba', name:'ナイソー SMX', cat:'断熱物置', added:'2026-07-11',
-    steel:'公式カタログ参照', door:'公式カタログ参照', found:'公式カタログ参照',
+    steel:'公式カタログ参照', door:'引き戸2枚・片開き（右側固定パネル）', found:'公式カタログ参照',
+    doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
     tags:{ insulation:3, medium:2, sturdy:2, premium:1 },
     features:['断熱シリーズ「ナイソー」の新型（2026年9月1日発売）','旧SMK型は2026年8月31日をもって生産終了','寸法・扉形式など詳細仕様は公式カタログ参照'],
     base:'断熱物置「ナイソー」の新型です。湿気に弱い大切な物の保管に、心強い選択肢です。',
@@ -683,9 +687,10 @@ const PRODUCTS = [
     link:'https://www.yodomonooki.jp/products/lumberroom/esumo/',
     sizes:[ { code:'ESE-1105E', w:1120, d:520, h:1606 }, { code:'ESE-1305A', w:1350, d:520, h:1959 }, { code:'ESE-1606D', w:1650, d:620, h:1959 }, { code:'ESE-1607A', w:1650, d:750, h:1959 }, { code:'ESE-2107A', w:2100, d:750, h:1959 } ] },
   { id:'y-lmd', maker:'yodoko', name:'エルモ', cat:'中・大型物置',
-    steel:'高耐久ガルバリウム鋼板', door:'3枚扉（有効開口 最大化）', found:'ブロック基礎 対応',
-    tags:{ medium:3, large:1, door3:3, rustproof:3, coastal:3, premium:2, design:1, tires:1, garden:1 },
-    features:['サビへの圧倒的耐性','有効開口最大化の3枚扉','塩害地域でも長寿命'],
+    steel:'高耐久ガルバリウム鋼板', door:'引き戸2枚・片開き（右側固定パネル）', found:'ブロック基礎 対応',
+    doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
+    tags:{ medium:3, large:1, slide:2, rustproof:3, coastal:3, premium:2, design:1, tires:1, garden:1 },
+    features:['サビへの圧倒的耐性','広い有効開口の引き戸','塩害地域でも長寿命'],
     base:'サビに強いガルバリウム鋼板で、海の近くでも長く安心してお使いいただけます。',
     link:'https://www.yodomonooki.jp/products/lumberroom/erumo/',
     sizes:[ { code:'LMD-1811', w:1800, d:1170, h:2120 }, { code:'LMD-2211', w:2220, d:1170, h:2120 }, { code:'LMD-2215', w:2220, d:1570, h:2120 }, { code:'LMD-2218', w:2220, d:1870, h:2120 }, { code:'LMD-2511', w:2540, d:1170, h:2120 }, { code:'LMD-2918', w:2900, d:1870, h:2120 }, { code:'LMD-2925', w:2900, d:2570, h:2120 } ] },
@@ -909,10 +914,17 @@ function svgElevation(p, size, showDims = true){
   const H = s0 ? s0.h : 2000;
   const roofWmm = Math.round(W * 1.05 / 10) * 10;
   const gy = 235, cx = 185;
-  const s = globalElevScale();
+  let s = globalElevScale();
+  /* drawRef: 指定シリーズと同じ表示サイズに揃える（例: 小型物置をエスモ基準で表示） */
+  if(p.drawRef){
+    const ref = PRODUCTS.find(x => x.id === p.drawRef);
+    const rs = ref && repSize(ref), ps = repSize(p);
+    if(rs && ps) s *= rs.h / ps.h;
+  }
   const rw = roofWmm * s, w = W * s, h = H * s;
   const y = gy - h;
-  const slab = Math.max(8, Math.min(12, h * 0.08));
+  const isGable = p.roof === 'gable';
+  const slab = isGable ? Math.max(14, Math.min(26, h * 0.16)) : Math.max(8, Math.min(12, h * 0.08));
   const bx1 = cx - w / 2, bx2 = cx + w / 2;
   const rx1 = cx - rw / 2, rx2 = cx + rw / 2;
   const railY = y + slab + Math.min(9, (gy - y - slab) * 0.09);
@@ -942,10 +954,13 @@ function svgElevation(p, size, showDims = true){
         const yy = bTop + bH * acc;
         inner += `<line x1="${bx1.toFixed(1)}" y1="${yy.toFixed(1)}" x2="${bx2.toFixed(1)}" y2="${yy.toFixed(1)}"/>`;
       }
+      const leftSide = spec.handleSide === 'l';
       let a2 = 0;
       rows.forEach(r => {
         const cy = bTop + bH * (a2 + r / 2);
-        inner += `<line x1="${(bx2 - w * 0.22).toFixed(1)}" y1="${cy.toFixed(1)}" x2="${(bx2 - w * 0.08).toFixed(1)}" y2="${cy.toFixed(1)}" stroke-width="3"/>`;
+        const hx1 = leftSide ? bx1 + w * 0.08 : bx2 - w * 0.22;
+        const hx2 = leftSide ? bx1 + w * 0.22 : bx2 - w * 0.08;
+        inner += `<line x1="${hx1.toFixed(1)}" y1="${cy.toFixed(1)}" x2="${hx2.toFixed(1)}" y2="${cy.toFixed(1)}" stroke-width="3"/>`;
         a2 += r;
       });
     } else if(spec && Array.isArray(spec.front)){
@@ -993,7 +1008,9 @@ function svgElevation(p, size, showDims = true){
   const labelH = mH ? fmt(H) : '—';
   return `<svg viewBox="0 0 400 300" class="w-full h-full text-ink" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="${esc(p.name)} 正面図">
     <line x1="20" y1="${gy}" x2="380" y2="${gy}" stroke-width="2"/>
-    <rect x="${rx1.toFixed(1)}" y="${y.toFixed(1)}" width="${rw.toFixed(1)}" height="${slab.toFixed(1)}"/>
+    ${isGable
+      ? `<path d="M${rx1.toFixed(1)} ${(y + slab).toFixed(1)} L${cx} ${y.toFixed(1)} L${rx2.toFixed(1)} ${(y + slab).toFixed(1)} Z"/>`
+      : `<rect x="${rx1.toFixed(1)}" y="${y.toFixed(1)}" width="${rw.toFixed(1)}" height="${slab.toFixed(1)}"/>`}
     <path d="M${bx1.toFixed(1)} ${(y + slab).toFixed(1)} V${gy} M${bx2.toFixed(1)} ${(y + slab).toFixed(1)} V${gy}"/>
     ${drawRails ? `<line x1="${bx1.toFixed(1)}" y1="${railY.toFixed(1)}" x2="${bx2.toFixed(1)}" y2="${railY.toFixed(1)}"/>
     <line x1="${bx1.toFixed(1)}" y1="${baseY.toFixed(1)}" x2="${bx2.toFixed(1)}" y2="${baseY.toFixed(1)}"/>` : ''}
