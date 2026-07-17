@@ -574,7 +574,8 @@ const MAKERS = { takubo:'タクボ / TAKUBO', inaba:'イナバ / INABA', yodoko:
    ・このブロック外のコードは一切変更しないこと */
 const PRODUCTS = [
   { id:'t-gp', maker:'takubo', name:'グランプレステージ ジャンプ', cat:'小型物置',
-    steel:'特殊焼付塗装鋼板', door:'引き戸（2枚）', found:'ブロック基礎 対応',
+    steel:'特殊焼付塗装鋼板', door:'引き戸2枚・両開き', found:'ブロック基礎 対応',
+    doorSpec:{ front:['door','door'], handles:[{p:0,e:'l'},{p:1,e:'r'}], opening:'両開き' },
     tags:{ small:3, low:3, cheap:2, garden:2, slide:2, design:1, daily:1 },
     features:['窓下に収まるロータイプ','軽い引き戸','棚板標準装備'],
     base:'窓の下にすっきり収まる、うれしいロータイプ。狭いスペースの第一候補です。',
@@ -602,14 +603,16 @@ const PRODUCTS = [
     link:'https://www.e-ty.co.jp/seihin/nde-jne/',
     sizes:[ { code:'BS-1509', w:1500, d:2600, h:2110 }, { code:'BS-1809', w:1800, d:2600, h:2110 }, { code:'BS-2209', w:2200, d:2600, h:2110 } ] },
   { id:'t-belos', maker:'takubo', name:'BELOS', cat:'中型物置', added:'2026-07-09',
-    steel:'高耐食鋼板ZAM＋粉体塗装', door:'連動吊り戸式扉（開き方向選択可）', found:'ブロック基礎 対応（豪雪型は公式カタログ参照）',
+    steel:'高耐食鋼板ZAM＋粉体塗装', door:'連動吊り戸式扉2枚・片開き（右側固定パネル／開き方向は現地選択可）', found:'ブロック基礎 対応（豪雪型は公式カタログ参照）',
+    doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
     tags:{ medium:3, design:3, premium:2, daily:2, rustproof:2, slide:1 },
     features:['プロダクトデザイナー日原佐知夫が手掛ける意匠','独自壁パネル構造で雨水侵入を軽減','床耐荷重1.5倍(9000N/㎡)の頑丈設計'],
     base:'デザイナーズ物置「BELOS」。お住まいと美しく調和するデザインに、頑丈な基本性能も兼ね備えています。',
     link:'https://www.e-ty.co.jp/belos/',
     sizes:[ { code:'B-2215', w:2230, d:1500, h:2160 }, { code:'B-2518', w:2530, d:1800, h:2160 }, { code:'B-2922', w:2930, d:2200, h:2160 } ] },
   { id:'t-lsn', maker:'takubo', name:'リジュー', cat:'小型物置', added:'2026-07-16',
-    steel:'ZAM／ガルバリウム鋼板＋高級焼付塗装', door:'吊り戸式引き戸＋仮ロック錠', found:'ブロック基礎 対応（一般・多雪兼用）',
+    steel:'ZAM／ガルバリウム鋼板＋高級焼付塗装', door:'吊り戸式引き戸2枚・両開き（両端は固定パネル）＋仮ロック錠', found:'ブロック基礎 対応（一般・多雪兼用）',
+    doorSpec:{ front:['fix','door','door','fix'], handles:[{p:1,e:'r'},{p:2,e:'l'}], opening:'両開き' },
     tags:{ garden:3, design:3, slide:2, small:2, snow:1, daily:1 },
     features:['大手物置初の切妻三角屋根デザイン','摩擦の少ない吊り戸＋仮止め機能付き錠','ガーデングリーン／アイボリーブラックの2色・一般多雪兼用'],
     base:'大手では珍しい三角屋根がかわいい新シリーズ。軽い吊り戸はそのままに、お庭の景色になじむデザインです。',
@@ -644,7 +647,8 @@ const PRODUCTS = [
     link:'https://www.inaba-ss.co.jp/monooki/lineup/grn/',
     sizes:[ { code:'GRN-2142', w:2180, d:4240, h:2450 }, { code:'GRN-2652', w:2630, d:5240, h:2450 }, { code:'GRN-3157', w:3100, d:5700, h:2450 }, { code:'GRN-3652', w:3630, d:5240, h:2450 } ] },
   { id:'i-tbj', maker:'inaba', name:'宅配ボックス', cat:'小型物置', added:'2026-07-09',
-    steel:'塗装鋼板', door:'前面開口扉（上段:宅配ボックス／下段:収納庫）', found:'ブロック基礎 対応（アンカー工事必須）',
+    steel:'塗装鋼板', door:'前開き扉・上下2段（上1/3:宅配ボックス／下2/3:収納庫）', found:'ブロック基礎 対応（アンカー工事必須）',
+    doorSpec:{ hingedRows:[0.34, 0.66], opening:'前開き' },
     tags:{ small:3, daily:2, cheap:1, design:1 },
     features:['上段は宅配ボックス、下段は収納庫の二段構成','宅配ボックスは裏面ボタン施錠+鍵解錠のみ','全面開口扉で出し入れしやすい'],
     base:'荷物の受け取りと収納がこれ一台に。宅配ボックスと収納庫が一体になった便利な新製品です。',
@@ -657,7 +661,8 @@ const PRODUCTS = [
     base:'断熱物置「ナイソー」の新型です。湿気に弱い大切な物の保管に、心強い選択肢です。',
     sizes:[] },
   { id:'i-sml', maker:'inaba', name:'como lite', cat:'断熱物置', added:'2026-07-12',
-    steel:'公式カタログ参照', door:'公式カタログ参照', found:'公式カタログ参照',
+    steel:'公式カタログ参照', door:'側面に扉（正面は中央から上部にかけて窓のみ）', found:'公式カタログ参照',
+    doorSpec:{ front:[], window:'upper', opening:'側面扉' },
     tags:{ insulation:2, medium:2, design:2, premium:1 },
     features:['断熱マルチスペース「コモ」系譜の新型ライト版（2026年9月1日発売）','ナイソーSMX型と同一リリースで発表された新製品','寸法・扉形式など詳細仕様は公式カタログ参照'],
     base:'収納にとどまらない「もう一室」を気軽に実現できる、コモ系譜の新型です。詳細は公式カタログをお待ちください。',
@@ -670,7 +675,8 @@ const PRODUCTS = [
     link:'https://www.inaba-ss.co.jp/monooki/lineup/dm/',
     sizes:[ { code:'DM-1835HDA', w:1830, d:3575, h:2391 }, { code:'DM-2235HDA', w:2290, d:3575, h:2391 } ] },
   { id:'y-ese', maker:'yodoko', name:'エスモ', cat:'小型物置',
-    steel:'ガルバリウム鋼板', door:'3枚扉', found:'ブロック基礎 対応',
+    steel:'ガルバリウム鋼板', door:'3枚扉・両開き', found:'ブロック基礎 対応',
+    doorSpec:{ front:['door','door','door'], handles:[{p:0,e:'l'},{p:2,e:'r'}], opening:'両開き' },
     tags:{ small:2, medium:1, door3:3, cheap:1, design:2, rustproof:2, daily:1 },
     features:['開口2/3を確保する3枚扉','ガルバリウム鋼板','奥行が浅く通路脇にも置きやすい'],
     base:'奥行きの浅い省スペースでも、3枚扉で開口部は広々。通路脇にも置きやすいモデルです。',
@@ -859,6 +865,22 @@ function sizeRangeLabel(p){
   const label = p.sizesComplete ? `全${s.length}種` : `${s.length}種（代表）`;
   return `サイズ展開 ${label} / 間口 ${fmtNum(wMin)}〜${fmtNum(wMax)} mm`;
 }
+/* 図版の共通縮尺: 全商品・全サイズの最大寸法を基準に統一し、
+   実際の大小関係がそのまま図版に表れるようにする */
+let _elevScaleCache = null;
+function globalElevScale(){
+  if(_elevScaleCache) return _elevScaleCache;
+  let maxRoof = 2000, maxH = 2200;
+  for(const p of PRODUCTS){
+    for(const sz of (p.sizes || [])){
+      maxRoof = Math.max(maxRoof, Math.round(sz.w * 1.05));
+      maxH = Math.max(maxH, sz.h);
+    }
+  }
+  _elevScaleCache = Math.min(250 / maxRoof, 165 / maxH);
+  return _elevScaleCache;
+}
+
 /* ユーザーの設置スペース(mm)に収まる最大サイズを返す（実務基準の判定）
    ・屋根の張り出し: 本体寸法の約+5%で判定
    ・作業スペース: 左右 各100mm＋背面100mm を確保
@@ -887,7 +909,7 @@ function svgElevation(p, size, showDims = true){
   const H = s0 ? s0.h : 2000;
   const roofWmm = Math.round(W * 1.05 / 10) * 10;
   const gy = 235, cx = 185;
-  const s = Math.min(250 / roofWmm, 165 / H);
+  const s = globalElevScale();
   const rw = roofWmm * s, w = W * s, h = H * s;
   const y = gy - h;
   const slab = Math.max(8, Math.min(12, h * 0.08));
@@ -896,6 +918,10 @@ function svgElevation(p, size, showDims = true){
   const railY = y + slab + Math.min(9, (gy - y - slab) * 0.09);
   const baseY = gy - Math.min(8, (gy - y - slab) * 0.08);
   let inner = '';
+  const spec = p.doorSpec;
+  /* レール線・土台線は「正面に引き戸がある」場合とシャッターのみ描く（前開き扉・側面扉ではレール不要） */
+  const drawRails = /シャッター/.test(p.door || '')
+    || (!spec ? true : (spec.hingedRows ? false : (!Array.isArray(spec.front) || spec.front.includes('door'))));
   if(/シャッター/.test(p.door || '')){
     const n = Math.max(5, Math.floor((baseY - railY) / 11));
     for(let i = 1; i < n; i++){
@@ -903,17 +929,62 @@ function svgElevation(p, size, showDims = true){
       inner += `<line x1="${(bx1 + 5).toFixed(1)}" y1="${yy.toFixed(1)}" x2="${(bx2 - 5).toFixed(1)}" y2="${yy.toFixed(1)}" opacity=".55"/>`;
     }
   } else {
-    const n = /3枚/.test(p.door || '') ? 3 : 2;
-    for(let i = 1; i < n; i++){
-      const xx = bx1 + w * i / n;
-      inner += `<line x1="${xx.toFixed(1)}" y1="${railY.toFixed(1)}" x2="${xx.toFixed(1)}" y2="${baseY.toFixed(1)}"/>`;
-    }
     const hy1 = railY + (baseY - railY) * 0.42, hy2 = railY + (baseY - railY) * 0.58;
     const grip = gx => `<line x1="${gx.toFixed(1)}" y1="${hy1.toFixed(1)}" x2="${gx.toFixed(1)}" y2="${hy2.toFixed(1)}" stroke-width="3"/>`;
-    if(H < 1400){
-      inner += grip(bx1 + 5) + grip(bx2 - 5);
+    if(spec && spec.hingedRows){
+      /* 前開き扉・上下分割（例: 宅配ボックス = 上1/3＋下2/3）。
+         横の仕切り線と、各扉の右寄り・中央高さに横向きの取っ手を描く */
+      const bTop = y + slab, bH = gy - bTop;
+      const rows = spec.hingedRows;
+      let acc = 0;
+      for(let i = 0; i < rows.length - 1; i++){
+        acc += rows[i];
+        const yy = bTop + bH * acc;
+        inner += `<line x1="${bx1.toFixed(1)}" y1="${yy.toFixed(1)}" x2="${bx2.toFixed(1)}" y2="${yy.toFixed(1)}"/>`;
+      }
+      let a2 = 0;
+      rows.forEach(r => {
+        const cy = bTop + bH * (a2 + r / 2);
+        inner += `<line x1="${(bx2 - w * 0.22).toFixed(1)}" y1="${cy.toFixed(1)}" x2="${(bx2 - w * 0.08).toFixed(1)}" y2="${cy.toFixed(1)}" stroke-width="3"/>`;
+        a2 += r;
+      });
+    } else if(spec && Array.isArray(spec.front)){
+      /* doorSpec方式: 正面構成（扉／固定パネル）と取っ手位置をデータ通りに描画 */
+      const n = spec.front.length, sw = w / n;
+      const sx = i => bx1 + sw * i;
+      for(let i = 1; i < n; i++){
+        inner += `<line x1="${sx(i).toFixed(1)}" y1="${railY.toFixed(1)}" x2="${sx(i).toFixed(1)}" y2="${baseY.toFixed(1)}"/>`;
+      }
+      spec.front.forEach((sec, i) => {
+        if(sec === 'fix'){
+          const m = Math.min(5, sw * 0.08);
+          inner += `<rect x="${(sx(i) + m).toFixed(1)}" y="${(y + slab + m).toFixed(1)}" width="${(sw - m * 2).toFixed(1)}" height="${(gy - y - slab - m * 2).toFixed(1)}" opacity=".45"/>`;
+        }
+      });
+      (spec.handles || []).forEach(hd => {
+        const gx = hd.e === 'r' ? sx(hd.p + 1) - 5 : sx(hd.p) + 5;
+        inner += grip(gx);
+      });
+      if(spec.window){
+        /* 正面窓: 中央から上部にかけての横長窓（中桟1本） */
+        const bTop = y + slab, bH = gy - bTop;
+        const wx = bx1 + w * 0.12, ww = w * 0.76;
+        const wy = bTop + bH * 0.12, wh = bH * 0.38;
+        inner += `<rect x="${wx.toFixed(1)}" y="${wy.toFixed(1)}" width="${ww.toFixed(1)}" height="${wh.toFixed(1)}"/>`;
+        inner += `<line x1="${(bx1 + w / 2).toFixed(1)}" y1="${wy.toFixed(1)}" x2="${(bx1 + w / 2).toFixed(1)}" y2="${(wy + wh).toFixed(1)}" opacity=".5"/>`;
+      }
     } else {
-      inner += grip(bx1 + 5);
+      /* フォールバック: 扉形式の文字列から推測（doorSpec未設定シリーズ） */
+      const n = /3枚/.test(p.door || '') ? 3 : 2;
+      for(let i = 1; i < n; i++){
+        const xx = bx1 + w * i / n;
+        inner += `<line x1="${xx.toFixed(1)}" y1="${railY.toFixed(1)}" x2="${xx.toFixed(1)}" y2="${baseY.toFixed(1)}"/>`;
+      }
+      if(H < 1400){
+        inner += grip(bx1 + 5) + grip(bx2 - 5);
+      } else {
+        inner += grip(bx1 + 5);
+      }
     }
   }
   const fmt = n => n.toLocaleString();
@@ -924,8 +995,8 @@ function svgElevation(p, size, showDims = true){
     <line x1="20" y1="${gy}" x2="380" y2="${gy}" stroke-width="2"/>
     <rect x="${rx1.toFixed(1)}" y="${y.toFixed(1)}" width="${rw.toFixed(1)}" height="${slab.toFixed(1)}"/>
     <path d="M${bx1.toFixed(1)} ${(y + slab).toFixed(1)} V${gy} M${bx2.toFixed(1)} ${(y + slab).toFixed(1)} V${gy}"/>
-    <line x1="${bx1.toFixed(1)}" y1="${railY.toFixed(1)}" x2="${bx2.toFixed(1)}" y2="${railY.toFixed(1)}"/>
-    <line x1="${bx1.toFixed(1)}" y1="${baseY.toFixed(1)}" x2="${bx2.toFixed(1)}" y2="${baseY.toFixed(1)}"/>
+    ${drawRails ? `<line x1="${bx1.toFixed(1)}" y1="${railY.toFixed(1)}" x2="${bx2.toFixed(1)}" y2="${railY.toFixed(1)}"/>
+    <line x1="${bx1.toFixed(1)}" y1="${baseY.toFixed(1)}" x2="${bx2.toFixed(1)}" y2="${baseY.toFixed(1)}"/>` : ''}
     <g>${inner}</g>
     ${showDims ? `<g opacity=".55" stroke-width="1.2">
       <line x1="${rx1.toFixed(1)}" y1="${(y - 14).toFixed(1)}" x2="${rx2.toFixed(1)}" y2="${(y - 14).toFixed(1)}"/>
