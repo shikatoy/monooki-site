@@ -621,7 +621,7 @@ const PRODUCTS = [
     link:'https://www.e-ty.co.jp/seihin/ls/',
     sizes:[ { code:'LSN-1811', w:1832, d:1140, h:2212 }, { code:'LSN-1815', w:1832, d:1540, h:2212 }, { code:'LSN-2215', w:2232, d:1540, h:2212 } ] },
   { id:'i-mjx', maker:'inaba', name:'シンプリー', cat:'小型物置', drawRef:'y-ese',
-    steel:'溶融亜鉛メッキ鋼板', door:'引き戸2枚・両開き（引き違い戸）', found:'ブロック基礎 対応',
+    steel:'溶融亜鉛メッキ鋼板', door:'引き戸2枚・両開き（両サイドから開閉／中央からは開きません）', found:'ブロック基礎 対応',
     doorSpec:{ front:['door','door'], handles:[{p:0,e:'l'},{p:1,e:'r'}], opening:'両開き' },
     tags:{ small:3, cheap:3, garden:1, design:1, low:2 },
     features:['玄関脇・ベランダ対応','ディンプルキー錠','最小フットプリント'],
@@ -1388,8 +1388,12 @@ function renderJournal(){
   const list = document.querySelector('#journal-list');
   if(!list) return;
   const HOT_TYPES = ['新商品', '入替'];
-  const fresh = UPDATE_LOG.some(e => (Date.now() - new Date(e.date).getTime()) < 45 * 24 * 3600 * 1000 && HOT_TYPES.includes(e.type));
-  list.innerHTML = UPDATE_LOG.map(e => {
+  /* 更新履歴は「新商品・廃盤・入替」と初回公開のみ掲載する。
+     サイズ・扉構成などの構成変更（改定）は台帳データには残すが表示しない */
+  const SHOWN_TYPES = ['新商品', '廃盤', '入替', '公開'];
+  const shown = UPDATE_LOG.filter(e => SHOWN_TYPES.includes(e.type));
+  const fresh = shown.some(e => (Date.now() - new Date(e.date).getTime()) < 45 * 24 * 3600 * 1000 && HOT_TYPES.includes(e.type));
+  list.innerHTML = shown.map(e => {
     const isFreshEntry = HOT_TYPES.includes(e.type) && (Date.now() - new Date(e.date).getTime()) < 45 * 24 * 3600 * 1000;
     return `
     <div class="grid grid-cols-12 items-baseline gap-3 md:gap-4 py-6 md:py-8 border-b border-line">
@@ -1401,7 +1405,7 @@ function renderJournal(){
       </div>
     </div>`;
   }).join('');
-  if(!fresh && UPDATE_LOG.length === 1){
+  if(!fresh && shown.length === 1){
     list.innerHTML += `
     <div class="py-6 md:py-8 border-b border-linesoft">
       <p class="font-mono text-[11px] tracking-widest text-neutral-400">SYSTEM STANDBY ── 巡回システムは稼働中です。新商品・廃盤・モデルチェンジが見つかり次第、こちらに追加されます。</p>
