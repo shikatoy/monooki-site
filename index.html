@@ -114,6 +114,10 @@ tailwind.config = {
   [id^="product-"] { scroll-margin-top: 90px; }
   [id^="product-"]:target { outline: 2px solid #a3512b; outline-offset: -2px; }
 
+  /* ───── 診断結果シェアボタン ───── */
+  .share-btn { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em; border: 1px solid #171717; padding: 9px 16px; background: transparent; cursor: pointer; transition: all .25s ease; }
+  .share-btn:hover { background: #101010; color: #f8f6f0; }
+
   /* ───── 図版リンク（公式ページ） ───── */
   .vis-link { position: relative; display: block; cursor: pointer; }
   .vis-link .vis-tag { position: absolute; top: 8px; right: 8px; opacity: 0; transition: opacity .3s ease; }
@@ -561,6 +565,7 @@ tailwind.config = {
    ════════════════════════════════════════════════ */
 
 const MAKERS = { takubo:'タクボ / TAKUBO', inaba:'イナバ / INABA', yodoko:'ヨドコウ / YODOKO' };
+const SITE_URL = 'https://shikatoy.github.io/monooki-site/';
 
 /* ---------- 製品アーカイブ ---------- */
 /* ===== PRODUCTS_START =====
@@ -603,7 +608,7 @@ const PRODUCTS = [
     features:['前面フルオープン','スロープ対応','工具棚オプション'],
     base:'前面シャッターでバイクをまっすぐ格納できます。雨の日の出し入れもらくらくです。',
     link:'https://www.e-ty.co.jp/seihin/nde-jne/',
-    sizes:[ { code:'BS-1509', w:1500, d:2600, h:2110 }, { code:'BS-1809', w:1800, d:2600, h:2110 }, { code:'BS-2209', w:2200, d:2600, h:2110 } ] },
+    sizes:[ { code:'BS-1826WH', w:1832, d:2622, h:2570 }, { code:'BS-2226WH', w:2200, d:2622, h:2570 }, { code:'BS-2526WH', w:2532, d:2622, h:2570 }, { code:'BS-2926WH', w:2900, d:2622, h:2570 }, { code:'BS-1829WH', w:1832, d:2990, h:2570 }, { code:'BS-2229WH', w:2200, d:2990, h:2570 }, { code:'BS-2529WH', w:2532, d:2990, h:2570 }, { code:'BS-2929WH', w:2900, d:2990, h:2570 } ], sizesComplete:true },
   { id:'t-belos', maker:'takubo', name:'BELOS', cat:'中型物置', added:'2026-07-09',
     steel:'高耐食鋼板ZAM＋粉体塗装', door:'連動吊り戸式扉2枚・片開き（右側固定パネル／開き方向は現地選択可）', found:'ブロック基礎 対応（豪雪型は公式カタログ参照）',
     doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
@@ -712,6 +717,8 @@ const PRODUCTS = [
    （廃盤=生産終了による削除、入替=モデルチェンジによる新旧交代）
    既存の記録は削除・改変しないこと（この台帳は追記のみ）。 */
 const UPDATE_LOG = [
+  { date:'2026-07-19', type:'改定', title:'『バイクシャッターマン』のサイズ展開を全型番に更新しました',
+    body:'タクボ（田窪工業所）公式サイトのシャッター式物置サイズバリエーション表をもとに、間口4種×奥行2種の全8型番（BS-1826WH〜BS-2929WH、高さ2570mm共通）へ更新しました。従来掲載していた型番・寸法は公式サイトと一致しなかったため、公式情報に基づき置き換えています。' },
   { date:'2026-07-18', type:'改定', title:'『シンプリー』の扉構成を反映しました',
     body:'イナバ（稲葉製作所）公式ラインアップおよびサイズ表をもとに、扉構成を索引の正面図へ反映しました。左右2枚の引き違い戸で、中央から両側に開ける両開きタイプです。なお本シリーズは間口・奥行・高さの組み合わせで多数のサイズ展開があるため、サイズ一覧は代表寸法のみの掲載としています。' },
   { date:'2026-07-16', type:'新商品', title:'『リジュー』をアーカイブに追加',
@@ -1342,9 +1349,20 @@ function renderResults(){
           </article>`;
         }).join('')}
       </div>
-      <p class="mt-10 font-mono text-[10px] leading-relaxed text-neutral-400">※ 掲載の寸法・仕様は代表的な参考値です。設置時は本体の下に基礎用コンクリートブロック（基本 高さ約10cm）を敷くため、実際の高さは「本体高さ＋約10cm」となります。ご購入前には必ず最新のメーカーカタログと現地調査でご確認ください。</p>
+      <div class="mt-12 border-t border-line pt-8">
+        <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">Share — 診断結果をシェア</p>
+        <p class="mt-2 text-[13px] text-neutral-600">あなたにおすすめの物置は「${esc(results[0].p.name)}」でした。結果をシェアできます。</p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <button class="share-btn" data-net="x">X（旧Twitter）</button>
+          <button class="share-btn" data-net="line">LINE</button>
+          <button class="share-btn" data-net="fb">Facebook</button>
+          <button class="share-btn" data-net="copy" id="share-copy">リンクをコピー</button>
+        </div>
+      </div>
+      <p class="mt-8 font-mono text-[10px] leading-relaxed text-neutral-400">※ 掲載の寸法・仕様は代表的な参考値です。設置時は本体の下に基礎用コンクリートブロック（基本 高さ約10cm）を敷くため、実際の高さは「本体高さ＋約10cm」となります。ご購入前には必ず最新のメーカーカタログと現地調査でご確認ください。</p>
     </div>`;
 
+  setupShare(results[0].p);
   quizBody.querySelectorAll('.goto-maker').forEach(b => {
     b.addEventListener('click', () => {
       closeModal();
@@ -1358,6 +1376,39 @@ function renderResults(){
     b.addEventListener('click', () => openDetail(b.dataset.pid));
   });
   $('#quiz-body').parentElement.scrollTop = 0;
+}
+
+/* ---------- 診断結果のシェア ---------- */
+function setupShare(topProduct){
+  const catText = { use:'用途', size:'サイズ', maker:'メーカー' }[state.mode] || '条件';
+  const text = `【物置どれがいい？】${catText}で診断したら、私におすすめの物置は「${topProduct.name}」でした！あなたにぴったりの物置も1分で診断できます。`;
+  const url = SITE_URL;
+  const links = {
+    x: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=物置どれがいい`,
+    line: `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`,
+    fb: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
+  };
+  quizBody.querySelectorAll('.share-btn').forEach(b => {
+    b.addEventListener('click', async () => {
+      const net = b.dataset.net;
+      if(net === 'copy'){
+        const copyText = text + '\n' + url;
+        try {
+          await navigator.clipboard.writeText(copyText);
+        } catch(e){
+          const ta = document.createElement('textarea');
+          ta.value = copyText; document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); } catch(_){}
+          document.body.removeChild(ta);
+        }
+        const orig = b.textContent;
+        b.textContent = 'コピーしました ✓';
+        setTimeout(() => { b.textContent = orig; }, 1800);
+      } else {
+        window.open(links[net], '_blank', 'noopener,noreferrer,width=600,height=520');
+      }
+    });
+  });
 }
 
 /* ---------- 遷移・戻る ---------- */
