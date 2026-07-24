@@ -344,11 +344,7 @@ tailwind.config = {
         <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">表面処理</dt><dd class="col-span-2 leading-relaxed">耐食性に優れた特殊焼付塗装。色あせや小さな傷に強い、きれいが長持ちする仕上がりです</dd></div>
         <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">骨格</dt><dd class="col-span-2 leading-relaxed">柱と梁でしっかり支える軸組フレーム。長く使っても歪みにくい構造です</dd></div>
       </dl>
-      <div class="mt-10 space-y-0 text-[13px]">
-        <div class="flex items-baseline justify-between py-3 border-b border-neutral-800"><span class="font-mono text-[11px] text-neutral-500">物置</span><span class="text-right">グランプレステージ／Mr.ストックマン／Mr.トールマン</span></div>
-        <div class="flex items-baseline justify-between py-3 border-b border-neutral-800"><span class="font-mono text-[11px] text-neutral-500">バイク車庫</span><span class="text-right">バイクシャッターマン</span></div>
-        <div class="flex items-baseline justify-between py-3"><span class="font-mono text-[11px] text-neutral-500">ガレージ</span><span class="text-right">ベルフォーマ／カールフォーマ</span></div>
-      </div>
+      <div id="lineup-takubo" class="mt-10 space-y-0 text-[13px]"></div>
     </article>
 
     <!-- イナバ -->
@@ -364,11 +360,7 @@ tailwind.config = {
         <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">防犯</dt><dd class="col-span-2 leading-relaxed">複製されにくいディンプルキーを採用。こじ開けに強い、頼もしい錠前です</dd></div>
         <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">展開</dt><dd class="col-span-2 leading-relaxed">バイク保管庫・ガレージの種類は業界トップクラス。多雪地域向けも揃っています</dd></div>
       </dl>
-      <div class="mt-10 space-y-0 text-[13px]">
-        <div class="flex items-baseline justify-between py-3 border-b border-neutral-800"><span class="font-mono text-[11px] text-neutral-500">物置</span><span class="text-right">シンプリー／ネクスタ／フォルタ</span></div>
-        <div class="flex items-baseline justify-between py-3 border-b border-neutral-800"><span class="font-mono text-[11px] text-neutral-500">バイク車庫</span><span class="text-right">バイク保管庫（床付・土間）</span></div>
-        <div class="flex items-baseline justify-between py-3"><span class="font-mono text-[11px] text-neutral-500">ガレージ</span><span class="text-right">ガレーディア／アルシア</span></div>
-      </div>
+      <div id="lineup-inaba" class="mt-10 space-y-0 text-[13px]"></div>
     </article>
 
     <!-- ヨドコウ -->
@@ -382,13 +374,9 @@ tailwind.config = {
       <dl class="mt-10 border-t border-neutral-700 text-[12px]">
         <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">素材</dt><dd class="col-span-2 leading-relaxed">高耐久ガルバリウム鋼板。サビにとても強く、塩害のある地域でも長持ちします</dd></div>
         <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">開口</dt><dd class="col-span-2 leading-relaxed">開口部を広く使える独自の3枚扉。大きな物の出し入れがしやすい設計です</dd></div>
-        <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">断熱</dt><dd class="col-span-2 leading-relaxed">断熱構造の「ヨド蔵」シリーズも。結露を抑えて、湿気に弱い物を守ります</dd></div>
+        <div class="grid grid-cols-3 gap-3 py-3.5 border-b border-neutral-800"><dt class="font-mono text-neutral-500">耐候</dt><dd class="col-span-2 leading-relaxed">サビや色あせに強い素材と塗装。海沿いや風雨の当たる場所でも長持ちします</dd></div>
       </dl>
-      <div class="mt-10 space-y-0 text-[13px]">
-        <div class="flex items-baseline justify-between py-3 border-b border-neutral-800"><span class="font-mono text-[11px] text-neutral-500">物置</span><span class="text-right">エスモ／エルモ／ヨド蔵MD</span></div>
-        <div class="flex items-baseline justify-between py-3 border-b border-neutral-800"><span class="font-mono text-[11px] text-neutral-500">バイク車庫</span><span class="text-right">エルモ シャッタータイプ</span></div>
-        <div class="flex items-baseline justify-between py-3"><span class="font-mono text-[11px] text-neutral-500">ガレージ</span><span class="text-right">ラヴィージュ／ヨドガレージ</span></div>
-      </div>
+      <div id="lineup-yodoko" class="mt-10 space-y-0 text-[13px]"></div>
     </article>
   </div>
 </section>
@@ -706,7 +694,15 @@ const PRODUCTS = [
     features:['高耐食素材で長寿命','車1台＋収納空間','塩害・積雪地に強い'],
     base:'高耐食素材で長持ち。建てたあとも長く安心が続く、本格派のガレージです。',
     link:'https://www.yodomonooki.jp/products/garage/ravige/',
-    sizes:[ { code:'VGC-2642', w:2650, d:4240, h:2560 }, { code:'VGC-3049', w:3000, d:4980, h:2560 }, { code:'VGC-3059', w:3000, d:5900, h:2560 }, { code:'VGC-3359', w:3350, d:5900, h:2560 } ] }
+    sizes:[ { code:'VGC-2642', w:2650, d:4240, h:2560 }, { code:'VGC-3049', w:3000, d:4980, h:2560 }, { code:'VGC-3059', w:3000, d:5900, h:2560 }, { code:'VGC-3359', w:3350, d:5900, h:2560 } ] },
+  { id:'t-pe', maker:'takubo', name:'ペインタ', cat:'小型物置', added:'2026-07-24',
+    steel:'鋼板＋UVインクジェット塗装仕上げ', door:'吊り戸式引き戸2枚・連動右引き固定（開き方向の変更不可）', found:'ブロック基礎 対応（アンカープレート4枚付属）',
+    doorSpec:{ front:['door','door'], handles:[{p:0,e:'l'}], opening:'片開き' },
+    tags:{ small:3, design:3, premium:2, garden:1, daily:1 },
+    features:['UVインクジェット塗装で扉のデザインが選べる意匠系物置','外壁材と調和するサイディング調・ウッド調の6柄','本体色はアイボリーブラックとムーンホワイトの2色から選べます'],
+    base:'外壁のサイディングや木目にやさしく調和する、扉のデザインが選べる意匠系の小型物置です。',
+    link:'https://www.e-ty.co.jp/seihin/p/',
+    sizes:[ { code:'PY-155B', w:1488, d:530, h:1600 }, { code:'PY-155A', w:1488, d:530, h:1900 }, { code:'PY-156B', w:1488, d:650, h:1600 }, { code:'PY-156A', w:1488, d:650, h:1900 }, { code:'PY-157B', w:1488, d:750, h:1600 }, { code:'PY-157A', w:1488, d:750, h:1900 }, { code:'PY-159B', w:1488, d:900, h:1600 }, { code:'PY-159A', w:1488, d:900, h:1900 }, { code:'PY-175B', w:1695, d:530, h:1600 }, { code:'PY-175A', w:1695, d:530, h:1900 }, { code:'PY-176B', w:1695, d:650, h:1600 }, { code:'PY-176A', w:1695, d:650, h:1900 }, { code:'PY-177B', w:1695, d:750, h:1600 }, { code:'PY-177A', w:1695, d:750, h:1900 }, { code:'PY-179B', w:1695, d:900, h:1600 }, { code:'PY-179A', w:1695, d:900, h:1900 }, { code:'PY-195B', w:1879, d:530, h:1600 }, { code:'PY-195A', w:1879, d:530, h:1900 }, { code:'PY-196B', w:1879, d:650, h:1600 }, { code:'PY-196A', w:1879, d:650, h:1900 }, { code:'PY-197B', w:1879, d:750, h:1600 }, { code:'PY-197A', w:1879, d:750, h:1900 }, { code:'PY-199B', w:1879, d:900, h:1600 }, { code:'PY-199A', w:1879, d:900, h:1900 } ], sizesComplete:true }
 ];
 /* ===== PRODUCTS_END ===== */
 
@@ -717,6 +713,8 @@ const PRODUCTS = [
    （廃盤=生産終了による削除、入替=モデルチェンジによる新旧交代）
    既存の記録は削除・改変しないこと（この台帳は追記のみ）。 */
 const UPDATE_LOG = [
+  { date:'2026-07-24', type:'新商品', title:'『ペインタ』をアーカイブに追加',
+    body:'タクボ（田窪工業所）公式サイト掲載の小型物置シリーズです。UVインクジェット塗装により、外壁材と調和するサイディング調・ウッド調の扉デザイン6柄から選べる意匠系モデルで、本体色はアイボリーブラックとムーンホワイトの2色展開です。サイズバリエーションは公式サイトのサイズ表に基づき全24型番を掲載しています。' },
   { date:'2026-07-19', type:'改定', title:'『バイクシャッターマン』のサイズ展開を全型番に更新しました',
     body:'タクボ（田窪工業所）公式サイトのシャッター式物置サイズバリエーション表をもとに、間口4種×奥行2種の全8型番（BS-1826WH〜BS-2929WH、高さ2570mm共通）へ更新しました。従来掲載していた型番・寸法は公式サイトと一致しなかったため、公式情報に基づき置き換えています。' },
   { date:'2026-07-18', type:'改定', title:'『シンプリー』の扉構成を反映しました',
@@ -747,7 +745,28 @@ const UPDATE_LOG = [
 /* ===== QA_ITEMS_START =====
    Q&Aはこの配列に追加すること。スキーマ: { q:'質問文', a:'回答文' }
    空の場合はサイト上に「準備中」と表示される。 */
-const QA_ITEMS = [];
+const QA_ITEMS = [
+  { q:'転倒防止（アンカー）工事は必ず必要ですか？',
+    a:'はい、強く推奨されます。台風や強風で物置が動いたり倒れたりすると、本体の破損だけでなく、飛散して人や近隣に被害を与える恐れがあります。各メーカーとも設置を推奨しており、積雪・強風地域では建築基準法対応のため必須となる場合があります。地面がコンクリートか土かで工法が変わるため、設置業者にご相談ください。' },
+  { q:'設置には本体サイズ以外にどれくらいの余裕が必要ですか？',
+    a:'本体寸法に加え、左右・背面に各10〜20cm程度の組立・点検スペースが必要です。特に屋根は本体より一回り張り出すため、収まりの判定は必ず「屋根寸法」で行ってください。加えて、設置時は本体の下に基礎用ブロック（約10cm）を敷くため、実際の高さは「本体高さ＋約10cm」になります。窓の下や軒下では特にご注意ください。' },
+  { q:'物置の設置費用の相場はどれくらいですか？',
+    a:'物置本体の価格とは別に、「組み立て・施工費」「転倒防止のアンカー工事費」「本体の下に敷く基礎用ブロック代」がかかります。組み立て・施工費はサイズにより、小型で1.5〜3万円、中型で2〜4.5万円、大型で3〜6万円ほどが目安です。これにアンカー工事費と必要なブロック代が加わります。なお物置は基本的にブロックを敷いて据え付けますが、バイク車庫・ガレージの場合は土間コンクリートなどの基礎工事が別途必要になります。金額はあくまで目安で、地域や条件により変わります。' },
+  { q:'自分で組み立てられますか？',
+    a:'小型ならDIYで組み立てる方もいますが、水平が出ていないと「扉が閉まらない」「鍵がかからない」といった不具合が必ず出ます。中型以上は部材が重く2人以上の作業が前提です。組立説明書の手順を外れると保証が受けられない場合もあるため、据付・アンカー工事も含め専門業者への依頼が安心です。' },
+  { q:'物置に建築確認申請は必要ですか？',
+    a:'物置も建築基準法上は「建築物」に当たり、申請が必要な場合があります。一般に防火・準防火地域外で床面積10m²以下なら不要となる例が多いですが、用途地域や敷地条件で扱いが異なります。大型物置・ガレージの設置前には、必ずお住まいの市区町村の建築指導課へご確認ください。' },
+  { q:'物置の保証期間はどれくらいですか？',
+    a:'メーカーや製品により異なりますが、多くの主要メーカーで5年程度の保証が付いています（一部製品は2年など）。自分で組み立てた際の施工ミスや、経年による自然消耗は保証対象外となる場合があります。詳細は製品付属の保証書をご確認ください。' },
+  { q:'「一般型」「多雪型」「豪雪型」の違いは何ですか？',
+    a:'積雪荷重に対する強度の分類です。一般型は積雪120kg/m²（約60cmが目安）、多雪型は約315kg/m²（約1m）、豪雪型は約450kg/m²（約1.5m）に対応します。目安を超える前に早めの雪下ろしが必要です。お住まいの地域の積雪量に合ったタイプをお選びください。' },
+  { q:'海の近くに設置しても大丈夫ですか？',
+    a:'潮風の当たる沿岸部では、サビに強い素材選びが重要です。ガルバリウム鋼板など高耐食素材を採用した製品が適しています。設置後も、定期的に水洗いして塩分を落とすと、より長持ちします。' },
+  { q:'鍵をなくしてしまいました。',
+    a:'本体の錠前に刻印された「鍵番号」があれば、スペアキーを注文できます。購入した販売店、または各メーカーのパーツショップで手配が可能です。鍵番号が分からない場合は、メーカーの問い合わせ窓口にご相談ください。' },
+  { q:'サイズ選びで失敗しないコツは？',
+    a:'「収納量は一回り大きめ、設置計画は一回り慎重に」が基本です。収納物は年々増える傾向があるため容量に余裕を持たせつつ、屋根の張り出しや作業スペースの余裕も忘れずに確認しましょう。当サイトの「サイズで選ぶ」診断は、これらの余裕を見込んで最適なサイズをご提案します。' }
+];
 /* ===== QA_ITEMS_END ===== */
 
 /* ===== COLUMNS_START =====
@@ -1464,6 +1483,31 @@ function renderJournal(){
   }
 }
 renderJournal();
+
+/* ---------- メーカー紹介のラインナップ自動生成 ----------
+   PRODUCTS から各メーカー・カテゴリ別にシリーズ名を集約して表示する。
+   商品の追加・廃盤・入替が、この欄にも自動で反映される（二重管理の解消） */
+function renderMakerLineups(){
+  const GROUPS = [
+    { label:'物置', match: cat => /物置/.test(cat) },
+    { label:'バイク車庫', match: cat => cat === 'バイク車庫' },
+    { label:'ガレージ', match: cat => cat === 'ガレージ' }
+  ];
+  ['takubo', 'inaba', 'yodoko'].forEach(mk => {
+    const el = document.querySelector('#lineup-' + mk);
+    if(!el) return;
+    const rows = GROUPS.map(g => {
+      const names = PRODUCTS.filter(p => p.maker === mk && g.match(p.cat)).map(p => p.name);
+      return names.length ? { label: g.label, names } : null;
+    }).filter(Boolean);
+    el.innerHTML = rows.map((r, i) => `
+      <div class="flex items-baseline justify-between gap-4 py-3 ${i < rows.length - 1 ? 'border-b border-neutral-800' : ''}">
+        <span class="font-mono text-[11px] text-neutral-500 shrink-0">${esc(r.label)}</span>
+        <span class="text-right">${r.names.map(esc).join('／')}</span>
+      </div>`).join('');
+  });
+}
+renderMakerLineups();
 
 /* ---------- 索引レンダリング（フィルタ対応） ---------- */
 const idxFilter = { maker:'all', cat:'all' };
