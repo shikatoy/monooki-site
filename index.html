@@ -177,7 +177,7 @@ tailwind.config = {
       <a href="#column" class="u-link hidden sm:block">コラム</a>
       <a href="#faq" class="u-link hidden sm:block">Q&amp;A</a>
       <a href="#journal" class="u-link hidden sm:block">更新履歴</a>
-      <a href="contact.html" class="hidden sm:block border border-line px-4 py-2 hover:bg-ink hover:text-paper transition-colors duration-300">CONTACT</a>
+      <a href="#contact" class="u-link hidden sm:block">お問い合わせ</a>
       <button id="menu-btn" class="sm:hidden border border-line px-4 py-2 font-mono text-[11px] tracking-widest2 uppercase" aria-label="メニューを開閉">MENU</button>
     </nav>
   </div>
@@ -486,20 +486,6 @@ tailwind.config = {
   <div class="border-b border-line py-14"></div>
 </section>
 
-<!-- ═══════════ お問い合わせ（専用ページへの導線） ═══════════ -->
-<section>
-  <a href="contact.html" class="group block border-b border-line hover:bg-ink hover:text-paper transition-colors duration-300">
-    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-16 md:py-20 flex flex-wrap items-end justify-between gap-6">
-      <div>
-        <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">Correspondence</p>
-        <h2 class="mt-4 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2rem, 5vw, 4rem)">お問い合わせはこちら。</h2>
-        <p class="mt-4 text-[13px] leading-loose text-neutral-500 group-hover:text-neutral-400 transition-colors">物置選びの迷いや設置場所のお悩み、掲載内容へのご意見など、専用ページで受け付けています。</p>
-      </div>
-      <span class="font-mono text-3xl md:text-4xl transition-transform duration-300 group-hover:translate-x-3">→</span>
-    </div>
-  </a>
-</section>
-
 <!-- ═══════════ フッター ═══════════ -->
 <footer class="bg-ink text-paper">
   <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-16 md:py-20">
@@ -523,6 +509,15 @@ tailwind.config = {
         <p>当サイトの情報のご利用により生じたいかなる損害についても、当サイトは責任を負いかねますので、あらかじめご了承ください。</p>
         <p>お問い合わせの際にいただいたお名前・メールアドレスは、お問い合わせへの回答のみに使用し、それ以外の目的では利用しません。</p>
       </div>
+    </div>
+
+    <!-- お問い合わせ（コンパクト） -->
+    <div id="contact" class="mt-4 border border-neutral-700 p-6 md:p-8 flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">Contact — お問い合わせ</p>
+        <p class="mt-2 text-[13px] leading-relaxed text-neutral-300">物置選びのご相談や掲載内容へのご意見は、専用ページで受け付けています。</p>
+      </div>
+      <a href="contact.html" class="shrink-0 border border-neutral-500 px-6 py-3 font-mono text-[11px] tracking-widest2 uppercase hover:bg-paper hover:text-ink transition-colors duration-300">お問い合わせページへ →</a>
     </div>
 
     <div class="mt-14 md:mt-16 flex flex-col md:flex-row md:items-end justify-between gap-10">
