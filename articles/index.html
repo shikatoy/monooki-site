@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>記事一覧｜物置どれがいい？</title>
+<meta name="description" content="物置の設置・選び方にまつわる読みものの一覧です。基礎ブロックの水平出しなど、カタログには載らない実務の話をお届けします。">
+<meta name="theme-color" content="#101010">
+<link rel="canonical" href="https://shikatoy.github.io/monooki-site/articles/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="物置どれがいい？">
+<meta property="og:title" content="記事一覧｜物置どれがいい？">
+<meta property="og:description" content="物置の設置・選び方にまつわる読みものの一覧です。基礎ブロックの水平出しなど、カタログには載らない実務の話をお届けします。">
+<meta property="og:url" content="https://shikatoy.github.io/monooki-site/articles/">
+<meta property="og:image" content="https://shikatoy.github.io/monooki-site/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23101010'/%3E%3Ctext x='32' y='45' font-family='serif' font-size='34' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3E倉%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700;800&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ═══════ 記事一覧ページ専用スタイル（index.html とは独立。共通化しないこと） ═══════ */
+  :root {
+    --ink: #101010;
+    --paper: #f8f6f0;
+    --line: #171717;
+    --linesoft: #dcdcd8;
+    --rust: #a3512b;
+    --mute: #6b6b66;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 16px;
+    line-height: 2;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--rust); color: #fff; }
+  a { color: inherit; }
+
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+  /* ───── ヘッダー ───── */
+  .site-header {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(248, 246, 240, .95);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header-inner {
+    max-width: 1440px; margin: 0 auto; padding: 0 20px;
+    height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand-mark {
+    width: 32px; height: 32px; background: var(--ink); color: var(--paper);
+    font-family: 'Shippori Mincho B1', serif; font-weight: 700; font-size: 14px;
+    display: flex; align-items: center; justify-content: center; user-select: none;
+  }
+  .brand-name { font-family: 'Shippori Mincho B1', serif; font-weight: 700; font-size: 16px; letter-spacing: .02em; }
+  .header-link { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .28em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
+  .header-link:hover { color: var(--rust); }
+
+  /* ───── ページ見出し ───── */
+  .page-head { padding: 56px 0 44px; border-bottom: 1px solid var(--line); }
+  .page-kicker { margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--rust); }
+  .page-title {
+    margin: 22px 0 0;
+    font-family: 'Shippori Mincho B1', serif; font-weight: 800;
+    font-size: clamp(2.1rem, 7vw, 3.6rem); line-height: 1.3; letter-spacing: -.02em;
+  }
+  .page-lead { margin: 24px 0 0; max-width: 34em; font-size: 13px; line-height: 2.1; color: var(--mute); }
+
+  /* ───── 記事カード ───── */
+  .card-list { list-style: none; margin: 0; padding: 0; }
+  .card { border-bottom: 1px solid var(--line); }
+  .card-inner {
+    display: block; text-decoration: none; padding: 36px 0;
+    display: grid; grid-template-columns: 1fr; gap: 12px;
+    transition: opacity .3s ease;
+  }
+  .card-date { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .12em; color: #8f8f8a; }
+  .card-date .card-tag { display: block; margin-top: 6px; font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--rust); }
+  .card-title {
+    margin: 0; font-family: 'Shippori Mincho B1', serif; font-weight: 700;
+    font-size: clamp(1.2rem, 4.4vw, 1.8rem); line-height: 1.6;
+    transition: color .3s ease;
+  }
+  .card-desc { margin: 0; font-size: 13px; line-height: 2.1; color: var(--mute); }
+  .card-more { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .28em; text-transform: uppercase; }
+  .card-more .arrow { display: inline-block; transition: transform .35s cubic-bezier(.22,1,.36,1); }
+  .card-inner:hover .card-title { color: var(--rust); }
+  .card-inner:hover .arrow { transform: translateX(12px); }
+
+  .nav-links { margin: 40px 0 64px; display: flex; flex-wrap: wrap; gap: 14px 28px; }
+  .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .18em; text-decoration: none; border-bottom: 1px solid var(--linesoft); padding-bottom: 3px; }
+  .nav-links a:hover { color: var(--rust); border-bottom-color: currentColor; }
+
+  /* ───── サイトフッター ───── */
+  .site-footer { background: var(--ink); color: var(--paper); }
+  .site-footer-inner { max-width: 1440px; margin: 0 auto; padding: 48px 20px; }
+  .footer-meta { display: flex; flex-direction: column; gap: 12px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .18em; color: #8f8f8a; }
+  .footer-meta a { text-decoration: none; }
+  .footer-meta a:hover { color: var(--paper); }
+
+  @media (min-width: 768px) {
+    body { font-size: 17px; }
+    .wrap { padding: 0 40px; }
+    .site-header-inner { padding: 0 40px; }
+    .brand-name { font-size: 18px; }
+    .header-link { font-size: 11px; }
+    .card-inner { grid-template-columns: 150px 1fr; gap: 8px 32px; padding: 48px 0; align-items: baseline; }
+    .card-date { grid-row: span 3; }
+    .card-desc { font-size: 14px; }
+    .site-footer-inner { padding: 56px 40px; }
+    .footer-meta { flex-direction: row; justify-content: space-between; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ ヘッダー ═══════════ -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="../" class="brand">
+      <span class="brand-mark">倉</span>
+      <span class="brand-name">物置どれがいい？</span>
+    </a>
+    <a href="../" class="header-link">← トップへ戻る</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div class="page-head">
+      <p class="page-kicker">Articles — 読みもの</p>
+      <h1 class="page-title">記事一覧。</h1>
+      <p class="page-lead">物置の設置と選び方にまつわる読みものです。カタログの数字には出てこない、現場の実務からわかることをまとめています。</p>
+    </div>
+
+    <!-- ═══════════ 記事カード一覧 ═══════════
+         記事を追加するときは、下の <li class="card"> ブロックを丸ごとコピーして
+         このコメントの直下（＝一覧の先頭）に貼り、date / tag / title / desc / href を書き換えること。
+         新しい記事ほど上に来るよう、日付の降順で並べる。
+         合わせて sitemap.xml にも <url> を1件追加すること。
+
+    <li class="card">
+      <a class="card-inner" href="{slug}.html">
+        <span class="card-date">{YYYY-MM-DD}<span class="card-tag">{分類ラベル}</span></span>
+        <h2 class="card-title">{title}</h2>
+        <p class="card-desc">{description}</p>
+        <span class="card-more">続きを読む <span class="arrow">→</span></span>
+      </a>
+    </li>
+    ═══════════════════════════════════════════ -->
+    <ul class="card-list">
+
+      <li class="card">
+        <a class="card-inner" href="monooki-level-blocks.html">
+          <span class="card-date">2026-08-03<span class="card-tag">設置の実務</span></span>
+          <h2 class="card-title">物置の水平出し｜1cmで鍵が掛からなくなる理由</h2>
+          <p class="card-desc">物置設置で本当に難しいのは本体の組み立てではなく、基礎ブロックの水平出しです。1cmズレると扉は閉まるのに鍵だけ掛からない。土・コンクリート・砂利それぞれの据え方を、何百台も設置してきた実務者の視点で解説します。</p>
+          <span class="card-more">続きを読む <span class="arrow">→</span></span>
+        </a>
+      </li>
+
+    </ul>
+
+    <nav class="nav-links">
+      <a href="../">← 物置マッチング診断（トップ）へ</a>
+      <a href="../contact.html">お問い合わせ</a>
+    </nav>
+
+  </div>
+</main>
+
+<!-- ═══════════ フッター ═══════════ -->
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-meta">
+      <a href="../">← 物置どれがいい？ トップへ</a>
+      <span>© 2026 物置どれがいい？ — 非公式情報比較メディア</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

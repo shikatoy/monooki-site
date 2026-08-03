@@ -6,6 +6,16 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://shikatoy.github.io/monooki-site/articles/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://shikatoy.github.io/monooki-site/articles/monooki-level-blocks.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://shikatoy.github.io/monooki-site/contact.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
