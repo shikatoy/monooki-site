@@ -60,7 +60,7 @@ tailwind.config = {
   ::selection { background: #a3512b; color: #fff; }
 
   /* ───── 配色（案C ベージュ基調）: 診断・索引・コラムを一段濃い生成りに ───── */
-  #shindan, #archive, #column { background: #efe9dc; }
+  #shindan, #archive, #articles { background: #efe9dc; }
 
   .tate { writing-mode: vertical-rl; text-orientation: mixed; }
 
@@ -174,7 +174,7 @@ tailwind.config = {
       <a href="#shindan" class="u-link hidden sm:block">診断</a>
       <a href="#makers" class="u-link hidden sm:block">メーカー</a>
       <a href="#archive" class="u-link hidden sm:block">索引</a>
-      <a href="#column" class="u-link hidden sm:block">コラム</a>
+      <a href="#articles" class="u-link hidden sm:block">記事</a>
       <a href="#faq" class="u-link hidden sm:block">Q&amp;A</a>
       <a href="#journal" class="u-link hidden sm:block">更新履歴</a>
       <a href="#contact" class="u-link hidden sm:block">お問い合わせ</a>
@@ -189,7 +189,7 @@ tailwind.config = {
     <a href="#shindan" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">01</span><span class="font-serif font-bold text-2xl">診断</span></a>
     <a href="#makers" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">02</span><span class="font-serif font-bold text-2xl">メーカー</span></a>
     <a href="#archive" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">03</span><span class="font-serif font-bold text-2xl">索引</span></a>
-    <a href="#column" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">04</span><span class="font-serif font-bold text-2xl">コラム</span></a>
+    <a href="#articles" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">04</span><span class="font-serif font-bold text-2xl">記事</span></a>
     <a href="#faq" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">05</span><span class="font-serif font-bold text-2xl">よくあるご質問</span></a>
     <a href="#journal" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">06</span><span class="font-serif font-bold text-2xl">更新履歴</span></a>
     <a href="contact.html" class="flex items-baseline gap-5 py-5"><span class="font-mono text-[11px] text-neutral-400">07</span><span class="font-serif font-bold text-2xl">お問い合わせ</span></a>
@@ -437,20 +437,21 @@ tailwind.config = {
 </section>
 
 <!-- ═══════════ コラム（論考） ═══════════ -->
-<section id="column">
+<section id="articles">
   <div class="border-b border-line">
     <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-16 md:py-24 grid md:grid-cols-12 gap-8 items-end">
       <div class="md:col-span-8">
-        <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">Editorial Column — 読みもの</p>
-        <h2 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">コラム。</h2>
+        <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">Articles — 読みもの</p>
+        <h2 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">記事。</h2>
       </div>
       <p class="md:col-span-4 text-[13px] leading-loose text-neutral-500">
-        物置や外構にまつわる読みものコーナーです。見出しをクリックすると全文をお読みいただけます。新しい記事は随時こちらに追加していきます。
+        物置の設置と選び方にまつわる読みものです。カタログの数字には出てこない、現場の実務からわかることをまとめています。
       </p>
     </div>
   </div>
   <div class="max-w-[1440px] mx-auto px-5 md:px-10">
-    <div id="column-list"></div>
+    <div id="article-list"></div>
+    <p class="py-10"><a href="articles/" class="u-link font-mono text-[11px] tracking-widest2 uppercase">記事一覧ページへ →</a></p>
   </div>
   <div class="border-b border-line py-14"></div>
 </section>
@@ -529,7 +530,7 @@ tailwind.config = {
         <a href="#shindan" class="u-link hover:text-paper transition-colors">診断</a>
         <a href="#makers" class="u-link hover:text-paper transition-colors">メーカー</a>
         <a href="#archive" class="u-link hover:text-paper transition-colors">索引</a>
-        <a href="#column" class="u-link hover:text-paper transition-colors">コラム</a>
+        <a href="#articles" class="u-link hover:text-paper transition-colors">記事</a>
         <a href="#faq" class="u-link hover:text-paper transition-colors">Q&amp;A</a>
         <a href="#journal" class="u-link hover:text-paper transition-colors">更新履歴</a>
         <a href="contact.html" class="u-link hover:text-paper transition-colors">Contact</a>
@@ -770,48 +771,25 @@ const QA_ITEMS = [
 ];
 /* ===== QA_ITEMS_END ===== */
 
-/* ===== COLUMNS_START =====
-   コラム投稿はこの配列の【先頭】に追加すること。
-   スキーマ: { id:'col-通し番号', date:'YYYY-MM-DD', tag:'分類ラベル', title:'題', lead:'導入文（1〜2文）', body:['段落1','段落2',…] }
-   既存コラムの削除・改変は行わないこと。 */
-const COLUMNS = [
-  { id:'col-005', date:'2026-08-04', tag:'機種の見方',
-    title:'「どのメーカーが組みやすい」は答えられない',
-    lead:'物置は小型（収納庫）と中型・大型の2つに分かれます。同じメーカーでも、この2つで組みやすさが逆転します。',
-    body:[
-      '「イナバは組みやすい」「ヨドは組みにくい」という話をよく見かけますが、区分を抜きにすると答えになりません。中型・大型で比べると、現行のエルモ（ヨドコウ）はフォルタ（イナバ）より組みやすい。ところが小型で比べると、シンプリー（イナバ）のほうがエスモ（ヨドコウ）より遥かに組み立てやすいのです。',
-      '同じ2社が、区分をまたぐと入れ替わります。ヨドコウとタクボは公式サイトでも「小型物置」「中・大型物置」とカテゴリが分かれていますが、イナバは小型と中型をひとまとめに表記していて区分が見えにくい。メーカー全体で一括りに語られやすいのは、この分かりにくさも一因かもしれません。',
-      '型番によるモデルチェンジの話や、業者に任せる場合に見るべき場所については、記事「「どのメーカーの物置が組みやすい？」は、実は答えられない質問です」（articles/monooki-maker-assembly.html）にまとめています。' ] },
-  { id:'col-004', date:'2026-08-04', tag:'設置の実務',
-    title:'自分で組めるかは「地面」で決まる',
-    lead:'物置を自分で組み立てるとき、大変なのは本体の組み立てだけではありません。その前の整地とブロック設置が、仕上がりを左右します。',
-    body:[
-      '扉がズレて閉まらない、鍵がかからない。こうした不具合を「組み立てが下手だったから」と考えがちですが、原因はたいてい土台にあります。現行の機種は本体を組み立てる途中で微調整をする機会がほとんどないため、ブロックが傾いていれば、その傾きがそのまま扉に出ます。',
-      '人数についても「2人でやるもの」と言われがちですが、慣れていれば一人でも組めます。分かれ目はサイズではなく、壁のパネルや屋根を片手で支えたまま、もう片方の手でビス穴を合わせられるかどうかです。むしろ気をつけたいのは設置場所で、地面が緩い、急勾配、砂利敷きといった条件は難度が上がります。',
-      '所要時間の目安や、自分でやるか業者に頼むかの判断材料は、記事「物置は自分で組み立てられる？ 大変なのは組み立てだけじゃない」（articles/monooki-diy-assembly.html）にまとめています。' ] },
-  { id:'col-003', date:'2026-08-03', tag:'設置の実務',
-    title:'扉は閉まるのに、鍵だけ掛からない',
-    lead:'物置を自分で置くとき、本当の難所は本体の組み立てではありません。その下に敷くブロックの水平出しです。',
-    body:[
-      '下のブロックが水平でないと、本体はわずかに歪みます。そこで起きるのが、扉はきちんと閉まるのに鍵の受け金具だけが合わない、という現象です。組み上げた直後は問題なく見えるので、気づくのは荷物をしまって戸締まりをしようとした後日になります。',
-      '難しさは地面の種類で変わります。土は高いところを削って高さを合わせられますが、コンクリートやアスファルトは削れないため、スペーサーをかませて調整します。いちばん厄介なのが砂利で、そのまま置くとグラつくため、砂利をどかして下の土の上にブロックを据える必要があります。',
-      '水平を見る道具、プロが組むときの所要時間の目安、本体だけを自分で買うときの落とし穴まで、詳しくは記事「物置の水平出し｜設置の難所は組み立てではない」（articles/monooki-level-blocks.html）にまとめています。' ] },
-  { id:'col-002', date:'2026-07-16', tag:'選定論',
-    title:'「一回り大きく」を疑ってみる',
-    lead:'物置選びの合言葉「迷ったら一回り大きく」。とても頼りになる言葉ですが、実はちょっとした落とし穴もあるんです。',
-    body:[
-      '購入後の後悔で多いのは、やはり「小さすぎた」というもの。収納する物は年々増えていくので、容量に余裕を持たせておくこと自体は、間違いなく良い考えです。',
-      'ただし、気をつけたいのが設置スペースとのバランスです。奥行が20cm増えるということは、通路が20cm狭くなるということ。自転車の取り回しや室外機との距離、組み立て作業のスペースなど、物置のまわりには意外と余白が必要です。',
-      'おすすめは「収納量は一回り大きく、設置計画は一回り慎重に」。当サイトの診断で最初に間口と奥行をお聞きするのも、この順番で考えるのが失敗しないコツだからです。' ] },
-  { id:'col-001', date:'2026-07-07', tag:'創刊',
-    title:'物置は、外構の主役になれるか',
-    lead:'家の顔は玄関、庭の顔は植栽。では、物置はどうでしょうか。つい「見なかったことにされる箱」になりがちな存在です。',
-    body:[
-      '敷地の一角にどっしりと置かれ、10年以上そこに在り続ける物置。せっかくなら、お庭の景色に気持ちよくなじんでほしいものです。けれど物置は長いあいだ、性能表の中だけで語られてきました。',
-      '最近の3メーカーのカタログを見比べると、物置が「見られること」を意識し始めているのがよく分かります。落ち着いたマットカラーにフラットなパネル、すっきりした直線的なかたち。道具置き場から、外構の一部へと変わりつつあるのです。',
-      '当サイトが性能だけでなく見た目や佇まいについても触れているのは、そんな理由からです。物置選びは収納量の計算であると同時に、お庭の風景をひとつ決める、楽しい買い物でもあります。' ] }
+/* ===== ARTICLES_START =====
+   記事を追加したら、この配列の【先頭】に1件足すこと（新しい順）。
+   スキーマ: { date:'YYYY-MM-DD', tag:'分類ラベル', title:'題', lead:'導入文（1〜2文）', url:'articles/スラッグ.html' }
+   合わせて articles/index.html・sitemap.xml・llms.txt にも追記すること。 */
+const ARTICLES = [
+  { date:'2026-08-04', tag:'機種の見方',
+    title:'「どのメーカーの物置が組みやすい？」は、実は答えられない質問です',
+    lead:'物置は小型（収納庫）と中型・大型の2区分に分かれます。同じメーカーでも、この2つで組みやすさが逆転します。',
+    url:'articles/monooki-maker-assembly.html' },
+  { date:'2026-08-04', tag:'設置の実務',
+    title:'物置は自分で組み立てられる？ 大変なのは組み立てだけじゃない',
+    lead:'大変なのは本体の組み立てだけではありません。その前の整地とブロック設置が、仕上がりを左右します。',
+    url:'articles/monooki-diy-assembly.html' },
+  { date:'2026-08-03', tag:'設置の実務',
+    title:'物置の水平出し｜設置の難所は組み立てではない',
+    lead:'難所は本体の組み立てではなく、基礎ブロックの水平出しです。傾くと扉は閉まるのに鍵だけ掛からなくなることがあります。',
+    url:'articles/monooki-level-blocks.html' },
 ];
-/* ===== COLUMNS_END ===== */
+/* ===== ARTICLES_END ===== */
 
 /* ---------- タグ → 選定根拠 ---------- */
 const TAG_REASONS = {
@@ -1566,32 +1544,21 @@ document.querySelectorAll('.idx-filter').forEach(b => {
 });
 document.querySelectorAll('.idx-filter[data-val="all"]').forEach(x => x.classList.add('active'));
 
-/* ---------- コラムレンダリング ---------- */
-function renderColumns(){
-  const list = document.querySelector('#column-list');
+/* ---------- 記事一覧レンダリング ---------- */
+function renderArticles(){
+  const list = document.querySelector('#article-list');
   if(!list) return;
-  list.innerHTML = COLUMNS.map(c => `
-    <div class="qa-item col-item border-b border-line">
-      <button class="qa-btn w-full grid grid-cols-12 items-baseline gap-4 py-8 md:py-10 text-left group">
-        <span class="col-span-11 md:col-span-2 font-mono text-[11px] text-neutral-400">${esc(c.date)}<span class="block mt-1 text-rust uppercase tracking-widest2 text-[10px]">${esc(c.tag)}</span></span>
-        <span class="col-span-12 md:col-span-9 order-last md:order-none">
-          <span class="block font-serif font-bold text-xl md:text-3xl leading-snug group-hover:text-rust transition-colors duration-300">${esc(c.title)}</span>
-          <span class="mt-3 block text-[13px] leading-loose text-neutral-500">${esc(c.lead)}</span>
-        </span>
-        <span class="col-span-1 justify-self-end self-center"><span class="qa-cross"></span></span>
-      </button>
-      <div class="qa-panel">
-        <div class="grid grid-cols-12 gap-4 pb-10">
-          <span class="hidden md:block md:col-span-2"></span>
-          <div class="col-span-12 md:col-span-8 space-y-5">
-            ${c.body.map(par => `<p class="text-sm leading-loose text-neutral-600">${esc(par)}</p>`).join('')}
-            <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-400 pt-3">Text — 編集部</p>
-          </div>
-        </div>
-      </div>
-    </div>`).join('');
+  list.innerHTML = ARTICLES.map(a => `
+    <a href="${esc(a.url)}" class="grid grid-cols-12 items-baseline gap-4 py-8 md:py-10 border-b border-line group">
+      <span class="col-span-11 md:col-span-2 font-mono text-[11px] text-neutral-400">${esc(a.date)}<span class="block mt-1 text-rust uppercase tracking-widest2 text-[10px]">${esc(a.tag)}</span></span>
+      <span class="col-span-12 md:col-span-9 order-last md:order-none">
+        <span class="block font-serif font-bold text-xl md:text-3xl leading-snug group-hover:text-rust transition-colors duration-300">${esc(a.title)}</span>
+        <span class="mt-3 block text-[13px] leading-loose text-neutral-500">${esc(a.lead)}</span>
+      </span>
+      <span class="col-span-1 justify-self-end self-center font-mono text-xl transition-transform duration-300 group-hover:translate-x-2">→</span>
+    </a>`).join('');
 }
-renderColumns();
+renderArticles();
 
 /* ---------- Q&Aレンダリング ---------- */
 function renderQA(){
@@ -1709,7 +1676,7 @@ document.addEventListener('keydown', e => {
 (function(){
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const targets = document.querySelectorAll(
-    '.entry-banner, section div[class*="py-16"], #makers article, #qa-list > div, #column-list > div, #journal-list > div, aside .ad-slot'
+    '.entry-banner, section div[class*="py-16"], #makers article, #qa-list > div, #article-list > a, #journal-list > div, aside .ad-slot'
   );
   targets.forEach((el, i) => {
     el.classList.add('reveal');
@@ -1741,14 +1708,14 @@ document.addEventListener('keydown', e => {
       if(link) link.classList.add('nav-active');
     });
   }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
-  ['shindan', 'makers', 'archive', 'column', 'faq', 'journal'].forEach(id => {
+  ['shindan', 'makers', 'archive', 'articles', 'faq', 'journal'].forEach(id => {
     const s = document.getElementById(id);
     if(s) spy.observe(s);
   });
 })();
 
 /* ---------- 構造化データの自動生成（SEO・AEO対策） ----------
-   PRODUCTS / QA_ITEMS / COLUMNS の内容から JSON-LD を組み立てて
+   PRODUCTS / QA_ITEMS / ARTICLES の内容から JSON-LD を組み立てて
    <head> に注入する。データが更新されれば構造化データも自動で追随する。 */
 (function(){
   const data = [];
@@ -1780,17 +1747,17 @@ document.addEventListener('keydown', e => {
       }))
     });
   }
-  if(COLUMNS.length){
+  if(ARTICLES.length){
     data.push({
       '@context': 'https://schema.org',
       '@type': 'Blog',
-      name: '物置どれがいい？ コラム',
-      blogPost: COLUMNS.map(c => ({
+      name: '物置どれがいい？ 記事',
+      blogPost: ARTICLES.map(a => ({
         '@type': 'BlogPosting',
-        headline: c.title,
-        datePublished: c.date,
-        description: c.lead,
-        articleBody: c.body.join(' '),
+        headline: a.title,
+        datePublished: a.date,
+        description: a.lead,
+        url: 'https://shikatoy.github.io/monooki-site/' + a.url,
         author: { '@type': 'Organization', name: '物置どれがいい？ 編集部' }
       }))
     });

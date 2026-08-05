@@ -1,0 +1,8 @@
+# 週次チェックの実行ログ（公開不要）
+tools/run.log
+tools/env.txt
+# Claude Code のローカル設定・作業メモ
+.claude/settings.local.json
+_SPEC_A1.md
+# macOS
+.DS_Store

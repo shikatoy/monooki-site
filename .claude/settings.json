@@ -1,0 +1,49 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(./**)",
+      "Write(articles/**)",
+      "Edit(articles/**)",
+      "Write(products/**)",
+      "Edit(products/**)",
+      "Edit(sitemap.xml)",
+      "Edit(llms.txt)",
+      "Edit(robots.txt)",
+      "Edit(index.html)",
+      "Edit(contact.html)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(open:*)",
+      "WebSearch",
+      "WebFetch(domain:www.inaba-ss.co.jp)",
+      "WebFetch(domain:www.yodomonooki.jp)",
+      "WebFetch(domain:www.e-ty.co.jp)",
+      "WebFetch(domain:www.takubo.co.jp)"
+    ],
+    "deny": [
+      "Bash(rm:*)",
+      "Bash(rmdir:*)",
+      "Bash(del:*)",
+      "Bash(chmod:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(git reset:*)",
+      "Bash(git checkout:*)",
+      "Bash(git rebase:*)",
+      "Bash(git push --force:*)",
+      "Edit(.git/**)",
+      "Write(.git/**)",
+      "Read(.env)",
+      "Read(**/*.key)",
+      "Read(**/credentials*)"
+    ]
+  }
+}
