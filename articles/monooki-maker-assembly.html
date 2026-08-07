@@ -13,7 +13,7 @@
 <meta property="og:title" content="物置の組みやすさは小型と中型・大型で逆転する">
 <meta property="og:description" content="「イナバは組みやすい、ヨドは組みにくい」は本当でしょうか。物置は小型と中型・大型で組みやすさが逆転します。エルモとフォルタ、シンプリーとエスモの違いを、施工歴20年の実務者の視点で解説。メーカー名だけで選べない理由が分かります。">
 <meta property="og:url" content="https://shikatoy.github.io/monooki-site/articles/monooki-maker-assembly.html">
-<meta property="og:image" content="https://shikatoy.github.io/monooki-site/images/og-image.png">
+<meta property="og:image" content="https://shikatoy.github.io/monooki-site/images/og-monooki-maker-assembly.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 {
@@ -26,7 +26,7 @@
   "author": { "@type": "Organization", "name": "物置どれがいい？" },
   "publisher": { "@type": "Organization", "name": "物置どれがいい？" },
   "mainEntityOfPage": "https://shikatoy.github.io/monooki-site/articles/monooki-maker-assembly.html",
-  "image": "https://shikatoy.github.io/monooki-site/images/og-image.png",
+  "image": "https://shikatoy.github.io/monooki-site/images/og-monooki-maker-assembly.png",
   "inLanguage": "ja",
   "keywords": "物置 メーカー 組みやすさ, 物置 小型 中型 大型 違い, 物置 イナバ ヨド 違い, 物置 棚 使い勝手, 物置 組み立て 昔と今"
 }
@@ -175,6 +175,36 @@
     .disclaimer { padding: 32px; }
     .footer-meta { flex-direction: row; justify-content: space-between; }
   }
+
+  /* ───── 図：物置の2区分（機種対応表） ───── */
+  .fig { margin: 40px 0; border: 1px solid var(--line); background: #fffdf9; }
+  .fig-label { margin: 0; padding: 14px 16px 0;
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .28em;
+    text-transform: uppercase; color: var(--mute); }
+  .fig-title { margin: 4px 0 0; padding: 0 16px 14px; border-bottom: 1px solid var(--line);
+    font-family: 'Shippori Mincho B1', serif; font-weight: 700; font-size: 15px; line-height: 1.7; }
+  .kubun { display: grid; grid-template-columns: 4.6em 1fr 1fr; }
+  .kubun > div { padding: 11px 9px; font-size: 12px; line-height: 1.8;
+    border-bottom: 1px solid var(--linesoft); }
+  .kubun > div:nth-child(3n+2),
+  .kubun > div:nth-child(3n+3) { border-left: 1px solid var(--linesoft); }
+  .kubun-h { border-bottom: 1px solid var(--line) !important;
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; color: var(--mute); }
+  .kubun-h.is-col { font-family: 'Shippori Mincho B1', serif; font-weight: 700;
+    font-size: 13px; letter-spacing: .02em; color: var(--ink); }
+  .kubun-m { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em;
+    color: var(--mute); }
+  .kubun > div:nth-last-child(-n+3) { border-bottom: 0; }
+  .fig-note { margin: 0; padding: 14px 16px; border-top: 1px solid var(--line);
+    font-size: 12px; line-height: 1.95; color: var(--mute); }
+  .fig-note b { display: block; color: var(--rust); font-weight: 700; }
+  @media (min-width: 600px) {
+    .kubun { grid-template-columns: 6em 1fr 1fr; }
+    .kubun > div { padding: 14px 16px; font-size: 13px; }
+    .kubun-h.is-col { font-size: 15px; }
+    .fig-title { font-size: 16px; }
+    .fig-note { font-size: 13px; }
+  }
 </style>
 </head>
 <body>
@@ -231,15 +261,31 @@
 
         <p>呼び方はメーカーごとに違いますが、この2区分はどのメーカーにもあります。</p>
 
-        <ul>
+        <figure class="fig">
+          <p class="fig-label">Fig. 01 — 機種の区分</p>
+          <p class="fig-title">物置は「小型（収納庫）」と「中型・大型」に分かれます</p>
+          <div class="kubun">
+            <div class="kubun-h"></div>
+            <div class="kubun-h is-col">小型（収納庫）</div>
+            <div class="kubun-h is-col">中型・大型</div>
 
-          <li>ヨドコウ：小型は「エスモ」、中型・大型は「エルモ」</li>
+            <div class="kubun-m">ヨドコウ</div>
+            <div>エスモ／ブラックエスモ</div>
+            <div>エルモ／ブラックエルモ／エルモコンビ／エルモシャッター</div>
 
-          <li>イナバ：小型は「シンプリー」、中型・大型は「フォルタ」</li>
+            <div class="kubun-m">イナバ</div>
+            <div>シンプリー／アイビーストッカー</div>
+            <div>フォルタ（プラス／大型／ウィズ）／ドマール</div>
 
-          <li>タクボ：小型は「グランプレステージ」、中型・大型は「ストックマン ダンディ」など</li>
-
-        </ul>
+            <div class="kubun-m">タクボ</div>
+            <div>グランプレステージ／リジュー／ペインタ</div>
+            <div>Mr.ストックマン ダンディ／Mr.トールマン ダンディ／BELOS</div>
+          </div>
+          <p class="fig-note">
+            <b>比べるのは、たての列（同じ区分）の中どうしです。</b>
+            よこの行（メーカー）でまとめると、この記事で書いている逆転が見えなくなります。車庫・ガレージ・バイク保管庫と、断熱タイプは、この表には入れていません。
+          </p>
+        </figure>
 
         <p>ここで少しややこしいのが<strong>イナバ</strong>です。</p>
 
