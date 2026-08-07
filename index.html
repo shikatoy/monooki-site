@@ -68,6 +68,15 @@ tailwind.config = {
   .marquee { overflow: hidden; white-space: nowrap; }
   .marquee-inner { display: inline-block; animation: marq 36s linear infinite; }
   @keyframes marq { to { transform: translateX(-50%); } }
+  /* 押せるマーキー: ホバー / キーボード操作 / タップで一時停止 */
+  .marquee:hover .marquee-inner,
+  .marquee:focus-within .marquee-inner,
+  .marquee.is-paused .marquee-inner { animation-play-state: paused; }
+  .marquee a { transition: color .2s ease, -webkit-text-stroke-color .2s ease; }
+  .marquee a:hover, .marquee a:focus-visible { color: #a3512b; }
+  .marquee a.outline-k:hover, .marquee a.outline-k:focus-visible { -webkit-text-stroke-color: #a3512b; color: transparent; }
+  .marquee a:focus-visible { outline: 1px solid #a3512b; outline-offset: 4px; }
+  @media (prefers-reduced-motion: reduce) { .marquee-inner { animation: none; } .marquee { overflow-x: auto; } }
 
   /* ───── モーダル ───── */
   .modal { transition: opacity .4s ease, visibility .4s ease; }
@@ -132,6 +141,18 @@ tailwind.config = {
   header nav a.nav-active { color: #a3512b; }
   .u-link.nav-active::after { transform: scaleX(1); transform-origin: left; background: #a3512b; }
 
+  /* ───── 比較 ───── */
+  #compare-tray.tray-open { transform: translateY(0); }
+  .cmp-chip { display:inline-flex; align-items:center; gap:8px; border:1px solid #171717; padding:5px 10px; font-size:11px; }
+  .cmp-chip button { font-family:'IBM Plex Mono',monospace; color:#a3512b; }
+  .cmp-on { background:#101010 !important; color:#f8f6f0 !important; }
+  .cmp-table { width:100%; border-collapse:collapse; font-size:13px; }
+  .cmp-table th, .cmp-table td { border:1px solid #dcdcd8; padding:12px 14px; vertical-align:top; line-height:1.9; text-align:left; }
+  .cmp-table thead th { border-color:#171717; background:#efe9dc; font-family:'Shippori Mincho B1',serif; font-weight:700; font-size:15px; }
+  .cmp-table tbody th { width:110px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#6b6b66; font-weight:400; white-space:nowrap; background:#faf8f3; }
+  .cmp-wrap { overflow-x:auto; }
+  @media (min-width:768px){ .cmp-table { font-size:14px; } .cmp-table tbody th { width:140px; } }
+
   /* ───── 索引フィルタ ───── */
   .idx-filter { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; border: 1px solid #171717; padding: 6px 14px; transition: all .25s ease; }
   .idx-filter:hover { background: #e6dfd0; }
@@ -174,6 +195,7 @@ tailwind.config = {
       <a href="#shindan" class="u-link hidden sm:block">診断</a>
       <a href="#makers" class="u-link hidden sm:block">メーカー</a>
       <a href="#archive" class="u-link hidden sm:block">索引</a>
+      <a href="products/" class="u-link hidden sm:block">製品</a>
       <a href="#articles" class="u-link hidden sm:block">記事</a>
       <a href="#faq" class="u-link hidden sm:block">Q&amp;A</a>
       <a href="#journal" class="u-link hidden sm:block">更新履歴</a>
@@ -189,10 +211,11 @@ tailwind.config = {
     <a href="#shindan" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">01</span><span class="font-serif font-bold text-2xl">診断</span></a>
     <a href="#makers" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">02</span><span class="font-serif font-bold text-2xl">メーカー</span></a>
     <a href="#archive" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">03</span><span class="font-serif font-bold text-2xl">索引</span></a>
-    <a href="#articles" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">04</span><span class="font-serif font-bold text-2xl">記事</span></a>
-    <a href="#faq" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">05</span><span class="font-serif font-bold text-2xl">よくあるご質問</span></a>
-    <a href="#journal" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">06</span><span class="font-serif font-bold text-2xl">更新履歴</span></a>
-    <a href="contact.html" class="flex items-baseline gap-5 py-5"><span class="font-mono text-[11px] text-neutral-400">07</span><span class="font-serif font-bold text-2xl">お問い合わせ</span></a>
+    <a href="products/" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">04</span><span class="font-serif font-bold text-2xl">製品一覧</span></a>
+    <a href="#articles" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">05</span><span class="font-serif font-bold text-2xl">記事</span></a>
+    <a href="#faq" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">06</span><span class="font-serif font-bold text-2xl">よくあるご質問</span></a>
+    <a href="#journal" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">07</span><span class="font-serif font-bold text-2xl">更新履歴</span></a>
+    <a href="contact.html" class="flex items-baseline gap-5 py-5"><span class="font-mono text-[11px] text-neutral-400">08</span><span class="font-serif font-bold text-2xl">お問い合わせ</span></a>
   </nav>
   <p class="px-5 pb-8 font-mono text-[10px] tracking-widest2 uppercase text-neutral-400">物置どれがいい？ — Storage Concierge</p>
 </div>
@@ -201,23 +224,26 @@ tailwind.config = {
 <section id="top" class="pt-16">
   <div class="border-b border-line">
     <div class="max-w-[1440px] mx-auto px-5 md:px-10 grid md:grid-cols-12">
-      <div class="md:col-span-9 py-14 md:py-24 md:pr-14">
+      <div class="md:col-span-9 py-8 md:py-16 md:pr-14">
         <div class="flex items-center justify-between font-mono text-[10px] md:text-[11px] tracking-widest2 text-neutral-500 uppercase">
           <span>Storage Concierge — Archive</span>
           <span class="hidden md:inline">Vol.01 / 2026</span>
           <span class="text-rust">JP</span>
         </div>
-        <h1 class="mt-10 md:mt-14 font-serif font-extrabold leading-[0.98] tracking-tight" style="font-size:clamp(3.2rem, 10.5vw, 9.5rem)">
+        <h1 class="mt-6 md:mt-10 font-serif font-extrabold leading-[0.98] tracking-tight" style="font-size:clamp(3.2rem, 10.5vw, 9.5rem)">
           物置<br>どれがいい？
         </h1>
-        <div class="mt-10 md:mt-16 flex flex-wrap items-end justify-between gap-6">
+        <div class="mt-8 md:mt-12 flex flex-wrap items-end justify-between gap-6">
           <p class="max-w-md text-sm leading-loose text-neutral-600">
             タクボ・イナバ・ヨドコウ。定番3メーカーの中から、収納したい物や設置スペースにぴったり合う一台を、いっしょにお探しします。質問は3〜4問、1分ほどで終わりますので、お気軽にお試しください。
           </p>
-          <a href="#shindan" class="font-mono text-[11px] tracking-widest2 uppercase u-link">Select Your Approach ↓</a>
+          <a href="#shindan" class="group inline-flex items-center gap-4 bg-ink text-paper px-7 py-4 md:px-9 md:py-5 border border-ink hover:bg-paper hover:text-ink transition-colors">
+            <span class="font-serif font-bold text-lg md:text-xl tracking-wide">診断をはじめる</span>
+            <span class="font-mono text-xl leading-none">↓</span>
+          </a>
         </div>
       </div>
-      <div class="hidden md:flex md:col-span-3 border-l border-line items-center justify-center py-24">
+      <div class="hidden md:flex md:col-span-3 border-l border-line items-center justify-center py-16">
         <p class="tate font-serif font-bold text-xl leading-[2.4] tracking-[.35em]">
           空間と用途を美しく調和させる、<br>物置のコンシェルジュ。
         </p>
@@ -226,9 +252,9 @@ tailwind.config = {
   </div>
 
   <!-- マーキー -->
-  <div class="marquee border-b border-line py-4 select-none" aria-hidden="true">
+  <div class="marquee border-b border-line py-4 select-none" aria-label="製品カテゴリーへのショートカット">
     <div class="marquee-inner font-mono text-lg md:text-2xl tracking-[.3em] uppercase">
-      <span class="outline-k">Takubo</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span>Inaba</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span class="outline-k">Yodoko</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span>物置</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span class="outline-k">バイク車庫</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span>ガレージ</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span class="outline-k">Takubo</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span>Inaba</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span class="outline-k">Yodoko</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span>物置</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span class="outline-k">バイク車庫</span>&nbsp;&nbsp;■&nbsp;&nbsp;<span>ガレージ</span>&nbsp;&nbsp;■&nbsp;&nbsp;
+      <a href="#makers" class="outline-k">Takubo</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#makers">Inaba</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#makers" class="outline-k">Yodoko</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#archive" data-fil-group="cat" data-fil-val="物置">物置</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#archive" class="outline-k" data-fil-group="cat" data-fil-val="バイク車庫">バイク車庫</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#archive" data-fil-group="cat" data-fil-val="ガレージ">ガレージ</a>&nbsp;&nbsp;■&nbsp;&nbsp;<span aria-hidden="true"><a href="#makers" class="outline-k" tabindex="-1">Takubo</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#makers" tabindex="-1">Inaba</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#makers" class="outline-k" tabindex="-1">Yodoko</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#archive" data-fil-group="cat" data-fil-val="物置" tabindex="-1">物置</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#archive" class="outline-k" data-fil-group="cat" data-fil-val="バイク車庫" tabindex="-1">バイク車庫</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#archive" data-fil-group="cat" data-fil-val="ガレージ" tabindex="-1">ガレージ</a>&nbsp;&nbsp;■&nbsp;&nbsp;</span>
     </div>
   </div>
 </section>
@@ -237,8 +263,8 @@ tailwind.config = {
 <section id="shindan">
   <div class="border-b border-line">
     <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-5 flex items-center justify-between font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">
-      <span>Matching System / 物置マッチング診断</span>
-      <span class="text-rust">AI Assisted</span>
+      <span><span class="hidden sm:inline">Matching System / </span>物置マッチング診断</span>
+      <span class="text-rust">3〜4問 / 約1分</span>
     </div>
   </div>
 
@@ -246,7 +272,7 @@ tailwind.config = {
     <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-10 md:py-16 grid grid-cols-12 items-center gap-3 md:gap-6">
       <span class="entry-num col-span-3 md:col-span-1 font-mono text-sm md:text-base text-neutral-400 transition-colors">[ 01 ]</span>
       <span class="col-span-9 md:col-span-4 font-serif font-bold text-3xl md:text-5xl tracking-wide">用途で選ぶ</span>
-      <span class="entry-desc hidden md:block col-span-5 text-[13px] leading-relaxed text-neutral-500 transition-colors">「何を、どのくらいの頻度でしまうか」から、ぴったりの構造や扉のタイプを一緒に考える、いちばん定番の選び方です。</span>
+      <span class="entry-desc col-span-12 md:col-span-5 mt-1 md:mt-0 text-[13px] leading-relaxed text-neutral-500 transition-colors">「何を、どのくらいの頻度でしまうか」から、ぴったりの構造や扉のタイプを一緒に考える、いちばん定番の選び方です。</span>
       <span class="col-span-12 md:col-span-2 text-right font-mono text-2xl"><span class="arrow">→</span></span>
     </div>
   </button>
@@ -255,7 +281,7 @@ tailwind.config = {
     <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-10 md:py-16 grid grid-cols-12 items-center gap-3 md:gap-6">
       <span class="entry-num col-span-3 md:col-span-1 font-mono text-sm md:text-base text-neutral-400 transition-colors">[ 02 ]</span>
       <span class="col-span-9 md:col-span-4 font-serif font-bold text-3xl md:text-5xl tracking-wide">サイズで選ぶ</span>
-      <span class="entry-desc hidden md:block col-span-5 text-[13px] leading-relaxed text-neutral-500 transition-colors">設置できるスペースが決まっている方はこちら。間口・奥行・高さをスライダーで入力すると、無理なく収まるサイズをご案内します。</span>
+      <span class="entry-desc col-span-12 md:col-span-5 mt-1 md:mt-0 text-[13px] leading-relaxed text-neutral-500 transition-colors">設置できるスペースが決まっている方はこちら。間口・奥行・高さをスライダーで入力すると、無理なく収まるサイズをご案内します。</span>
       <span class="col-span-12 md:col-span-2 text-right font-mono text-2xl"><span class="arrow">→</span></span>
     </div>
   </button>
@@ -264,7 +290,7 @@ tailwind.config = {
     <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-10 md:py-16 grid grid-cols-12 items-center gap-3 md:gap-6">
       <span class="entry-num col-span-3 md:col-span-1 font-mono text-sm md:text-base text-neutral-400 transition-colors">[ 03 ]</span>
       <span class="col-span-9 md:col-span-4 font-serif font-bold text-3xl md:text-5xl tracking-wide">メーカーで選ぶ</span>
-      <span class="entry-desc hidden md:block col-span-5 text-[13px] leading-relaxed text-neutral-500 transition-colors">扉の軽さのタクボ、頑丈さのイナバ、サビに強いヨドコウ。それぞれの持ち味から、相性のよいメーカーを見つける選び方です。</span>
+      <span class="entry-desc col-span-12 md:col-span-5 mt-1 md:mt-0 text-[13px] leading-relaxed text-neutral-500 transition-colors">扉の軽さのタクボ、頑丈さのイナバ、サビに強いヨドコウ。それぞれの持ち味から、相性のよいメーカーを見つける選び方です。</span>
       <span class="col-span-12 md:col-span-2 text-right font-mono text-2xl"><span class="arrow">→</span></span>
     </div>
   </button>
@@ -303,9 +329,32 @@ tailwind.config = {
   </div>
 </div>
 
+<!-- ═══════════ 比較モーダル ═══════════ -->
+<div id="compare-modal" class="modal modal-hidden fixed inset-0 z-[60] bg-paper flex flex-col">
+  <div class="border-b border-line shrink-0">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 h-16 flex items-center justify-between">
+      <span class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase">Compare — 比較</span>
+      <button id="compare-close" class="font-mono text-[11px] tracking-widest2 uppercase hover:text-rust transition-colors">Close ×</button>
+    </div>
+  </div>
+  <div class="flex-1 overflow-y-auto">
+    <div id="compare-body" class="max-w-[1440px] mx-auto px-5 md:px-10 py-10 md:py-14"></div>
+  </div>
+</div>
+
+<!-- ═══════════ 比較トレイ（選択中バー） ═══════════ -->
+<div id="compare-tray" class="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper translate-y-full transition-transform duration-300">
+  <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-4 flex flex-wrap items-center gap-3 md:gap-5">
+    <span class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500 shrink-0">Compare</span>
+    <div id="compare-chips" class="flex flex-wrap gap-2 flex-1 min-w-[140px]"></div>
+    <button id="compare-clear" class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500 hover:text-rust transition-colors shrink-0">クリア</button>
+    <button id="compare-go" class="shrink-0 border border-line px-5 py-2.5 font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">比較する →</button>
+  </div>
+</div>
+
 <!-- ═══════════ 広告欄 1 ═══════════ -->
-<!-- AD_SLOT_1_START: 広告タグ（Google AdSense等）は下の .ad-slot 内に貼り付けてください。中のプレースホルダー表示は削除してOKです -->
-<aside class="border-b border-line" aria-label="広告">
+<!-- AD_SLOT_1_START: 広告タグを入れるときは、下の <aside> の class から hidden を外し、.ad-slot 内にタグを貼り付けてください（中のプレースホルダー表示は削除してOK） -->
+<aside class="hidden border-b border-line" aria-label="広告">
   <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-8">
     <p class="font-mono text-[9px] tracking-widest2 uppercase text-neutral-400 mb-3">AD — 広告</p>
     <div class="ad-slot border border-dashed border-neutral-300 min-h-[100px] md:min-h-[120px] flex items-center justify-center">
@@ -320,7 +369,7 @@ tailwind.config = {
   <div class="border-b border-neutral-700">
     <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-16 md:py-24 grid md:grid-cols-12 gap-8 items-end">
       <div class="md:col-span-8">
-        <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">The Big Three — Monoliths</p>
+        <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">Makers — タクボ・イナバ・ヨドコウ</p>
         <h2 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">三大メーカー。</h2>
       </div>
       <p class="md:col-span-4 text-[13px] leading-loose text-neutral-400">
@@ -413,6 +462,11 @@ tailwind.config = {
       <span id="idx-count" class="md:ml-auto font-mono text-[11px] text-neutral-400"></span>
     </div>
     <div id="index-grid" class="grid md:grid-cols-3 border-t border-l border-line"></div>
+    <div id="idx-more" class="mt-6"></div>
+    <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
+      <p class="text-[12px] leading-relaxed text-neutral-500">型番ごとの寸法表は、製品ページにまとめてあります。</p>
+      <a href="products/" class="border border-line px-6 py-3 font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">製品一覧ページへ →</a>
+    </div>
   </div>
   <div class="border-b border-line"></div>
 </section>
@@ -457,8 +511,8 @@ tailwind.config = {
 </section>
 
 <!-- ═══════════ 広告欄 2 ═══════════ -->
-<!-- AD_SLOT_2_START: 広告タグ（Google AdSense等）は下の .ad-slot 内に貼り付けてください。中のプレースホルダー表示は削除してOKです -->
-<aside class="border-b border-line" aria-label="広告">
+<!-- AD_SLOT_2_START: 広告タグを入れるときは、下の <aside> の class から hidden を外し、.ad-slot 内にタグを貼り付けてください（中のプレースホルダー表示は削除してOK） -->
+<aside class="hidden border-b border-line" aria-label="広告">
   <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-8">
     <p class="font-mono text-[9px] tracking-widest2 uppercase text-neutral-400 mb-3">AD — 広告</p>
     <div class="ad-slot border border-dashed border-neutral-300 min-h-[100px] md:min-h-[120px] flex items-center justify-center">
@@ -530,11 +584,10 @@ tailwind.config = {
         <a href="#shindan" class="u-link hover:text-paper transition-colors">診断</a>
         <a href="#makers" class="u-link hover:text-paper transition-colors">メーカー</a>
         <a href="#archive" class="u-link hover:text-paper transition-colors">索引</a>
+        <a href="products/" class="u-link hover:text-paper transition-colors">製品一覧</a>
         <a href="#articles" class="u-link hover:text-paper transition-colors">記事</a>
         <a href="#faq" class="u-link hover:text-paper transition-colors">Q&amp;A</a>
         <a href="#journal" class="u-link hover:text-paper transition-colors">更新履歴</a>
-        <a href="about.html" class="u-link hover:text-paper transition-colors">運営者情報</a>
-        <a href="privacy.html" class="u-link hover:text-paper transition-colors">プライバシー</a>
         <a href="contact.html" class="u-link hover:text-paper transition-colors">Contact</a>
       </nav>
     </div>
@@ -775,6 +828,29 @@ const QA_ITEMS = [
 ];
 /* ===== QA_ITEMS_END ===== */
 
+/* ===== PRODUCT_PAGES =====
+   製品IDと個別ページのファイル名の対応。製品を追加したらここにも1行足すこと。 */
+const PRODUCT_PAGES = {
+  't-gp': 'products/takubo-grand-prestage-jump.html',
+  't-nd': 'products/takubo-mr-stockman-dandy.html',
+  't-jn': 'products/takubo-mr-tallman-dandy.html',
+  't-bs': 'products/takubo-bike-shutterman.html',
+  't-belos': 'products/takubo-belos.html',
+  't-lsn': 'products/takubo-leisure.html',
+  'i-mjx': 'products/inaba-simply.html',
+  'i-fs': 'products/inaba-forta.html',
+  'i-fxn': 'products/inaba-bike-hokanko.html',
+  'i-grn': 'products/inaba-garudia.html',
+  'i-tbj': 'products/inaba-takuhai-box.html',
+  'i-smx': 'products/inaba-nyso-smx.html',
+  'i-sml': 'products/inaba-como-lite.html',
+  'i-dm': 'products/inaba-arcia-fit.html',
+  'y-ese': 'products/yodoko-esmo.html',
+  'y-lmd': 'products/yodoko-elmo.html',
+  'y-vgc': 'products/yodoko-lavige.html',
+  't-pe': 'products/takubo-peinte.html',
+};
+
 /* ===== ARTICLES_START =====
    記事を追加したら、この配列の【先頭】に1件足すこと（新しい順）。
    スキーマ: { date:'YYYY-MM-DD', tag:'分類ラベル', title:'題', lead:'導入文（1〜2文）', url:'articles/スラッグ.html' }
@@ -890,6 +966,61 @@ const QUESTION_SETS = {
 
 /* ---------- ステート ---------- */
 const state = { mode:null, step:0, answers:[], sizeSel:{ w:180, d:120 } };
+
+/* ---------- 診断結果をURLに残す ----------
+   形式: #r=<mode>.<間口cm>x<奥行cm>.<選んだ選択肢の番号を並べたもの>
+   例: #r=size.180x120.s1 / #r=use.02
+   これにより結果ページをブックマーク・共有でき、開き直すと同じ結果が出る。 */
+function encodeQuizState(){
+  if(!state.mode) return '';
+  const opts = state.answers.map(a => (a.oi === undefined ? '' : String(a.oi))).join('');
+  return `r=${state.mode}.${state.sizeSel.w}x${state.sizeSel.d}.${opts}`;
+}
+function resultUrl(){
+  const h = encodeQuizState();
+  return h ? location.origin + location.pathname + '#' + h : SITE_URL;
+}
+function writeResultHash(){
+  const h = encodeQuizState();
+  if(!h) return;
+  try { history.replaceState(null, '', '#' + h); } catch(e){}
+}
+function parseQuizHash(){
+  const m = (location.hash || '').match(/^#r=([a-z]+)\.(\d+)x(\d+)\.([0-9s]*)$/);
+  if(!m) return null;
+  const [, mode, w, d, opts] = m;
+  if(!QUESTION_SETS[mode]) return null;
+  return { mode, w:Number(w), d:Number(d), opts:opts.split('') };
+}
+/* URL から診断結果を復元して開く */
+function restoreFromHash(){
+  const q = parseQuizHash();
+  if(!q) return false;
+  state.mode = q.mode; state.step = 0; state.answers = []; state.sizeSel = { w:q.w, d:q.d };
+  const qs = QUESTION_SETS[q.mode].questions;
+  for(let i = 0; i < qs.length; i++){
+    const question = qs[i];
+    const token = q.opts[i];
+    if(question.type === 'slider'){
+      const { w, d } = state.sizeSel;
+      let tags, sizeName;
+      if(w <= 160 && d <= 100){ tags = { small:3, low:1, cheap:1 }; sizeName = '小型'; }
+      else if(w >= 280 || (w / 100) * (d / 100) >= 4.5){ tags = { large:3, garage:1, medium:1 }; sizeName = '大型'; }
+      else { tags = { medium:3 }; sizeName = '中型'; }
+      state.answers.push({ label:`W${w*10}mm × D${d*10}mm ── ${sizeName}級`, tags, oi:'s' });
+    } else {
+      const o = question.options[Number(token)];
+      if(!o) return false;
+      state.answers.push({ label:o.label, tags:o.tags, hMax:o.hMax, oi:Number(token) });
+    }
+  }
+  state.step = qs.length;
+  modalLabel.textContent = QUESTION_SETS[q.mode].label;
+  modal.classList.remove('modal-hidden');
+  document.body.style.overflow = 'hidden';
+  renderResults();
+  return true;
+}
 const $ = s => document.querySelector(s);
 const modal = $('#quiz-modal'), quizBody = $('#quiz-body');
 const progressBar = $('#quiz-progress'), stepLabel = $('#quiz-step-label'), modalLabel = $('#modal-label');
@@ -1099,6 +1230,10 @@ function hideModalUI(){
   modal.classList.add('modal-hidden');
   document.body.style.overflow = '';
   progressBar.style.width = '0%';
+  /* 結果のURLを残したまま閉じると、次に開いたとき古い結果に戻ってしまうため消す */
+  if((location.hash || '').startsWith('#r=')){
+    try { history.replaceState(null, '', location.pathname + location.search); } catch(e){}
+  }
 }
 function closeModal(){
   hideModalUI();
@@ -1183,7 +1318,7 @@ function renderStep(){
   quizBody.querySelectorAll('.opt-row').forEach(btn => {
     btn.addEventListener('click', () => {
       const o = q.options[Number(btn.dataset.opt)];
-      state.answers.push({ label:o.label, tags:o.tags, hMax:o.hMax });
+      state.answers.push({ label:o.label, tags:o.tags, hMax:o.hMax, oi:Number(btn.dataset.opt) });
       state.step++;
       transitionTo(renderStep);
     });
@@ -1264,7 +1399,7 @@ function renderSliderStep(q){
     if(w <= 160 && d <= 100){ tags = { small:3, low:1, cheap:1 }; sizeName = '小型'; }
     else if(w >= 280 || (w / 100) * (d / 100) >= 4.5){ tags = { large:3, garage:1, medium:1 }; sizeName = '大型'; }
     else { tags = { medium:3 }; sizeName = '中型'; }
-    state.answers.push({ label:`W${w*10}mm × D${d*10}mm ── ${sizeName}級`, tags });
+    state.answers.push({ label:`W${w*10}mm × D${d*10}mm ── ${sizeName}級`, tags, oi:'s' });
     state.step++;
     transitionTo(renderStep);
   });
@@ -1381,18 +1516,19 @@ function renderResults(){
         }).join('')}
       </div>
       <div class="mt-12 border-t border-line pt-8">
-        <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">Share — 診断結果をシェア</p>
-        <p class="mt-2 text-[13px] text-neutral-600">あなたにおすすめの物置は「${esc(results[0].p.name)}」でした。結果をシェアできます。</p>
+        <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">Save &amp; Share — 結果を残す・送る</p>
+        <p class="mt-2 text-[13px] text-neutral-600">あなたにおすすめの物置は「${esc(results[0].p.name)}」でした。<strong>この結果はURLに残っています。</strong>ブックマークすれば後で見返せますし、リンクを送れば同じ結果が相手にも表示されます。</p>
         <div class="mt-4 flex flex-wrap gap-2">
           <button class="share-btn" data-net="x">X（旧Twitter）</button>
           <button class="share-btn" data-net="line">LINE</button>
           <button class="share-btn" data-net="fb">Facebook</button>
-          <button class="share-btn" data-net="copy" id="share-copy">リンクをコピー</button>
+          <button class="share-btn" data-net="copy" id="share-copy">この結果のリンクをコピー</button>
         </div>
       </div>
-      <p class="mt-8 font-mono text-[10px] leading-relaxed text-neutral-400">※ 掲載の寸法・仕様は代表的な参考値です。設置時は本体の下に基礎用コンクリートブロック（基本 高さ約10cm）を敷くため、実際の高さは「本体高さ＋約10cm」となります。ご購入前には必ず最新のメーカーカタログと現地調査でご確認ください。</p>
+      <p class="mt-8 font-mono text-[10px] leading-relaxed text-neutral-400">※ 掲載の寸法・仕様は代表的な参考値です。設置時は本体の下に基礎用コンクリートブロック（基本 高さ約10cm）を敷くため、実際の高さは「本体高さ＋約10cm」となります。${space ? '<br>※ 判定では壁との余白を左右・背面 各約10cmで見ています。設置と点検の最低ラインは、小型（収納庫）なら5〜10cm、中型・大型で10cmほど（いずれも実測ではなく作業の体感）。もう少し詰められる場合があります。' : ''}ご購入前には必ず最新のメーカーカタログと現地調査でご確認ください。</p>
     </div>`;
 
+  writeResultHash();
   setupShare(results[0].p);
   quizBody.querySelectorAll('.goto-maker').forEach(b => {
     b.addEventListener('click', () => {
@@ -1412,8 +1548,8 @@ function renderResults(){
 /* ---------- 診断結果のシェア ---------- */
 function setupShare(topProduct){
   const catText = { use:'用途', size:'サイズ', maker:'メーカー' }[state.mode] || '条件';
-  const text = `【物置どれがいい？】${catText}で診断したら、私におすすめの物置は「${topProduct.name}」でした！あなたにぴったりの物置も1分で診断できます。`;
-  const url = SITE_URL;
+  const text = `【物置どれがいい？】${catText}で診断したら、私におすすめの物置は「${topProduct.name}」でした！この診断結果はこのリンクから見られます。`;
+  const url = resultUrl();
   const links = {
     x: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=物置どれがいい`,
     line: `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`,
@@ -1466,6 +1602,8 @@ function linkifyJournalTitle(title){
   }
   return out;
 }
+const JOURNAL_PREVIEW = 3;
+let journalExpanded = false;
 function renderJournal(){
   const list = document.querySelector('#journal-list');
   if(!list) return;
@@ -1473,7 +1611,8 @@ function renderJournal(){
   /* 更新履歴は「新商品・廃盤・入替」と初回公開のみ掲載する。
      サイズ・扉構成などの構成変更（改定）は台帳データには残すが表示しない */
   const SHOWN_TYPES = ['新商品', '廃盤', '入替', '公開'];
-  const shown = UPDATE_LOG.filter(e => SHOWN_TYPES.includes(e.type));
+  const all = UPDATE_LOG.filter(e => SHOWN_TYPES.includes(e.type));
+  const shown = journalExpanded ? all : all.slice(0, JOURNAL_PREVIEW);
   const fresh = shown.some(e => (Date.now() - new Date(e.date).getTime()) < 45 * 24 * 3600 * 1000 && HOT_TYPES.includes(e.type));
   list.innerHTML = shown.map(e => {
     const isFreshEntry = HOT_TYPES.includes(e.type) && (Date.now() - new Date(e.date).getTime()) < 45 * 24 * 3600 * 1000;
@@ -1487,6 +1626,12 @@ function renderJournal(){
       </div>
     </div>`;
   }).join('');
+  const rest = all.length - shown.length;
+  if(rest > 0){
+    list.innerHTML += `<div class="py-6"><button id="jr-more-btn" class="w-full border border-line py-4 font-mono text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">これまでの更新をすべて見る（残り ${rest} 件）↓</button></div>`;
+    const b = document.querySelector('#jr-more-btn');
+    if(b) b.addEventListener('click', () => { journalExpanded = true; renderJournal(); });
+  }
   if(!fresh && shown.length === 1){
     list.innerHTML += `
     <div class="py-6 md:py-8 border-b border-linesoft">
@@ -1523,6 +1668,166 @@ renderMakerLineups();
 
 /* ---------- 索引レンダリング（フィルタ対応） ---------- */
 const idxFilter = { maker:'all', cat:'all' };
+/* ═══════════ 比較機能 ═══════════
+   選んだ製品を横並びで比べる。最大3件。
+   選択はURL（#c=id1,id2）に残るので、ブックマークと共有ができる。 */
+const CMP_MAX = 3;
+let compareSel = [];
+
+function toggleCompare(pid){
+  const i = compareSel.indexOf(pid);
+  if(i >= 0) compareSel.splice(i, 1);
+  else {
+    if(compareSel.length >= CMP_MAX){ alertTray(`比較できるのは${CMP_MAX}件までです`); return; }
+    compareSel.push(pid);
+  }
+  syncCompare();
+}
+function clearCompare(){ compareSel = []; syncCompare(); }
+
+let trayMsgTimer = null;
+function alertTray(msg){
+  const chips = document.querySelector('#compare-chips');
+  if(!chips) return;
+  const old = chips.innerHTML;
+  chips.innerHTML = `<span class="text-rust text-[12px]">${esc(msg)}</span>`;
+  clearTimeout(trayMsgTimer);
+  trayMsgTimer = setTimeout(() => renderTray(), 1600);
+}
+
+function renderTray(){
+  const tray = document.querySelector('#compare-tray');
+  const chips = document.querySelector('#compare-chips');
+  const go = document.querySelector('#compare-go');
+  if(!tray || !chips) return;
+  tray.classList.toggle('tray-open', compareSel.length > 0);
+  chips.innerHTML = compareSel.map(id => {
+    const p = PRODUCTS.find(x => x.id === id);
+    return p ? `<span class="cmp-chip">${esc(p.name)}<button data-off="${id}" aria-label="外す">×</button></span>` : '';
+  }).join('');
+  chips.querySelectorAll('[data-off]').forEach(b => b.addEventListener('click', () => toggleCompare(b.dataset.off)));
+  if(go) go.disabled = compareSel.length < 2;
+  if(go) go.style.opacity = compareSel.length < 2 ? '.4' : '1';
+}
+
+function writeCompareHash(){
+  try {
+    if(compareSel.length) history.replaceState(null, '', '#c=' + compareSel.join(','));
+    else if((location.hash || '').startsWith('#c=')) history.replaceState(null, '', location.pathname + location.search);
+  } catch(e){}
+}
+function syncCompare(){
+  renderTray();
+  writeCompareHash();
+  renderIndex();
+}
+
+function cmpRow(label, fn){
+  return `<tr><th>${label}</th>${compareSel.map(id => {
+    const p = PRODUCTS.find(x => x.id === id);
+    return `<td>${p ? fn(p) : '—'}</td>`;
+  }).join('')}</tr>`;
+}
+
+function openCompare(){
+  if(compareSel.length < 2){ alertTray('2件以上えらんでください'); return; }
+  const body = document.querySelector('#compare-body');
+  const m = document.querySelector('#compare-modal');
+  if(!body || !m) return;
+
+  const range = p => {
+    const sz = p.sizes || [];
+    if(!sz.length) return 'サイズ表は公開待ち';
+    const w = sz.map(x => x.w), d = sz.map(x => x.d), h = sz.map(x => x.h);
+    const one = sz.length === 1;
+    return one
+      ? `${fmtNum(w[0])} × ${fmtNum(d[0])} × ${fmtNum(h[0])} mm`
+      : `間口 ${fmtNum(Math.min(...w))}〜${fmtNum(Math.max(...w))}<br>奥行 ${fmtNum(Math.min(...d))}〜${fmtNum(Math.max(...d))}<br>高さ ${fmtNum(Math.min(...h))}〜${fmtNum(Math.max(...h))} mm`;
+  };
+
+  body.innerHTML = `
+    <p class="font-mono text-[11px] tracking-widest2 uppercase text-rust">Compare — ${compareSel.length}件を比較</p>
+    <h3 class="mt-5 font-serif font-extrabold text-3xl md:text-4xl leading-snug">並べて比べる。</h3>
+    <p class="mt-4 text-[13px] text-neutral-500">このページのURLをブックマークすれば、同じ組み合わせをあとから開けます。リンクを送れば相手にも同じ比較が表示されます。</p>
+
+    <div class="cmp-wrap mt-10">
+      <table class="cmp-table">
+        <thead>
+          <tr><th style="background:#faf8f3"></th>${compareSel.map(id => {
+            const p = PRODUCTS.find(x => x.id === id);
+            return `<th>${p ? esc(p.name) : '—'}</th>`;
+          }).join('')}</tr>
+        </thead>
+        <tbody>
+          ${cmpRow('メーカー', p => esc(MAKERS[p.maker].split(' /')[0]))}
+          ${cmpRow('区分', p => esc(p.cat))}
+          ${cmpRow('サイズ展開', p => range(p) + (p.sizes && p.sizes.length > 1 ? `<br><span class="font-mono text-[10px] text-neutral-400">全${p.sizes.length}型番</span>` : ''))}
+          ${cmpRow('鋼板', p => esc(p.steel || '—'))}
+          ${cmpRow('扉', p => esc(p.door || '—'))}
+          ${cmpRow('基礎', p => esc(p.found || '—'))}
+          ${cmpRow('特徴', p => (p.features || []).map(f => '・' + esc(f)).join('<br>'))}
+          ${cmpRow('', p => {
+            const pg = PRODUCT_PAGES[p.id];
+            return (pg ? `<a href="${pg}" class="u-link font-mono text-[11px]">サイズ一覧ページ →</a><br>` : '') +
+                   (p.link ? `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="u-link font-mono text-[11px]">メーカー公式 ↗</a>` : '');
+          })}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mt-8 font-mono text-[10px] leading-relaxed text-neutral-400">※ 掲載の寸法・仕様は代表的な参考値です。設置時は本体の下に基礎用コンクリートブロック（基本 高さ約10cm）を敷くため、実際の高さは「本体高さ＋約10cm」となります。物置は小型（収納庫）と中型・大型で性質が変わるため、区分の違う製品を並べたときはその点にご注意ください。</p>
+
+    <div class="mt-10 flex flex-wrap gap-2">
+      <button class="share-btn" id="cmp-copy">この比較のリンクをコピー</button>
+      <button class="share-btn" id="cmp-clear2">選択をクリア</button>
+    </div>`;
+
+  m.classList.remove('modal-hidden');
+  document.body.style.overflow = 'hidden';
+
+  const cp = document.querySelector('#cmp-copy');
+  if(cp) cp.addEventListener('click', async () => {
+    const url = location.origin + location.pathname + '#c=' + compareSel.join(',');
+    try { await navigator.clipboard.writeText(url); }
+    catch(e){
+      const ta = document.createElement('textarea');
+      ta.value = url; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch(_){}
+      document.body.removeChild(ta);
+    }
+    const o = cp.textContent; cp.textContent = 'コピーしました ✓';
+    setTimeout(() => { cp.textContent = o; }, 1800);
+  });
+  const cl = document.querySelector('#cmp-clear2');
+  if(cl) cl.addEventListener('click', () => { closeCompare(); clearCompare(); });
+}
+
+function closeCompare(){
+  const m = document.querySelector('#compare-modal');
+  if(m) m.classList.add('modal-hidden');
+  document.body.style.overflow = '';
+}
+
+function restoreCompareFromHash(){
+  const m = (location.hash || '').match(/^#c=([a-z0-9,\-]+)$/i);
+  if(!m) return false;
+  const ids = m[1].split(',').filter(id => PRODUCTS.some(p => p.id === id)).slice(0, CMP_MAX);
+  if(!ids.length) return false;
+  compareSel = ids;
+  idxExpanded = true;
+  renderTray();
+  renderIndex();
+  /* 1件だけなら選択した状態にするだけ（製品ページから「比較に追加」で飛んできた場合）
+     2件以上そろっていれば、そのまま比較表を開く */
+  if(ids.length >= 2) openCompare();
+  else { const a = document.querySelector('#archive'); if(a) a.scrollIntoView({ behavior:'smooth' }); }
+  return true;
+}
+
+/* 索引は初期6件だけ表示する。トップページが索引だけで12画面分になっていたため。
+   絞り込みを変えたときは折りたたみ直す（idxExpanded = false に戻す） */
+const IDX_PREVIEW = 6;
+let idxExpanded = false;
 function renderIndex(){
   const grid = document.querySelector('#index-grid');
   if(!grid) return;
@@ -1532,8 +1837,9 @@ function renderIndex(){
   /* 更新（追加）が新しい順に並べる。added未設定の初期掲載品はサイト公開日扱い */
   items.sort((a, b) => new Date(b.added || '2026-07-07') - new Date(a.added || '2026-07-07'));
   const count = document.querySelector('#idx-count');
-  if(count) count.textContent = `${items.length} / ${PRODUCTS.length} 点を表示`;
-  grid.innerHTML = items.length ? items.map(p => `
+  const shown = idxExpanded ? items : items.slice(0, IDX_PREVIEW);
+  if(count) count.textContent = `${shown.length} / ${items.length} 点を表示`;
+  grid.innerHTML = items.length ? shown.map(p => `
     <div id="product-${p.id}" class="border-r border-b border-line p-6 md:p-8 group fade-up">
       ${p.link
         ? `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-white/60">${productVisual(p, null, false)}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">公式ページ →</span></a>`
@@ -1542,15 +1848,75 @@ function renderIndex(){
       <h4 class="mt-2 font-serif font-bold text-lg leading-snug">${esc(p.name)}</h4>
       <p class="mt-2 text-[12px] leading-relaxed text-neutral-500">${p.features.map(esc).join('・')}</p>
       <button class="size-open mt-4 w-full border border-line py-2.5 font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300" data-pid="${p.id}">詳細を見る →</button>
+      ${PRODUCT_PAGES[p.id] ? `<a href="${PRODUCT_PAGES[p.id]}" class="block mt-2 w-full border border-line py-2.5 text-center font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">サイズ一覧ページ →</a>` : ''}
+      <button class="cmp-toggle mt-2 w-full border border-line py-2.5 font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300 ${compareSel.includes(p.id) ? 'cmp-on' : ''}" data-pid="${p.id}">${compareSel.includes(p.id) ? '✓ 比較中' : '＋ 比較に追加'}</button>
     </div>`).join('')
   : `<div class="col-span-full border-r border-b border-line p-12 text-center font-mono text-[11px] tracking-widest text-neutral-400">NO RESULT ── 該当する製品が見つかりませんでした。</div>`;
   grid.querySelectorAll('.size-open').forEach(b => b.addEventListener('click', () => openDetail(b.dataset.pid)));
+  grid.querySelectorAll('.cmp-toggle').forEach(b => b.addEventListener('click', () => toggleCompare(b.dataset.pid)));
+  renderIndexMore(items.length - shown.length);
 }
+function renderIndexMore(rest){
+  const box = document.querySelector('#idx-more');
+  if(!box) return;
+  box.innerHTML = rest > 0
+    ? `<button id="idx-more-btn" class="w-full border border-line py-4 font-mono text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">残り ${rest} 点を表示する ↓</button>`
+    : '';
+  const btn = document.querySelector('#idx-more-btn');
+  if(btn) btn.addEventListener('click', () => { idxExpanded = true; renderIndex(); });
+}
+/* 更新履歴から個別商品へ飛ぶときは、隠れていても見えるように索引を開く */
+function expandIndexFor(hash){
+  if(!hash || !hash.startsWith('#product-')) return false;
+  if(idxExpanded) return false;
+  idxExpanded = true;
+  renderIndex();
+  return true;
+}
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#product-"]');
+  if(!a) return;
+  if(expandIndexFor(a.getAttribute('href'))){
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t) t.scrollIntoView({ behavior:'smooth', block:'center' });
+  }
+});
 renderIndex();
+/* 比較トレイの配線 */
+(function(){
+  const go = document.querySelector('#compare-go');
+  const cl = document.querySelector('#compare-clear');
+  const cx = document.querySelector('#compare-close');
+  if(go) go.addEventListener('click', openCompare);
+  if(cl) cl.addEventListener('click', clearCompare);
+  if(cx) cx.addEventListener('click', closeCompare);
+  renderTray();
+})();
+/* ───── マーキー：クリックで索引を絞り込み／タップで一時停止 ───── */
+(function(){
+  const mq = document.querySelector('.marquee');
+  if(!mq) return;
+  let timer;
+  mq.addEventListener('touchstart', () => {
+    mq.classList.add('is-paused');
+    clearTimeout(timer);
+    timer = setTimeout(() => mq.classList.remove('is-paused'), 6000);
+  }, { passive: true });
+  mq.addEventListener('click', e => {
+    const a = e.target.closest('a[data-fil-group]');
+    if(!a) return;
+    const btn = document.querySelector(
+      `.idx-filter[data-group="${a.dataset.filGroup}"][data-val="${a.dataset.filVal}"]`);
+    if(btn) btn.click();
+  });
+})();
+
 document.querySelectorAll('.idx-filter').forEach(b => {
   b.addEventListener('click', () => {
     idxFilter[b.dataset.group] = b.dataset.val;
     document.querySelectorAll(`.idx-filter[data-group="${b.dataset.group}"]`).forEach(x => x.classList.toggle('active', x === b));
+    idxExpanded = false;   /* 絞り込みを変えたら折りたたみ直す */
     renderIndex();
   });
 });
@@ -1778,6 +2144,18 @@ document.addEventListener('keydown', e => {
   s.type = 'application/ld+json';
   s.textContent = JSON.stringify(data);
   document.head.appendChild(s);
+})();
+
+/* ---------- URLに診断結果が入っていれば復元する ----------
+   共有されたリンク・ブックマークから開いたとき、同じ結果を表示する */
+(function(){
+  try { restoreFromHash(); } catch(e){}
+  try { restoreCompareFromHash(); } catch(e){}
+  window.addEventListener('hashchange', () => {
+    const h = location.hash || '';
+    if(h.startsWith('#r=')){ try { restoreFromHash(); } catch(e){} }
+    else if(h.startsWith('#c=')){ try { restoreCompareFromHash(); } catch(e){} }
+  });
 })();
 </script>
 

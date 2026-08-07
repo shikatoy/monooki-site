@@ -77,35 +77,48 @@ tailwind.config = {
         </div>
       </div>
       <div class="md:col-span-7 py-16 md:py-24 md:pl-14 fade-up">
-        <form id="contact-form" novalidate>
+        <form id="contact-form" action="https://formspree.io/f/xnpaqrzp" method="POST" novalidate>
           <div>
             <label for="cf-name" class="block font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">01 — 名前 <span class="text-rust">*</span></label>
-            <input id="cf-name" type="text" class="ed-input mt-1" placeholder="山田 太郎" autocomplete="name">
+            <input id="cf-name" name="お名前" type="text" class="ed-input mt-1" placeholder="山田 太郎" autocomplete="name">
             <p id="cf-name-err" class="hidden mt-2 text-[11px] font-mono text-rust"></p>
           </div>
           <div class="mt-12">
             <label for="cf-email" class="block font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">02 — メールアドレス <span class="text-rust">*</span></label>
-            <input id="cf-email" type="email" class="ed-input mt-1" placeholder="taro@example.com" autocomplete="email">
+            <input id="cf-email" name="email" type="email" class="ed-input mt-1" placeholder="taro@example.com" autocomplete="email">
             <p id="cf-email-err" class="hidden mt-2 text-[11px] font-mono text-rust"></p>
           </div>
           <div class="mt-12">
             <label for="cf-msg" class="block font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">03 — お問い合わせ内容 <span class="text-rust">*</span></label>
-            <textarea id="cf-msg" rows="5" class="ed-input mt-1 resize-y" placeholder="設置場所の状況、収納したい物、選定のお悩みなど。"></textarea>
+            <textarea id="cf-msg" name="お問い合わせ内容" rows="5" class="ed-input mt-1 resize-y" placeholder="設置場所の状況、収納したい物、選定のお悩みなど。"></textarea>
             <p id="cf-msg-err" class="hidden mt-2 text-[11px] font-mono text-rust"></p>
           </div>
-          <button type="submit" class="mt-14 group inline-flex items-center gap-4 font-serif font-bold text-2xl">
+          <!-- スパム対策（人間には見えない） -->
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+          <input type="hidden" name="_subject" value="【物置どれがいい？】お問い合わせ">
+
+          <p class="mt-12 text-[12px] leading-relaxed text-neutral-500">
+            送信いただいた内容は、お問い合わせへの回答のみに使用します。詳しくは<a href="privacy.html" class="u-link">プライバシーポリシー</a>をご確認ください。
+          </p>
+
+          <button id="cf-submit" type="submit" class="mt-8 group inline-flex items-center gap-4 font-serif font-bold text-2xl disabled:opacity-40">
             送信する
             <span class="inline-block transition-transform duration-300 group-hover:translate-x-3 font-mono">→</span>
           </button>
           <div class="mt-2 h-px w-32 bg-ink"></div>
+
+          <p id="cf-fail" class="hidden mt-8 border border-rust p-5 text-[13px] leading-loose">
+            送信できませんでした。通信の状態をご確認のうえ、もう一度お試しください。<br>
+            繰り返し失敗する場合は、お手数ですが <a href="mailto:doreiimono@gmail.com" class="u-link font-mono">doreiimono@gmail.com</a> 宛に直接お送りください。
+          </p>
         </form>
 
         <div id="contact-success" class="hidden fade-up">
-          <p class="font-mono text-[11px] tracking-widest2 uppercase text-rust">Ready to Send — 送信画面を開きました</p>
-          <h2 class="mt-6 font-serif font-extrabold text-3xl md:text-4xl leading-snug">あと一歩です。</h2>
+          <p class="font-mono text-[11px] tracking-widest2 uppercase text-rust">Sent — 送信しました</p>
+          <h2 class="mt-6 font-serif font-extrabold text-3xl md:text-4xl leading-snug">お送りしました。</h2>
           <p class="mt-6 text-sm leading-loose text-neutral-500 max-w-md">
-            お使いのメールソフトの送信画面が開きます。内容をご確認のうえ、送信を完了してください。<br>
-            画面が開かない場合は、お手数ですが <a href="mailto:doreiimono@gmail.com" class="u-link font-mono">doreiimono@gmail.com</a> 宛に直接お送りください。
+            お問い合わせありがとうございます。編集部より折り返しご連絡いたします。<br>
+            数日たっても返信が届かない場合は、迷惑メールフォルダをご確認のうえ、<a href="mailto:doreiimono@gmail.com" class="u-link font-mono">doreiimono@gmail.com</a> 宛に直接ご連絡ください。
           </p>
           <button id="contact-reset" class="mt-10 font-mono text-[11px] tracking-widest2 uppercase u-link">← フォームに戻る</button>
         </div>
@@ -131,6 +144,8 @@ tailwind.config = {
     </div>
     <div class="mt-8 flex flex-col md:flex-row justify-between gap-3 font-mono text-[10px] tracking-widest text-neutral-500">
       <a href="./" data-home="" class="u-link hover:text-paper transition-colors">← 物置どれがいい？ トップへ</a>
+      <a href="about.html" class="u-link hover:text-paper transition-colors">運営者情報</a>
+      <a href="privacy.html" class="u-link hover:text-paper transition-colors">プライバシーポリシー</a>
       <span>© 2026 物置どれがいい？ — 非公式情報比較メディア</span>
     </div>
   </div>
@@ -143,16 +158,19 @@ tailwind.config = {
   document.querySelectorAll('a[data-home]').forEach(a => { a.href = home; });
 })();
 
-/* ---------- フォーム（検証 → メール送信画面を起動） ---------- */
-const CONTACT_TO = 'doreiimono@gmail.com';
+/* ---------- フォーム（検証 → Formspree へ送信） ---------- */
 const form = document.querySelector('#contact-form');
+const submitBtn = document.querySelector('#cf-submit');
+const failBox = document.querySelector('#cf-fail');
+
 function setErr(id, msg){
   const el = document.querySelector('#' + id), err = document.querySelector('#' + id + '-err');
   if(msg){ err.textContent = '! ' + msg; err.classList.remove('hidden'); el.style.borderBottomColor = '#a3512b'; }
   else { err.classList.add('hidden'); el.style.borderBottomColor = ''; }
   return !msg;
 }
-form.addEventListener('submit', e => {
+
+form.addEventListener('submit', async e => {
   e.preventDefault();
   const name = document.querySelector('#cf-name').value.trim();
   const email = document.querySelector('#cf-email').value.trim();
@@ -162,17 +180,29 @@ form.addEventListener('submit', e => {
   ok = setErr('cf-email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? '' : 'メールアドレスの形式が正しくありません。') && ok;
   ok = setErr('cf-msg', msg.length >= 10 ? '' : '内容は10文字以上でご記入ください。') && ok;
   if(!ok) return;
-  const subject = encodeURIComponent('【物置どれがいい？】お問い合わせ（' + name + ' 様）');
-  const body = encodeURIComponent(
-    'お名前: ' + name + '\n' +
-    'ご連絡先: ' + email + '\n' +
-    '----------------------------------------\n\n' +
-    msg + '\n'
-  );
-  form.classList.add('hidden');
-  document.querySelector('#contact-success').classList.remove('hidden');
-  location.href = 'mailto:' + CONTACT_TO + '?subject=' + subject + '&body=' + body;
+
+  failBox.classList.add('hidden');
+  submitBtn.disabled = true;
+  const label = submitBtn.childNodes[0];
+  label.nodeValue = '\n            送信中…\n            ';
+
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    });
+    if(!res.ok) throw new Error('bad response');
+    form.classList.add('hidden');
+    document.querySelector('#contact-success').classList.remove('hidden');
+  } catch(err) {
+    failBox.classList.remove('hidden');
+  } finally {
+    submitBtn.disabled = false;
+    label.nodeValue = '\n            送信する\n            ';
+  }
 });
+
 ['cf-name', 'cf-email', 'cf-msg'].forEach(id => {
   document.querySelector('#' + id).addEventListener('input', () => setErr(id, ''));
 });

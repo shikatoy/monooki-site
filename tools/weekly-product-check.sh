@@ -55,7 +55,7 @@ fi
 
 # --- 6. index.html の変更が PRODUCTS / UPDATE_LOG の範囲内か確認 ---
 if git diff -U0 -- index.html | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' \
-   | grep -qE 'ARTICLES|renderArticles|<nav|<section|<header|<footer|<script|tailwind\.config'; then
+   | grep -qE 'ARTICLES|PRODUCT_PAGES|renderArticles|<nav|<section|<header|<footer|<script|tailwind\.config'; then
   echo "[中止] PRODUCTS / UPDATE_LOG 以外が変更された疑いがあります。push しません。"
   git diff --stat -- index.html
   exit 1
