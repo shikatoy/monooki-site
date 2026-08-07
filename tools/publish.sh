@@ -15,6 +15,9 @@ TARGETS=(index.html about.html privacy.html contact.html \
 cd "$REPO" 2>/dev/null || { echo "[中止] リポジトリが見つかりません: $REPO"; exit 1; }
 MSG="${1:-site: 記事とデータを更新 $(date '+%Y-%m-%d')}"
 
+# サイトマップの lastmod をファイル更新日で自動更新（手で直さなくてよい）
+python3 "$REPO/tools/update-sitemap-lastmod.py" || echo "[警告] サイトマップの更新に失敗しました（続行します）"
+
 CHANGED=$(git status --porcelain -- "${TARGETS[@]}")
 if [ -z "$CHANGED" ]; then
   echo "変更はありません。何もせず終了します。"
