@@ -403,6 +403,21 @@ def main():
             '<span class="card-more">一覧を見る <span class="arrow">→</span></span></a></li>'
             % (cfg["slug"], AXIS_JP[ax] + "で絞る", len(rows), esc(cfg["h1"]), esc(cfg["lead"])))
 
+    # サイズ帯ページ（build-bands.py が先に書き出す）をハブに載せる
+    bpath = os.path.join(ROOT, "tools", "_bands.json")
+    if os.path.exists(bpath):
+        bands = json.load(open(bpath, encoding="utf-8"))
+        if bands:
+            cards.append('<li class="card" style="border:0;padding:0;margin-top:48px">'
+                         '<p class="card-date" style="font-size:11px">サイズ帯で3メーカーを比べる</p></li>')
+            for b in bands:
+                cards.append(
+                    '<li class="card"><a class="card-inner" href="%s.html">'
+                    '<span class="card-date">%d社で比較<span class="card-tag">%d型番</span></span>'
+                    '<h2 class="card-title">%s</h2><p class="card-desc">%s</p>'
+                    '<span class="card-more">並べて見る <span class="arrow">→</span></span></a></li>'
+                    % (b["slug"], b["nm"], b["n"], esc(b["title"]), esc(b["lead"])))
+
     hub = hub_html(style, "".join(cards))
     hp = os.path.join(OUT, "index.html")
     old = open(hp, encoding="utf-8").read() if os.path.exists(hp) else None

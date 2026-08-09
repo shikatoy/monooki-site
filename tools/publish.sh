@@ -15,7 +15,9 @@ TARGETS=(index.html about.html privacy.html contact.html \
 cd "$REPO" 2>/dev/null || { echo "[中止] リポジトリが見つかりません: $REPO"; exit 1; }
 MSG="${1:-site: 記事とデータを更新 $(date '+%Y-%m-%d')}"
 
-# 寸法から探すページを製品データから作り直す（手で直さなくてよい）
+# 型番索引・サイズ帯・寸法ページを製品データから作り直す（手で直さなくてよい）
+python3 "$REPO/tools/build-codes.py" || echo "[警告] 型番索引の生成に失敗しました（続行します）"
+python3 "$REPO/tools/build-bands.py" || echo "[警告] サイズ帯ページの生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-size-pages.py" || echo "[警告] 寸法ページの生成に失敗しました（続行します）"
 
 # 廃盤・生産終了ページを作り直す（手で直さなくてよい）

@@ -33,3 +33,11 @@ https://shikatoy.github.io/monooki-site/size/height-1900.html
 https://shikatoy.github.io/monooki-site/size/width-1200.html
 https://shikatoy.github.io/monooki-site/size/width-1500.html
 https://shikatoy.github.io/monooki-site/products/discontinued.html
+https://shikatoy.github.io/monooki-site/products/codes.html
+https://shikatoy.github.io/monooki-site/size/band-w120-d30.html
+https://shikatoy.github.io/monooki-site/size/band-w150-d30.html
+https://shikatoy.github.io/monooki-site/size/band-w150-d60.html
+https://shikatoy.github.io/monooki-site/size/band-w180-d90.html
+https://shikatoy.github.io/monooki-site/size/band-w210-d150.html
+https://shikatoy.github.io/monooki-site/size/band-w240-d150.html
+https://shikatoy.github.io/monooki-site/size/band-w90-d30.html

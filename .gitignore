@@ -6,3 +6,6 @@ tools/env.txt
 _SPEC_A1.md
 # macOS
 .DS_Store
+# 生成の中間ファイル（公開不要）
+tools/_bands.json
+tools/__pycache__/
