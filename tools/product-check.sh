@@ -1,7 +1,8 @@
 #!/bin/bash
 # ============================================================
-#  物置どれがいい？ — 週次 製品データ確認
-#  launchd から週1回呼ばれる。手動実行も可（引数不要）。
+#  物置どれがいい？ — 製品データ定期確認
+#  launchd から毎朝8:00に呼ばれる。手動実行も可（引数不要）。
+#  変更が見つからなければ何も出さずに終わる。
 #  ログ: monooki-site/tools/run.log
 # ============================================================
 set -u
@@ -10,7 +11,7 @@ set -u
 export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
 
 REPO="$HOME/Documents/monooki-site"
-PROMPT="$REPO/tools/weekly-product-check-prompt.md"
+PROMPT="$REPO/tools/product-check-prompt.md"
 LOG="$REPO/tools/run.log"
 
 cd "$REPO" 2>/dev/null || { echo "[中止] リポジトリが見つかりません: $REPO"; exit 1; }

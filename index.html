@@ -535,7 +535,7 @@ tailwind.config = {
         <h2 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">更新履歴。</h2>
       </div>
       <p class="md:col-span-4 text-[13px] leading-loose text-neutral-500">
-        自動巡回システムが毎朝8:00に3社の新商品・廃盤・モデルチェンジ情報をチェックし、サイトへの追加・削除・入替をこちらに記録しています。<span class="text-rust font-mono text-[11px]">● NEW</span> の印は追加から45日間表示されます。
+        自動巡回システムが毎朝8:00に3社の新商品・廃盤・モデルチェンジ情報をチェックしています。<b>変更が見つかった日だけ</b>、サイトへの追加・削除・入替をこちらに記録します。変更がない日は更新されません。<span class="text-rust font-mono text-[11px]">● NEW</span> の印は追加から45日間表示されます。
       </p>
     </div>
   </div>
@@ -589,6 +589,7 @@ tailwind.config = {
         <a href="#makers" class="u-link hover:text-paper transition-colors">メーカー</a>
         <a href="#archive" class="u-link hover:text-paper transition-colors">索引</a>
         <a href="size/" class="u-link hover:text-paper transition-colors">寸法から探す</a>
+        <a href="products/discontinued.html" class="u-link hover:text-paper transition-colors">廃盤・生産終了</a>
         <a href="products/" class="u-link hover:text-paper transition-colors">製品一覧</a>
         <a href="#articles" class="u-link hover:text-paper transition-colors">記事</a>
         <a href="#faq" class="u-link hover:text-paper transition-colors">Q&amp;A</a>
@@ -802,7 +803,7 @@ const UPDATE_LOG = [
   { date:'2026-07-09', type:'廃盤', title:'『ヨド蔵MD』をアーカイブから削除',
     body:'ヨドコウ公式の廃番案内（2024年1月付）により、ヨド蔵MD・ヨド蔵SA（品番DZB）は2024年3月末受注をもって生産終了となりました。現行ラインアップにも掲載がなく、後継の断熱物置はまだ発表されていません。' },
   { date:'2026-07-07', type:'公開', title:'「物置どれがいい？」を公開しました',
-    body:'タクボ・イナバ・ヨドコウの3メーカー・13製品でサイトをオープンしました。マッチング診断やメーカー紹介を掲載しています。今後は毎朝8:00の自動チェックで新商品を追加していきます。' }
+    body:'タクボ・イナバ・ヨドコウの3メーカー・13製品でサイトをオープンしました。マッチング診断やメーカー紹介を掲載しています。今後は自動チェックで新商品を追加していきます。' }
 ];
 /* ===== UPDATE_LOG_END ===== */
 

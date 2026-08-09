@@ -32,3 +32,4 @@ https://shikatoy.github.io/monooki-site/size/height-1400.html
 https://shikatoy.github.io/monooki-site/size/height-1900.html
 https://shikatoy.github.io/monooki-site/size/width-1200.html
 https://shikatoy.github.io/monooki-site/size/width-1500.html
+https://shikatoy.github.io/monooki-site/products/discontinued.html
