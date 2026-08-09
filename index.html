@@ -212,6 +212,7 @@ tailwind.config = {
     <a href="#makers" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">02</span><span class="font-serif font-bold text-2xl">メーカー</span></a>
     <a href="#archive" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">03</span><span class="font-serif font-bold text-2xl">索引</span></a>
     <a href="products/" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">04</span><span class="font-serif font-bold text-2xl">製品一覧</span></a>
+    <a href="size/" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">04b</span><span class="font-serif font-bold text-2xl">寸法から探す</span></a>
     <a href="#articles" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">05</span><span class="font-serif font-bold text-2xl">記事</span></a>
     <a href="#faq" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">06</span><span class="font-serif font-bold text-2xl">よくあるご質問</span></a>
     <a href="#journal" class="flex items-baseline gap-5 py-5 border-b border-linesoft"><span class="font-mono text-[11px] text-neutral-400">07</span><span class="font-serif font-bold text-2xl">更新履歴</span></a>
@@ -464,8 +465,11 @@ tailwind.config = {
     <div id="index-grid" class="grid md:grid-cols-3 border-t border-l border-line"></div>
     <div id="idx-more" class="mt-6"></div>
     <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-      <p class="text-[12px] leading-relaxed text-neutral-500">型番ごとの寸法表は、製品ページにまとめてあります。</p>
-      <a href="products/" class="border border-line px-6 py-3 font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">製品一覧ページへ →</a>
+      <p class="text-[12px] leading-relaxed text-neutral-500">型番ごとの寸法表は製品ページに、置ける寸法から絞り込む一覧は「寸法から探す」にまとめてあります。</p>
+      <div class="flex flex-wrap gap-3">
+        <a href="size/" class="border border-line px-6 py-3 font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">寸法から探す →</a>
+        <a href="products/" class="border border-line px-6 py-3 font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">製品一覧ページへ →</a>
+      </div>
     </div>
   </div>
   <div class="border-b border-line"></div>
@@ -584,6 +588,7 @@ tailwind.config = {
         <a href="#shindan" class="u-link hover:text-paper transition-colors">診断</a>
         <a href="#makers" class="u-link hover:text-paper transition-colors">メーカー</a>
         <a href="#archive" class="u-link hover:text-paper transition-colors">索引</a>
+        <a href="size/" class="u-link hover:text-paper transition-colors">寸法から探す</a>
         <a href="products/" class="u-link hover:text-paper transition-colors">製品一覧</a>
         <a href="#articles" class="u-link hover:text-paper transition-colors">記事</a>
         <a href="#faq" class="u-link hover:text-paper transition-colors">Q&amp;A</a>

@@ -25,3 +25,10 @@ https://shikatoy.github.io/monooki-site/products/yodoko-esmo.html
 https://shikatoy.github.io/monooki-site/products/yodoko-elmo.html
 https://shikatoy.github.io/monooki-site/products/yodoko-lavige.html
 https://shikatoy.github.io/monooki-site/products/takubo-peinte.html
+https://shikatoy.github.io/monooki-site/size/
+https://shikatoy.github.io/monooki-site/size/depth-600.html
+https://shikatoy.github.io/monooki-site/size/depth-900.html
+https://shikatoy.github.io/monooki-site/size/height-1400.html
+https://shikatoy.github.io/monooki-site/size/height-1900.html
+https://shikatoy.github.io/monooki-site/size/width-1200.html
+https://shikatoy.github.io/monooki-site/size/width-1500.html
