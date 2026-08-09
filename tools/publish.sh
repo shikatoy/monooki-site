@@ -10,7 +10,7 @@ REPO="$HOME/Documents/monooki-site"
 # ここに無いものは、commit されてもサイトに上がらない（過去に products/ と about.html が漏れた）
 TARGETS=(index.html about.html privacy.html contact.html \
          articles products images \
-         sitemap.xml llms.txt robots.txt tools .gitignore)
+         sitemap.xml sitemap.txt llms.txt robots.txt tools .gitignore)
 
 cd "$REPO" 2>/dev/null || { echo "[中止] リポジトリが見つかりません: $REPO"; exit 1; }
 MSG="${1:-site: 記事とデータを更新 $(date '+%Y-%m-%d')}"

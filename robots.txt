@@ -1,4 +1,5 @@
 # 物置どれがいい？ — robots.txt
+Sitemap: https://shikatoy.github.io/monooki-site/sitemap.txt
 Sitemap: https://shikatoy.github.io/monooki-site/sitemap.xml
 
 User-agent: *
