@@ -628,6 +628,8 @@ const SITE_URL = 'https://shikatoy.github.io/monooki-site/';
 const PRODUCTS = [
   { id:'t-gp', maker:'takubo', name:'グランプレステージ ジャンプ', cat:'小型物置', drawRef:'y-ese',
     steel:'特殊焼付塗装鋼板', door:'引き戸2枚・両開き', found:'ブロック基礎 対応',
+    elev:{ openW:0.4308, openH:0.8727, ref:'GP-115D', src:'タクボ公式 型番ページ' },
+    look:{ eaves:1.10, doorRib:2, wallRib:0, handle:'pill', legs:2, seen:true },
     doorSpec:{ front:['door','door'], handles:[{p:0,e:'l'},{p:1,e:'r'}], opening:'両開き' },
     tags:{ small:3, low:3, cheap:2, garden:2, slide:2, design:1, daily:1 },
     features:['窓下に収まるロータイプ','軽い引き戸','棚板標準装備'],
@@ -636,6 +638,8 @@ const PRODUCTS = [
     sizes:[ { code:'GP-115D', w:1120, d:530, h:1100 }, { code:'GP-135D', w:1304, d:530, h:1100 }, { code:'GP-155D', w:1488, d:530, h:1100 }, { code:'GP-175D', w:1695, d:530, h:1100 }, { code:'GP-195D', w:1879, d:530, h:1100 }, { code:'GP-115C', w:1120, d:530, h:1400 }, { code:'GP-135C', w:1304, d:530, h:1400 }, { code:'GP-155C', w:1488, d:530, h:1400 }, { code:'GP-175C', w:1695, d:530, h:1400 }, { code:'GP-195C', w:1879, d:530, h:1400 }, { code:'GP-115B', w:1120, d:530, h:1600 }, { code:'GP-135B', w:1304, d:530, h:1600 }, { code:'GP-155B', w:1488, d:530, h:1600 }, { code:'GP-175B', w:1695, d:530, h:1600 }, { code:'GP-195B', w:1879, d:530, h:1600 }, { code:'GP-115A', w:1120, d:530, h:1900 }, { code:'GP-135A', w:1304, d:530, h:1900 }, { code:'GP-155A', w:1488, d:530, h:1900 }, { code:'GP-175A', w:1695, d:530, h:1900 }, { code:'GP-195A', w:1879, d:530, h:1900 }, { code:'GP-116C', w:1120, d:650, h:1400 }, { code:'GP-136C', w:1304, d:650, h:1400 }, { code:'GP-156C', w:1488, d:650, h:1400 }, { code:'GP-176C', w:1695, d:650, h:1400 }, { code:'GP-196C', w:1879, d:650, h:1400 }, { code:'GP-116B', w:1120, d:650, h:1600 }, { code:'GP-136B', w:1304, d:650, h:1600 }, { code:'GP-156B', w:1488, d:650, h:1600 }, { code:'GP-176B', w:1695, d:650, h:1600 }, { code:'GP-196B', w:1879, d:650, h:1600 }, { code:'GP-116A', w:1120, d:650, h:1900 }, { code:'GP-136A', w:1304, d:650, h:1900 }, { code:'GP-156A', w:1488, d:650, h:1900 }, { code:'GP-176A', w:1695, d:650, h:1900 }, { code:'GP-196A', w:1879, d:650, h:1900 }, { code:'GP-117D', w:1120, d:750, h:1100 }, { code:'GP-137D', w:1304, d:750, h:1100 }, { code:'GP-157D', w:1488, d:750, h:1100 }, { code:'GP-177D', w:1695, d:750, h:1100 }, { code:'GP-197D', w:1879, d:750, h:1100 }, { code:'GP-117C', w:1120, d:750, h:1400 }, { code:'GP-137C', w:1304, d:750, h:1400 }, { code:'GP-157C', w:1488, d:750, h:1400 }, { code:'GP-177C', w:1695, d:750, h:1400 }, { code:'GP-197C', w:1879, d:750, h:1400 }, { code:'GP-117B', w:1120, d:750, h:1600 }, { code:'GP-137B', w:1304, d:750, h:1600 }, { code:'GP-157B', w:1488, d:750, h:1600 }, { code:'GP-177B', w:1695, d:750, h:1600 }, { code:'GP-197B', w:1879, d:750, h:1600 }, { code:'GP-117A', w:1120, d:750, h:1900 }, { code:'GP-137A', w:1304, d:750, h:1900 }, { code:'GP-157A', w:1488, d:750, h:1900 }, { code:'GP-177A', w:1695, d:750, h:1900 }, { code:'GP-197A', w:1879, d:750, h:1900 }, { code:'GP-227A', w:2247, d:750, h:1900 }, { code:'GP-157H', w:1488, d:750, h:2100 }, { code:'GP-177H', w:1695, d:750, h:2100 }, { code:'GP-197H', w:1879, d:750, h:2100 }, { code:'GP-227H', w:2247, d:750, h:2100 }, { code:'GP-139C', w:1120, d:900, h:1400 }, { code:'GP-159C', w:1488, d:900, h:1400 }, { code:'GP-179C', w:1695, d:900, h:1400 }, { code:'GP-199C', w:1879, d:900, h:1400 }, { code:'GP-139B', w:1120, d:900, h:1600 }, { code:'GP-159B', w:1488, d:900, h:1600 }, { code:'GP-179B', w:1695, d:900, h:1600 }, { code:'GP-199B', w:1879, d:900, h:1600 }, { code:'GP-139A', w:1120, d:900, h:1900 }, { code:'GP-159A', w:1488, d:900, h:1900 }, { code:'GP-179A', w:1695, d:900, h:1900 }, { code:'GP-199A', w:1879, d:900, h:1900 }, { code:'GP-229A', w:2247, d:900, h:1900 }, { code:'GP-159H', w:1488, d:900, h:2100 }, { code:'GP-179H', w:1695, d:900, h:2100 }, { code:'GP-199H', w:1879, d:900, h:2100 }, { code:'GP-229H', w:2247, d:900, h:2100 } ], sizesComplete:true },
   { id:'t-nd', maker:'takubo', name:'Mr.ストックマン ダンディ', cat:'中・大型物置',
     steel:'高級2コート焼付塗装鋼板', door:'吊り戸式引き戸2枚・片開き（右側固定パネル）', found:'ブロック基礎 対応',
+    elev:{ openW:0.5415, openH:0.8768, ref:'ND-1815', src:'タクボ公式 型番ページ' },
+    look:{ eaves:1.08, doorRib:0, wallRib:4, handle:'bar', legs:4, seen:true },
     doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
     tags:{ medium:3, large:1, slide:3, daily:3, garden:2, tires:2, design:1, premium:1 },
     features:['摩擦ゼロの吊り戸','高級2コート焼付塗装','可動棚で自在に整理'],
@@ -644,6 +648,8 @@ const PRODUCTS = [
     sizes:[ { code:'ND-1808', w:1832, d:890, h:2110 }, { code:'ND-2208', w:2200, d:890, h:2110 }, { code:'ND-2215', w:2200, d:1590, h:2110 }, { code:'ND-2515', w:2532, d:1590, h:2110 }, { code:'ND-2519', w:2532, d:1922, h:2110 }, { code:'ND-2915', w:2900, d:1590, h:2110 }, { code:'ND-2922', w:2900, d:2290, h:2110 } ] },
   { id:'t-jn', maker:'takubo', name:'Mr.トールマン ダンディ', cat:'大型物置',
     steel:'高級2コート焼付塗装鋼板', door:'吊り戸式引き戸2枚・片開き（右側固定パネル）', found:'ブロック基礎＋アンカー必須',
+    elev:{ openW:0.5317, openH:0.7198, ref:'JN-2922', src:'タクボ公式 型番ページ' },
+    look:{ eaves:1.08, doorRib:0, wallRib:4, handle:'bar', legs:4, seen:false },
     doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
     tags:{ large:2, tall:3, long:3, slide:2, daily:1, premium:1, medium:1 },
     features:['天井の高い背高設計','長尺物を立てたまま収納','摩擦ゼロの吊り戸'],
@@ -652,6 +658,8 @@ const PRODUCTS = [
     sizes:[ { code:'JN-2215', w:2200, d:1590, h:2570 }, { code:'JN-2519', w:2532, d:1922, h:2570 }, { code:'JN-2919', w:2900, d:1922, h:2570 }, { code:'JN-2922', w:2900, d:2290, h:2570 } ] },
   { id:'t-bs', maker:'takubo', name:'バイクシャッターマン', cat:'バイク車庫',
     steel:'焼付塗装鋼板', door:'巻上げシャッター', found:'土間コンクリート 推奨',
+    elev:{ openW:0.9027, openH:0.7957, ref:'BS-2226', src:'タクボ公式 仕様図' },
+    look:{ eaves:1.06, doorRib:0, wallRib:0, handle:'pill', legs:4, seen:true },
     tags:{ bike:3, shutter:3, garage:1, sturdy:1, large:1 },
     features:['前面フルオープン','スロープ対応','工具棚オプション'],
     base:'前面シャッターでバイクをまっすぐ格納できます。雨の日の出し入れもらくらくです。',
@@ -659,6 +667,8 @@ const PRODUCTS = [
     sizes:[ { code:'BS-1826WH', w:1832, d:2622, h:2570 }, { code:'BS-2226WH', w:2200, d:2622, h:2570 }, { code:'BS-2526WH', w:2532, d:2622, h:2570 }, { code:'BS-2926WH', w:2900, d:2622, h:2570 }, { code:'BS-1829WH', w:1832, d:2990, h:2570 }, { code:'BS-2229WH', w:2200, d:2990, h:2570 }, { code:'BS-2529WH', w:2532, d:2990, h:2570 }, { code:'BS-2929WH', w:2900, d:2990, h:2570 } ], sizesComplete:true },
   { id:'t-belos', maker:'takubo', name:'BELOS', cat:'中型物置', added:'2026-07-09',
     steel:'高耐食鋼板ZAM＋粉体塗装', door:'連動吊り戸式扉2枚・片開き（右側固定パネル／開き方向は現地選択可）', found:'ブロック基礎 対応（豪雪型は公式カタログ参照）',
+    elev:{ openW:0.5806, openH:0.8478, ref:'B-2518', src:'タクボ公式 型番ページ' },
+    look:{ eaves:1.04, doorRib:0, wallRib:0, handle:'hbar', legs:0, seen:true },
     doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
     tags:{ medium:3, design:3, premium:2, daily:2, rustproof:2, slide:1 },
     features:['プロダクトデザイナー日原佐知夫が手掛ける意匠','独自壁パネル構造で雨水侵入を軽減','床耐荷重1.5倍(9000N/㎡)の頑丈設計'],
@@ -667,6 +677,8 @@ const PRODUCTS = [
     sizes:[ { code:'B-1710', w:1730, d:1000, h:2171 }, { code:'B-1714', w:1730, d:1400, h:2163 }, { code:'B-1718', w:1730, d:1800, h:2161 }, { code:'B-1722', w:1730, d:2200, h:2159 }, { code:'B-1726', w:1730, d:2600, h:2158 }, { code:'B-1730', w:1730, d:3000, h:2157 }, { code:'B-2110', w:2130, d:1000, h:2171 }, { code:'B-2114', w:2130, d:1400, h:2163 }, { code:'B-2118', w:2130, d:1800, h:2161 }, { code:'B-2122', w:2130, d:2200, h:2159 }, { code:'B-2126', w:2130, d:2600, h:2158 }, { code:'B-2130', w:2130, d:3000, h:2157 }, { code:'B-2510', w:2530, d:1000, h:2171 }, { code:'B-2514', w:2530, d:1400, h:2163 }, { code:'B-2518', w:2530, d:1800, h:2161 }, { code:'B-2522', w:2530, d:2200, h:2159 }, { code:'B-2526', w:2530, d:2600, h:2158 }, { code:'B-2530', w:2530, d:3000, h:2157 }, { code:'B-2910', w:2930, d:1000, h:2171 }, { code:'B-2914', w:2930, d:1400, h:2163 }, { code:'B-2918', w:2930, d:1800, h:2161 }, { code:'B-2922', w:2930, d:2200, h:2159 }, { code:'B-2926', w:2930, d:2600, h:2158 }, { code:'B-2930', w:2930, d:3000, h:2157 }, { code:'B-3310', w:3330, d:1000, h:2171 }, { code:'B-3314', w:3330, d:1400, h:2163 }, { code:'B-3318', w:3330, d:1800, h:2161 }, { code:'B-3322', w:3330, d:2200, h:2159 }, { code:'B-3326', w:3330, d:2600, h:2158 }, { code:'B-3330', w:3330, d:3000, h:2157 } ], sizesComplete:true },
   { id:'t-lsn', maker:'takubo', name:'リジュー', cat:'小型物置', added:'2026-07-16', roof:'gable',
     steel:'ZAM／ガルバリウム鋼板＋高級焼付塗装', door:'吊り戸式引き戸2枚・両開き（両端は固定パネル）＋仮ロック錠', found:'ブロック基礎 対応（一般・多雪兼用）',
+    elev:{ openW:0.4181, openH:0.8002, ref:'LSN-1815', src:'タクボ公式 型番ページ' },
+    look:{ eaves:1.06, doorRib:3, wallRib:3, handle:'pill', legs:2, seen:true },
     doorSpec:{ front:['fix','door','door','fix'], handles:[{p:1,e:'r'},{p:2,e:'l'}], opening:'両開き' },
     tags:{ garden:3, design:3, slide:2, small:2, snow:1, daily:1 },
     features:['大手物置初の切妻三角屋根デザイン','摩擦の少ない吊り戸＋仮止め機能付き錠','ガーデングリーン／アイボリーブラックの2色・一般多雪兼用'],
@@ -675,6 +687,8 @@ const PRODUCTS = [
     sizes:[ { code:'LSN-1808', w:1832, d:840, h:2212 }, { code:'LSN-1815', w:1832, d:1540, h:2212 }, { code:'LSN-2215', w:2200, d:1540, h:2212 } ] },
   { id:'i-mjx', maker:'inaba', name:'シンプリー', cat:'小型物置', drawRef:'y-ese',
     steel:'溶融亜鉛メッキ鋼板', door:'引き戸2枚・両開き（両サイドから開閉／中央からは開きません）', found:'ブロック基礎 対応',
+    elev:{ openW:0.4253, openH:0.9070, ref:'MJX-159D', src:'イナバ公式 外形図/サイズ表' },
+    look:{ eaves:1.03, doorRib:0, wallRib:0, handle:'pill', legs:4, seen:true },
     doorSpec:{ front:['door','door'], handles:[{p:0,e:'l'},{p:1,e:'r'}], opening:'両開き' },
     tags:{ small:3, cheap:3, garden:1, design:1, low:2 },
     features:['玄関脇・ベランダ対応','ディンプルキー錠','最小フットプリント'],
@@ -683,6 +697,8 @@ const PRODUCTS = [
     sizes:[ { code:'MJX-092C', w:920, d:520, h:1003 }, { code:'MJX-095D', w:950, d:548, h:1103 }, { code:'MJX-115D', w:1120, d:548, h:1103 }, { code:'MJX-135E', w:1320, d:548, h:1303 }, { code:'MJX-155E', w:1520, d:548, h:1303 }, { code:'MJX-176F', w:1740, d:615, h:1603 } ] },
   { id:'i-fs', maker:'inaba', name:'フォルタ', cat:'中・大型物置', added:'2026-07-09',
     steel:'指定建築材料使用の高耐食鋼板', door:'引き戸2枚・片開き（右側固定パネル）＋ディンプルキー、現地で開き方向変更可', found:'ブロック基礎 対応（大型はアンカー必須）',
+    elev:{ openW:0.5647, openH:0.8489, ref:'FS-2215S', src:'イナバ公式 外形図PDF' },
+    look:{ eaves:1.10, doorRib:5, wallRib:5, handle:'pill', legs:4, seen:true },
     doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
     tags:{ medium:3, large:3, sturdy:3, tires:2, snow:2, garden:1, daily:1, slide:1, long:1, premium:1, cheap:1 },
     features:['意匠性の高いリブ形状の扉','荷重試験に裏付けられた堅牢フレーム','多雪型仕様あり'],
@@ -691,6 +707,8 @@ const PRODUCTS = [
     sizes:[ { code:'FS-1409S', w:1370, d:950,  h:2085 }, { code:'FS-1414S', w:1370, d:1370, h:2085 }, { code:'FS-1415S', w:1370, d:1530, h:2085 }, { code:'FS-1418S', w:1370, d:1790, h:2085 }, { code:'FS-1422S', w:1370, d:2210, h:2085 }, { code:'FS-1426S', w:1370, d:2630, h:2085 }, { code:'FS-1509S', w:1530, d:950,  h:2085 }, { code:'FS-1514S', w:1530, d:1370, h:2085 }, { code:'FS-1515S', w:1530, d:1530, h:2085 }, { code:'FS-1518S', w:1530, d:1790, h:2085 }, { code:'FS-1522S', w:1530, d:2210, h:2085 }, { code:'FS-1526S', w:1530, d:2630, h:2085 }, { code:'FS-1809S', w:1790, d:950,  h:2085 }, { code:'FS-1814S', w:1790, d:1370, h:2085 }, { code:'FS-1814H', w:1790, d:1370, h:2385 }, { code:'FS-1815S', w:1790, d:1530, h:2085 }, { code:'FS-1815H', w:1790, d:1530, h:2385 }, { code:'FS-1818S', w:1790, d:1790, h:2085 }, { code:'FS-1818H', w:1790, d:1790, h:2385 }, { code:'FS-1822S', w:1790, d:2210, h:2085 }, { code:'FS-1822H', w:1790, d:2210, h:2385 }, { code:'FS-1826S', w:1790, d:2630, h:2085 }, { code:'FS-1826H', w:1790, d:2630, h:2385 }, { code:'FS-2209S', w:2210, d:950,  h:2085 }, { code:'FS-2214S', w:2210, d:1370, h:2085 }, { code:'FS-2214H', w:2210, d:1370, h:2385 }, { code:'FS-2215S', w:2210, d:1530, h:2085 }, { code:'FS-2215H', w:2210, d:1530, h:2385 }, { code:'FS-2218S', w:2210, d:1790, h:2085 }, { code:'FS-2218H', w:2210, d:1790, h:2385 }, { code:'FS-2222S', w:2210, d:2210, h:2085 }, { code:'FS-2222H', w:2210, d:2210, h:2385 }, { code:'FS-2226S', w:2210, d:2630, h:2085 }, { code:'FS-2226H', w:2210, d:2630, h:2385 }, { code:'FS-2230S', w:2210, d:3050, h:2085 }, { code:'FS-2230H', w:2210, d:3050, h:2385 }, { code:'FS-2609S', w:2630, d:950,  h:2085 }, { code:'FS-2614S', w:2630, d:1370, h:2085 }, { code:'FS-2614H', w:2630, d:1370, h:2385 }, { code:'FS-2615S', w:2630, d:1530, h:2085 }, { code:'FS-2615H', w:2630, d:1530, h:2385 }, { code:'FS-2618S', w:2630, d:1790, h:2085 }, { code:'FS-2618H', w:2630, d:1790, h:2385 }, { code:'FS-2622S', w:2630, d:2210, h:2085 }, { code:'FS-2622H', w:2630, d:2210, h:2385 }, { code:'FS-2626S', w:2630, d:2630, h:2085 }, { code:'FS-2626H', w:2630, d:2630, h:2385 }, { code:'FS-2630S', w:2630, d:3050, h:2085 }, { code:'FS-2630H', w:2630, d:3050, h:2385 }, { code:'FS-3009S', w:3050, d:950,  h:2085 }, { code:'FS-3014S', w:3050, d:1370, h:2085 }, { code:'FS-3015S', w:3050, d:1530, h:2085 }, { code:'FS-3018S', w:3050, d:1790, h:2085 }, { code:'FS-3018H', w:3050, d:1790, h:2385 }, { code:'FS-3022S', w:3050, d:2210, h:2085 }, { code:'FS-3022H', w:3050, d:2210, h:2385 }, { code:'FS-3026S', w:3050, d:2630, h:2085 }, { code:'FS-3026H', w:3050, d:2630, h:2385 }, { code:'FS-3030S', w:3050, d:3050, h:2085 }, { code:'FS-3030H', w:3050, d:3050, h:2385 }, { code:'FS-3518S', w:3470, d:1790, h:2085 }, { code:'FS-3518H', w:3470, d:1790, h:2385 }, { code:'FS-3522S', w:3470, d:2210, h:2085 }, { code:'FS-3522H', w:3470, d:2210, h:2385 }, { code:'FS-3526S', w:3470, d:2630, h:2085 }, { code:'FS-3526H', w:3470, d:2630, h:2385 }, { code:'FS-3618H', w:3580, d:1790, h:2385 }, { code:'FS-3622H', w:3580, d:2210, h:2385 }, { code:'FS-3626H', w:3580, d:2630, h:2385 }, { code:'FS-4418H', w:4420, d:1790, h:2385 }, { code:'FS-4422H', w:4420, d:2210, h:2385 }, { code:'FS-5218H', w:5260, d:1790, h:2385 } ], sizesComplete:true },
   { id:'i-fxn', maker:'inaba', name:'バイク保管庫', cat:'バイク車庫',
     steel:'高耐食溶融亜鉛メッキ鋼板', door:'シャッター＋床付タイプ', found:'土間コンクリート 推奨',
+    elev:{ openW:0.8887, openH:0.8168, ref:'FM-2226HD', src:'イナバ公式 外形図PDF' },
+    look:{ eaves:1.07, doorRib:0, wallRib:0, handle:'pill', legs:4, seen:true },
     tags:{ bike:3, garage:2, sturdy:2, shutter:2, large:1, daily:1 },
     features:['床付で湿気・盗難に強い','ハイルーフで大型車対応','業界随一の型式展開'],
     base:'床付き構造とディンプルキーで、大切な愛車をしっかり守るバイク保管庫です。',
@@ -698,6 +716,8 @@ const PRODUCTS = [
     sizes:[ { code:'FXN-1330S', w:1370, d:3050, h:2155 }, { code:'FXN-1530S', w:1530, d:3050, h:2155 }, { code:'FXN-1730HY', w:1790, d:3050, h:2375 }, { code:'FXN-2230HY', w:2210, d:3050, h:2375 } ] },
   { id:'i-grn', maker:'inaba', name:'ガレーディア', cat:'ガレージ',
     steel:'高耐食溶融亜鉛メッキ鋼板', door:'巻上げシャッター', found:'土間コンクリート 必須',
+    elev:{ openW:0.8905, openH:0.7703, ref:'GRN-2642S', src:'イナバ公式 外形図PDF' },
+    look:{ eaves:1.05, doorRib:0, wallRib:0, handle:'pill', legs:0, seen:true },
     tags:{ garage:3, large:3, bike:2, shutter:3, sturdy:2, snow:1 },
     features:['車1台＋作業空間','堅牢シャッター','趣味室としても機能'],
     base:'車もバイクも趣味の道具も、まるごと収まるゆとりの本格ガレージです。',
@@ -705,6 +725,8 @@ const PRODUCTS = [
     sizes:[ { code:'GRN-2142', w:2180, d:4240, h:2450 }, { code:'GRN-2652', w:2630, d:5240, h:2450 }, { code:'GRN-3157', w:3100, d:5700, h:2450 }, { code:'GRN-3652', w:3630, d:5240, h:2450 } ] },
   { id:'i-tbj', maker:'inaba', name:'宅配ボックス', cat:'小型物置', added:'2026-07-09',
     steel:'塗装鋼板', door:'前開き扉・上下2段（上1/3:宅配ボックス／下2/3:収納庫）', found:'ブロック基礎 対応（アンカー工事必須）',
+    elev:{ openW:0.8306, openH:0.8227, ref:'TBJ-065C', src:'イナバ公式 組立説明書（上336+下736）' },
+    look:{ eaves:1.03, doorRib:0, wallRib:0, handle:'pill', legs:2, seen:true },
     doorSpec:{ hingedRows:[0.34, 0.66], handleSide:'l', opening:'前開き' },
     tags:{ small:3, daily:2, cheap:1, design:1 },
     features:['上段は宅配ボックス、下段は収納庫の二段構成','宅配ボックスは裏面ボタン施錠+鍵解錠のみ','全面開口扉で出し入れしやすい'],
@@ -727,6 +749,8 @@ const PRODUCTS = [
     sizes:[] },
   { id:'i-dm', maker:'inaba', name:'アルシアフィット', cat:'バイク車庫', added:'2026-07-13',
     steel:'公式カタログ参照', door:'巻上げシャッター（シャッターケース標準装備）', found:'土間タイプ／床付タイプ 選択可',
+    elev:{ openW:0.8576, openH:0.8147, ref:'DM-2226HDA', src:'イナバ公式 外形図PDF' },
+    look:{ eaves:1.05, doorRib:0, wallRib:0, handle:'pill', legs:4, seen:false },
     tags:{ bike:3, design:3, shutter:2, premium:2, garage:1, sturdy:1 },
     features:['住宅と調和する上質デザインのバイクガレージ','2段錠ディンプルキーとシャッターケースを標準装備','2026年1月、設置容易な床付タイプを追加'],
     base:'デザインで選べるバイクガレージです。床付きタイプの追加で、土間工事なしでも導入しやすくなりました。',
@@ -734,6 +758,8 @@ const PRODUCTS = [
     sizes:[ { code:'DM-1835HDA', w:1830, d:3575, h:2391 }, { code:'DM-2235HDA', w:2290, d:3575, h:2391 } ] },
   { id:'y-ese', maker:'yodoko', name:'エスモ', cat:'小型物置',
     steel:'ガルバリウム鋼板', door:'3枚扉・両開き', found:'ブロック基礎 対応',
+    elev:{ openW:0.5127, openH:0.9247, ref:'ESF-1509A', src:'販売店仕様表2件で一致' },
+    look:{ eaves:1.03, doorRib:0, wallRib:0, handle:'pill', legs:4, seen:true },
     doorSpec:{ front:['door','door','door'], handles:[{p:0,e:'l'},{p:2,e:'r'}], opening:'両開き' },
     tags:{ small:2, medium:1, door3:3, cheap:1, design:2, rustproof:2, daily:1 },
     features:['開口2/3を確保する3枚扉','ガルバリウム鋼板','奥行が浅く通路脇にも置きやすい'],
@@ -742,6 +768,8 @@ const PRODUCTS = [
     sizes:[ { code:'ESE-1105E', w:1120, d:520, h:1606 }, { code:'ESE-1305A', w:1350, d:520, h:1959 }, { code:'ESE-1606D', w:1650, d:620, h:1959 }, { code:'ESE-1607A', w:1650, d:750, h:1959 }, { code:'ESE-2107A', w:2100, d:750, h:1959 } ] },
   { id:'y-lmd', maker:'yodoko', name:'エルモ', cat:'中・大型物置',
     steel:'高耐久ガルバリウム鋼板', door:'引き戸2枚・片開き（右側固定パネル）', found:'ブロック基礎 対応',
+    elev:{ openW:0.4330, openH:0.9030, ref:'LMD-2515', src:'販売店仕様表2件で一致' },
+    look:{ eaves:1.04, doorRib:0, wallRib:6, handle:'bar', legs:4, seen:true },
     doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
     tags:{ medium:3, large:1, slide:2, rustproof:3, coastal:3, premium:2, design:1, tires:1, garden:1 },
     features:['サビへの圧倒的耐性','広い有効開口の引き戸','塩害地域でも長寿命'],
@@ -750,6 +778,8 @@ const PRODUCTS = [
     sizes:[ { code:'LMD-1811', w:1800, d:1170, h:2120 }, { code:'LMD-2211', w:2220, d:1170, h:2120 }, { code:'LMD-2215', w:2220, d:1570, h:2120 }, { code:'LMD-2218', w:2220, d:1870, h:2120 }, { code:'LMD-2511', w:2540, d:1170, h:2120 }, { code:'LMD-2918', w:2900, d:1870, h:2120 }, { code:'LMD-2925', w:2900, d:2570, h:2120 } ] },
   { id:'y-vgc', maker:'yodoko', name:'ラヴィージュ', cat:'ガレージ',
     steel:'高耐久ガルバリウム鋼板', door:'巻上げシャッター', found:'土間コンクリート 必須',
+    elev:{ openW:0.8971, openH:0.8054, ref:'VGC-2652', src:'販売店仕様表2件で一致' },
+    look:{ eaves:1.09, doorRib:0, wallRib:0, handle:'pill', legs:0, seen:true },
     tags:{ garage:3, large:3, shutter:2, rustproof:2, coastal:2, premium:1 },
     features:['高耐食素材で長寿命','車1台＋収納空間','塩害・積雪地に強い'],
     base:'高耐食素材で長持ち。建てたあとも長く安心が続く、本格派のガレージです。',
@@ -757,6 +787,8 @@ const PRODUCTS = [
     sizes:[ { code:'VGC-2642', w:2650, d:4240, h:2560 }, { code:'VGC-3049', w:3000, d:4980, h:2560 }, { code:'VGC-3059', w:3000, d:5900, h:2560 }, { code:'VGC-3359', w:3350, d:5900, h:2560 } ] },
   { id:'t-pe', maker:'takubo', name:'ペインタ', cat:'小型物置', added:'2026-07-24',
     steel:'鋼板＋UVインクジェット塗装仕上げ', door:'吊り戸式引き戸2枚・連動右引き固定（開き方向の変更不可）', found:'ブロック基礎 対応（アンカープレート4枚付属）',
+    elev:{ openW:0.4543, openH:0.9125, ref:'PY-175B', src:'タクボ公式 型番ページ' },
+    look:{ eaves:1.10, doorRib:0, wallRib:0, handle:'pill', legs:2, face:'stone', seen:true },
     doorSpec:{ front:['door','door'], handles:[{p:0,e:'l'}], opening:'片開き' },
     tags:{ small:3, design:3, premium:2, garden:1, daily:1 },
     features:['UVインクジェット塗装で扉のデザインが選べる意匠系物置','外壁材と調和するサイディング調・ウッド調の6柄','本体色はアイボリーブラックとムーンホワイトの2色から選べます'],
@@ -1093,7 +1125,10 @@ function svgElevation(p, size, showDims = true){
   const mH = s0 ? String(s0.h) : null;
   const W = s0 ? s0.w : 1800;
   const H = s0 ? s0.h : 2000;
-  const roofWmm = Math.round(W * 1.05 / 10) * 10;
+  const isGableRoof = p.roof === 'gable';
+  /* 軒の出：切妻は控えめ。片流れは実測（小型 左右14mm／中大型 40mm）に近い比率 */
+  const lk = p.look || {};
+  const roofWmm = Math.round(W * (lk.eaves || (isGableRoof ? 1.03 : 1.05)) / 10) * 10;
   const gy = 235, cx = 185;
   let s = globalElevScale();
   /* drawRef: 指定シリーズと同じ表示サイズに揃える（例: 小型物置をエスモ基準で表示） */
@@ -1105,29 +1140,76 @@ function svgElevation(p, size, showDims = true){
   const rw = roofWmm * s, w = W * s, h = H * s;
   const y = gy - h;
   const isGable = p.roof === 'gable';
-  const slab = isGable ? Math.max(14, Math.min(26, h * 0.16)) : Math.max(8, Math.min(12, h * 0.08));
+  const slab = isGable ? Math.max(10, Math.min(18, h * 0.105)) : Math.max(7, Math.min(11, h * 0.055));
   const bx1 = cx - w / 2, bx2 = cx + w / 2;
   const rx1 = cx - rw / 2, rx2 = cx + rw / 2;
-  const railY = y + slab + Math.min(9, (gy - y - slab) * 0.09);
-  const baseY = gy - Math.min(8, (gy - y - slab) * 0.08);
+  /* 開口の位置は elev（各シリーズの有効開口÷外形）から決める。
+     開口が狭い機種ほど扉の上に大きな壁面（鴨居）が残り、正面の見え方が変わる */
+  const bodyTop = y + slab, bodyH = gy - bodyTop;
+  const el = p.elev;
+  const openHr = el ? el.openH : 0.90;
+  const openWr = el ? el.openW : 1.00;
+  const railY = bodyTop + bodyH * (1 - openHr);
+  const baseY = gy - Math.min(8, bodyH * 0.05);
+  const ow = w * openWr;
+  const ox1 = cx - ow / 2, ox2 = cx + ow / 2;
   let inner = '';
   const spec = p.doorSpec;
   /* レール線・土台線は「正面に引き戸がある」場合とシャッターのみ描く（前開き扉・側面扉ではレール不要） */
   const drawRails = /シャッター/.test(p.door || '')
     || (!spec ? true : (spec.hingedRows ? false : (!Array.isArray(spec.front) || spec.front.includes('door'))));
   if(/シャッター/.test(p.door || '')){
-    const n = Math.max(5, Math.floor((baseY - railY) / 11));
+    /* シャッターは有効開口の幅だけ。左右に残る柱と、上に残るケース部分を描き分ける */
+    inner += `<path d="M${ox1.toFixed(1)} ${railY.toFixed(1)} V${gy} M${ox2.toFixed(1)} ${railY.toFixed(1)} V${gy}"/>`;
+    const n = Math.max(6, Math.floor((baseY - railY) / 9));
     for(let i = 1; i < n; i++){
       const yy = railY + (baseY - railY) * i / n;
-      inner += `<line x1="${(bx1 + 5).toFixed(1)}" y1="${yy.toFixed(1)}" x2="${(bx2 - 5).toFixed(1)}" y2="${yy.toFixed(1)}" opacity=".55"/>`;
+      inner += `<line x1="${(ox1 + 2).toFixed(1)}" y1="${yy.toFixed(1)}" x2="${(ox2 - 2).toFixed(1)}" y2="${yy.toFixed(1)}" opacity=".5"/>`;
     }
+    /* 座板（シャッター下端の厚み） */
+    inner += `<line x1="${(ox1 + 2).toFixed(1)}" y1="${(baseY - 3).toFixed(1)}" x2="${(ox2 - 2).toFixed(1)}" y2="${(baseY - 3).toFixed(1)}" stroke-width="2.4"/>`;
   } else {
     const hy1 = railY + (baseY - railY) * 0.42, hy2 = railY + (baseY - railY) * 0.58;
-    const grip = gx => `<line x1="${gx.toFixed(1)}" y1="${hy1.toFixed(1)}" x2="${gx.toFixed(1)}" y2="${hy2.toFixed(1)}" stroke-width="3"/>`;
+    /* 取っ手: bar = ヨドの握りん棒のように上下に長い太い棒 / pill = 小さい縦の取っ手 */
+    const isHBar = lk.handle === 'hbar';
+    const isBar = lk.handle === 'bar';
+    const gh = isBar ? (baseY - railY) * 0.30 : (baseY - railY) * 0.13;
+    const gc = railY + (baseY - railY) * (isBar ? 0.46 : 0.50);
+    const grip = gx => isHBar
+      ? `<line x1="${(gx - w * 0.055).toFixed(1)}" y1="${gc.toFixed(1)}" x2="${(gx + w * 0.055).toFixed(1)}" y2="${gc.toFixed(1)}" stroke-width="3"/>`
+      : `<line x1="${gx.toFixed(1)}" y1="${(gc - gh / 2).toFixed(1)}" x2="${gx.toFixed(1)}" y2="${(gc + gh / 2).toFixed(1)}" stroke-width="${isBar ? 3.4 : 2.6}"/>`;
+    /* ペインタの乱張りストーン柄: 横目地を主に、縦の短い目地を不規則に入れる */
+    const stone = (x0, x1, seed) => {
+      let o = '', rows = 7, hgt = baseY - railY;
+      let r = (seed + 1) * 9301;
+      const rnd = () => { r = (r * 9301 + 49297) % 233280; return r / 233280; };
+      for(let k = 1; k < rows; k++){
+        const yy = railY + hgt * k / rows;
+        o += `<line x1="${(x0 + 2).toFixed(1)}" y1="${yy.toFixed(1)}" x2="${(x1 - 2).toFixed(1)}" y2="${yy.toFixed(1)}" opacity=".3" stroke-width="1"/>`;
+      }
+      for(let k = 0; k < rows; k++){
+        const ya = railY + hgt * k / rows, yb = railY + hgt * (k + 1) / rows;
+        const cnt = 2 + Math.floor(rnd() * 2);
+        for(let q = 1; q <= cnt; q++){
+          const xx = x0 + (x1 - x0) * (q / (cnt + 1) + (rnd() - 0.5) * 0.12);
+          o += `<line x1="${xx.toFixed(1)}" y1="${(ya + 1).toFixed(1)}" x2="${xx.toFixed(1)}" y2="${(yb - 1).toFixed(1)}" opacity=".3" stroke-width="1"/>`;
+        }
+      }
+      return o;
+    };
+    /* 縦リブ（波板状の凹凸）を面に描く */
+    const ribs = (x0, x1, cnt) => {
+      let o = '';
+      for(let i = 1; i < cnt; i++){
+        const xx = x0 + (x1 - x0) * i / cnt;
+        o += `<line x1="${xx.toFixed(1)}" y1="${(railY + 2).toFixed(1)}" x2="${xx.toFixed(1)}" y2="${(baseY - 2).toFixed(1)}" opacity=".28" stroke-width="1"/>`;
+      }
+      return o;
+    };
     if(spec && spec.hingedRows){
       /* 前開き扉・上下分割（例: 宅配ボックス = 上1/3＋下2/3）。
          横の仕切り線と、各扉の右寄り・中央高さに横向きの取っ手を描く */
-      const bTop = y + slab, bH = gy - bTop;
+      const bTop = railY, bH = baseY - railY;
       const rows = spec.hingedRows;
       let acc = 0;
       for(let i = 0; i < rows.length - 1; i++){
@@ -1153,8 +1235,12 @@ function svgElevation(p, size, showDims = true){
       }
       spec.front.forEach((sec, i) => {
         if(sec === 'fix'){
-          const m = Math.min(5, sw * 0.08);
-          inner += `<rect x="${(sx(i) + m).toFixed(1)}" y="${(y + slab + m).toFixed(1)}" width="${(sw - m * 2).toFixed(1)}" height="${(gy - y - slab - m * 2).toFixed(1)}" opacity=".45"/>`;
+          inner += lk.wallRib ? ribs(sx(i), sx(i + 1), lk.wallRib)
+                              : `<rect x="${(sx(i) + 4).toFixed(1)}" y="${(railY + 4).toFixed(1)}" width="${(sw - 8).toFixed(1)}" height="${(baseY - railY - 8).toFixed(1)}" opacity=".3"/>`;
+        } else if(lk.face === 'stone'){
+          inner += stone(sx(i), sx(i + 1), i);
+        } else if(lk.doorRib){
+          inner += ribs(sx(i), sx(i + 1), lk.doorRib);
         }
       });
       (spec.handles || []).forEach(hd => {
@@ -1163,7 +1249,7 @@ function svgElevation(p, size, showDims = true){
       });
       if(spec.window){
         /* 正面窓: 中央から上部にかけての横長窓（中桟1本） */
-        const bTop = y + slab, bH = gy - bTop;
+        const bTop = railY, bH = baseY - railY;
         const wx = bx1 + w * 0.12, ww = w * 0.76;
         const wy = bTop + bH * 0.12, wh = bH * 0.38;
         inner += `<rect x="${wx.toFixed(1)}" y="${wy.toFixed(1)}" width="${ww.toFixed(1)}" height="${wh.toFixed(1)}"/>`;
@@ -1196,6 +1282,10 @@ function svgElevation(p, size, showDims = true){
     ${drawRails ? `<line x1="${bx1.toFixed(1)}" y1="${railY.toFixed(1)}" x2="${bx2.toFixed(1)}" y2="${railY.toFixed(1)}"/>
     <line x1="${bx1.toFixed(1)}" y1="${baseY.toFixed(1)}" x2="${bx2.toFixed(1)}" y2="${baseY.toFixed(1)}"/>` : ''}
     <g>${inner}</g>
+    ${lk.legs ? (() => { let o = ''; const n = lk.legs, lw = Math.max(4, w * 0.05), lh = Math.min(5, h * 0.03);
+        for(let i = 0; i < n; i++){ const fx = bx1 + (w - lw) * (n === 1 ? 0.5 : i / (n - 1));
+          o += `<rect x="${fx.toFixed(1)}" y="${gy.toFixed(1)}" width="${lw.toFixed(1)}" height="${lh.toFixed(1)}" opacity=".7"/>`; }
+        return `<g stroke-width="1.2">${o}</g>`; })() : ''}
     ${showDims ? `<g opacity=".55" stroke-width="1.2">
       <line x1="${rx1.toFixed(1)}" y1="${(y - 14).toFixed(1)}" x2="${rx2.toFixed(1)}" y2="${(y - 14).toFixed(1)}"/>
       <line x1="${rx1.toFixed(1)}" y1="${(y - 19).toFixed(1)}" x2="${rx1.toFixed(1)}" y2="${(y - 9).toFixed(1)}"/>
