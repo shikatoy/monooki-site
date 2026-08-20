@@ -1531,6 +1531,29 @@ function computeUserTags(){
   return t;
 }
 
+/* ═══════ 提携リンク（バリューコマース MyLink / エクスショップ） ═══════
+   sid・pid は取得済みの MyLink コードと同じもの。遷移先(vc_url)だけを製品ごとに差し替える。
+   ここに無い製品にはリンクを出さない（affLink が空文字を返す） */
+const VC = { sid:'3777863', pid:'892682808' };
+const EXSHOP = {
+  'i-mjx':'inaba_s2',   'i-fs':'inaba_s12',
+  'y-ese':'yodoko_s1',  'y-lmd':'yodoko_s3',
+  't-gp':'takubo_s13',  't-nd':'takubo_s2',  't-jn':'takubo_s6',
+  't-belos':'takubo_s28','t-lsn':'takubo_s29'
+};
+function affUrl(code){
+  const dest = 'https://www.ex-shop.net/index.php?action=public_item_mo_search_execute&se_series=series%3A' + code;
+  return '//ck.jp.ap.valuecommerce.com/servlet/referral?sid=' + VC.sid + '&pid=' + VC.pid + '&vc_url=' + encodeURIComponent(dest);
+}
+function affLink(p){
+  const code = EXSHOP[p.id];
+  if(!code) return '';
+  return `<a href="${affUrl(code)}" rel="nofollow sponsored" target="_blank"
+     class="block border-t border-line bg-rust text-paper px-5 md:px-7 py-4 text-center font-serif font-bold text-base md:text-lg hover:bg-ink transition-colors duration-300"
+     ><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=${VC.sid}&pid=${VC.pid}" height="1" width="0" border="0" alt=""
+     >${esc(p.name)}の価格・無料見積もりを見る <span class="font-mono">→</span><span class="block mt-1 font-sans font-normal text-[10px] tracking-widest2 opacity-80">広告 — エクスショップ</span></a>`;
+}
+
 function renderResults(){
   const userTags = computeUserTags();
   const totalWeight = Object.values(userTags).reduce((s, v) => s + v, 0) || 1;
@@ -1565,6 +1588,7 @@ function renderResults(){
       <p class="font-mono text-[11px] tracking-widest2 uppercase text-rust">Diagnosis Result</p>
       <h3 class="mt-5 font-serif font-extrabold text-3xl md:text-5xl leading-snug">おすすめの物置、${results.length}件です。</h3>
       <p class="mt-4 text-[13px] text-neutral-500">ご回答との相性が良い順にご紹介します。寸法・仕様は代表的な参考値です。</p>
+      <p class="mt-3 text-[11px] leading-relaxed text-neutral-500 border border-linesoft px-3 py-2">※ この結果には<b>広告（アフィリエイトリンク）が含まれます。</b>販売店へのリンクから購入・お見積もりがあった場合、当サイトに紹介料が支払われることがあります。<b>紹介料の有無は、おすすめの順番に影響しません。</b>順番はご回答内容だけで決まります。</p>
       ${noFit ? `<p class="mt-3 text-[12px] font-bold text-rust">※ ご入力のスペースに（屋根の張り出し・作業スペースの余裕込みで）収まるサイズが見つかりませんでした。条件の近い候補を参考として表示しています。</p>` : ''}
 
       <div class="mt-12 space-y-10">
@@ -1606,6 +1630,7 @@ function renderResults(){
               <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">Rationale — おすすめの理由</p>
               <p class="mt-2.5 text-sm leading-loose text-neutral-700">${esc(r.p.base)}${reasons.length ? ' 今回のご回答では「' + reasons.map(esc).join('」「') + '」があなたの条件にマッチしました。' : ''}${fitNote}</p>
             </div>
+            ${affLink(r.p)}
             <div class="border-t border-line grid grid-cols-3 divide-x divide-line">
               <button class="size-open py-4 font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300" data-pid="${r.p.id}">サイズ展開 →</button>
               <button class="goto-maker py-4 font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300" data-brand="${r.p.maker}">メーカー詳細 →</button>
