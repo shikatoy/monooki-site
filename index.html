@@ -613,7 +613,45 @@ tailwind.config = {
    ════════════════════════════════════════════════ */
 
 const MAKERS = { takubo:'タクボ / TAKUBO', inaba:'イナバ / INABA', yodoko:'ヨドコウ / YODOKO' };
+/* 実物写真。エクスショップ（広告主）側のサーバーを参照する（保存はしない）。
+   バリューコマースの提携条件『画像の使用：可／保存先：広告主側』にもとづく */
+const PHOTO = {
+  'i-mjx':'INMO220001',
+  'i-fs':'INMO002235',
+  'y-ese':'YDMO321090',
+  'y-lmd':'YDMO320045',
+  't-gp':'TKMO6510089',
+  't-nd':'TKMO3510098',
+  't-jn':'TKMO3610250',
+  't-belos':'TKMO2400502',
+  't-lsn':'TKMO6600001',
+};
+function photoUrl(p){ const c = PHOTO[p.id]; return c ? `https://www.ex-shop.net/public/img/img_item/mo/${c}/basic/${c}_360.jpg` : ''; }
+
 const SITE_URL = 'https://shikatoy.github.io/monooki-site/';
+
+/* ═══════ 提携リンク（バリューコマース MyLink / エクスショップ） ═══════
+   sid・pid は取得済みの MyLink コードと同じもの。遷移先(vc_url)だけを製品ごとに差し替える。
+   ここに無い製品にはリンクを出さない（affLink が空文字を返す） */
+const VC = { sid:'3777863', pid:'892682808' };
+const EXSHOP = {
+  'i-mjx':'inaba_s2',   'i-fs':'inaba_s12',
+  'y-ese':'yodoko_s1',  'y-lmd':'yodoko_s3',
+  't-gp':'takubo_s13',  't-nd':'takubo_s2',  't-jn':'takubo_s6',
+  't-belos':'takubo_s28','t-lsn':'takubo_s29'
+};
+function affUrl(code){
+  const dest = 'https://www.ex-shop.net/index.php?action=public_item_mo_search_execute&se_series=series%3A' + code;
+  return '//ck.jp.ap.valuecommerce.com/servlet/referral?sid=' + VC.sid + '&pid=' + VC.pid + '&vc_url=' + encodeURIComponent(dest);
+}
+function affLink(p){
+  const code = EXSHOP[p.id];
+  if(!code) return '';
+  return `<a href="${affUrl(code)}" rel="nofollow sponsored" target="_blank"
+     class="block border-t border-line bg-rust text-paper px-5 md:px-7 py-4 text-center font-serif font-bold text-base md:text-lg hover:bg-ink transition-colors duration-300"
+     ><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=${VC.sid}&pid=${VC.pid}" height="1" width="0" border="0" alt=""
+     >${esc(p.name)}の価格・無料見積もりを見る <span class="font-mono">→</span><span class="block mt-1 font-sans font-normal text-[10px] tracking-widest2 opacity-80">広告 — エクスショップ</span></a>`;
+}
 
 /* ---------- 製品アーカイブ ---------- */
 /* ===== PRODUCTS_START =====
@@ -1305,9 +1343,21 @@ function svgElevation(p, size, showDims = true){
   </svg>`;
 }
 function productVisual(p, size, showDims = true){
-  return p.img
-    ? `<img src="${esc(p.img)}" alt="${esc(p.name)}" class="w-full h-full object-cover">`
+  const ph = p.img || photoUrl(p);
+  return ph
+    ? `<img src="${esc(ph)}" alt="${esc(p.name)}" loading="lazy" class="w-full h-full object-contain bg-white">`
     : svgElevation(p, size, showDims);
+}
+/* 画像の飛び先: 提携先があれば提携先（広告）、無ければメーカー公式 */
+function visualWrap(p, inner, boxCls){
+  const code = EXSHOP[p.id];
+  if(code){
+    return `<a href="${affUrl(code)}" rel="nofollow sponsored" target="_blank" class="vis-link" title="販売店で価格・お見積もりを見る（広告）"><div class="${boxCls}">${inner}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-rust text-paper px-2 py-1">広告 — 価格を見る →</span></a>`;
+  }
+  if(p.link){
+    return `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="${boxCls}">${inner}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">公式ページ →</span></a>`;
+  }
+  return `<div class="${boxCls}">${inner}</div>`;
 }
 
 /* ---------- モーダル開閉 ---------- */
@@ -1531,29 +1581,6 @@ function computeUserTags(){
   return t;
 }
 
-/* ═══════ 提携リンク（バリューコマース MyLink / エクスショップ） ═══════
-   sid・pid は取得済みの MyLink コードと同じもの。遷移先(vc_url)だけを製品ごとに差し替える。
-   ここに無い製品にはリンクを出さない（affLink が空文字を返す） */
-const VC = { sid:'3777863', pid:'892682808' };
-const EXSHOP = {
-  'i-mjx':'inaba_s2',   'i-fs':'inaba_s12',
-  'y-ese':'yodoko_s1',  'y-lmd':'yodoko_s3',
-  't-gp':'takubo_s13',  't-nd':'takubo_s2',  't-jn':'takubo_s6',
-  't-belos':'takubo_s28','t-lsn':'takubo_s29'
-};
-function affUrl(code){
-  const dest = 'https://www.ex-shop.net/index.php?action=public_item_mo_search_execute&se_series=series%3A' + code;
-  return '//ck.jp.ap.valuecommerce.com/servlet/referral?sid=' + VC.sid + '&pid=' + VC.pid + '&vc_url=' + encodeURIComponent(dest);
-}
-function affLink(p){
-  const code = EXSHOP[p.id];
-  if(!code) return '';
-  return `<a href="${affUrl(code)}" rel="nofollow sponsored" target="_blank"
-     class="block border-t border-line bg-rust text-paper px-5 md:px-7 py-4 text-center font-serif font-bold text-base md:text-lg hover:bg-ink transition-colors duration-300"
-     ><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=${VC.sid}&pid=${VC.pid}" height="1" width="0" border="0" alt=""
-     >${esc(p.name)}の価格・無料見積もりを見る <span class="font-mono">→</span><span class="block mt-1 font-sans font-normal text-[10px] tracking-widest2 opacity-80">広告 — エクスショップ</span></a>`;
-}
-
 function renderResults(){
   const userTags = computeUserTags();
   const totalWeight = Object.values(userTags).reduce((s, v) => s + v, 0) || 1;
@@ -1615,9 +1642,7 @@ function renderResults(){
               </div>
             </div>
             <div class="border-b border-line hatch-bg">
-              ${r.p.link
-                ? `<a href="${esc(r.p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="h-44 md:h-56 flex items-center justify-center px-6 py-3">${productVisual(r.p, ds)}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">公式ページ →</span></a>`
-                : `<div class="h-44 md:h-56 flex items-center justify-center px-6 py-3">${productVisual(r.p, ds)}</div>`}
+              ${visualWrap(r.p, productVisual(r.p, ds), 'h-44 md:h-56 flex items-center justify-center px-6 py-3')}
             </div>
             <dl class="text-[12px] md:text-[13px]">
               <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 px-5 md:px-7 py-3 font-mono text-[11px] text-neutral-500 border-r border-linesoft">外形寸法</dt><dd class="col-span-8 md:col-span-9 px-5 md:px-7 py-3 font-mono">${dimsLabel}</dd></div>
@@ -1965,9 +1990,7 @@ function renderIndex(){
   if(count) count.textContent = `${shown.length} / ${items.length} 点を表示`;
   grid.innerHTML = items.length ? shown.map(p => `
     <div id="product-${p.id}" class="border-r border-b border-line p-6 md:p-8 group fade-up">
-      ${p.link
-        ? `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-white/60">${productVisual(p, null, false)}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">公式ページ →</span></a>`
-        : `<div class="aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-white/60">${productVisual(p, null, false)}</div>`}
+      ${visualWrap(p, productVisual(p, null, false), 'aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-white/60')}
       <p class="mt-5 font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">${MAKERS[p.maker]} — ${esc(p.cat)}${isNew(p) ? ' <span class="text-rust">● NEW</span>' : ''}</p>
       <h4 class="mt-2 font-serif font-bold text-lg leading-snug">${esc(p.name)}</h4>
       <p class="mt-2 text-[12px] leading-relaxed text-neutral-500">${p.features.map(esc).join('・')}</p>
