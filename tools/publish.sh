@@ -5,7 +5,7 @@
 #          bash ~/Documents/monooki-site/tools/publish.sh "コミットメッセージ"
 # ============================================================
 set -u
-REPO="$HOME/Documents/monooki-site"
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 # 反映する対象。新しいフォルダやページを作ったら、ここに必ず足すこと。
 # ここに無いものは、commit されてもサイトに上がらない（過去に products/ と about.html が漏れた）
 TARGETS=(index.html about.html privacy.html contact.html \
