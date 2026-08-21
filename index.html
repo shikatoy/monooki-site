@@ -773,6 +773,7 @@ const PRODUCTS = [
     sizes:[ { code:'TBJ-065C', w:620, d:548, h:1303 } ], sizesComplete:true },
   { id:'i-smx', maker:'inaba', name:'ナイソー SMX', cat:'断熱物置', added:'2026-07-11',
     steel:'公式カタログ参照', door:'引き戸2枚・片開き（右側固定パネル）', found:'公式カタログ参照',
+    soon:'2026年9月1日 発売予定',
     doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
     tags:{ insulation:3, medium:2, sturdy:2, premium:1 },
     features:['断熱シリーズ「ナイソー」の新型（2026年9月1日発売）','旧SMK型は2026年8月31日をもって生産終了','寸法・扉形式など詳細仕様は公式カタログ参照'],
@@ -780,6 +781,7 @@ const PRODUCTS = [
     sizes:[] },
   { id:'i-sml', maker:'inaba', name:'como lite', cat:'断熱物置', added:'2026-07-12',
     steel:'公式カタログ参照', door:'側面に扉（正面は中央から上部にかけて窓のみ）', found:'公式カタログ参照',
+    soon:'2026年9月1日 発売予定',
     doorSpec:{ front:[], window:'upper', opening:'側面扉' },
     tags:{ insulation:2, medium:2, design:2, premium:1 },
     features:['断熱マルチスペース「コモ」系譜の新型ライト版（2026年9月1日発売）','ナイソーSMX型と同一リリースで発表された新製品','寸法・扉形式など詳細仕様は公式カタログ参照'],
@@ -1343,6 +1345,14 @@ function svgElevation(p, size, showDims = true){
   </svg>`;
 }
 function productVisual(p, size, showDims = true){
+  /* 未発売の製品は、実物の写真がまだ無い。似た絵を当てず、発売前であることを出す */
+  if(p.soon){
+    return `<div class="w-full h-full flex flex-col items-center justify-center bg-paper border border-dashed border-neutral-300 text-center px-4">
+      <span class="font-mono text-[11px] md:text-xs tracking-widest2 uppercase text-neutral-400">Coming Soon</span>
+      <span class="mt-2 font-serif font-bold text-sm md:text-base leading-snug">${esc(p.soon)}</span>
+      <span class="mt-1.5 text-[10px] leading-relaxed text-neutral-400">発売後に実物の写真へ差し替えます</span>
+    </div>`;
+  }
   const ph = p.img || photoUrl(p);
   return ph
     ? `<img src="${esc(ph)}" alt="${esc(p.name)}" loading="lazy" class="w-full h-full object-contain bg-white">`
