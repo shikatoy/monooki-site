@@ -344,15 +344,23 @@ tailwind.config = {
   </div>
 </div>
 
-<!-- ═══════════ 広告欄 1 ═══════════ -->
-<!-- AD_SLOT_1_START: 広告タグを入れるときは、下の <aside> の class から hidden を外し、.ad-slot 内にタグを貼り付けてください（中のプレースホルダー表示は削除してOK） -->
-<aside class="hidden border-b border-line" aria-label="広告">
-  <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-8">
+<!-- ═══════════ 広告欄 1（提携先リンク） ═══════════ -->
+<!-- AD_SLOT_1_START: 提携先（エクスショップ）への広告枠。別の広告タグに差し替えるときは、下の <aside> の中身を丸ごと入れ替えてください -->
+<aside class="border-b border-line" aria-label="広告">
+  <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-8 md:py-10">
     <p class="font-mono text-[9px] tracking-widest2 uppercase text-neutral-400 mb-3">AD — 広告</p>
-    <div class="ad-slot border border-dashed border-neutral-300 min-h-[100px] md:min-h-[120px] flex items-center justify-center">
-      <span class="font-mono text-[10px] tracking-widest text-neutral-300 uppercase">Advertisement Space</span>
+    <div class="border border-line bg-white/60 px-5 md:px-7 py-5 md:flex md:items-center md:justify-between md:gap-8">
+      <div class="min-w-0">
+        <p class="font-serif font-bold text-base md:text-xl leading-snug">価格は、提携先の販売店で調べられます。</p>
+        <p class="mt-2 text-[12px] md:text-[13px] leading-relaxed text-neutral-500">当サイトは価格を掲載していません。エクスショップ（提携先）なら、現場調査とお見積もりが無料です。</p>
+      </div>
+      <div class="mt-4 md:mt-0 flex flex-wrap gap-2">
+        <a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_mo_search_execute" rel="nofollow sponsored" target="_blank" class="shrink-0 border border-line bg-paper px-5 py-3 text-center font-mono text-[10px] tracking-widest2 uppercase hover:bg-rust hover:text-paper hover:border-rust transition-colors duration-300">物置・収納を見る →</a>
+        <a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_wh_search_execute" rel="nofollow sponsored" target="_blank" class="shrink-0 border border-line bg-paper px-5 py-3 text-center font-mono text-[10px] tracking-widest2 uppercase hover:bg-rust hover:text-paper hover:border-rust transition-colors duration-300">倉庫・ガレージを見る →</a>
+      </div>
     </div>
   </div>
+  <img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3777863&pid=892682808" height="1" width="0" border="0" alt="">
 </aside>
 <!-- AD_SLOT_1_END -->
 

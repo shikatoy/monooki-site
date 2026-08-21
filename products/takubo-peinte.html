@@ -231,6 +231,23 @@
   .hero-photo .cap b { color:var(--rust); }
   .hero-photo:hover .cap { background:var(--rust); color:#fff; }
   .hero-photo:hover .cap b { color:#fff; }
+
+  /* ───── 提携先リンク（広告） ───── */
+  .shop { position:relative; display:flex; align-items:stretch; margin:32px 0 0; border:1px solid var(--line);
+    background:#fff; text-decoration:none; overflow:hidden;
+    transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+  .shop:hover { border-color:var(--rust); box-shadow:4px 4px 0 var(--rust); transform:translate(-1px,-1px); }
+  .shop-thumb { width:74px; flex:0 0 74px; height:auto; object-fit:contain; background:#fff;
+    border-right:1px solid var(--linesoft); padding:6px; }
+  .shop-txt { flex:1; min-width:0; padding:10px 14px; display:flex; flex-direction:column; justify-content:center; gap:4px; }
+  .shop-lead { font-family:'Shippori Mincho B1',serif; font-weight:700; font-size:14px; line-height:1.5; }
+  .shop-sub { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.12em; color:var(--mute); }
+  .shop-sub b { color:var(--rust); }
+  .shop-go { flex:0 0 46px; display:flex; align-items:center; justify-content:center;
+    background:var(--rust); color:#fff; font-size:17px; transition:background .2s ease; }
+  .shop:hover .shop-go { background:var(--ink); }
+  .shop img[height='1'] { position:absolute; left:0; top:0; width:1px !important; height:1px !important; opacity:0; }
+  @media (min-width:768px){ .shop-lead { font-size:15px; } .shop-thumb { width:86px; flex-basis:86px; } }
 </style>
 </head>
 <body>
@@ -283,6 +300,8 @@
         <li>本体色はアイボリーブラックとムーンホワイトの2色から選べます</li>
         </ul>
 
+        <a class="shop" href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_mo_search_execute%26se_series%3Dseries%253Atakubo_s13" rel="nofollow sponsored" target="_blank"><img class="shop-thumb" src="https://www.ex-shop.net/public/img/img_item/mo/TKMO5000203/basic/TKMO5000203_360.jpg" alt="" loading="lazy"><span class="shop-txt"><span class="shop-lead">ペインタの価格・無料見積もりを見る</span><span class="shop-sub"><b>広告</b> — エクスショップ（提携先）</span></span><span class="shop-go" aria-hidden="true">→</span><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3777863&pid=892682808" height="1" width="0" border="0" alt=""></a>
+
         <h2>サイズ一覧</h2>
 
       <table class="sizes">
@@ -330,7 +349,9 @@
     </article>
 
     <!-- ═══════════ 導線 ═══════════ -->
-    <aside class="cta">
+    <a class="shop" href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_mo_search_execute%26se_series%3Dseries%253Atakubo_s13" rel="nofollow sponsored" target="_blank"><img class="shop-thumb" src="https://www.ex-shop.net/public/img/img_item/mo/TKMO5000203/basic/TKMO5000203_360.jpg" alt="" loading="lazy"><span class="shop-txt"><span class="shop-lead">ペインタの価格・無料見積もりを見る</span><span class="shop-sub"><b>広告</b> — エクスショップ（提携先）</span></span><span class="shop-go" aria-hidden="true">→</span><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3777863&pid=892682808" height="1" width="0" border="0" alt=""></a>
+
+        <aside class="cta">
       <p class="cta-label">Find — 条件から探す</p>
       <p class="cta-title">この物置が、自分に合うか。</p>
       <p class="cta-text">用途と設置スペースから、条件に合う物置を絞り込めます。3〜4問で結果が出ます。</p>
