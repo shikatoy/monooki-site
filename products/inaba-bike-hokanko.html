@@ -221,23 +221,13 @@
   .sizes tbody tr:hover { background: #efe9dc; }
   .note { margin: 22px 0 0; padding: 18px 20px; border: 1px solid var(--linesoft); background: #efe9dc; font-size: 13px; line-height: 2; }
   @media (min-width: 768px) { .spec th, .spec td { font-size: 15px; } .sizes th, .sizes td { font-size: 14px; } }
-/* ───── 提携リンク（広告） ───── */
-  .aff { margin:34px 0 0; border:1px solid var(--line); background:#efe9dc; }
-  .aff-note { margin:0; padding:14px 18px; border-bottom:1px solid var(--linesoft); font-size:12px; line-height:1.9; color:var(--mute); }
-  .aff-note b { color:var(--ink); }
-  .aff-btn { display:block; padding:20px 18px; text-align:center; text-decoration:none;
-    background:var(--rust); color:#fff; font-family:'Shippori Mincho B1',serif; font-weight:700; font-size:17px; line-height:1.6;
-    transition:background .25s ease; }
-  .aff-btn:hover { background:var(--ink); }
-  .aff-btn .sub { display:block; margin-top:5px; font-family:'IBM Plex Mono',monospace; font-weight:400; font-size:10px; letter-spacing:.2em; opacity:.85; }
-  @media (min-width:768px){ .aff-btn { font-size:19px; } }
-  .aff-slim { margin:30px 0 0; }
-  .aff-slim .aff-btn { border:1px solid var(--line); }
-  /* ───── 製品写真 ───── */
-  .hero-photo { display:block; margin:26px 0 0; border:1px solid var(--line); background:#fff; text-decoration:none; position:relative; }
+/* ───── 製品写真 ───── */
+  .hero-photo { display:block; max-width:360px; margin:26px 0 30px; border:1px solid var(--line); background:#fff; text-decoration:none; position:relative; }
   .hero-photo img { display:block; width:100%; height:auto; }
-  .hero-photo .cap { display:block; padding:11px 14px; border-top:1px solid var(--linesoft); background:#efe9dc;
-    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:var(--mute); }
+  /* 計測用の1x1画像が width:100% で巨大な余白になっていたのを防ぐ（読み込みは維持） */
+  .hero-photo img[height='1'], .hero-photo img[height="1"] { position:absolute; left:0; top:0; width:1px !important; height:1px !important; opacity:0; pointer-events:none; }
+  .hero-photo .cap { display:block; padding:9px 12px; border-top:1px solid var(--linesoft); background:#efe9dc;
+    font-family:'IBM Plex Mono',monospace; font-size:9px; line-height:1.7; letter-spacing:.1em; color:var(--mute); }
   .hero-photo .cap b { color:var(--rust); }
   .hero-photo:hover .cap { background:var(--rust); color:#fff; }
   .hero-photo:hover .cap b { color:#fff; }
@@ -255,10 +245,6 @@
     <a href="../" class="header-link">← トップへ戻る</a>
   </div>
 </header>
-      <a class="hero-photo" href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_wh_search_execute%26se_series%3Dseries%253Ainaba_s9" rel="nofollow sponsored" target="_blank"><img src="https://www.ex-shop.net/public/img/img_item/wh/INWH040026/basic/INWH040026_360.jpg" alt="バイク保管庫" loading="lazy"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3777863&pid=892682808" height="1" width="0" border="0" alt=""><span class="cap"><b>広告</b> — 写真はエクスショップ提供。クリックで価格・無料見積もりへ →</span></a>
-      
-
-
 <main>
   <div class="wrap">
 
@@ -272,6 +258,8 @@
         <h1 class="article-title">イナバ バイク保管庫</h1>
         <p class="article-lead">床付き構造とディンプルキーで、大切な愛車をしっかり守るバイク保管庫です。</p>
       </header>
+
+      <a class="hero-photo" href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_wh_search_execute%26se_series%3Dseries%253Ainaba_s9" rel="nofollow sponsored" target="_blank"><img src="https://www.ex-shop.net/public/img/img_item/wh/INWH040026/basic/INWH040026_360.jpg" alt="バイク保管庫" loading="lazy"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3777863&pid=892682808" height="1" width="0" border="0" alt=""><span class="cap"><b>広告</b> — 写真はエクスショップ提供。クリックで価格・無料見積もりへ →</span></a>
 
       <div class="article-body">
 
@@ -294,11 +282,6 @@
         <li>ハイルーフで大型車対応</li>
         <li>業界随一の型式展開</li>
         </ul>
-
-        <div class="aff">
-      <p class="aff-note">※ここから先は<b>広告（アフィリエイトリンク）</b>です。リンク先の販売店で購入・お見積もりがあった場合、当サイトに紹介料が支払われることがあります。<b>掲載内容や順番は、紹介料の有無では変わりません。</b></p>
-      <a class="aff-btn" href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_wh_search_execute%26se_series%3Dseries%253Ainaba_s9" rel="nofollow sponsored" target="_blank"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3777863&pid=892682808" height="1" width="0" border="0" alt="">バイク保管庫の価格・無料見積もりを見る →<span class="sub">広告 — エクスショップ</span></a>
-    </div>
 
         <h2>サイズ一覧</h2>
 
@@ -327,11 +310,7 @@
     </article>
 
     <!-- ═══════════ 導線 ═══════════ -->
-    <div class="aff aff-slim">
-      <a class="aff-btn" href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_wh_search_execute%26se_series%3Dseries%253Ainaba_s9" rel="nofollow sponsored" target="_blank"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3777863&pid=892682808" height="1" width="0" border="0" alt="">バイク保管庫の価格・無料見積もりを見る →<span class="sub">広告 — エクスショップ</span></a>
-    </div>
-
-        <aside class="cta">
+    <aside class="cta">
       <p class="cta-label">Find — 条件から探す</p>
       <p class="cta-title">この物置が、自分に合うか。</p>
       <p class="cta-text">用途と設置スペースから、条件に合う物置を絞り込めます。3〜4問で結果が出ます。</p>
