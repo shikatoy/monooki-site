@@ -141,6 +141,10 @@ tailwind.config = {
   header nav a.nav-active { color: #a3512b; }
   .u-link.nav-active::after { transform: scaleX(1); transform-origin: left; background: #a3512b; }
 
+  /* ───── メーカー別ラインアップの製品名リンク（濃色地） ───── */
+  .ln-link { border-bottom: 1px solid rgba(248,246,240,.3); transition: color .25s ease, border-color .25s ease; }
+  .ln-link:hover { color: #d08a5f; border-color: #d08a5f; }
+
   /* ───── 比較 ───── */
   #compare-tray.tray-open { transform: translateY(0); }
   .cmp-chip { display:inline-flex; align-items:center; gap:8px; border:1px solid #171717; padding:5px 10px; font-size:11px; }
@@ -317,19 +321,6 @@ tailwind.config = {
   </div>
 </div>
 
-<!-- ═══════════ 商品詳細モーダル（サイズ選択） ═══════════ -->
-<div id="detail-modal" class="modal modal-hidden fixed inset-0 z-[60] bg-paper flex flex-col">
-  <div class="border-b border-line shrink-0">
-    <div class="max-w-[1440px] mx-auto px-5 md:px-10 h-16 flex items-center justify-between">
-      <span class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase">Product Detail — サイズ展開</span>
-      <button id="detail-close" class="font-mono text-[11px] tracking-widest2 uppercase hover:text-rust transition-colors">Close ×</button>
-    </div>
-  </div>
-  <div class="flex-1 overflow-y-auto">
-    <div id="detail-body" class="max-w-3xl mx-auto px-5 md:px-10 py-10 md:py-14"></div>
-  </div>
-</div>
-
 <!-- ═══════════ 比較モーダル ═══════════ -->
 <div id="compare-modal" class="modal modal-hidden fixed inset-0 z-[60] bg-paper flex flex-col">
   <div class="border-b border-line shrink-0">
@@ -440,7 +431,7 @@ tailwind.config = {
         <h2 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">索引。</h2>
       </div>
       <p class="md:col-span-4 text-[13px] leading-loose text-neutral-500">
-        掲載中の全製品を、更新（追加）が新しい順にご覧いただけます。図版は各製品の形状を自動で描いた正面図です（写真ではありません）。寸法・サイズ展開は「詳細を見る」からご確認ください。
+        掲載中の全製品を、更新（追加）が新しい順にご覧いただけます。写真のない製品は、寸法データから描いた正面図を載せています。寸法・全サイズ・仕様は、各製品の「製品ページ」にまとめてあります。
       </p>
     </div>
   </div>
@@ -1385,7 +1376,7 @@ function visualWrap(p, inner, boxCls){
     return `<a href="${affUrl(code)}" rel="nofollow sponsored" target="_blank" class="vis-link" title="販売店で価格・お見積もりを見る（広告）"><div class="${boxCls}">${inner}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-rust text-paper px-2 py-1">広告 — 価格を見る →</span></a>`;
   }
   if(p.link){
-    return `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="${boxCls}">${inner}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">公式ページ →</span></a>`;
+    return `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="${boxCls}">${inner}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">メーカー公式 ↗</span></a>`;
   }
   return `<div class="${boxCls}">${inner}</div>`;
 }
@@ -1422,12 +1413,6 @@ function closeModal(){
   }
 }
 window.addEventListener('popstate', () => {
-  const dm = document.querySelector('#detail-modal');
-  if(dm && !dm.classList.contains('modal-hidden')){
-    detailGuard = false;                                   // ガードはこのpopstateで消費済み
-    hideDetailUI();                                        // 詳細モーダルを閉じてサイトに留まる
-    return;
-  }
   if(modal.classList.contains('modal-hidden')) return;   // 診断中でなければ通常の「戻る」
   if(state.step === 0 || state.answers.length === 0){
     historyGuard = false;                                  // ガードはこのpopstateで消費済み
@@ -1672,7 +1657,7 @@ function renderResults(){
               </div>
             </div>
             <div class="border-b border-line hatch-bg">
-              ${visualWrap(r.p, productVisual(r.p, ds), 'h-44 md:h-56 flex items-center justify-center px-6 py-3')}
+              ${visualWrap(r.p, productVisual(r.p, ds, false), 'h-44 md:h-56 flex items-center justify-center px-6 py-3')}
             </div>
             <dl class="text-[12px] md:text-[13px]">
               <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 px-5 md:px-7 py-3 font-mono text-[11px] text-neutral-500 border-r border-linesoft">外形寸法</dt><dd class="col-span-8 md:col-span-9 px-5 md:px-7 py-3 font-mono">${dimsLabel}</dd></div>
@@ -1686,9 +1671,9 @@ function renderResults(){
               <p class="mt-2.5 text-sm leading-loose text-neutral-700">${esc(r.p.base)}${reasons.length ? ' 今回のご回答では「' + reasons.map(esc).join('」「') + '」があなたの条件にマッチしました。' : ''}${fitNote}</p>
             </div>
             ${affLink(r.p)}
-            <div class="border-t border-line grid grid-cols-3 divide-x divide-line">
-              <button class="size-open py-4 font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300" data-pid="${r.p.id}">サイズ展開 →</button>
-              <button class="goto-maker py-4 font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300" data-brand="${r.p.maker}">メーカー詳細 →</button>
+            ${PRODUCT_PAGES[r.p.id] ? `<a href="${PRODUCT_PAGES[r.p.id]}" class="block border-t border-line bg-ink text-paper py-4 text-center font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-rust transition-colors duration-300">製品ページ — 全サイズと仕様 →</a>` : ''}
+            <div class="border-t border-line grid grid-cols-2 divide-x divide-line">
+              <button class="goto-maker py-4 font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300" data-brand="${r.p.maker}">メーカー別に見る →</button>
               <button class="quiz-restart py-4 font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">↻ もう一度</button>
             </div>
           </article>`;
@@ -1717,9 +1702,6 @@ function renderResults(){
   });
   quizBody.querySelectorAll('.quiz-restart').forEach(b => {
     b.addEventListener('click', () => openModal(state.mode));
-  });
-  quizBody.querySelectorAll('.size-open').forEach(b => {
-    b.addEventListener('click', () => openDetail(b.dataset.pid));
   });
   $('#quiz-body').parentElement.scrollTop = 0;
 }
@@ -1833,13 +1815,16 @@ function renderMakerLineups(){
     const el = document.querySelector('#lineup-' + mk);
     if(!el) return;
     const rows = GROUPS.map(g => {
-      const names = PRODUCTS.filter(p => p.maker === mk && g.match(p.cat)).map(p => p.name);
+      const names = PRODUCTS.filter(p => p.maker === mk && g.match(p.cat)).map(p => {
+        const pg = PRODUCT_PAGES[p.id];
+        return pg ? `<a href="${pg}" class="ln-link">${esc(p.name)}</a>` : esc(p.name);
+      });
       return names.length ? { label: g.label, names } : null;
     }).filter(Boolean);
     el.innerHTML = rows.map((r, i) => `
       <div class="flex items-baseline justify-between gap-4 py-3 ${i < rows.length - 1 ? 'border-b border-neutral-800' : ''}">
         <span class="font-mono text-[11px] text-neutral-500 shrink-0">${esc(r.label)}</span>
-        <span class="text-right">${r.names.map(esc).join('／')}</span>
+        <span class="text-right">${r.names.join('／')}</span>
       </div>`).join('');
   });
 }
@@ -1947,7 +1932,7 @@ function openCompare(){
           ${cmpRow('特徴', p => (p.features || []).map(f => '・' + esc(f)).join('<br>'))}
           ${cmpRow('', p => {
             const pg = PRODUCT_PAGES[p.id];
-            return (pg ? `<a href="${pg}" class="u-link font-mono text-[11px]">サイズ一覧ページ →</a><br>` : '') +
+            return (pg ? `<a href="${pg}" class="u-link font-mono text-[11px]">製品ページ →</a><br>` : '') +
                    (p.link ? `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="u-link font-mono text-[11px]">メーカー公式 ↗</a>` : '');
           })}
         </tbody>
@@ -2024,12 +2009,10 @@ function renderIndex(){
       <p class="mt-5 font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">${MAKERS[p.maker]} — ${esc(p.cat)}${isNew(p) ? ' <span class="text-rust">● NEW</span>' : ''}</p>
       <h4 class="mt-2 font-serif font-bold text-lg leading-snug">${esc(p.name)}</h4>
       <p class="mt-2 text-[12px] leading-relaxed text-neutral-500">${p.features.map(esc).join('・')}</p>
-      <button class="size-open mt-4 w-full border border-line py-2.5 font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300" data-pid="${p.id}">詳細を見る →</button>
-      ${PRODUCT_PAGES[p.id] ? `<a href="${PRODUCT_PAGES[p.id]}" class="block mt-2 w-full border border-line py-2.5 text-center font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">サイズ一覧ページ →</a>` : ''}
+      ${PRODUCT_PAGES[p.id] ? `<a href="${PRODUCT_PAGES[p.id]}" class="block mt-4 w-full bg-ink text-paper py-2.5 text-center font-mono text-[10px] tracking-widest2 uppercase hover:bg-rust transition-colors duration-300">製品ページ →</a>` : ''}
       <button class="cmp-toggle mt-2 w-full border border-line py-2.5 font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300 ${compareSel.includes(p.id) ? 'cmp-on' : ''}" data-pid="${p.id}">${compareSel.includes(p.id) ? '✓ 比較中' : '＋ 比較に追加'}</button>
     </div>`).join('')
   : `<div class="col-span-full border-r border-b border-line p-12 text-center font-mono text-[11px] tracking-widest text-neutral-400">NO RESULT ── 該当する製品が見つかりませんでした。</div>`;
-  grid.querySelectorAll('.size-open').forEach(b => b.addEventListener('click', () => openDetail(b.dataset.pid)));
   grid.querySelectorAll('.cmp-toggle').forEach(b => b.addEventListener('click', () => toggleCompare(b.dataset.pid)));
   renderIndexMore(items.length - shown.length);
 }
@@ -2148,70 +2131,6 @@ document.querySelectorAll('.qa-btn').forEach(btn => {
     if(!wasOpen) item.classList.add('qa-open');
   });
 });
-
-/* ---------- 商品詳細（サイズ選択）モーダル ---------- */
-const detailModal = $('#detail-modal');
-let detailGuard = false;
-
-function openDetail(pid){
-  const p = PRODUCTS.find(x => x.id === pid);
-  if(!p) return;
-  renderDetail(p, null);
-  detailModal.classList.remove('modal-hidden');
-  document.body.style.overflow = 'hidden';
-  if(!detailGuard){
-    try { history.pushState({ detailGuard: true }, ''); detailGuard = true; } catch(e){}
-  }
-}
-function hideDetailUI(){
-  detailModal.classList.add('modal-hidden');
-  if(modal.classList.contains('modal-hidden')) document.body.style.overflow = '';
-}
-function closeDetail(){
-  hideDetailUI();
-  if(detailGuard){
-    detailGuard = false;
-    try { history.back(); } catch(e){}
-  }
-}
-$('#detail-close').addEventListener('click', closeDetail);
-document.addEventListener('keydown', e => {
-  if(e.key === 'Escape' && !detailModal.classList.contains('modal-hidden')) closeDetail();
-});
-
-function renderDetail(p, sizeIdx){
-  const sizes = sortedSizes(p);
-  let si = (sizeIdx === null || sizeIdx === undefined)
-    ? (sizes.length ? sizes.findIndex(s => s === repSize(p)) : -1)
-    : sizeIdx;
-  const cur = si >= 0 ? sizes[si] : null;
-  document.querySelector('#detail-body').innerHTML = `
-    <div class="step-enter">
-      <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">${MAKERS[p.maker]} — ${esc(p.cat)}${isNew(p) ? ' <span class="text-rust">● NEW</span>' : ''}</p>
-      <h3 class="mt-2 font-serif font-extrabold text-3xl md:text-4xl leading-snug">${esc(p.name)}</h3>
-      <p class="mt-4 text-sm leading-loose text-neutral-600">${esc(p.base)}</p>
-      <div class="mt-6 border border-line hatch-bg"><div class="h-48 md:h-60 flex items-center justify-center px-6 py-3">${productVisual(p, cur)}</div></div>
-      ${sizes.length ? `
-      <p class="mt-8 font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">Size — サイズを選択（${p.sizesComplete ? '全' + sizes.length + '種' : '代表 ' + sizes.length + '種'}）</p>
-      <div class="mt-3 flex flex-wrap gap-2">
-        ${sizes.map((s, i) => `<button class="size-chip idx-filter ${i === si ? 'active' : ''}" data-i="${i}">${esc(s.code)}</button>`).join('')}
-      </div>` : `
-      <p class="mt-8 font-mono text-[11px] tracking-widest text-neutral-400">サイズ情報は公式カタログの公開をお待ちください。</p>`}
-      <dl class="mt-6 border-t border-line text-[12px] md:text-[13px]">
-        <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 py-3 pr-3 font-mono text-[11px] text-neutral-500">外形寸法</dt><dd class="col-span-8 md:col-span-9 py-3 font-mono">${cur ? esc(cur.code) + '： ' : ''}${esc(fmtDims(cur))}</dd></div>
-        <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 py-3 pr-3 font-mono text-[11px] text-neutral-500">主要鋼板</dt><dd class="col-span-8 md:col-span-9 py-3">${esc(p.steel)}</dd></div>
-        <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 py-3 pr-3 font-mono text-[11px] text-neutral-500">扉形式</dt><dd class="col-span-8 md:col-span-9 py-3">${esc(p.door)}</dd></div>
-        <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 py-3 pr-3 font-mono text-[11px] text-neutral-500">推奨基礎</dt><dd class="col-span-8 md:col-span-9 py-3">${esc(p.found)}</dd></div>
-        <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 py-3 pr-3 font-mono text-[11px] text-neutral-500">特記事項</dt><dd class="col-span-8 md:col-span-9 py-3">${p.features.map(esc).join(' ／ ')}</dd></div>
-      </dl>
-      <div class="mt-6 flex flex-wrap gap-3">
-        ${p.link ? `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="border border-line px-5 py-3 font-mono text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">公式ページで全サイズを見る →</a>` : ''}
-      </div>
-      <p class="mt-6 font-mono text-[10px] leading-relaxed text-neutral-400">※ 掲載サイズは公式ラインナップに基づく代表的な参考値です。全サイズ展開・最新仕様は公式ページをご確認ください。設置時は本体の下に基礎用ブロック（基本 高さ約10cm）を敷きます。</p>
-    </div>`;
-  document.querySelectorAll('#detail-body .size-chip').forEach(b =>
-    b.addEventListener('click', () => renderDetail(p, Number(b.dataset.i))));
-}
 
 /* ---------- モバイルメニュー ---------- */
 const mmBtn = $('#menu-btn'), mmPanel = $('#mobile-menu');
