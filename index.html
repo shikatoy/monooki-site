@@ -127,10 +127,13 @@ tailwind.config = {
   .share-btn { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em; border: 1px solid #171717; padding: 9px 16px; background: transparent; cursor: pointer; transition: all .25s ease; }
   .share-btn:hover { background: #101010; color: #f8f6f0; }
 
-  /* ───── 図版リンク（公式ページ） ───── */
+  /* ───── 図版リンク ─────
+     広告であることは常に見えている必要がある。以前はホバー時だけ出していたため、
+     ホバーのないスマホでは表示されないままだった */
   .vis-link { position: relative; display: block; cursor: pointer; }
-  .vis-link .vis-tag { position: absolute; top: 8px; right: 8px; opacity: 0; transition: opacity .3s ease; }
-  .vis-link:hover .vis-tag { opacity: 1; }
+  .vis-link .vis-tag { position: absolute; top: 8px; right: 8px; opacity: 1; transition: opacity .3s ease; }
+  .vis-tag-more { display: none; }
+  @media (hover: hover) { .vis-link:hover .vis-tag-more { display: inline; } }
 
   /* ───── スクロール演出 ───── */
   .reveal { opacity: 0; transform: translateY(26px); transition: opacity .75s cubic-bezier(.22,1,.36,1), transform .75s cubic-bezier(.22,1,.36,1); }
@@ -1381,10 +1384,10 @@ function productVisual(p, size, showDims = true){
 function visualWrap(p, inner, boxCls){
   const code = EXSHOP[p.id];
   if(code){
-    return `<a href="${affUrl(code)}" rel="nofollow sponsored" target="_blank" class="vis-link" title="販売店で価格・お見積もりを見る（広告）"><div class="${boxCls}">${inner}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-rust text-paper px-2 py-1">広告 — 価格を見る →</span></a>`;
+    return `<a href="${affUrl(code)}" rel="nofollow sponsored" target="_blank" class="vis-link" title="販売店で価格・お見積もりを見る（広告）"><div class="${boxCls}">${inner}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-rust text-paper px-2 py-1">広告<span class="vis-tag-more"> — 価格を見る →</span></span></a>`;
   }
   if(p.link){
-    return `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="${boxCls}">${inner}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">メーカー公式 ↗</span></a>`;
+    return `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="vis-link" title="メーカー公式の商品ページを開く"><div class="${boxCls}">${inner}</div><span class="vis-tag font-mono text-[9px] tracking-widest uppercase bg-ink text-paper px-2 py-1">公式<span class="vis-tag-more">メーカーページ </span>↗</span></a>`;
   }
   return `<div class="${boxCls}">${inner}</div>`;
 }
@@ -1998,7 +2001,7 @@ function restoreCompareFromHash(){
 
 /* 索引は初期6件だけ表示する。トップページが索引だけで12画面分になっていたため。
    絞り込みを変えたときは折りたたみ直す（idxExpanded = false に戻す） */
-const IDX_PREVIEW = 6;
+const IDX_PREVIEW = 9;
 let idxExpanded = false;
 function renderIndex(){
   const grid = document.querySelector('#index-grid');
@@ -2028,7 +2031,7 @@ function renderIndexMore(rest){
   const box = document.querySelector('#idx-more');
   if(!box) return;
   box.innerHTML = rest > 0
-    ? `<button id="idx-more-btn" class="w-full border border-line py-4 font-mono text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">残り ${rest} 点を表示する ↓</button>`
+    ? `<button id="idx-more-btn" class="w-full bg-ink text-paper py-4 font-mono text-[11px] tracking-widest2 uppercase hover:bg-rust transition-colors duration-300">残り ${rest} 点の物置をすべて見る ↓</button>`
     : '';
   const btn = document.querySelector('#idx-more-btn');
   if(btn) btn.addEventListener('click', () => { idxExpanded = true; renderIndex(); });

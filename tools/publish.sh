@@ -21,6 +21,9 @@ python3 "$REPO/tools/build-bands.py" || echo "[警告] サイズ帯ページの�
 python3 "$REPO/tools/build-size-pages.py" || echo "[警告] 寸法ページの生成に失敗しました（続行します）"
 
 # 廃盤・生産終了ページを作り直す（手で直さなくてよい）
+python3 "$REPO/tools/build-article-links.py" || echo "[警告] 記事導線の生成に失敗しました（続行します）"
+
+# 廃盤・生産終了ページを作り直す（手で直さなくてよい）
 python3 "$REPO/tools/build-discontinued.py" || echo "[警告] 廃盤ページの生成に失敗しました（続行します）"
 
 # サイトマップの lastmod をファイル更新日で自動更新（手で直さなくてよい）

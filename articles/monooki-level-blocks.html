@@ -175,6 +175,27 @@
     .disclaimer { padding: 32px; }
     .footer-meta { flex-direction: row; justify-content: space-between; }
   }
+/* AUTO_RELATED_CSS_START */
+  /* ───── 記事末尾の導線（tools/build-article-links.py が生成） ───── */
+  .rel { margin: 46px 0 0; border-top: 1px solid var(--line); padding-top: 26px; }
+  .rel-label { margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--mute); }
+  .rel-note { margin: 10px 0 18px; font-size: 12.5px; line-height: 1.9; color: var(--mute); }
+  .rel-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  @media (min-width: 700px) { .rel-list { grid-template-columns: 1fr 1fr; } }
+  .rel-list li { margin: 0; padding: 0; }
+  .rel-list li::before { content: none; }
+  .rel-list a { display: flex; align-items: center; gap: 12px; border: 1px solid var(--linesoft);
+    background: #fff; padding: 12px 14px; text-decoration: none;
+    transition: border-color .2s ease, box-shadow .2s ease; }
+  .rel-list a:hover { border-color: var(--rust); box-shadow: 3px 3px 0 var(--rust); }
+  .rel-txt { flex: 1; min-width: 0; }
+  .rel-kicker { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+    letter-spacing: .14em; color: var(--mute); }
+  .rel-name { display: block; margin-top: 3px; font-family: 'Shippori Mincho B1', serif;
+    font-weight: 700; font-size: 15px; line-height: 1.4; }
+  .rel-go { flex: 0 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--rust); }
+/* AUTO_RELATED_CSS_END */
 </style>
 </head>
 <body>
@@ -361,6 +382,19 @@
 
       </div>
     </article>
+
+    <!-- AUTO_RELATED_START -->
+    <aside class="rel">
+      <p class="rel-label">Products — この記事に出てくる物置</p>
+      <p class="rel-note">本文に出てきた順に並べています。サイズ展開と仕様は、それぞれの製品ページにまとめてあります。</p>
+      <ul class="rel-list">
+        <li><a href="../products/yodoko-esmo.html"><span class="rel-txt"><span class="rel-kicker">ヨドコウ — 小型物置</span><span class="rel-name">エスモ</span></span><span class="rel-go">&rarr;</span></a></li>
+        <li><a href="../products/inaba-simply.html"><span class="rel-txt"><span class="rel-kicker">イナバ — 小型物置</span><span class="rel-name">シンプリー</span></span><span class="rel-go">&rarr;</span></a></li>
+        <li><a href="../products/yodoko-elmo.html"><span class="rel-txt"><span class="rel-kicker">ヨドコウ — 中・大型物置</span><span class="rel-name">エルモ</span></span><span class="rel-go">&rarr;</span></a></li>
+        <li><a href="../products/inaba-forta.html"><span class="rel-txt"><span class="rel-kicker">イナバ — 中・大型物置</span><span class="rel-name">フォルタ</span></span><span class="rel-go">&rarr;</span></a></li>
+      </ul>
+    </aside>
+    <!-- AUTO_RELATED_END -->
 
     <!-- ═══════════ お問い合わせ導線 ═══════════ -->
     <aside class="cta">
