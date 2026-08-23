@@ -196,6 +196,18 @@
     font-weight: 700; font-size: 15px; line-height: 1.4; }
   .rel-go { flex: 0 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--rust); }
 /* AUTO_RELATED_CSS_END */
+/* AUTO_DOORFIG_CSS_START */
+  /* ───── 扉の開き方の図（tools/build-door-figure.py が生成） ───── */
+  .dfig { margin: 34px 0 0; }
+  .dfig-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 620px) { .dfig-grid { grid-template-columns: 1fr 1fr; } }
+  .dfig figure { margin: 0; border: 1px solid var(--line); background: #fff; }
+  .dfig svg { display: block; width: 100%; height: auto; }
+  .dfig figcaption { padding: 11px 14px; border-top: 1px solid var(--linesoft); background: #efe9dc; }
+  .dfig-t { display: block; font-family: 'Shippori Mincho B1', serif; font-weight: 700; font-size: 14px; }
+  .dfig-s { display: block; margin-top: 4px; font-size: 12px; line-height: 1.8; color: var(--mute); }
+  .dfig-note { margin: 14px 0 0; font-size: 12px; line-height: 1.95; color: var(--mute); }
+/* AUTO_DOORFIG_CSS_END */
 </style>
 </head>
 <body>
@@ -261,13 +273,33 @@
         <h2>中型・大型の「片開き（右側固定パネル）」とは</h2>
         <p>カタログの扉形式欄に「片開き（右側固定パネル）」と書いてあっても、初めてだと形が浮かびにくいと思います。</p>
         <p>これは、右側のパネルは動かず固定されていて、左側の戸だけがスライドして開く、という意味です。</p>
+        <p>呼び名は「<strong>どちら側へ戸を引くか</strong>」で決まります。<strong>右開きとは、戸を右へ引くこと。</strong>引いた戸は右の固定パネルに重なるので、<strong>開くのは反対の左側</strong>です。名前と開く場所が逆になるので、ここだけ注意してください。</p>
+
+        <!-- AUTO_DOORFIG_START -->
+        <div class="dfig">
+          <div class="dfig-grid">
+        <figure>
+          <svg viewBox="0 0 260 172" role="img" aria-label="右開き（標準）"><line x1="10" y1="148" x2="250" y2="148" stroke="#101010" stroke-width="2"/><rect x="14" y="26" width="232" height="12" fill="none" stroke="#101010" stroke-width="1.6"/><rect x="22" y="38" width="216" height="110" fill="none" stroke="#101010" stroke-width="1.6"/><rect x="23.0" y="39" width="107.0" height="108" fill="#2b2b2b"/><rect x="130.0" y="38" width="108.0" height="110" fill="#ffffff" stroke="#101010" stroke-width="1.4"/><line x1="175.4" y1="42" x2="175.4" y2="144" stroke="#101010" stroke-width="1.2" opacity=".55"/><line x1="137.0" y1="86" x2="137.0" y2="104" stroke="#101010" stroke-width="2.6"/><line x1="96.0" y1="162" x2="170.0" y2="162" stroke="#a3512b" stroke-width="2"/><path d="M170.0 162 l-7 -5 l0 10 Z" fill="#a3512b"/></svg>
+          <figcaption><span class="dfig-t">右開き（標準）</span><span class="dfig-s">左の戸を<strong>右へ</strong>引く。戸は右の固定パネルに重なり、<strong>開くのは左側</strong>。</span></figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 260 172" role="img" aria-label="左開き"><line x1="10" y1="148" x2="250" y2="148" stroke="#101010" stroke-width="2"/><rect x="14" y="26" width="232" height="12" fill="none" stroke="#101010" stroke-width="1.6"/><rect x="22" y="38" width="216" height="110" fill="none" stroke="#101010" stroke-width="1.6"/><rect x="131.0" y="39" width="107.0" height="108" fill="#2b2b2b"/><rect x="22.0" y="38" width="108.0" height="110" fill="#ffffff" stroke="#101010" stroke-width="1.4"/><line x1="84.6" y1="42" x2="84.6" y2="144" stroke="#101010" stroke-width="1.2" opacity=".55"/><line x1="123.0" y1="86" x2="123.0" y2="104" stroke="#101010" stroke-width="2.6"/><line x1="164.0" y1="162" x2="90.0" y2="162" stroke="#a3512b" stroke-width="2"/><path d="M90.0 162 l7 -5 l0 10 Z" fill="#a3512b"/></svg>
+          <figcaption><span class="dfig-t">左開き</span><span class="dfig-s">右の戸を<strong>左へ</strong>引く。<strong>開くのは右側</strong>。希望があるとき、扉の前に障害物があるときに、こちらにする。</span></figcaption>
+        </figure>
+          </div>
+          <p class="dfig-note">※ 開けたあとの状態を、正面から見た模式図です。黒く塗った側が開口になります。実際の戸の枚数・重なり方は機種によって異なります。</p>
+        </div>
+        <!-- AUTO_DOORFIG_END -->
+
+
+
         <p>つまり、間口（正面の横幅）いっぱいには開きません。右半分はふさがったまま、開くのは左側の戸の分だけです。</p>
         <p>冬用タイヤや脚立、幅のある棚を出し入れするとき。この「開かない側がある」ことを頭に入れておくと、当日あわてずに済みます。</p>
 
         <h2>標準は右開き。左開きにするのはどんなときか</h2>
         <p>ここが、カタログを読んでも出てこない部分です。据える側の判断は、こうなっています。</p>
         <p class="note">どのメーカーも標準は右開き。施主の要望があったり、扉前に障害物があった時のみ左開きに変更</p>
-        <p>何も指定しなければ、右開き（正面から見て左側の戸が開く形）で据わります。</p>
+        <p>何も指定しなければ、右開き（左の戸を右へ引いて、正面から見て左側が開く形）で据わります。</p>
         <p>左開きにするのは、次のような場合です。</p>
         <ul>
         <li>住まい手から「こちら側に開けたい」という希望があるとき</li>
