@@ -81,10 +81,10 @@ def fig(mirror, title, sub):
 BLOCK = (BEG + """
         <div class="dfig">
           <div class="dfig-grid">
-        """ + fig(False, "右開き（標準）",
-                  "左の戸を<strong>右へ</strong>引く。戸は右の固定パネルに重なり、<strong>開くのは左側</strong>。")
-        + "\n        " + fig(True, "左開き",
-                             "右の戸を<strong>左へ</strong>引く。<strong>開くのは右側</strong>。"
+        """ + fig(False, "標準の向き",
+                  "右側が固定パネル。左の戸が右へ動いて、<strong>開くのは左側</strong>。カタログの「右側固定パネル」はこの向きのこと。")
+        + "\n        " + fig(True, "逆向き",
+                             "左側が固定パネル。<strong>開くのは右側</strong>。"
                              "希望があるとき、扉の前に障害物があるときに、こちらにする。")
         + """
           </div>
@@ -104,7 +104,7 @@ def main():
         print("[中止] <style> がありません"); return 1
     s = s.replace("</style>", CSS + "</style>", 1)
     # 用語の説明の直後に置く（読んだ直後に絵で確かめられる位置）
-    anchor = "名前と開く場所が逆になるので、ここだけ注意してください。</p>"
+    anchor = "と言うほうが、行き違いが起きません。</p>"
     if anchor not in s:
         print("[中止] 差し込み位置（用語の説明）が見つかりません"); return 1
     s = s.replace(anchor, anchor + "\n\n        " + BLOCK, 1)
