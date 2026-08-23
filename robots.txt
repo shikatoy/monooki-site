@@ -1,6 +1,6 @@
 # 物置どれがいい？ — robots.txt
-Sitemap: https://shikatoy.github.io/monooki-site/sitemap.txt
-Sitemap: https://shikatoy.github.io/monooki-site/sitemap.xml
+Sitemap: https://monooki-erabi.com/sitemap.txt
+Sitemap: https://monooki-erabi.com/sitemap.xml
 
 User-agent: *
 Allow: /

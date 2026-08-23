@@ -10,7 +10,7 @@
 import json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE = "https://shikatoy.github.io/monooki-site/"
+SITE = "https://monooki-erabi.com/"
 NAME = "物置どれがいい？"
 OUT  = os.path.join(ROOT, "size")
 

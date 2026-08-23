@@ -10,7 +10,7 @@ REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 # ここに無いものは、commit されてもサイトに上がらない（過去に products/ と about.html が漏れた）
 TARGETS=(index.html about.html privacy.html contact.html \
          articles products images size \
-         sitemap.xml sitemap.txt llms.txt robots.txt tools .gitignore)
+         sitemap.xml sitemap.txt llms.txt robots.txt CNAME tools .gitignore)
 
 cd "$REPO" 2>/dev/null || { echo "[中止] リポジトリが見つかりません: $REPO"; exit 1; }
 MSG="${1:-site: 記事とデータを更新 $(date '+%Y-%m-%d')}"
@@ -42,7 +42,7 @@ git push origin main || { echo "[中止] push に失敗しました（認証を�
 
 echo ""
 echo "[完了] push しました。1〜3分でサイトに反映されます。"
-echo "       https://shikatoy.github.io/monooki-site/"
+echo "       https://monooki-erabi.com/"
 
 # --- 対象漏れの自己点検（.gitignore 済みのものは除く）---
 LEFT=$(git ls-files --others --exclude-standard)

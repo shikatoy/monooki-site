@@ -3,7 +3,7 @@
 import os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE = "https://shikatoy.github.io/monooki-site/"
+SITE = "https://monooki-erabi.com/"
 NAME = "物置どれがいい？"
 MAKER_JP = {"takubo": "タクボ", "inaba": "イナバ", "yodoko": "ヨドコウ"}
 CAT_OK = {"小型物置", "中型物置", "中・大型物置", "大型物置"}

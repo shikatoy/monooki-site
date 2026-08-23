@@ -12,7 +12,7 @@ publish.sh から自動で呼ばれるので、手で触る必要はない。
 """
 import os, re, sys, datetime
 
-BASE    = "https://shikatoy.github.io/monooki-site/"
+BASE    = "https://monooki-erabi.com/"
 ROOT    = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITEMAP = os.path.join(ROOT, "sitemap.xml")
 
