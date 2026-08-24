@@ -1,0 +1,25 @@
+import os
+
+p = os.path.expanduser("~/mnt/Documents/monooki-site/tools/publish-article.py")
+if not os.path.exists(p):
+    p = os.path.expanduser("~/Documents/monooki-site/tools/publish-article.py")
+s = open(p, encoding="utf-8").read()
+
+old = '''def inline(t):
+    t = esc(t)
+    t = re.sub(r"\\*\\*(.+?)\\*\\*", r"<strong>\\1</strong>", t)
+    return t'''
+
+new = '''def inline(t):
+    t = esc(t)
+    t = re.sub(r"\\*\\*(.+?)\\*\\*", r"<strong>\\1</strong>", t)
+    # [表示する文字](リンク先) を <a> にする。記事どうしをつなぐために使う
+    t = re.sub(r"\\[([^\\]]+)\\]\\(([^)\\s]+)\\)", r'<a href="\\2">\\1</a>', t)
+    return t'''
+
+n = s.count(old)
+print("置換対象:", n)
+if n != 1:
+    raise SystemExit("[中止] inline() を特定できませんでした")
+open(p, "w", encoding="utf-8").write(s.replace(old, new, 1))
+print("publish-article.py にリンク記法の対応を追加しました")

@@ -175,6 +175,18 @@
     .disclaimer { padding: 32px; }
     .footer-meta { flex-direction: row; justify-content: space-between; }
   }
+/* AUTO_DOORFIG_CSS_START */
+  /* ───── 扉の開き方の図（tools/build-door-figure.py が生成） ───── */
+  .dfig { margin: 34px 0 0; }
+  .dfig-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 620px) { .dfig-grid { grid-template-columns: 1fr 1fr; } }
+  .dfig figure { margin: 0; border: 1px solid var(--line); background: #fff; }
+  .dfig svg { display: block; width: 100%; height: auto; }
+  .dfig figcaption { padding: 11px 14px; border-top: 1px solid var(--linesoft); background: #efe9dc; }
+  .dfig-t { display: block; font-family: 'Shippori Mincho B1', serif; font-weight: 700; font-size: 14px; }
+  .dfig-s { display: block; margin-top: 4px; font-size: 12px; line-height: 1.8; color: var(--mute); }
+  .dfig-note { margin: 14px 0 0; font-size: 12px; line-height: 1.95; color: var(--mute); }
+/* AUTO_DOORFIG_CSS_END */
 /* AUTO_RELATED_CSS_START */
   /* ───── 記事末尾の導線（tools/build-article-links.py が生成） ───── */
   .rel { margin: 46px 0 0; border-top: 1px solid var(--line); padding-top: 26px; }
@@ -196,18 +208,6 @@
     font-weight: 700; font-size: 15px; line-height: 1.4; }
   .rel-go { flex: 0 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--rust); }
 /* AUTO_RELATED_CSS_END */
-/* AUTO_DOORFIG_CSS_START */
-  /* ───── 扉の開き方の図（tools/build-door-figure.py が生成） ───── */
-  .dfig { margin: 34px 0 0; }
-  .dfig-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
-  @media (min-width: 620px) { .dfig-grid { grid-template-columns: 1fr 1fr; } }
-  .dfig figure { margin: 0; border: 1px solid var(--line); background: #fff; }
-  .dfig svg { display: block; width: 100%; height: auto; }
-  .dfig figcaption { padding: 11px 14px; border-top: 1px solid var(--linesoft); background: #efe9dc; }
-  .dfig-t { display: block; font-family: 'Shippori Mincho B1', serif; font-weight: 700; font-size: 14px; }
-  .dfig-s { display: block; margin-top: 4px; font-size: 12px; line-height: 1.8; color: var(--mute); }
-  .dfig-note { margin: 14px 0 0; font-size: 12px; line-height: 1.95; color: var(--mute); }
-/* AUTO_DOORFIG_CSS_END */
 </style>
 </head>
 <body>

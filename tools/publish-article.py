@@ -53,6 +53,8 @@ def parse_front(md):
 def inline(t):
     t = esc(t)
     t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
+    # [表示する文字](リンク先) を <a> にする。記事どうしをつなぐために使う
+    t = re.sub(r"\[([^\]]+)\]\(([^)\s]+)\)", r'<a href="\2">\1</a>', t)
     return t
 
 
