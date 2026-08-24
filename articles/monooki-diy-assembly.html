@@ -196,6 +196,11 @@
     font-weight: 700; font-size: 15px; line-height: 1.4; }
   .rel-go { flex: 0 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--rust); }
 /* AUTO_RELATED_CSS_END */
+/* AUTO_XLINK_CSS_START */
+  /* ───── 記事どうしのリンク（tools/build-crosslinks.py が生成） ───── */
+  .x-link { border-bottom: 1px dotted var(--rust); text-decoration: none; }
+  .x-link:hover { color: var(--rust); border-bottom-style: solid; }
+/* AUTO_XLINK_CSS_END */
 </style>
 </head>
 <body>
@@ -281,7 +286,7 @@
 
         <p>でも、原因はたいてい別のところにあります。</p>
 
-        <p><strong>ブロックの水平が取れているかどうか</strong>。ここでほぼ決まります。</p>
+        <p><strong><a class="x-link" href="monooki-level-blocks.html">ブロックの水平</a>が取れているかどうか</strong>。ここでほぼ決まります。</p>
 
         <p>理由はシンプルです。</p>
 
@@ -351,7 +356,7 @@
 
         <h2>「これは自分でやめておいた方がいい」現場</h2>
 
-        <p>サイズより先に見てほしいのが、<strong>設置場所の地面の状態</strong>です。</p>
+        <p>サイズより先に見てほしいのが、<strong><a class="x-link" href="monooki-size-and-placement.html">設置場所</a>の地面の状態</strong>です。</p>
 
         <p>物置の大きさより、地面がどうなっているかで難しさが変わります。</p>
 
