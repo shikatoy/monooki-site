@@ -2223,23 +2223,23 @@ document.addEventListener('keydown', e => {
    PRODUCTS / QA_ITEMS / ARTICLES の内容から JSON-LD を組み立てて
    <head> に注入する。データが更新されれば構造化データも自動で追随する。 */
 (function(){
+  const SITE_ORIGIN = 'https://monooki-erabi.com/';
   const data = [];
   data.push({
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: '物置 製品アーカイブ（タクボ・イナバ・ヨドコウ）',
     numberOfItems: PRODUCTS.length,
-    itemListElement: PRODUCTS.map((p, i) => ({
+    /* Product 型は offers（価格）か review か aggregateRating が要る。
+       当サイトは価格を載せず、レビューも集めていないので Product にはしない。
+       名前とリンクだけの一覧にしておけば、Google に無効と判定されない。
+       行き先は自分の製品ページ。無ければメーカー公式。 */
+    itemListElement: PRODUCTS.map((p, i) => Object.assign({
       '@type': 'ListItem',
       position: i + 1,
-      item: Object.assign({
-        '@type': 'Product',
-        name: p.name,
-        brand: { '@type': 'Brand', name: MAKERS[p.maker].split(' /')[0] },
-        category: p.cat,
-        description: p.base
-      }, p.link ? { url: p.link } : {})
-    }))
+      name: p.name
+    }, PRODUCT_PAGES[p.id] ? { url: SITE_ORIGIN + PRODUCT_PAGES[p.id] }
+       : (p.link ? { url: p.link } : {})))
   });
   if(QA_ITEMS.length){
     data.push({
