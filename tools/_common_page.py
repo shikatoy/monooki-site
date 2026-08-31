@@ -126,7 +126,7 @@ def shell(title, desc, url, up, crumbs, body, style, jsonld):
 
 <header class="site-header">
   <div class="site-header-inner">
-    <a href="%(up)s" class="brand"><span class="brand-mark">倉</span><span class="brand-name">%(site)s</span></a>
+    <a href="%(up)s" class="brand"><span class="brand-mark"><svg viewBox="0 0 128 128" width="23" height="23" fill="currentColor" aria-hidden="true"><rect x="10" y="27" width="108" height="14" rx="1"/><rect x="22" y="47" width="38" height="54"/><rect x="68" y="47" width="38" height="54"/></svg></span><span class="brand-name">%(site)s</span></a>
     <a href="%(up)s" class="header-link">← トップへ戻る</a>
   </div>
 </header>
