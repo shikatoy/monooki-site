@@ -1511,7 +1511,18 @@ function renderStep(){
           </button>`).join('')}
       </div>
     </div>
-    <style>.opt-row:hover .opt-arrow{opacity:1}</style>`;
+    <style>.opt-row:hover .opt-arrow{opacity:1}
+    /* ───── 色違い・コラボの印（variant） ───── */
+    .vbadge { margin-top:6px; display:inline-flex; align-items:center; gap:6px;
+      border:1px solid var(--rust); color:var(--rust); background:#fff;
+      padding:2px 8px; font-family:'IBM Plex Mono',monospace; font-size:9px;
+      letter-spacing:.12em; line-height:1.7; }
+    .vbadge .vb-of { color:var(--mute); letter-spacing:0;
+      font-family:'Shippori Mincho B1',serif; font-size:10px; }
+    .vtag { margin-left:6px; border:1px solid currentColor; opacity:.7;
+      padding:1px 5px; font-family:'IBM Plex Mono',monospace; font-size:8px;
+      letter-spacing:.1em; vertical-align:2px; }
+  </style>`;
 
   quizBody.querySelectorAll('.opt-row').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -1634,7 +1645,9 @@ function renderResults(){
   const userTags = computeUserTags();
   const totalWeight = Object.values(userTags).reduce((s, v) => s + v, 0) || 1;
 
-  const scored = PRODUCTS.map(p => {
+  /* 色違い・コラボ（variant 付き）は診断の候補から外す。
+     中身が同じものが並ぶと選びにくくなるため。索引・比較・メーカー一覧には出る */
+  const scored = PRODUCTS.filter(p => !p.variant).map(p => {
     let score = 0; const matched = [];
     for(const k in p.tags){
       if(userTags[k]){ score += p.tags[k] * userTags[k]; matched.push({ tag:k, w:userTags[k] }); }
@@ -1851,7 +1864,8 @@ function renderMakerLineups(){
     const rows = GROUPS.map(g => {
       const names = PRODUCTS.filter(p => p.maker === mk && g.match(p.cat)).map(p => {
         const pg = PRODUCT_PAGES[p.id];
-        return pg ? `<a href="${pg}" class="ln-link">${esc(p.name)}</a>` : esc(p.name);
+        const nm = pg ? `<a href="${pg}" class="ln-link">${esc(p.name)}</a>` : esc(p.name);
+        return nm + (p.variant ? `<span class="vtag">${esc(p.variant.kind)}</span>` : '');
       });
       return names.length ? { label: g.label, names } : null;
     }).filter(Boolean);
@@ -2026,6 +2040,14 @@ function restoreCompareFromHash(){
    絞り込みを変えたときは折りたたみ直す（idxExpanded = false に戻す） */
 const IDX_PREVIEW = 9;
 let idxExpanded = false;
+/* 色違い・コラボの印。variant:{ of:'親のid', kind:'色違い'|'コラボ'|'仕様違い' } */
+function variantBadge(p){
+  if(!p.variant) return '';
+  const base = PRODUCTS.find(x => x.id === p.variant.of);
+  const of = base ? `　<span class="vb-of">${esc(base.name)}</span>` : '';
+  return `<p class="vbadge">${esc(p.variant.kind)}${of}</p>`;
+}
+
 function renderIndex(){
   const grid = document.querySelector('#index-grid');
   if(!grid) return;
@@ -2042,6 +2064,7 @@ function renderIndex(){
       ${visualWrap(p, productVisual(p, null, false), 'aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-white/60')}
       <p class="mt-5 font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">${MAKERS[p.maker]} — ${esc(p.cat)}${isNew(p) ? ' <span class="text-rust">● NEW</span>' : ''}</p>
       <h4 class="mt-2 font-serif font-bold text-lg leading-snug">${esc(p.name)}</h4>
+      ${variantBadge(p)}
       <p class="mt-2 text-[12px] leading-relaxed text-neutral-500">${p.features.map(esc).join('・')}</p>
       ${PRODUCT_PAGES[p.id] ? `<a href="${PRODUCT_PAGES[p.id]}" class="block mt-4 w-full bg-ink text-paper py-2.5 text-center font-mono text-[10px] tracking-widest2 uppercase hover:bg-rust transition-colors duration-300">製品ページ →</a>` : ''}
       <button class="cmp-toggle mt-2 w-full border border-line py-2.5 font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300 ${compareSel.includes(p.id) ? 'cmp-on' : ''}" data-pid="${p.id}">${compareSel.includes(p.id) ? '✓ 比較中' : '＋ 比較に追加'}</button>
