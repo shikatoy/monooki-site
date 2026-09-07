@@ -48,6 +48,13 @@ MAP = [
     ("組み立て", "monooki-diy-assembly"),
     ("ホームセンター", "homecenter-monooki-vs-major3"),
     ("OEM", "homecenter-monooki-vs-major3"),
+    ("錆び", "monooki-rust-where-and-how"),
+    ("塗装が剥", "monooki-rust-where-and-how"),
+    ("水平器", "monooki-diy-tools"),
+    ("インパクトドライバー", "monooki-diy-tools"),
+    ("道具", "monooki-diy-tools"),
+    ("オーバースライド", "takubo-garage-scudo-door-types"),
+    ("巻上げシャッター", "takubo-garage-scudo-door-types"),
 ]
 
 CSS = CSSBEG + """
