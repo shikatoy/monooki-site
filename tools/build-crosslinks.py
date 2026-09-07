@@ -55,6 +55,8 @@ MAP = [
     ("道具", "monooki-diy-tools"),
     ("オーバースライド", "takubo-garage-scudo-door-types"),
     ("巻上げシャッター", "takubo-garage-scudo-door-types"),
+    ("結露", "monooki-insulated-generation"),
+    ("断熱", "monooki-insulated-generation"),
 ]
 
 CSS = CSSBEG + """

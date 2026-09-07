@@ -23,8 +23,7 @@ import os, sys, re, json, asyncio
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 FONTS = os.path.join(HERE, "_ogfonts")
-ROOT = os.path.dirname(HERE)
-OUT = os.path.join(ROOT, "images")
+OUT = os.path.join(HERE, "out")
 
 # slug → OG に載せる見出し。\n を入れるとそこで改行する（入れなければ幅で自動改行）
 # 1行は 32px で12字まで。はみ出したら自動で字を小さくする
@@ -44,7 +43,6 @@ TITLES = {
     "monooki-rust-where-and-how":      "物置は、\nどこから錆びるのか",
     "monooki-diy-tools":               "自分で組む前に、\n無いと止まる道具",
     "takubo-garage-scudo-door-types":  "タクボのガレージは、\n扉だけが違う",
-    "monooki-insulated-generation":    "断熱物置が、\n静かに入れ替わった",
 }
 
 # 元の5枚を実測して合わせた寸法（600×315 を 2倍で書き出す）
