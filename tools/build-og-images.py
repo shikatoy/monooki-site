@@ -44,7 +44,6 @@ TITLES = {
     "monooki-rust-where-and-how":      "物置は、\nどこから錆びるのか",
     "takubo-garage-scudo-door-types":  "タクボのガレージは、\n扉だけが違う",
     "monooki-insulated-generation":    "断熱物置が、\n静かに入れ替わった",
-    "inaba-yodo-takubo-monooki-compare": "イナバ・ヨド・タクボ、\n比べる前に決めること",
 }
 
 # 元の5枚を実測して合わせた寸法（600×315 を 2倍で書き出す）

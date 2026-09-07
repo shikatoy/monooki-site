@@ -22,7 +22,6 @@ NG_AFTER = ("説明", "工事", "費用", "方法", "時間", "作業", "手順"
 
 # 言葉 → 行き先。長い言葉から順に見るので、並びは気にしなくてよい
 MAP = [
-    ("どのメーカー", "inaba-yodo-takubo-monooki-compare"),
     ("水平出し", "monooki-level-blocks"),
     ("基礎ブロック", "monooki-level-blocks"),
     ("ブロックの水平", "monooki-level-blocks"),
