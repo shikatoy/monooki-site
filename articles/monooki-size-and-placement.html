@@ -178,6 +178,11 @@
     .disclaimer { padding: 32px; }
     .footer-meta { flex-direction: row; justify-content: space-between; }
   }
+/* AUTO_XLINK_CSS_START */
+  /* ───── 記事どうしのリンク（tools/build-crosslinks.py が生成） ───── */
+  .x-link { border-bottom: 1px dotted var(--rust); text-decoration: none; }
+  .x-link:hover { color: var(--rust); border-bottom-style: solid; }
+/* AUTO_XLINK_CSS_END */
 /* AUTO_RELATED_CSS_START */
   /* ───── 記事末尾の導線（tools/build-article-links.py が生成） ───── */
   .rel { margin: 46px 0 0; border-top: 1px solid var(--line); padding-top: 26px; }
@@ -199,11 +204,6 @@
     font-weight: 700; font-size: 15px; line-height: 1.4; }
   .rel-go { flex: 0 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--rust); }
 /* AUTO_RELATED_CSS_END */
-/* AUTO_XLINK_CSS_START */
-  /* ───── 記事どうしのリンク（tools/build-crosslinks.py が生成） ───── */
-  .x-link { border-bottom: 1px dotted var(--rust); text-decoration: none; }
-  .x-link:hover { color: var(--rust); border-bottom-style: solid; }
-/* AUTO_XLINK_CSS_END */
 </style>
 </head>
 <body>
