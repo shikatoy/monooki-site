@@ -40,6 +40,10 @@ TITLES = {
     "monooki-door-opening-side":       "物置の扉は、\nどっち側が開くのか",
     "monooki-removal-and-replacement": "古い物置は、\nどうやって撤去するのか",
     "monooki-okenai-basho":            "物置が置けない場所、\n置きにくい場所",
+    # 2026-09-07 追加
+    "monooki-rust-where-and-how":      "物置は、\nどこから錆びるのか",
+    "monooki-diy-tools":               "自分で組む前に、\n無いと止まる道具",
+    "takubo-garage-scudo-door-types":  "タクボのガレージは、\n扉だけが違う",
 }
 
 # 元の5枚を実測して合わせた寸法（600×315 を 2倍で書き出す）
