@@ -9,7 +9,11 @@
   <array>
     <string>/bin/bash</string>
     <string>-lc</string>
-    <string>"$HOME/Documents/monooki-site/tools/product-check.sh"</string>
+    <!-- スクリプトを「実行」せず bash に「読ませる」。
+         ~/Documents 配下のファイルには macOS が com.apple.provenance を付けるため、
+         launchd から直接 exec すると Operation not permitted で弾かれる。
+         bash の引数として渡せば読み込みだけで済み、実行権限もいらない。 -->
+    <string>bash "$HOME/Documents/monooki-site/tools/product-check.sh"</string>
   </array>
 
   <!-- 毎朝 8:00。変更が見つからなければ何もせずに終わる -->
