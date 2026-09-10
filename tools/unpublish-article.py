@@ -21,9 +21,35 @@ TRASH = os.path.join(os.path.dirname(ROOT), "_to_delete")
 
 
 def strip_articles_entry(s, slug):
-    """ARTICLES 配列から該当スラッグの1件を落とす"""
-    pat = re.compile(r"\n\s*\{[^{}]*?" + re.escape(slug) + r"[^{}]*?\},?", re.S)
-    return pat.sub("", s), len(pat.findall(s))
+    """ARTICLES 配列から該当スラッグの1件を落とす。
+
+    2026-09-10：ここを正規表現で切っていたところ、1件消すつもりで
+    手前の4件まで巻き込んで消してしまった。{ } の対応を数えて
+    1件ずつに割る方式に変える（正規表現では入れ子を数えられない）。
+    """
+    i = s.find("const ARTICLES")
+    if i < 0:
+        return s, 0
+    j = s.index("];", i)
+    blk = s[i:j]
+
+    ents, depth, start = [], 0, None
+    for k, ch in enumerate(blk):
+        if ch == "{":
+            if depth == 0:
+                start = k
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                ents.append(blk[start:k + 1])
+                start = None
+
+    keep = [e for e in ents if slug not in e]
+    n = len(ents) - len(keep)
+    if not n:
+        return s, 0
+    return s[:i] + "const ARTICLES = [\n  " + ",\n  ".join(keep) + "\n" + s[j:], n
 
 
 def main():

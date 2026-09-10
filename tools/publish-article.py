@@ -17,10 +17,11 @@
 """
 import os, re, sys, io
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
 SITE = "https://monooki-erabi.com/"
 NAME = "物置どれがいい？"
-TEMPLATE = os.path.join(ROOT, "articles", "monooki-level-blocks.html")
+TEMPLATE = os.path.join(HERE, "_article_template.html")  # ライブ記事を雛形にすると、同じ記事を出し直したとき自分自身を上書きして壊す
 TAGS = ["設置の実務", "選び方", "機種の見方"]
 
 

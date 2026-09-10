@@ -29,16 +29,12 @@ OUT = os.path.join(ROOT, "images")
 # slug → OG に載せる見出し。\n を入れるとそこで改行する（入れなければ幅で自動改行）
 # 1行は 32px で12字まで。はみ出したら自動で字を小さくする
 TITLES = {
-    "monooki-level-blocks":            "物置の水平出し｜設置の難所は組み立てではない",
-    "monooki-diy-assembly":            "物置は自分で組み立てられる？ 大変なのは組み立てだけじゃない",
-    "monooki-maker-assembly":          "物置の組みやすさは小型と中型・大型で逆転する",
     "monooki-options-and-anchor":      "物置のオプションは要る？基本は不要、でもアンカーは別",
     "monooki-size-and-placement":      "物置の置き方は誰が決める？サイズ選びの前に知ること",
     # ここから今回ぶん
     "kogata-chugata-ogata-chigai":     "小型と中型・大型は何が違う？\n物置は「区分」で見る",
     "homecenter-monooki-vs-major3":    "ホームセンターの物置と\n大手3社は、何が違うのか",
-    "monooki-door-opening-side":       "物置の扉は、\nどっち側が開くのか",
-    "monooki-removal-and-replacement": "古い物置は、\nどうやって撤去するのか",
+    "monooki-door-opening-side":       "扉の向きは、\n買うときに決めなくていい",
     "monooki-okenai-basho":            "物置が置けない場所、\n置きにくい場所",
     # 2026-09-07 追加
     "monooki-rust-where-and-how":      "物置は、\nどこから錆びるのか",
