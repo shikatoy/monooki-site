@@ -39,11 +39,20 @@ def load_products():
         if nx > 0:
             seg = seg[:nx]
         door = re.search(r"door:'([^']*)'", seg)
+        note = re.search(r"codeNote:'([^']*)'", seg)
+        # 桁揃えで空白が余分に入っている行がある（例 d:950,  h:2085）。
+        # 空白を固定で書くと取りこぼす（2026-09-17 に型番索引が 343→337 と表示していた）。
+        sizes = [(c, int(w), int(d), int(h)) for c, w, d, h in re.findall(
+            r"code:'([^']+)'\s*,\s*w:\s*(\d+)\s*,\s*d:\s*(\d+)\s*,\s*h:\s*(\d+)", seg)]
+        loose = len(re.findall(r"code:'[^']+'", seg))
+        if loose != len(sizes):
+            raise SystemExit("[中止] %s の型番を取りこぼしました（%d 件中 %d 件）。書式を確認してください。"
+                             % (pid, loose, len(sizes)))
         out.append(dict(
             id=pid, maker=mk, name=nm, cat=cat, page=pages.get(pid, ""),
             door=door.group(1) if door else "",
-            sizes=[(c, int(w), int(d), int(h))
-                   for c, w, d, h in re.findall(r"code:'([^']+)', w:(\d+), d:(\d+), h:(\d+)", seg)]))
+            codeNote=note.group(1) if note else "",
+            sizes=sizes))
     return out
 
 

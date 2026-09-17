@@ -44,6 +44,8 @@ def build():
             '<tr><td class="l m">%s</td><td>%s</td><td>%s</td><td>%s</td></tr>'
             % (C.esc(c), "{:,}".format(w), "{:,}".format(d), "{:,}".format(h))
             for c, w, d, h in sorted(p["sizes"], key=lambda s: s[0]))
+        if p.get("codeNote"):
+            head += '<p class="note">%s</p>' % p["codeNote"]
         body_parts.append(head +
                           '<table class="tbl"><thead><tr><th class="l">型番</th>'
                           '<th>間口 mm</th><th>奥行 mm</th><th>高さ mm</th></tr></thead>'
