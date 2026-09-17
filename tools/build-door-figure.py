@@ -104,9 +104,14 @@ def main():
         print("[中止] <style> がありません"); return 1
     s = s.replace("</style>", CSS + "</style>", 1)
     # 用語の説明の直後に置く（読んだ直後に絵で確かめられる位置）
-    anchor = "と言うほうが、行き違いが起きません。</p>"
-    if anchor not in s:
-        print("[中止] 差し込み位置（用語の説明）が見つかりません"); return 1
+    # 記事を書き直すと、この目印が消えて図が入らなくなる（2026-09-17 に発生）。
+    # 候補を順に試し、どれも無ければ止める。
+    anchors = ["言い切るほうが確実です。</p>",
+               "と言うほうが、行き違いが起きません。</p>"]
+    anchor = next((a for a in anchors if a in s), None)
+    if anchor is None:
+        print("[中止] 差し込み位置が見つかりません。記事を書き直したなら、"
+              "tools/build-door-figure.py の anchors に今の文末を足してください"); return 1
     s = s.replace(anchor, anchor + "\n\n        " + BLOCK, 1)
     if s != orig:
         open(PAGE, "w", encoding="utf-8").write(s)

@@ -16,6 +16,7 @@ cd "$REPO" 2>/dev/null || { echo "[中止] リポジトリが見つかりませ�
 MSG="${1:-site: 記事とデータを更新 $(date '+%Y-%m-%d')}"
 
 # 型番索引・サイズ帯・寸法ページを製品データから作り直す（手で直さなくてよい）
+python3 "$REPO/tools/build-product-sizes.py" || echo "[警告] 製品ページのサイズ表の生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-codes.py" || echo "[警告] 型番索引の生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-bands.py" || echo "[警告] サイズ帯ページの生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-size-pages.py" || echo "[警告] 寸法ページの生成に失敗しました（続行します）"
@@ -31,7 +32,7 @@ python3 "$REPO/tools/build-article-links.py" || echo "[警告] 記事導線の�
 python3 "$REPO/tools/build-discontinued.py" || echo "[警告] 廃盤ページの生成に失敗しました（続行します）"
 
 # サイトマップの lastmod をファイル更新日で自動更新（手で直さなくてよい）
-python3 "$REPO/tools/update-sitemap-lastmod.py" || echo "[警告] サイトマップの更新に失敗しました（続行します）"
+python3 "$REPO/tools/build-sitemap.py" || echo "[警告] サイトマップの生成に失敗しました（続行します）"
 
 CHANGED=$(git status --porcelain -- "${TARGETS[@]}")
 if [ -z "$CHANGED" ]; then
