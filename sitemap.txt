@@ -48,6 +48,7 @@ https://monooki-erabi.com/size/band-w180-d60.html
 https://monooki-erabi.com/size/band-w180-d90.html
 https://monooki-erabi.com/size/band-w210-d120.html
 https://monooki-erabi.com/size/band-w210-d150.html
+https://monooki-erabi.com/size/band-w210-d180.html
 https://monooki-erabi.com/size/band-w210-d210.html
 https://monooki-erabi.com/size/band-w210-d240.html
 https://monooki-erabi.com/size/band-w210-d60.html
@@ -59,6 +60,9 @@ https://monooki-erabi.com/size/band-w240-d210.html
 https://monooki-erabi.com/size/band-w240-d240.html
 https://monooki-erabi.com/size/band-w270-d180.html
 https://monooki-erabi.com/size/band-w270-d210.html
+https://monooki-erabi.com/size/band-w270-d240.html
+https://monooki-erabi.com/size/band-w270-d270.html
+https://monooki-erabi.com/size/band-w420-d210.html
 https://monooki-erabi.com/size/band-w90-d30.html
 https://monooki-erabi.com/size/band-w90-d60.html
 https://monooki-erabi.com/size/band-w90-d90.html
