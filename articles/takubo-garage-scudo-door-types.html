@@ -178,6 +178,11 @@
     .disclaimer { padding: 32px; }
     .footer-meta { flex-direction: row; justify-content: space-between; }
   }
+/* AUTO_XLINK_CSS_START */
+  /* ───── 記事どうしのリンク（tools/build-crosslinks.py が生成） ───── */
+  .x-link { border-bottom: 1px dotted var(--rust); text-decoration: none; }
+  .x-link:hover { color: var(--rust); border-bottom-style: solid; }
+/* AUTO_XLINK_CSS_END */
 /* AUTO_RELATED_CSS_START */
   /* ───── 記事末尾の導線（tools/build-article-links.py が生成） ───── */
   .rel { margin: 46px 0 0; border-top: 1px solid var(--line); padding-top: 26px; }
@@ -250,7 +255,7 @@
 
         <h2>寸法の選択肢が完全に一致している</h2>
         <p>公式のサイズ表は、2機種とも次のようになっています。</p>
-        <p>| | 選べる値 | |---|---| | 間口 | 2,774 / 3,124 / 3,474 mm | | 奥行 | 5,432 / 6,132 / 6,648 mm | | 高さ | 2,450 / 2,763 / 3,250 mm |</p>
+        <p>| | 選べる値 | |---|---| | 間口 | 2,774 / 3,124 / 3,474 mm | | <a class="x-link" href="monooki-narrow-space-maker.html">奥行</a> | 5,432 / 6,132 / 6,648 mm | | 高さ | 2,450 / 2,763 / 3,250 mm |</p>
         <p>そして、間口と奥行の組み合わせにも同じ制限がかかっています。</p>
         <ul>
         <li>奥行 5,432 … 間口は 2,774 と 3,124 のみ（最大の 3,474 は選べない）</li>

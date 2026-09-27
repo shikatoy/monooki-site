@@ -22,6 +22,8 @@ NG_AFTER = ("説明", "工事", "費用", "方法", "時間", "作業", "手順"
 
 # 言葉 → 行き先。長い言葉から順に見るので、並びは気にしなくてよい
 MAP = [
+    ("寸法から探す", "monooki-narrow-space-maker"),
+    ("奥行", "monooki-narrow-space-maker"),
     ("アンカー工事", "monooki-options-and-anchor"),
     ("転倒防止", "monooki-options-and-anchor"),
     ("アンカー", "monooki-options-and-anchor"),
