@@ -9,3 +9,6 @@ _SPEC_A1.md
 # 生成の中間ファイル（公開不要）
 tools/_bands.json
 tools/__pycache__/
+# エージェントが作る作業用の一時ファイル（公開不要）
+.scratch*
+_scratch*

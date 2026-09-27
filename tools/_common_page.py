@@ -42,8 +42,8 @@ def load_products():
         note = re.search(r"codeNote:'([^']*)'", seg)
         # 桁揃えで空白が余分に入っている行がある（例 d:950,  h:2085）。
         # 空白を固定で書くと取りこぼす（2026-09-17 に型番索引が 343→337 と表示していた）。
-        sizes = [(c, int(w), int(d), int(h)) for c, w, d, h in re.findall(
-            r"code:'([^']+)'\s*,\s*w:\s*(\d+)\s*,\s*d:\s*(\d+)\s*,\s*h:\s*(\d+)", seg)]
+        sizes = [(c, int(float(w)+0.5), int(float(d)+0.5), int(float(h)+0.5)) for c, w, d, h in re.findall(
+            r"code:'([^']+)'\s*,\s*w:\s*([\d.]+)\s*,\s*d:\s*([\d.]+)\s*,\s*h:\s*([\d.]+)", seg)]
         loose = len(re.findall(r"code:'[^']+'", seg))
         if loose != len(sizes):
             raise SystemExit("[中止] %s の型番を取りこぼしました（%d 件中 %d 件）。書式を確認してください。"

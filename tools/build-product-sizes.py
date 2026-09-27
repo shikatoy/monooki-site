@@ -27,6 +27,11 @@ PAGES = {
 }
 
 
+def _mm(v):
+    """寸法は整数mmに揃える。ヨドは図面値を .5 で出すことがあるので四捨五入する。"""
+    return int(float(v) + 0.5)
+
+
 def products():
     s = io.open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
     i = s.index("const PRODUCTS"); j = s.index("];", i)
@@ -46,13 +51,13 @@ def products():
         if not m: continue
         # 桁揃えのため空白が余分に入っている行がある（例 d:950,  h:2085）。
         # 空白を固定で書くと取りこぼす（2026-09-17 にフォルタの6型番を落とした）。
-        sizes = [(c, int(w), int(d), int(h)) for c, w, d, h
-                 in re.findall(r"\{\s*code:'([^']+)'\s*,\s*w:\s*(\d+)\s*,\s*d:\s*(\d+)\s*,\s*h:\s*(\d+)\s*\}", e)]
+        sizes = [(c, _mm(w), _mm(d), _mm(h)) for c, w, d, h
+                 in re.findall(r"\{\s*code:'([^']+)'\s*,\s*w:\s*([\d.]+)\s*,\s*d:\s*([\d.]+)\s*,\s*h:\s*([\d.]+)\s*\}", e)]
         # 取りこぼしが無いか、単純な型番の数と突き合わせる
         loose = len(re.findall(r"code:'[^']+'", e))
         if loose != len(sizes):
             raise SystemExit("[中止] %s の型番を取りこぼしました（%d 件中 %d 件しか読めていません）。"
-                             "書式を確認してください。" % (pid, loose, len(sizes)))
+                             "書式を確認してください。" % (m.group(1), loose, len(sizes)))
         out[m.group(1)] = (sizes, "sizesComplete:true" in e)
     return out
 
