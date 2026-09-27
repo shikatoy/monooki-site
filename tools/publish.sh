@@ -16,7 +16,8 @@ cd "$REPO" 2>/dev/null || { echo "[中止] リポジトリが見つかりませ�
 MSG="${1:-site: 記事とデータを更新 $(date '+%Y-%m-%d')}"
 
 # 型番索引・サイズ帯・寸法ページを製品データから作り直す（手で直さなくてよい）
-python3 "$REPO/tools/build-product-sizes.py" || echo "[警告] 製品ページのサイズ表の生成に失敗しました（続行します）"
+# 取りこぼし検知で止まる作りなので、ここは警告で流さず公開を止める
+python3 "$REPO/tools/build-product-sizes.py" || { echo "[中止] 製品ページのサイズ表の生成に失敗しました。上の理由を直してから公開してください。"; exit 1; }
 python3 "$REPO/tools/build-codes.py" || echo "[警告] 型番索引の生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-bands.py" || echo "[警告] サイズ帯ページの生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-size-pages.py" || echo "[警告] 寸法ページの生成に失敗しました（続行します）"
@@ -33,6 +34,9 @@ python3 "$REPO/tools/build-discontinued.py" || echo "[警告] 廃盤ページの
 
 # サイトマップの lastmod をファイル更新日で自動更新（手で直さなくてよい）
 python3 "$REPO/tools/build-sitemap.py" || echo "[警告] サイトマップの生成に失敗しました（続行します）"
+
+# サイト内リンクが切れていないか（記事を取り下げたあとの取り残しを止める）
+python3 "$REPO/tools/check-links.py" || { echo "[中止] リンク切れを直してから公開してください。"; exit 1; }
 
 CHANGED=$(git status --porcelain -- "${TARGETS[@]}")
 if [ -z "$CHANGED" ]; then

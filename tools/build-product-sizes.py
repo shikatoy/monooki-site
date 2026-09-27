@@ -24,7 +24,13 @@ PAGES = {
     "i-tbj": "inaba-takuhai-box",         "i-dm": "inaba-arcia-fit",
     "y-ese": "yodoko-esmo",               "y-lmd": "yodoko-elmo",
     "y-vgc": "yodoko-lavige",
+    "i-smx": "inaba-nyso-smx",            "i-sml": "inaba-como-lite",
 }
+
+# 表がまだ無いページに差し込むときの目印。型番0件で作ったページは
+# 「サイズ一覧」の下がこの注記1行だけになっている。
+PLACEHOLDER = re.compile(
+    r'<p class="note">現時点でサイズ表は公開されていません。[^<]*</p>')
 
 
 def _mm(v):
@@ -64,6 +70,12 @@ def products():
 
 def main():
     data = products()
+    missing = [pid for pid, (sizes, _) in data.items()
+               if sizes and pid not in PAGES]
+    if missing:
+        raise SystemExit("[中止] PAGES に無い機種に型番が入っています: %s。"
+                         "tools/build-product-sizes.py の PAGES に"
+                         "製品ページのファイル名を足してください。" % "／".join(missing))
     n = 0
     for pid, slug in PAGES.items():
         if pid not in data: continue
@@ -80,7 +92,29 @@ def main():
 
         body = re.search(r"(<table class=\"sizes\">.*?</table>)", s, re.S)
         if not body:
-            print("  [飛ばす] 表が見つかりません:", slug); continue
+            # 型番0件のまま作ったページ。注記の位置に表と注記を新しく置く。
+            body = PLACEHOLDER.search(s)
+            if not body:
+                print("  [飛ばす] 表も差し込み位置も見つかりません:", slug); continue
+            note = ("全 %d 型番を掲載しています。" % len(sizes) if complete
+                    else "公式で確認できた %d 型番を掲載しています。"
+                         "<strong>これ以外の型番もあります。</strong>" % len(sizes))
+            rows = "\n".join(
+                "          <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>"
+                % (c, format(w, ","), format(d, ","), format(h, ","))
+                for c, w, d, h in sorted(sizes, key=lambda x: (x[1], x[2], x[3])))
+            block = ('<table class="sizes">\n        <thead>\n'
+                     '          <tr><th>型番</th><th>間口 W</th><th>奥行 D</th>'
+                     '<th>高さ H</th></tr>\n        </thead>\n        <tbody>\n'
+                     '%s\n        </tbody>\n      </table>\n'
+                     '<p class="note">%s寸法は本体の外寸（mm）です。'
+                     '実際の設置高さは、基礎ブロック分（基本 高さ約10cm）を'
+                     '足した値になります。</p>' % (rows, note))
+            io.open(p, "w", encoding="utf-8").write(s[:body.start()] + block + s[body.end():])
+            print("  %-34s %3d型番%s ← 表を新しく作りました"
+                  % (slug, len(sizes), "（全型番）" if complete else ""))
+            n += 1
+            continue
         tbl = ('<table class="sizes">\n        <thead>\n'
                '          <tr><th>型番</th><th>間口 W</th><th>奥行 D</th><th>高さ H</th></tr>\n'
                '        </thead>\n        <tbody>\n%s\n        </tbody>\n      </table>' % rows)
