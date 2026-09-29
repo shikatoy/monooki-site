@@ -37,7 +37,24 @@ python3 "$REPO/tools/build-discontinued.py" || echo "[警告] 廃盤ページの
 python3 "$REPO/tools/build-sitemap.py" || echo "[警告] サイトマップの生成に失敗しました（続行します）"
 
 # サイト内リンクが切れていないか（記事を取り下げたあとの取り残しを止める）
+# 計測タグを全ページに入れる（1枚でも漏れると、そのページの数字が消える）
+python3 "$REPO/tools/build-analytics.py" || { echo "[中止] 計測タグの設置に失敗しました。"; exit 1; }
+
 python3 "$REPO/tools/check-links.py" || { echo "[中止] リンク切れを直してから公開してください。"; exit 1; }
+
+# .git/index.lock の取り残し対策（2026-09-29）
+# エージェントが git を叩いたあとロックだけ残ることがあり、
+# そのままだと次の publish が必ず "Unable to create index.lock" で落ちていた。
+# 本当に git が動いている場合は消さずに止める。
+if compgen -G "$REPO/.git/index.lock*" >/dev/null; then
+  if pgrep -x git >/dev/null 2>&1; then
+    echo "[中止] 別の git が動いています。終わるのを待ってから、もう一度実行してください。"
+    exit 1
+  fi
+  echo "[注意] 取り残された .git/index.lock を片付けました（git は動いていません）。"
+  rm -f "$REPO"/.git/index.lock* || {
+    echo "[中止] .git/index.lock を消せませんでした。手で削除してください。"; exit 1; }
+fi
 
 CHANGED=$(git status --porcelain -- "${TARGETS[@]}")
 if [ -z "$CHANGED" ]; then

@@ -3,6 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ANALYTICS_START -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B5453D0GBM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-B5453D0GBM');
+  /* 提携先（バリューコマース経由）のクリックを数える。
+     読者が最後まで進んだかを見る唯一の出口なので、ここだけは必ず取る。 */
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    var a = (t && t.closest) ? t.closest('a[href]') : null;
+    if (!a || !/valuecommerce\.com/.test(a.href)) return;
+    gtag('event', 'affiliate_click', {
+      page_path: location.pathname,
+      link_url: String(a.href).slice(0, 100)
+    });
+  }, true);
+</script>
+<!-- ANALYTICS_END -->
 <title>物置の小型と中型・大型は何が違う？区分で選ぶ｜物置どれがいい？</title>
 <meta name="description" content="物置の「小型」と「中型・大型」は何が違うのか。据える側の視点で、一人で手が足りなくなる工程が区分ごとに違うこと、下地は変わらないこと、組みやすさは区分で逆転することを整理しました。区分で迷っている方の判断材料に。">
 <meta name="keywords" content="物置 小型 中型 違い, 物置 区分 選び方, 物置 組み立て 大変, 小型 物置 比較, 物置 大型 一人 組める">

@@ -3,6 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ANALYTICS_START -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B5453D0GBM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-B5453D0GBM');
+  /* 提携先（バリューコマース経由）のクリックを数える。
+     読者が最後まで進んだかを見る唯一の出口なので、ここだけは必ず取る。 */
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    var a = (t && t.closest) ? t.closest('a[href]') : null;
+    if (!a || !/valuecommerce\.com/.test(a.href)) return;
+    gtag('event', 'affiliate_click', {
+      page_path: location.pathname,
+      link_url: String(a.href).slice(0, 100)
+    });
+  }, true);
+</script>
+<!-- ANALYTICS_END -->
 <title>イナバ バイク保管庫｜サイズ一覧と仕様｜物置どれがいい？</title>
 <meta name="description" content="イナバのバイク保管庫（バイク車庫）のサイズ一覧と仕様。間口1,370〜2,210mm・奥行3,050〜3,050mm、全4型番。床付き構造とディンプルキーで、大切な愛車をしっかり守るバイク保管庫です。">
 <meta name="keywords" content="イナバ バイク保管庫, バイク保管庫 寸法, バイク保管庫 サイズ, イナバ バイク車庫, 物置 バイク車庫">

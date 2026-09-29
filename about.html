@@ -3,6 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ANALYTICS_START -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B5453D0GBM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-B5453D0GBM');
+  /* 提携先（バリューコマース経由）のクリックを数える。
+     読者が最後まで進んだかを見る唯一の出口なので、ここだけは必ず取る。 */
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    var a = (t && t.closest) ? t.closest('a[href]') : null;
+    if (!a || !/valuecommerce\.com/.test(a.href)) return;
+    gtag('event', 'affiliate_click', {
+      page_path: location.pathname,
+      link_url: String(a.href).slice(0, 100)
+    });
+  }, true);
+</script>
+<!-- ANALYTICS_END -->
 <title>運営者情報｜物置どれがいい？</title>
 <meta name="description" content="物置比較サイト「物置どれがいい？」の運営者情報です。エクステリア施工に20年近く従事し、アルミ製品と物置の設置を個人宅で担当してきた立場から記事を書いています。非公式の情報サイトであり、施工の請負・仲介は行っていません。">
 <meta name="theme-color" content="#101010">

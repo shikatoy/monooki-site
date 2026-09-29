@@ -3,6 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ANALYTICS_START -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B5453D0GBM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-B5453D0GBM');
+  /* 提携先（バリューコマース経由）のクリックを数える。
+     読者が最後まで進んだかを見る唯一の出口なので、ここだけは必ず取る。 */
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    var a = (t && t.closest) ? t.closest('a[href]') : null;
+    if (!a || !/valuecommerce\.com/.test(a.href)) return;
+    gtag('event', 'affiliate_click', {
+      page_path: location.pathname,
+      link_url: String(a.href).slice(0, 100)
+    });
+  }, true);
+</script>
+<!-- ANALYTICS_END -->
 <title>タクボのガレージは扉だけが違う｜スクード2機種の見分け方｜物置どれがいい？</title>
 <meta name="description" content="ベルフォーマスクードとカールフォーマスクードは、間口・奥行・高さの組み合わせが完全に同じで、違うのは扉だけです。オーバースライド扉と巻上げシャッター扉の使い分けと、型番から扉と寸法を読む方法をまとめました。">
 <meta name="keywords" content="ベルフォーマスクード カールフォーマスクード 違い, タクボ ガレージ 扉 種類, オーバースライド扉 シャッター 違い, タクボ ガレージ 型番 読み方, ガレージ 扉 選び方">

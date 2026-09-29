@@ -3,6 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ANALYTICS_START -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B5453D0GBM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-B5453D0GBM');
+  /* 提携先（バリューコマース経由）のクリックを数える。
+     読者が最後まで進んだかを見る唯一の出口なので、ここだけは必ず取る。 */
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    var a = (t && t.closest) ? t.closest('a[href]') : null;
+    if (!a || !/valuecommerce\.com/.test(a.href)) return;
+    gtag('event', 'affiliate_click', {
+      page_path: location.pathname,
+      link_url: String(a.href).slice(0, 100)
+    });
+  }, true);
+</script>
+<!-- ANALYTICS_END -->
 <title>間口1.2m以下の物置（幅がとれない場所へ）｜物置どれがいい？</title>
 <meta name="description" content="間口1,200mm以下に収まる物置の型番一覧です。タクボ・イナバ・ヨドコウの3メーカーから74型番（5シリーズ）。間口・奥行・高さを一覧で比べられます。">
 <meta name="theme-color" content="#101010">

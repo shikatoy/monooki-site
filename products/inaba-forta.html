@@ -3,6 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ANALYTICS_START -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B5453D0GBM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-B5453D0GBM');
+  /* 提携先（バリューコマース経由）のクリックを数える。
+     読者が最後まで進んだかを見る唯一の出口なので、ここだけは必ず取る。 */
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    var a = (t && t.closest) ? t.closest('a[href]') : null;
+    if (!a || !/valuecommerce\.com/.test(a.href)) return;
+    gtag('event', 'affiliate_click', {
+      page_path: location.pathname,
+      link_url: String(a.href).slice(0, 100)
+    });
+  }, true);
+</script>
+<!-- ANALYTICS_END -->
 <title>イナバ フォルタ｜サイズ一覧と仕様｜物置どれがいい？</title>
 <meta name="description" content="イナバのフォルタ（中・大型物置）のサイズ一覧と仕様。間口1,370〜5,260mm・奥行950〜3,050mm、全72型番。定番だったネクスタの実質的な後継機です。頑丈さと使いやすさを兼ね備えた、イナバの新しい標準機です。">
 <meta name="keywords" content="イナバ フォルタ, フォルタ 寸法, フォルタ サイズ, イナバ 中・大型物置, 物置 中・大型物置">
