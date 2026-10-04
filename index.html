@@ -477,6 +477,7 @@ tailwind.config = {
         <button class="idx-filter" data-group="cat" data-val="物置">物置</button>
         <button class="idx-filter" data-group="cat" data-val="バイク車庫">バイク車庫</button>
         <button class="idx-filter" data-group="cat" data-val="ガレージ">ガレージ</button>
+        <button class="idx-filter" data-group="cat" data-val="宅配ボックス">宅配ボックス</button>
       </div>
       <span id="idx-count" class="md:ml-auto font-mono text-[11px] text-neutral-400"></span>
     </div>
@@ -796,7 +797,7 @@ const PRODUCTS = [
     base:'車もバイクも趣味の道具も、まるごと収まるゆとりの本格ガレージです。',
     link:'https://www.inaba-ss.co.jp/monooki/lineup/grn/',
     sizes:[ { code:'GRN-2142S', w:2130, d:4275, h:2360 }, { code:'GRN-2142H', w:2130, d:4275, h:2660 }, { code:'GRN-2642S', w:2630, d:4275, h:2360 }, { code:'GRN-2642H', w:2630, d:4275, h:2660 }, { code:'GRN-3142S', w:3130, d:4275, h:2360 }, { code:'GRN-3142H', w:3130, d:4275, h:2660 }, { code:'GRN-3642S', w:3630, d:4275, h:2360 }, { code:'GRN-3642H', w:3630, d:4275, h:2660 }, { code:'GRN-2147S', w:2130, d:4775, h:2360 }, { code:'GRN-2147H', w:2130, d:4775, h:2660 }, { code:'GRN-2647S', w:2630, d:4775, h:2360 }, { code:'GRN-2647H', w:2630, d:4775, h:2660 }, { code:'GRN-3147S', w:3130, d:4775, h:2360 }, { code:'GRN-3147H', w:3130, d:4775, h:2660 }, { code:'GRN-3647S', w:3630, d:4775, h:2360 }, { code:'GRN-3647H', w:3630, d:4775, h:2660 }, { code:'GRN-2652S', w:2630, d:5275, h:2360 }, { code:'GRN-2652H', w:2630, d:5275, h:2660 }, { code:'GRN-3152S', w:3130, d:5275, h:2360 }, { code:'GRN-3152H', w:3130, d:5275, h:2660 }, { code:'GRN-3652S', w:3630, d:5275, h:2360 }, { code:'GRN-3652H', w:3630, d:5275, h:2660 }, { code:'GRN-2657S', w:2630, d:5775, h:2360 }, { code:'GRN-2657H', w:2630, d:5775, h:2660 }, { code:'GRN-2657J', w:2630, d:5775, h:2960 }, { code:'GRN-3157S', w:3130, d:5775, h:2360 }, { code:'GRN-3157H', w:3130, d:5775, h:2660 }, { code:'GRN-3157J', w:3130, d:5775, h:2960 }, { code:'GRN-3657S', w:3630, d:5775, h:2360 }, { code:'GRN-3657H', w:3630, d:5775, h:2660 }, { code:'GRN-3657J', w:3630, d:5775, h:2960 }, { code:'GRN-2662S', w:2630, d:6275, h:2360 }, { code:'GRN-2662H', w:2630, d:6275, h:2660 }, { code:'GRN-2662J', w:2630, d:6275, h:2960 }, { code:'GRN-3162S', w:3130, d:6275, h:2360 }, { code:'GRN-3162H', w:3130, d:6275, h:2660 }, { code:'GRN-3162J', w:3130, d:6275, h:2960 }, { code:'GRN-3662S', w:3630, d:6275, h:2360 }, { code:'GRN-3662H', w:3630, d:6275, h:2660 }, { code:'GRN-3662J', w:3630, d:6275, h:2960 } ], sizesComplete:true },
-  { id:'i-tbj', maker:'inaba', name:'宅配ボックス', cat:'小型物置', added:'2026-07-09',
+  { id:'i-tbj', maker:'inaba', name:'宅配ボックス', cat:'宅配ボックス', added:'2026-07-09',
     steel:'塗装鋼板', door:'前開き扉・上下2段（上1/3:宅配ボックス／下2/3:収納庫）', found:'ブロック基礎 対応（アンカー工事必須）',
     elev:{ openW:0.8306, openH:0.8227, ref:'TBJ-065C', src:'イナバ公式 組立説明書（上336+下736）' },
     look:{ eaves:1.03, doorRib:0, wallRib:0, handle:'pill', legs:2, seen:true },
@@ -881,6 +882,8 @@ const PRODUCTS = [
    （廃盤=生産終了による削除、入替=モデルチェンジによる新旧交代）
    既存の記録は削除・改変しないこと（この台帳は追記のみ）。 */
 const UPDATE_LOG = [
+  { date:'2026-10-04', type:'改定', title:'『宅配ボックス』の区分を小型物置から宅配ボックスへ変更しました',
+    body:'イナバ（稲葉製作所）の宅配ボックス（TBJ-065C）を、これまで小型物置として扱っていましたが、区分を宅配ボックスに改めました。寸法から探すページには「この一覧は物置のみです」と記載しているにもかかわらず、奥行60cm以下・高さ1.4m以下・間口1.2m以下の3ページに宅配ボックスが1型番だけ混ざっていたためです。上段が宅配ボックス、下段が収納庫という二段構成の製品で、物置を探している方の一覧に並ぶのは適切ではないと判断しました。区分を変えたことで寸法の絞り込み対象からは外れますが、型番索引には引き続き掲載しており、TBJ-065Cから寸法を引くことはできます。製品ページ・アーカイブでの掲載も続けます。寸法データそのものに変更はありません。' },
   { date:'2026-09-29', type:'新商品', title:'『新ナイソー SMX』『como lite』の寸法を掲載しました（発売済みに更新）',
     body:'イナバ（稲葉製作所）公式の寸法表PDFと各型番の外形図面で確認し、新ナイソー SMX を9型番、como lite を33型番（Type A 10／Type B 9／Type K 8／Type GM 6）掲載しました。寸法は公式の寸法表にある「土台回り寸法」（柱の外側）で、屋根回り寸法はこれより間口160mm・奥行243mm大きくなります。高さは2機種とも2,416mmで、内高2,100mm・軒高2,378mmと公式に記載があります。como lite は「間口・奥行の内部寸法は外部寸法の-123mm」と公式に記載があり、寸法表の内部寸法もこれと一致していました。あわせて、2026年9月1日に発売済みとなった両機種の「発売予定」表示を外しました。' },
   { date:'2026-08-05', type:'改定', title:'タクボ4製品のサイズ・型番の誤りを修正しました（グランプレステージ ジャンプ／Mr.ストックマン ダンディ／Mr.トールマン ダンディ／リジュー）',
@@ -1897,7 +1900,8 @@ function renderMakerLineups(){
   const GROUPS = [
     { label:'物置', match: cat => /物置/.test(cat) },
     { label:'バイク車庫', match: cat => cat === 'バイク車庫' },
-    { label:'ガレージ', match: cat => cat === 'ガレージ' }
+    { label:'ガレージ', match: cat => cat === 'ガレージ' },
+    { label:'宅配ボックス', match: cat => cat === '宅配ボックス' }
   ];
   ['takubo', 'inaba', 'yodoko'].forEach(mk => {
     const el = document.querySelector('#lineup-' + mk);
