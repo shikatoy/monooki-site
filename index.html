@@ -465,7 +465,7 @@ tailwind.config = {
         <h2 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">索引。</h2>
       </div>
       <p class="md:col-span-4 text-[13px] leading-loose text-neutral-500">
-        掲載中の全製品を、更新（追加）が新しい順にご覧いただけます。写真のない製品は、寸法データから描いた正面図を載せています。寸法・全サイズ・仕様は、各製品の「製品ページ」にまとめてあります。
+        掲載中の全製品を、更新（追加）が新しい順にご覧いただけます。写真のない製品は、寸法データから描いた正面図を載せています。全サイズと仕様は、気になる物置を選ぶとご覧いただけます。
       </p>
     </div>
   </div>
@@ -490,7 +490,7 @@ tailwind.config = {
     <div id="index-grid" class="grid md:grid-cols-3 border-t border-l border-line"></div>
     <div id="idx-more" class="mt-6"></div>
     <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-      <p class="text-[12px] leading-relaxed text-neutral-500">型番ごとの寸法表は製品ページに、置ける寸法から絞り込む一覧は「寸法から探す」にまとめてあります。</p>
+      <p class="text-[12px] leading-relaxed text-neutral-500">型番ごとの寸法表は機種ごとのページに、置ける寸法から絞り込む一覧は「寸法から探す」にまとめてあります。</p>
       <div class="flex flex-wrap gap-3">
         <a href="size/" class="border border-line px-6 py-3 font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">寸法から探す →</a>
         <a href="products/" class="border border-line px-6 py-3 font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">製品一覧ページへ →</a>
@@ -1762,7 +1762,7 @@ function renderResults(){
               <p class="mt-2.5 text-sm leading-loose text-neutral-700">${esc(r.p.base)}${reasons.length ? ' 今回のご回答では「' + reasons.map(esc).join('」「') + '」があなたの条件にマッチしました。' : ''}${fitNote}</p>
             </div>
             ${affLink(r.p)}
-            ${PRODUCT_PAGES[r.p.id] ? `<a href="${PRODUCT_PAGES[r.p.id]}" class="block border-t border-line bg-ink text-paper py-4 text-center font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-rust transition-colors duration-300">製品ページ — 全サイズと仕様 →</a>` : ''}
+            ${PRODUCT_PAGES[r.p.id] ? `<a href="${PRODUCT_PAGES[r.p.id]}" class="block border-t border-line bg-ink text-paper py-4 text-center font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-rust transition-colors duration-300">全サイズと仕様を見る →</a>` : ''}
             <div class="border-t border-line grid grid-cols-2 divide-x divide-line">
               <button class="goto-maker py-4 font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300" data-brand="${r.p.maker}">メーカー別に見る →</button>
               <button class="quiz-restart py-4 font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">↻ もう一度</button>
@@ -2024,7 +2024,7 @@ function openCompare(){
           ${cmpRow('特徴', p => (p.features || []).map(f => '・' + esc(f)).join('<br>'))}
           ${cmpRow('', p => {
             const pg = PRODUCT_PAGES[p.id];
-            return (pg ? `<a href="${pg}" class="u-link font-mono text-[11px]">製品ページ →</a><br>` : '') +
+            return (pg ? `<a href="${pg}" class="u-link font-mono text-[11px]">この物置の詳細 →</a><br>` : '') +
                    (p.link ? `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="u-link font-mono text-[11px]">メーカー公式 ↗</a>` : '');
           })}
         </tbody>
@@ -2110,7 +2110,7 @@ function renderIndex(){
       <h4 class="mt-2 font-serif font-bold text-lg leading-snug">${esc(p.name)}</h4>
       ${variantBadge(p)}
       <p class="mt-2 text-[12px] leading-relaxed text-neutral-500">${p.features.map(esc).join('・')}</p>
-      ${PRODUCT_PAGES[p.id] ? `<a href="${PRODUCT_PAGES[p.id]}" class="block mt-4 w-full bg-ink text-paper py-2.5 text-center font-mono text-[10px] tracking-widest2 uppercase hover:bg-rust transition-colors duration-300">製品ページ →</a>` : ''}
+      ${PRODUCT_PAGES[p.id] ? `<a href="${PRODUCT_PAGES[p.id]}" class="block mt-4 w-full bg-ink text-paper py-2.5 text-center font-mono text-[10px] tracking-widest2 uppercase hover:bg-rust transition-colors duration-300">この物置の詳細 →</a>` : ''}
       <button class="cmp-toggle mt-2 w-full border border-line py-2.5 font-mono text-[10px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300 ${compareSel.includes(p.id) ? 'cmp-on' : ''}" data-pid="${p.id}">${compareSel.includes(p.id) ? '✓ 比較中' : '＋ 比較に追加'}</button>
     </div>`).join('')
   : `<div class="col-span-full border-r border-b border-line p-12 text-center font-mono text-[11px] tracking-widest text-neutral-400">NO RESULT ── 該当する製品が見つかりませんでした。</div>`;

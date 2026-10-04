@@ -76,7 +76,7 @@ def build():
     <div class="cta">
       <p class="cta-label">Next — 次に</p>
       <p class="cta-title">型番が分かったら。</p>
-      <p class="cta-text">シリーズごとの仕様は製品ページに、置ける寸法から絞り込む一覧は「寸法から探す」にまとめています。廃盤になった物置は別ページに記録しています。</p>
+      <p class="cta-text">シリーズごとの仕様は機種ごとのページに、置ける寸法から絞り込む一覧は「寸法から探す」にまとめています。廃盤になった物置は別ページに記録しています。</p>
       <a class="cta-btn" href="./">製品一覧を見る <span class="arrow">→</span></a>
     </div>
 

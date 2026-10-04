@@ -85,7 +85,7 @@ def build_block(hits):
         rows = "\n        ".join(card("../" + p["page"], "%s — %s" % (p["maker"], p["cat"]), p["name"]) for p in hits)
         return ('%s\n    <aside class="rel">\n'
                 '      <p class="rel-label">Products — この記事に出てくる物置</p>\n'
-                '      <p class="rel-note">本文に出てきた順に並べています。サイズ展開と仕様は、それぞれの製品ページにまとめてあります。</p>\n'
+                '      <p class="rel-note">本文に出てきた順に並べています。サイズ展開と仕様は、機種ごとのページにまとめてあります。</p>\n'
                 '      <ul class="rel-list">\n        %s\n      </ul>\n'
                 '    </aside>\n    %s\n') % (BEG, rows, END)
     rows = "\n        ".join(card(h, k, n) for h, k, n in FIND)
