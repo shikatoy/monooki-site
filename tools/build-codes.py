@@ -51,9 +51,9 @@ def build():
                           '<th>間口 mm</th><th>奥行 mm</th><th>高さ mm</th></tr></thead>'
                           '<tbody>%s</tbody></table>' % rows)
 
-    h1 = "型番から探す（全%d型番）" % total
-    desc = ("タクボ・イナバ・ヨドコウの物置 全%d型番の索引です。見積書やカタログに書かれた型番から、"
-            "間口・奥行・高さとシリーズを引けます。" % total)
+    h1 = "型番から探す"
+    desc = ("タクボ・イナバ・ヨドコウの物置 全型番の索引です。見積書やカタログに書かれた型番から、"
+            "間口・奥行・高さとシリーズを引けます。")
     url = C.SITE + "products/codes.html"
 
     body = """
