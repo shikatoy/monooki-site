@@ -20,6 +20,10 @@
     h<数>          高さがその値の型番数
     dmakers<数>    奥行がその値に入るメーカー数
     wmakers<数>    間口がその値に入るメーカー数
+    codes_<id>     そのシリーズの型番数（id は PRODUCTS の id。t-nd など）
+    fp_<id>        そのシリーズの間口×奥行の種類
+    fpmulti_<id>   そのうち高さが2通り以上ある数
+                   id は + でつなぐと合算できる（fp_t-nd+t-jn）
 
 id が無い数字は見ない。包んだものだけを見る。
 """
@@ -40,8 +44,17 @@ def dataset():
         if p["cat"] not in C.CAT_OK:
             continue
         for code, w, d, h in p["sizes"]:
-            rows.append(dict(maker=p["maker"], w=w, d=d, h=h))
+            rows.append(dict(maker=p["maker"], sid=p["id"], w=w, d=d, h=h))
     return rows
+
+
+def series_stats(rows, ids):
+    """シリーズ（複数可）をまとめたときの 型番数／床の種類／高さが2通り以上ある床の数。"""
+    v = [r for r in rows if r["sid"] in ids]
+    fp = defaultdict(set)
+    for r in v:
+        fp[(r["w"], r["d"])].add(r["h"])
+    return len(v), len(fp), sum(1 for hs in fp.values() if len(hs) >= 2)
 
 
 def expected(cid, rows):
@@ -65,12 +78,22 @@ def expected(cid, rows):
     if m:
         k, v = m.group(1), int(m.group(2))
         return len({r["maker"] for r in rows if r[k] == v})
+    # シリーズ単位: codes_<id> / fp_<id> / fpmulti_<id>
+    # <id> は index.html の PRODUCTS の id（t-nd など）。+ でつないで合算できる
+    m = re.fullmatch(r"(codes|fp|fpmulti)_([a-z0-9+-]+)", cid)
+    if m:
+        ids = set(m.group(2).split("+"))
+        known = {r["sid"] for r in rows}
+        if not ids <= known:
+            return None
+        n_codes, n_fp, n_multi = series_stats(rows, ids)
+        return {"codes": n_codes, "fp": n_fp, "fpmulti": n_multi}[m.group(1)]
     return None
 
 
 def main():
     rows = dataset()
-    pat = re.compile(r'data-claim="([a-z0-9]+)"[^>]*>\s*([0-9,]+)\s*<')
+    pat = re.compile(r'data-claim="([a-z0-9_:+-]+)"[^>]*>\s*([0-9,]+)\s*<')
     bad, unknown, n = [], [], 0
     files = sorted(set(glob.glob(os.path.join(ROOT, "*.html"))
                        + glob.glob(os.path.join(ROOT, "*", "*.html"))))

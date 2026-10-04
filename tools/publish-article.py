@@ -53,6 +53,9 @@ def parse_front(md):
 
 def inline(t):
     t = esc(t)
+    # {{claim-id=数}} → データから検算できる数字（tools/check-claims.py が照合する）
+    # 区切りは = 。| にすると表のセル区切りと衝突する
+    t = re.sub(r"\{\{([a-z0-9_:+-]+)=([0-9,]+)\}\}", r'<span data-claim="\1">\2</span>', t)
     t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
     # [表示する文字](リンク先) を <a> にする。記事どうしをつなぐために使う
     t = re.sub(r"\[([^\]]+)\]\(([^)\s]+)\)", r'<a href="\2">\1</a>', t)
