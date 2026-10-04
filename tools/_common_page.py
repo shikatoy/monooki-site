@@ -69,6 +69,8 @@ EXTRA_CSS = """
   .crumbs a:hover { color:var(--rust); border-bottom-color:currentColor; }
   .crumbs span { margin:0 8px; color:#b9b9b4; }
   .note { margin:22px 0 0; padding:18px 20px; border:1px solid var(--linesoft); background:#efe9dc; font-size:13px; line-height:2; }
+  .note a { color:inherit; text-decoration:none; border-bottom:1px solid #b9b9b4; }
+  .note a:hover { color:var(--rust); border-bottom-color:currentColor; }
   .tbl { width:100%; border-collapse:collapse; margin:18px 0 0; font-size:13px; }
   .tbl th, .tbl td { padding:10px 8px; border-bottom:1px solid var(--linesoft); text-align:right; font-variant-numeric:tabular-nums; }
   .tbl th { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--mute); font-weight:400; border-bottom:1px solid var(--line); white-space:nowrap; }
@@ -97,6 +99,12 @@ EXTRA_CSS = """
   .cta-btn .arrow { font-family:'IBM Plex Mono',monospace; transition:transform .3s cubic-bezier(.22,1,.36,1); }
   .cta-btn:hover { color:var(--rust); border-bottom-color:var(--rust); }
   .cta-btn:hover .arrow { transform:translateX(10px); }
+  .sec-h { margin:48px 0 0; font-family:'Shippori Mincho B1',serif; font-weight:700; font-size:clamp(1.05rem,3.2vw,1.3rem); line-height:1.7; padding-bottom:12px; border-bottom:1px solid var(--line); }
+  .sec-p { margin:16px 0 0; font-size:13px; line-height:2.1; color:var(--mute); }
+  .sec-p a { color:inherit; text-decoration:none; border-bottom:1px solid var(--linesoft); }
+  .sec-p a:hover { color:var(--rust); border-bottom-color:currentColor; }
+  .sec-p + .links { margin-top:20px; }
+  .fine { margin:44px 0 0; padding-top:18px; border-top:1px solid var(--linesoft); font-size:11px; line-height:1.9; color:var(--mute); }
   @media (min-width:768px){ .tbl th, .tbl td { font-size:14px; padding:12px 10px; } .grp h2 { font-size:19px; } }
 </style>"""
 

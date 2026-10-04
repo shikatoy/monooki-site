@@ -5,6 +5,10 @@
 各社の実寸は少しずつ違うため、そのままでは並べて比べられない。
 間口・奥行を300mm刻みの帯にまとめて、同じ帯に入る型番を横並びにする。
 2メーカー以上・5型番以上の帯だけをページにする。
+
+ページ間のリンクは「隣の帯」だけに絞る。全帯を全ページに並べると、
+どのページも同じ文字列の塊を抱えることになり、帯ごとの中身が埋もれる。
+すべての帯は size/ のハブから辿れる。
 """
 import importlib.util, json, os, re
 from collections import defaultdict
@@ -17,10 +21,20 @@ OUTD = os.path.join(C.ROOT, "size")
 STEP = 300
 MIN_MAKERS = 2
 MIN_CODES = 5
+ALL_MAKERS = ("takubo", "inaba", "yodoko")
+NEAR_MIN = 3          # 隣が少ない帯は、近い帯で最低これだけ埋める
 
 
 def m(v):
     return ("%.1f" % (v / 1000.0)).rstrip("0").rstrip(".")
+
+
+def band_name(bw, bd):
+    return "間口%s〜%sm × 奥行%s〜%sm" % (m(bw), m(bw + STEP), m(bd), m(bd + STEP))
+
+
+def slug_of(bw, bd):
+    return "band-w%d-d%d" % (bw // 10, bd // 10)
 
 
 def collect():
@@ -43,19 +57,78 @@ def collect():
     return out
 
 
+def neighbours(key, keys):
+    """隣接する帯（間口±1段・奥行±1段）。足りなければ近い帯で補う。"""
+    bw, bd = key
+    plan = [((bw + STEP, bd), "間口をひとつ広く"),
+            ((bw - STEP, bd), "間口をひとつ狭く"),
+            ((bw, bd + STEP), "奥行をひとつ深く"),
+            ((bw, bd - STEP), "奥行をひとつ浅く")]
+    out = [(k, lab) for k, lab in plan if k in keys]
+    if len(out) < NEAR_MIN:
+        have = {k for k, _ in out} | {key}
+        rest = sorted((k for k in keys if k not in have),
+                      key=lambda k: ((k[0] - bw) ** 2 + (k[1] - bd) ** 2, k))
+        for k in rest[:NEAR_MIN - len(out)]:
+            out.append((k, "近い帯"))
+    return out
+
+
+def height_line(rows):
+    hs = sorted({r["h"] for r in rows})
+    if len(hs) == 1:
+        return "高さは <b>%s mm</b> の1通りだけです。" % "{:,}".format(hs[0])
+    return ("高さは <b>%s〜%s mm</b> の範囲で、%d通りあります。"
+            % ("{:,}".format(hs[0]), "{:,}".format(hs[-1]), len(hs)))
+
+
+def area_line(rows):
+    ar = sorted({r["w"] * r["d"] / 1e6 for r in rows})
+    lo, hi = ar[0], ar[-1]
+    if abs(hi - lo) < 0.005:
+        return "本体の外寸から計算した設置面積は <b>約%.2f ㎡</b> です。" % lo
+    return ("本体の外寸から計算した設置面積は <b>約%.2f〜%.2f ㎡</b> です。" % (lo, hi))
+
+
+def missing_line(key, mks, by_maker):
+    """この帯にいないメーカーを挙げ、そのメーカーが入る最も近い帯へ送る。"""
+    miss = [x for x in ALL_MAKERS if x not in mks]
+    if not miss:
+        return ""
+    bw, bd = key
+    out = ["<b>%sには、この帯に入る寸法の物置が見当たりません。</b>"
+           % "・".join(C.MAKER_JP[x] for x in miss)]
+    for mk in miss:
+        cand = sorted(by_maker.get(mk, ()),
+                      key=lambda k: ((k[0] - bw) ** 2 + (k[1] - bd) ** 2, k))
+        if not cand:
+            continue
+        k = cand[0]
+        out.append('%sでこの大きさにいちばん近いのは<a href="%s.html">%s</a>の帯です。'
+                   % (C.MAKER_JP[mk], slug_of(*k), band_name(*k)))
+    return " ".join(out)
+
+
 def build():
     bands = collect()
+    keyset = {k for k, _, _ in bands}
+    by_maker = defaultdict(set)
+    for k, rows, _ in bands:
+        for r in rows:
+            by_maker[r["maker"]].add(k)
     style = C.load_style()
     cards = []
     for (bw, bd), rows, mks in bands:
-        slug = "band-w%d-d%d" % (bw // 10, bd // 10)
-        title = "間口%s〜%sm × 奥行%s〜%sm の物置" % (m(bw), m(bw + STEP), m(bd), m(bd + STEP))
+        slug = slug_of(bw, bd)
+        title = band_name(bw, bd) + " の物置"
         h1 = title + "を%dメーカーで比べる" % len(mks)
         url = C.SITE + "size/" + slug + ".html"
         ws = sorted({r["w"] for r in rows}); ds = sorted({r["d"] for r in rows})
+        hs = sorted({r["h"] for r in rows})
         desc = ("間口%s〜%sm・奥行%s〜%smに収まる物置を、タクボ・イナバ・ヨドコウ%dメーカー%d型番で並べました。"
-                "実寸は各社で違うため、間口・奥行・高さを横並びで比べられます。"
-                % (m(bw), m(bw + STEP), m(bd), m(bd + STEP), len(mks), len(rows)))
+                "高さは%s〜%smm。実寸は各社で違うため、間口・奥行・高さを横並びで比べられます。"
+                % (m(bw), m(bw + STEP), m(bd), m(bd + STEP), len(mks), len(rows),
+                   "{:,}".format(hs[0]), "{:,}".format(hs[-1])))
 
         trs = "".join(
             '<tr><td class="l">%s</td><td class="l">%s</td><td class="l m">%s</td>'
@@ -76,11 +149,11 @@ def build():
             for k, v in sorted(per.items(), key=lambda x: -len(x[1])))
 
         nav = "".join(
-            '<a href="band-w%d-d%d.html"%s>間口%s〜%sm × 奥行%s〜%sm</a>'
-            % (k[0] // 10, k[1] // 10,
-               ' class="is-here"' if (k[0], k[1]) == (bw, bd) else "",
-               m(k[0]), m(k[0] + STEP), m(k[1]), m(k[1] + STEP))
-            for k, _, _ in bands)
+            '<a href="%s.html">%s — %s</a>' % (slug_of(*k), lab, band_name(*k))
+            for k, lab in neighbours((bw, bd), keyset))
+
+        miss = missing_line((bw, bd), mks, by_maker)
+        miss_p = ('<p style="margin:14px 0 0">%s</p>' % miss) if miss else ""
 
         body = """
     <div class="page-head">
@@ -91,8 +164,9 @@ def build():
 
     <div class="note">
       <p style="margin:0"><b>各社の実寸は同じではありません。</b>この帯に入る間口は %(ws)s mm、奥行は %(ds)s mm と幅があります。カタログの見出しが近くても、<b>数十mm単位で違います。</b>置き場所に余裕がないときは、この差が効いてきます。</p>
+      <p style="margin:14px 0 0">%(hline)s %(aline)s</p>
+      %(miss_p)s
       <p style="margin:14px 0 0">※本体の下には基礎用コンクリートブロック（基本 高さ約10cm）を敷きます。<b>実際の高さは「本体高さ＋約10cm」</b>になります。</p>
-      <p style="margin:14px 0 0">※この一覧は<b>物置のみ</b>です。車庫・ガレージ・バイク保管庫は含めていません。寸法は各メーカーの公表値をもとにしています。ご購入前に必ず公式サイト・最新カタログでご確認ください。</p>
     </div>
 
     <div class="grp" style="background:#fffdf9">%(sums)s</div>
@@ -102,6 +176,8 @@ def build():
       <tbody>%(trs)s</tbody>
     </table>
 
+    <h2 class="sec-h">隣の寸法帯</h2>
+    <p class="sec-p">この帯に収まらないときは、ひとつ隣の帯を見てください。すべての帯は<a href="./">寸法から探す</a>に並べています。</p>
     <div class="links">%(nav)s</div>
 
     <div class="cta">
@@ -111,6 +187,8 @@ def build():
       <a class="cta-btn" href="../#shindan">診断をはじめる <span class="arrow">→</span></a>
     </div>
 
+    <p class="fine">この一覧は<b>物置のみ</b>です。車庫・ガレージ・バイク保管庫は含めていません。寸法は各メーカーの公表値をもとにしています。ご購入前に必ず公式サイト・最新カタログでご確認ください。</p>
+
     <div class="links">
       <a href="./">寸法から探す</a>
       <a href="../products/">製品一覧</a>
@@ -118,6 +196,7 @@ def build():
       <a href="../products/discontinued.html">廃盤・生産終了</a>
     </div>
 """ % dict(h1=C.esc(h1), nm=len(mks), nc=len(rows), sums=sums, trs=trs, nav=nav,
+           hline=height_line(rows), aline=area_line(rows), miss_p=miss_p,
            ws="・".join("{:,}".format(x) for x in ws),
            ds="・".join("{:,}".format(x) for x in ds))
 
