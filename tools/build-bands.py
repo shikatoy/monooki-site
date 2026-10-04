@@ -106,7 +106,7 @@ def missing_line(key, mks, by_maker):
         k = cand[0]
         out.append('%sでこの大きさにいちばん近いのは<a href="%s.html">%s</a>の帯です。'
                    % (C.MAKER_JP[mk], slug_of(*k), band_name(*k)))
-    return " ".join(out)
+    return "".join(out)
 
 
 def build():
@@ -164,7 +164,7 @@ def build():
 
     <div class="note">
       <p style="margin:0"><b>各社の実寸は同じではありません。</b>この帯に入る間口は %(ws)s mm、奥行は %(ds)s mm と幅があります。カタログの見出しが近くても、<b>数十mm単位で違います。</b>置き場所に余裕がないときは、この差が効いてきます。</p>
-      <p style="margin:14px 0 0">%(hline)s %(aline)s</p>
+      <p style="margin:14px 0 0">%(hline)s%(aline)s</p>
       %(miss_p)s
       <p style="margin:14px 0 0">※本体の下には基礎用コンクリートブロック（基本 高さ約10cm）を敷きます。<b>実際の高さは「本体高さ＋約10cm」</b>になります。</p>
     </div>
