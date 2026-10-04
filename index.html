@@ -23,8 +23,8 @@
   }, true);
 </script>
 <!-- ANALYTICS_END -->
-<title>物置どれがいい？ ─ 空間と用途を美しく調和させる、物置のコンシェルジュ。</title>
-<meta name="description" content="タクボ・イナバ・ヨドコウの3大メーカーから、あなたにぴったりの物置を1分で診断。用途・サイズ・メーカーの3つの入口から選べるマッチング診断と、全製品索引・更新履歴・コラムをお届けします。">
+<title>物置どれがいい？｜イナバ・ヨド・タクボの全型番を寸法から比較</title>
+<meta name="description" content="イナバ・ヨドコウ・タクボの物置を、公式の寸法表にもとづく全型番のサイズ表で比較できます。置き場所の間口・奥行・高さを入れると、屋根の張り出しと基礎ブロック分を含めて収まる機種に絞り込み。見積書の型番から逆引きする索引もあります。">
 <meta name="theme-color" content="#101010">
 <meta name="google-site-verification" content="UyOuUgdHmuNVYiGnNzDQvFTut000UJ1k8QNdAMbVAC8" />
 <!-- OGP/canonical: 公開URL設定済み（https://monooki-erabi.com/） -->
@@ -32,8 +32,8 @@
 <meta property="og:url" content="https://monooki-erabi.com/">
 <meta property="og:image" content="https://monooki-erabi.com/images/og-image.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="物置どれがいい？｜1分でわかる物置マッチング診断">
-<meta property="og:description" content="タクボ・イナバ・ヨドコウの3大メーカーから、あなたにぴったりの物置を1分で診断します。">
+<meta property="og:title" content="物置どれがいい？｜イナバ・ヨド・タクボの全型番を寸法から比較">
+<meta property="og:description" content="イナバ・ヨドコウ・タクボの物置を、公式の寸法表にもとづく全型番のサイズ表で比較できます。置き場所の寸法を入れると、収まる機種に絞り込めます。">
 <meta property="og:site_name" content="物置どれがいい？">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
@@ -509,12 +509,12 @@ tailwind.config = {
         <h2 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">よくあるご質問。</h2>
       </div>
       <p class="md:col-span-4 text-[13px] leading-loose text-neutral-500">
-        設置前に気になる基礎・寸法・法規のポイントを、こちらで順次ご紹介していく予定です。ただいま内容を準備中です。
+        設置前に迷いやすい、基礎・寸法・アンカー工事まわりのご質問をまとめました。
       </p>
     </div>
   </div>
 
-  <!-- QA_HTML: 質問と回答は下部スクリプト内の QA_ITEMS 配列で管理（現在は空欄・準備中表示） -->
+  <!-- QA_HTML: 質問と回答は下部スクリプト内の QA_ITEMS 配列で管理（空の場合のみ準備中と表示される） -->
   <div id="qa-list" class="max-w-[1440px] mx-auto px-5 md:px-10"></div>
   <div class="border-b border-line py-14"></div>
 </section>
@@ -1519,6 +1519,10 @@ function updateProgress(){
 function renderStep(){
   const qs = QUESTION_SETS[state.mode].questions;
   updateProgress();
+  /* 計測: 何問目まで進んだか。どこで離脱しているかを見るため。 */
+  if(typeof gtag === 'function' && state.step < qs.length){
+    gtag('event', 'diagnosis_step', { mode: state.mode, step: state.step + 1 });
+  }
   if(state.step >= qs.length){ renderPreResult(); return; }
   const q = qs[state.step];
   if(q.type === 'slider'){ renderSliderStep(q); return; }
@@ -1694,6 +1698,20 @@ function renderResults(){
   }
   let results = pool.slice(0, 3);
   const maxScore = results[0].score || 1;
+
+  /* 計測: 診断の完走と、入力スペースに収まる候補が無かったか（no_fit）。
+     no_fit が多いなら、寸法データか判定基準が読者の実態と合っていない。
+     入力された間口・奥行も残す。どの寸法帯が足りないかが分かる。 */
+  if(typeof gtag === 'function'){
+    gtag('event', 'diagnosis_complete', {
+      mode: state.mode,
+      result_count: results.length,
+      no_fit: noFit ? 1 : 0,
+      space_w: space ? space.w : 0,
+      space_d: space ? space.d : 0,
+      space_h: space && space.h ? space.h : 0
+    });
+  }
 
   progressBar.style.width = '100%';
   stepLabel.textContent = 'Complete';

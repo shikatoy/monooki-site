@@ -27,6 +27,7 @@ python3 "$REPO/tools/build-size-pages.py" || echo "[警告] 寸法ページの�
 python3 "$REPO/tools/build-door-figure.py" || echo "[警告] 扉の図の生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-peinte-patterns.py" || echo "[警告] ペインタの柄の生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-shop-links.py" || echo "[警告] 製品ページの出口の生成に失敗しました（続行します）"
+python3 "$REPO/tools/build-size-links.py" || { echo "[中止] サイズ帯への導線の生成に失敗しました。"; exit 1; }
 python3 "$REPO/tools/build-crosslinks.py" || echo "[警告] 記事どうしのリンク生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-article-links.py" || echo "[警告] 記事導線の生成に失敗しました（続行します）"
 
