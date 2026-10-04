@@ -27,7 +27,7 @@ PAGES = [
          kicker="Depth — 奥行から探す",
          lead="隣家との隙間や、家の脇の通路など、奥行がとれない場所に置ける物置です。",
          why="奥行が足りないと、扉を開けたときに前へ出る分まで含めて収まらないことがあります。物を出し入れする側に、どれだけ余裕があるかもあわせてご確認ください。"),
-    dict(slug="depth-900",  axis="d", limit=900,
+    dict(slug="depth-900", floor=600, floor_of="depth-600",  axis="d", limit=900,
          h1="奥行90cm以下で置ける物置",
          kicker="Depth — 奥行から探す",
          lead="奥行90cm以下に収まる物置です。小型（収納庫）の多くがこの範囲に入ります。",
@@ -37,7 +37,7 @@ PAGES = [
          kicker="Height — 高さから探す",
          lead="窓の下や、低い塀の内側に収めたいときの物置です。",
          why="高さは、本体だけで判断できません。下に敷く基礎ブロックの分が加わります。"),
-    dict(slug="height-1900", axis="h", limit=1900,
+    dict(slug="height-1900", floor=1400, floor_of="height-1400", axis="h", limit=1900,
          h1="高さ1.9m以下の物置",
          kicker="Height — 高さから探す",
          lead="軒下や、目線の高さを超えたくない場所に置ける物置です。",
@@ -47,7 +47,7 @@ PAGES = [
          kicker="Width — 間口から探す",
          lead="幅の狭いスペースに置ける物置です。",
          why="間口は、置けるかどうかだけでなく、何を入れられるかも左右します。タイヤや長い物を入れる予定があるなら、間口も見ておいてください。"),
-    dict(slug="width-1500", axis="w", limit=1500,
+    dict(slug="width-1500", floor=1200, floor_of="width-1200", axis="w", limit=1500,
          h1="間口1.5m以下の物置",
          kicker="Width — 間口から探す",
          lead="間口1.5m以下に収まる物置です。",
@@ -134,7 +134,7 @@ def esc(t):
     return (t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;"))
 
 
-def page_html(cfg, rows, series, style, nav_links, desc):
+def page_html(cfg, rows, series, style, nav_links, desc, scope, split_p):
     axis = cfg["axis"]
     unit = AXIS_JP[axis]
     url = SITE + "size/" + cfg["slug"] + ".html"
@@ -209,11 +209,11 @@ def page_html(cfg, rows, series, style, nav_links, desc):
     <div class="page-head">
       <p class="page-kicker">%(kicker)s</p>
       <h1 class="page-title">%(h1)s</h1>
-      <p class="page-lead">%(lead)s タクボ・イナバ・ヨドコウの3メーカーから、<b>%(unit)s%(limit)smm以下の型番を%(ncode)d件</b>集めました（%(nseries)dシリーズ）。</p>
+      <p class="page-lead">%(lead)s タクボ・イナバ・ヨドコウの3メーカーから、<b>%(scope)sの型番を%(ncode)d件</b>集めました（%(nseries)dシリーズ）。</p>
     </div>
 
     <div class="note">
-      <p style="margin:0">%(why)s</p>
+      <p style="margin:0">%(why)s</p>%(split_p)s
       <p style="margin:14px 0 0">※本体の下には基礎用コンクリートブロック（基本 高さ約10cm）を敷きます。<b>実際の高さは「本体高さ＋約10cm」</b>になるため、高さに制限のある場所では、ブロック分を含めてご確認ください。</p>
       <p style="margin:14px 0 0">※この一覧は<b>物置のみ</b>です。車庫・ガレージ・バイク保管庫は含めていません。寸法は各メーカーの公表値をもとにしています。ご購入前に必ず公式サイト・最新カタログでご確認ください。</p>
     </div>
@@ -262,7 +262,7 @@ def page_html(cfg, rows, series, style, nav_links, desc):
            crumb=json.dumps(crumb, ensure_ascii=False, indent=2),
            kicker=esc(cfg["kicker"]), lead=esc(cfg["lead"]), why=esc(cfg["why"]),
            unit=unit, limit="{:,}".format(cfg["limit"]),
-           ncode=len(rows), nseries=len(series),
+           ncode=len(rows), nseries=len(series), scope=scope, split_p=split_p,
            sums=sums, trs="".join(trs), nav=nav_links)
 
 
@@ -374,10 +374,12 @@ def main():
 
     navs = {c["slug"]: c for c in PAGES}
     for cfg in PAGES:
-        ax = cfg["axis"]; lim = cfg["limit"]
+        ax = cfg["axis"]; lim = cfg["limit"]; fl = cfg.get("floor", 0)
         rows, series = [], []
+        # この帯より下は姉妹ページが持つ。同じ行を二度載せない
+        n_below = sum(1 for p in prods for s0 in p["sizes"] if s0[idx[ax]] <= fl) if fl else 0
         for p in prods:
-            hit = [s for s in p["sizes"] if s[idx[ax]] <= lim]
+            hit = [s for s in p["sizes"] if fl < s[idx[ax]] <= lim]
             if not hit:
                 continue
             series.append((p, len(hit)))
@@ -385,16 +387,31 @@ def main():
         rows.sort(key=lambda r: (r[1][idx[ax]], r[1][1], r[1][2]))
         series.sort(key=lambda x: -x[1])
 
-        desc = ("%s%smm以下に収まる物置の型番一覧です。タクボ・イナバ・ヨドコウの3メーカーから%d型番（%dシリーズ）。"
-                "間口・奥行・高さを一覧で比べられます。"
-                % (AXIS_JP[ax], "{:,}".format(lim), len(rows), len(series)))
+        if fl:
+            scope = "%s%s〜%smm" % (AXIS_JP[ax], "{:,}".format(fl), "{:,}".format(lim))
+            desc = ("%s%s〜%smmに収まる物置の型番一覧です。タクボ・イナバ・ヨドコウの3メーカーから%d型番（%dシリーズ）。"
+                    "%s%smm以下の%d型番は別ページにあります。"
+                    % (AXIS_JP[ax], "{:,}".format(fl), "{:,}".format(lim), len(rows), len(series),
+                       AXIS_JP[ax], "{:,}".format(fl), n_below))
+            sib = navs[cfg["floor_of"]]
+            split_p = ('\n      <p style="margin:14px 0 0">このページは<b>%s%s〜%smm</b>の型番です。'
+                       '%s%smm以下の<b>%d型番</b>は<a href="%s.html">%s</a>にまとめています。'
+                       '同じ型番を二度並べないよう、ここでは重ねていません。</p>'
+                       % (AXIS_JP[ax], "{:,}".format(fl), "{:,}".format(lim),
+                          AXIS_JP[ax], "{:,}".format(fl), n_below, sib["slug"], esc(sib["h1"])))
+        else:
+            scope = "%s%smm以下" % (AXIS_JP[ax], "{:,}".format(lim))
+            desc = ("%s%smm以下に収まる物置の型番一覧です。タクボ・イナバ・ヨドコウの3メーカーから%d型番（%dシリーズ）。"
+                    "間口・奥行・高さを一覧で比べられます。"
+                    % (AXIS_JP[ax], "{:,}".format(lim), len(rows), len(series)))
+            split_p = ""
 
         nav = "".join(
             '<a href="%s.html"%s>%s</a>' % (c["slug"], ' class="is-here"' if c["slug"] == cfg["slug"] else "",
                                             esc(c["h1"]))
             for c in PAGES)
 
-        html = page_html(cfg, rows, series, style, nav, desc)
+        html = page_html(cfg, rows, series, style, nav, desc, scope, split_p)
         path = os.path.join(OUT, cfg["slug"] + ".html")
         old = open(path, encoding="utf-8").read() if os.path.exists(path) else None
         if old != html:
