@@ -62,7 +62,7 @@ def inline(t):
 def md_to_html(body):
     """記事本文のマークダウンを、このサイトの article-body の書式に変換する"""
     lines = body.split("\n")
-    out, buf, lis, h1 = [], [], [], None
+    out, buf, lis, rows, h1 = [], [], [], [], None
 
     def flush_p():
         if buf:
@@ -76,8 +76,44 @@ def md_to_html(body):
             out.append("        </ul>")
             lis.clear()
 
+    def cells(line):
+        t = line.strip()
+        if t.startswith("|"): t = t[1:]
+        if t.endswith("|"): t = t[:-1]
+        return [c.strip() for c in t.split("|")]
+
+    def flush_table():
+        """Markdownの表をHTMLにする。
+        2026-10-04 まで変換が無く、記事に「| 時期 | 何が起きたか |」が
+        そのまま表示されていた。区切り行（|---|---|）は読み飛ばす。"""
+        if not rows:
+            return
+        body_rows = [r for r in rows if not re.match(r"^[\s|:-]+$", "|".join(r))]
+        if not body_rows:
+            rows.clear(); return
+        head, rest = body_rows[0], body_rows[1:]
+        out.append('        <div class="table-wrap">')
+        out.append("        <table>")
+        out.append("          <thead><tr>"
+                   + "".join("<th>" + inline(c) + "</th>" for c in head)
+                   + "</tr></thead>")
+        if rest:
+            out.append("          <tbody>")
+            for r in rest:
+                r = (r + [""] * len(head))[:len(head)]
+                out.append("            <tr>"
+                           + "".join("<td>" + inline(c) + "</td>" for c in r)
+                           + "</tr>")
+            out.append("          </tbody>")
+        out.append("        </table>")
+        out.append("        </div>")
+        rows.clear()
+
     for raw in lines:
         line = raw.rstrip()
+        if line.lstrip().startswith("|") and line.count("|") >= 2:
+            flush_p(); flush_li(); rows.append(cells(line)); continue
+        flush_table()
         if line.startswith("# "):
             flush_p(); flush_li(); h1 = line[2:].strip(); continue
         if line.startswith("## "):
@@ -94,7 +130,7 @@ def md_to_html(body):
         if not line.strip():
             flush_p(); flush_li(); continue
         buf.append(line.strip())
-    flush_p(); flush_li()
+    flush_p(); flush_li(); flush_table()
     return h1, "\n".join(out).strip("\n")
 
 

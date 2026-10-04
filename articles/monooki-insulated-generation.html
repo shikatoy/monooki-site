@@ -144,6 +144,15 @@
   .article-body h3::before { content: '—'; color: var(--rust); margin-right: 10px; }
   .article-body p { margin: 26px 0 0; font-size: 15px; line-height: 2.15; }
   .article-body strong { font-weight: 700; background: linear-gradient(transparent 62%, rgba(163, 81, 43, .18) 62%); }
+  /* ───── 本文中の表（Markdownの表から生成） ───── */
+  .article-body table { width: 100%; border-collapse: collapse; margin: 26px 0 0; font-size: 13.5px; line-height: 1.9; }
+  .article-body th, .article-body td { padding: 9px 10px; border-bottom: 1px solid var(--linesoft); text-align: left; vertical-align: top; }
+  .article-body th { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .1em; color: var(--mute); font-weight: 400; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .article-body td { font-variant-numeric: tabular-nums; }
+  .article-body tbody tr:hover { background: #efe9dc; }
+  .article-body .table-wrap { margin: 26px 0 0; overflow-x: auto; }
+  .article-body .table-wrap table { margin: 0; }
+  @media (min-width: 768px) { .article-body table { font-size: 14.5px; } }
   .article-body ul, .article-body ol { margin: 26px 0 0; padding-left: 0; list-style: none; counter-reset: li; }
   .article-body li { position: relative; margin: 14px 0 0; padding-left: 30px; font-size: 15px; line-height: 2.1; }
   .article-body ul > li::before { content: ''; position: absolute; left: 8px; top: 15px; width: 8px; height: 1px; background: var(--rust); }
@@ -270,10 +279,19 @@
 
         <p>2026年9月1日、イナバの断熱物置「ナイソー」が新型のSMX型に切り替わりました。同じ日に「como lite（コモ・ライト）」も加わっています。従来のSMK型は、その前日、8月31日をもって生産終了です。</p>
         <p>断熱物置は、物置全体から見ればごく一部の区分です。そこで機種が入れ替わっても、ふつうは話題になりません。ただ、この区分は<strong>この2年で顔ぶれが変わっています。</strong></p>
-        <p><strong>この記事は、メーカーの公式発表と当サイトの廃盤記録を突き合わせて書いています。</strong>私自身が断熱物置を据えた経験にもとづくものではありません。</p>
+        <p><strong>この記事は、メーカーの公式発表と当サイトの廃盤記録を突き合わせて書いています。</strong></p>
 
         <h2>この2年で起きたこと</h2>
-        <p>| 時期 | 何が起きたか | 出典 | |---|---|---| | 2024年3月末 | ヨドコウ「ヨド蔵MD／ヨド蔵SA」が受注をもって生産終了 | ヨドコウ公式の廃番案内（2024年1月付） | | 2026年8月31日 | イナバ「ナイソー」SMK型が生産終了 | イナバ公式ニュースリリース（2026年7月6日付） | | 2026年9月1日 | イナバ「ナイソー」SMX型・「como lite」SML型を発売 | イナバ公式ニュースリリース（2026年9月1日付） |</p>
+                <div class="table-wrap">
+        <table>
+          <thead><tr><th>時期</th><th>何が起きたか</th><th>出典</th></tr></thead>
+          <tbody>
+            <tr><td>2024年3月末</td><td>ヨドコウ「ヨド蔵MD／ヨド蔵SA」が受注をもって生産終了</td><td>ヨドコウ公式の廃番案内（2024年1月付）</td></tr>
+            <tr><td>2026年8月31日</td><td>イナバ「ナイソー」SMK型が生産終了</td><td>イナバ公式ニュースリリース（2026年7月6日付）</td></tr>
+            <tr><td>2026年9月1日</td><td>イナバ「ナイソー」SMX型・「como lite」SML型を発売</td><td>イナバ公式ニュースリリース（2026年9月1日付）</td></tr>
+          </tbody>
+        </table>
+        </div>
         <p>ヨド蔵については、<strong>後継が発表されていません。</strong>ヨドコウの現行ラインアップに、後継にあたる断熱物置の掲載は見当たりません。</p>
         <p>一方、イナバは同じ日に2機種を出しています。片方は従来からの「ナイソー」の後継、もう片方は「como lite」という新しい名前です。</p>
         <p>タクボの現行ラインアップにも、断熱を掲げた区分は見当たりません。</p>
