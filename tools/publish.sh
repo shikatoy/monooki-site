@@ -36,6 +36,7 @@ python3 "$REPO/tools/build-discontinued.py" || echo "[警告] 廃盤ページの
 
 # サイトマップの lastmod をファイル更新日で自動更新（手で直さなくてよい）
 python3 "$REPO/tools/build-sitemap.py" || echo "[警告] サイトマップの生成に失敗しました（続行します）"
+python3 "$REPO/tools/build-llms.py" || echo "[警告] llms.txt の生成に失敗しました（続行します）"
 
 # サイト内リンクが切れていないか（記事を取り下げたあとの取り残しを止める）
 # 計測タグを全ページに入れる（1枚でも漏れると、そのページの数字が消える）
