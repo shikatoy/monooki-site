@@ -42,6 +42,7 @@ python3 "$REPO/tools/build-llms.py" || echo "[警告] llms.txt の生成に失�
 # 計測タグを全ページに入れる（1枚でも漏れると、そのページの数字が消える）
 python3 "$REPO/tools/build-analytics.py" || { echo "[中止] 計測タグの設置に失敗しました。"; exit 1; }
 
+python3 "$REPO/tools/check-claims.py" || { echo "[中止] 本文の数字を直してから公開してください。"; exit 1; }
 python3 "$REPO/tools/check-links.py" || { echo "[中止] リンク切れを直してから公開してください。"; exit 1; }
 
 # .git/index.lock の取り残し対策（2026-09-29）

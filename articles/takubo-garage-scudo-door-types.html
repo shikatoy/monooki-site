@@ -198,6 +198,12 @@
     .disclaimer { padding: 32px; }
     .footer-meta { flex-direction: row; justify-content: space-between; }
   }
+  .article-body table { width: 100%; border-collapse: collapse; margin: 26px 0 0; font-size: 13.5px; line-height: 1.9; }
+  .article-body th, .article-body td { padding: 9px 10px; border-bottom: 1px solid var(--linesoft); text-align: left; vertical-align: top; }
+  .article-body th { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .1em; color: var(--mute); font-weight: 400; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .article-body td { font-variant-numeric: tabular-nums; }
+  .article-body tbody tr:hover { background: #efe9dc; }
+  .article-body .table-wrap { margin: 26px 0 0; overflow-x: auto; }
 /* AUTO_XLINK_CSS_START */
   /* ───── 記事どうしのリンク（tools/build-crosslinks.py が生成） ───── */
   .x-link { border-bottom: 1px dotted var(--rust); text-decoration: none; }
@@ -275,8 +281,8 @@
 
         <h2>寸法の選択肢が完全に一致している</h2>
         <p>公式のサイズ表は、2機種とも次のようになっています。</p>
-        <p>| | 選べる値 | |---|---| | 間口 | 2,774 / 3,124 / 3,474 mm | | <a class="x-link" href="monooki-narrow-space-maker.html">奥行</a> | 5,432 / 6,132 / 6,648 mm | | 高さ | 2,450 / 2,763 / 3,250 mm |</p>
-        <p>そして、間口と奥行の組み合わせにも同じ制限がかかっています。</p>
+        <div class="table-wrap"><table><thead><tr><th></th><th>選べる値</th></tr></thead><tbody><tr><td>間口</td><td>2,774 / 3,124 / 3,474 mm</td></tr><tr><td>奥行</td><td>5,432 / 6,132 / 6,648 mm</td></tr><tr><td>高さ</td><td>2,450 / 2,763 / 3,250 mm</td></tr></tbody></table></div>
+        <p>そして、間口と<a class="x-link" href="monooki-narrow-space-maker.html">奥行</a>の組み合わせにも同じ制限がかかっています。</p>
         <ul>
         <li>奥行 5,432 … 間口は 2,774 と 3,124 のみ（最大の 3,474 は選べない）</li>
         <li>奥行 6,132 … 間口は3つとも選べる</li>
