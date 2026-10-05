@@ -31,6 +31,7 @@ https://monooki-erabi.com/products/takubo-leisure.html
 https://monooki-erabi.com/products/takubo-mr-stockman-dandy.html
 https://monooki-erabi.com/products/takubo-mr-tallman-dandy.html
 https://monooki-erabi.com/products/takubo-peinte.html
+https://monooki-erabi.com/products/yodoko-elmo-shutter.html
 https://monooki-erabi.com/products/yodoko-elmo.html
 https://monooki-erabi.com/products/yodoko-esmo.html
 https://monooki-erabi.com/products/yodoko-lavige.html
@@ -46,6 +47,8 @@ https://monooki-erabi.com/size/band-w150-d30.html
 https://monooki-erabi.com/size/band-w150-d60.html
 https://monooki-erabi.com/size/band-w150-d90.html
 https://monooki-erabi.com/size/band-w180-d150.html
+https://monooki-erabi.com/size/band-w180-d180.html
+https://monooki-erabi.com/size/band-w180-d210.html
 https://monooki-erabi.com/size/band-w180-d30.html
 https://monooki-erabi.com/size/band-w180-d60.html
 https://monooki-erabi.com/size/band-w180-d90.html

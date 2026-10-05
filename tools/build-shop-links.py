@@ -64,6 +64,7 @@ DEST = {
     "inaba-takuhai-box":          ("mo", None, None),
     "takubo-bike-shutterman":     ("wh", None, None),
     "yodoko-lavige":              ("wh", None, None),
+    "yodoko-elmo-shutter":        ("mo", None, None),
 }
 
 CAT_LABEL = {"mo": "物置・収納", "wh": "倉庫・ガレージ"}

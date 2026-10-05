@@ -23,6 +23,7 @@ PAGES = {
     "i-fxn": "inaba-bike-hokanko",        "i-grn": "inaba-garudia",
     "i-tbj": "inaba-takuhai-box",         "i-dm": "inaba-arcia-fit",
     "y-ese": "yodoko-esmo",               "y-lmd": "yodoko-elmo",
+    "y-lod": "yodoko-elmo-shutter",
     "y-vgc": "yodoko-lavige",
     "i-smx": "inaba-nyso-smx",            "i-sml": "inaba-como-lite",
 }
