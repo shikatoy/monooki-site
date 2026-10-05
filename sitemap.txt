@@ -12,6 +12,7 @@ https://monooki-erabi.com/articles/monooki-rust-where-and-how.html
 https://monooki-erabi.com/articles/monooki-size-and-placement.html
 https://monooki-erabi.com/articles/takubo-garage-scudo-door-types.html
 https://monooki-erabi.com/articles/takubo-height-by-series.html
+https://monooki-erabi.com/articles/yodo-shutter-height-one-step.html
 https://monooki-erabi.com/products/index.html
 https://monooki-erabi.com/products/codes.html
 https://monooki-erabi.com/products/discontinued.html
