@@ -44,6 +44,20 @@ MAP = [
     ("巻上げシャッター", "takubo-garage-scudo-door-types"),
     ("結露", "monooki-insulated-generation"),
     ("断熱", "monooki-insulated-generation"),
+    # 2026-10-08 追加ぶん
+    ("前にどれだけ空ける", "monooki-front-clearance"),
+    ("通路幅", "monooki-front-clearance"),
+    ("作業スペース", "monooki-front-clearance"),
+    ("一段動かす", "monooki-one-step-dimension"),
+    ("床面積", "monooki-one-step-dimension"),
+    ("シャッター式", "monooki-shutter-vs-slide-opening"),
+    ("シャッター扉", "monooki-shutter-vs-slide-opening"),
+    ("エルモシャッター", "yodo-shutter-height-one-step"),
+    ("ブラックエルモ", "black-monooki-size-lineup"),
+    ("黒い物置", "black-monooki-size-lineup"),
+    ("Mr.トールマン", "takubo-height-by-series"),
+    ("屋根の出幅", "monooki-size-and-placement"),
+    ("壁や塀", "monooki-size-and-placement"),
 ]
 
 CSS = CSSBEG + """

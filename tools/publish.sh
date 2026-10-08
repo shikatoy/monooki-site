@@ -33,6 +33,7 @@ python3 "$REPO/tools/build-shop-links.py" || echo "[警告] 製品ページの�
 python3 "$REPO/tools/build-size-links.py" || { echo "[中止] サイズ帯への導線の生成に失敗しました。"; exit 1; }
 python3 "$REPO/tools/build-crosslinks.py" || echo "[警告] 記事どうしのリンク生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-article-links.py" || echo "[警告] 記事導線の生成に失敗しました（続行します）"
+python3 "$REPO/tools/build-article-related.py" || echo "[警告] あわせて読むの生成に失敗しました（続行します）"
 
 # 廃盤・生産終了ページを作り直す（手で直さなくてよい）
 python3 "$REPO/tools/build-discontinued.py" || echo "[警告] 廃盤ページの生成に失敗しました（続行します）"
