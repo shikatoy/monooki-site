@@ -26,6 +26,10 @@ PAGES = {
     "y-lod": "yodoko-elmo-shutter",
     "y-vgc": "yodoko-lavige",
     "i-smx": "inaba-nyso-smx",            "i-sml": "inaba-como-lite",
+    "i-bjx": "inaba-ivy-stocker",         "i-bjt": "inaba-tire-stocker",
+    "t-tp": "takubo-mr-stockman-plus-alpha",
+    "i-ff": "inaba-domaru",
+    "t-nde": "takubo-mr-stockman-shutter", "t-ws": "takubo-mr-shutterman",
 }
 
 # 表がまだ無いページに差し込むときの目印。型番0件で作ったページは

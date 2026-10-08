@@ -187,6 +187,10 @@ tailwind.config = {
   .idx-filter { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; border: 1px solid #171717; padding: 6px 14px; transition: all .25s ease; }
   .idx-filter:hover { background: #e6dfd0; }
   .idx-filter.active { background: #101010; color: #ffffff; }
+  /* 結果画面の絞り込みチップ。索引のフィルタと同じ体裁にそろえる */
+  .fchip { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; border: 1px solid #171717; padding: 6px 12px; transition: all .25s ease; }
+  .fchip:hover { background: #e6dfd0; }
+  .fchip.active { background: #101010; color: #ffffff; }
 
   /* ───── アウトライン文字 ───── */
   .outline-w { -webkit-text-stroke: 1px rgba(255,255,255,.55); color: transparent; }
@@ -197,11 +201,10 @@ tailwind.config = {
   .ed-input:focus { border-bottom-color: #a3512b; border-bottom-width: 2px; margin-bottom: -1px; }
   .ed-input::placeholder { color: #b9b9b4; }
 
-  /* ───── スライダー（設計図風） ───── */
-  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 1px; background: #171717; outline: none; }
-  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; background: #101010; border: none; border-radius: 0; cursor: ew-resize; transition: background .2s; }
-  input[type=range]::-webkit-slider-thumb:hover { background: #a3512b; }
-  input[type=range]::-moz-range-thumb { width: 16px; height: 16px; background: #101010; border: none; border-radius: 0; cursor: ew-resize; }
+  /* ───── 寸法入力（設計図風） ───── */
+  .mm-input { background: transparent; border: 0; border-bottom: 1px solid #171717; border-radius: 0; padding: 4px 0; width: 100%; outline: none; color: #101010; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 30px; line-height: 1.2; letter-spacing: .02em; -moz-appearance: textfield; transition: border-color .3s ease; }
+  .mm-input::-webkit-outer-spin-button, .mm-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .mm-input:focus { border-bottom-color: #a3512b; border-bottom-width: 2px; margin-bottom: -1px; }
   #size-box { transition: width .2s ease, height .2s ease; background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(16,16,16,.08) 5px, rgba(16,16,16,.08) 6px); }
 
   /* ───── 汎用アニメーション ───── */
@@ -477,6 +480,7 @@ tailwind.config = {
         <button class="idx-filter" data-group="cat" data-val="物置">物置</button>
         <button class="idx-filter" data-group="cat" data-val="バイク車庫">バイク車庫</button>
         <button class="idx-filter" data-group="cat" data-val="ガレージ">ガレージ</button>
+        <button class="idx-filter" data-group="cat" data-val="収納庫">ドア型・タイヤ収納庫</button>
         <button class="idx-filter" data-group="cat" data-val="宅配ボックス">宅配ボックス</button>
       </div>
       <span id="idx-count" class="md:ml-auto font-mono text-[11px] text-neutral-400"></span>
@@ -698,7 +702,7 @@ function affLink(p){
    ・このブロック外のコードは一切変更しないこと */
 const PRODUCTS = [
   { id:'t-gp', maker:'takubo', name:'グランプレステージ ジャンプ', cat:'小型物置', drawRef:'y-ese',
-    steel:'特殊焼付塗装鋼板', door:'引き戸2枚・両開き', found:'ブロック基礎 対応',
+    steel:'特殊焼付塗装鋼板', doorKind:'slide', door:'引き戸2枚・両開き', found:'ブロック基礎 対応',
     elev:{ openW:0.4308, openH:0.8727, ref:'GP-115D', src:'タクボ公式 型番ページ' },
     look:{ eaves:1.10, doorRib:2, wallRib:0, handle:'pill', legs:2, seen:true },
     doorSpec:{ front:['door','door'], handles:[{p:0,e:'l'},{p:1,e:'r'}], opening:'両開き' },
@@ -708,7 +712,7 @@ const PRODUCTS = [
     link:'https://www.e-ty.co.jp/seihin/gp/',
     sizes:[ { code:'GP-115D', w:1120, d:530, h:1100 }, { code:'GP-135D', w:1304, d:530, h:1100 }, { code:'GP-155D', w:1488, d:530, h:1100 }, { code:'GP-175D', w:1695, d:530, h:1100 }, { code:'GP-195D', w:1879, d:530, h:1100 }, { code:'GP-115C', w:1120, d:530, h:1400 }, { code:'GP-135C', w:1304, d:530, h:1400 }, { code:'GP-155C', w:1488, d:530, h:1400 }, { code:'GP-175C', w:1695, d:530, h:1400 }, { code:'GP-195C', w:1879, d:530, h:1400 }, { code:'GP-115B', w:1120, d:530, h:1600 }, { code:'GP-135B', w:1304, d:530, h:1600 }, { code:'GP-155B', w:1488, d:530, h:1600 }, { code:'GP-175B', w:1695, d:530, h:1600 }, { code:'GP-195B', w:1879, d:530, h:1600 }, { code:'GP-115A', w:1120, d:530, h:1900 }, { code:'GP-135A', w:1304, d:530, h:1900 }, { code:'GP-155A', w:1488, d:530, h:1900 }, { code:'GP-175A', w:1695, d:530, h:1900 }, { code:'GP-195A', w:1879, d:530, h:1900 }, { code:'GP-116C', w:1120, d:650, h:1400 }, { code:'GP-136C', w:1304, d:650, h:1400 }, { code:'GP-156C', w:1488, d:650, h:1400 }, { code:'GP-176C', w:1695, d:650, h:1400 }, { code:'GP-196C', w:1879, d:650, h:1400 }, { code:'GP-116B', w:1120, d:650, h:1600 }, { code:'GP-136B', w:1304, d:650, h:1600 }, { code:'GP-156B', w:1488, d:650, h:1600 }, { code:'GP-176B', w:1695, d:650, h:1600 }, { code:'GP-196B', w:1879, d:650, h:1600 }, { code:'GP-116A', w:1120, d:650, h:1900 }, { code:'GP-136A', w:1304, d:650, h:1900 }, { code:'GP-156A', w:1488, d:650, h:1900 }, { code:'GP-176A', w:1695, d:650, h:1900 }, { code:'GP-196A', w:1879, d:650, h:1900 }, { code:'GP-117D', w:1120, d:750, h:1100 }, { code:'GP-137D', w:1304, d:750, h:1100 }, { code:'GP-157D', w:1488, d:750, h:1100 }, { code:'GP-177D', w:1695, d:750, h:1100 }, { code:'GP-197D', w:1879, d:750, h:1100 }, { code:'GP-117C', w:1120, d:750, h:1400 }, { code:'GP-137C', w:1304, d:750, h:1400 }, { code:'GP-157C', w:1488, d:750, h:1400 }, { code:'GP-177C', w:1695, d:750, h:1400 }, { code:'GP-197C', w:1879, d:750, h:1400 }, { code:'GP-117B', w:1120, d:750, h:1600 }, { code:'GP-137B', w:1304, d:750, h:1600 }, { code:'GP-157B', w:1488, d:750, h:1600 }, { code:'GP-177B', w:1695, d:750, h:1600 }, { code:'GP-197B', w:1879, d:750, h:1600 }, { code:'GP-117A', w:1120, d:750, h:1900 }, { code:'GP-137A', w:1304, d:750, h:1900 }, { code:'GP-157A', w:1488, d:750, h:1900 }, { code:'GP-177A', w:1695, d:750, h:1900 }, { code:'GP-197A', w:1879, d:750, h:1900 }, { code:'GP-227A', w:2247, d:750, h:1900 }, { code:'GP-157H', w:1488, d:750, h:2100 }, { code:'GP-177H', w:1695, d:750, h:2100 }, { code:'GP-197H', w:1879, d:750, h:2100 }, { code:'GP-227H', w:2247, d:750, h:2100 }, { code:'GP-139C', w:1120, d:900, h:1400 }, { code:'GP-159C', w:1488, d:900, h:1400 }, { code:'GP-179C', w:1695, d:900, h:1400 }, { code:'GP-199C', w:1879, d:900, h:1400 }, { code:'GP-139B', w:1120, d:900, h:1600 }, { code:'GP-159B', w:1488, d:900, h:1600 }, { code:'GP-179B', w:1695, d:900, h:1600 }, { code:'GP-199B', w:1879, d:900, h:1600 }, { code:'GP-139A', w:1120, d:900, h:1900 }, { code:'GP-159A', w:1488, d:900, h:1900 }, { code:'GP-179A', w:1695, d:900, h:1900 }, { code:'GP-199A', w:1879, d:900, h:1900 }, { code:'GP-229A', w:2247, d:900, h:1900 }, { code:'GP-159H', w:1488, d:900, h:2100 }, { code:'GP-179H', w:1695, d:900, h:2100 }, { code:'GP-199H', w:1879, d:900, h:2100 }, { code:'GP-229H', w:2247, d:900, h:2100 } ], sizesComplete:true },
   { id:'t-nd', maker:'takubo', name:'Mr.ストックマン ダンディ', cat:'中・大型物置',
-    steel:'高級2コート焼付塗装鋼板', door:'吊り戸式引き戸2枚・片開き（右側固定パネル）', found:'ブロック基礎 対応',
+    steel:'高級2コート焼付塗装鋼板', doorKind:'slide', door:'吊り戸式引き戸2枚・片開き（右側固定パネル）', found:'ブロック基礎 対応',
     elev:{ openW:0.5415, openH:0.8768, ref:'ND-1815', src:'タクボ公式 型番ページ' },
     look:{ eaves:1.08, doorRib:0, wallRib:4, handle:'bar', legs:4, seen:true },
     doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
@@ -719,7 +723,7 @@ const PRODUCTS = [
     codeNote:'多雪型は <b>ND-S</b>、結露減少屋根は <b>ND-Z</b>、その両方は <b>ND-SZ</b> で始まります。公式の仕様図で確認できた範囲では、外形寸法はいずれも標準型（ND-）と同じです。末尾の Y・W などは棚の位置や扉の違いで、寸法は変わりません。公式のサイズ表で「受注生産」になっているマスには型番が振られていないため、ここには載せていません。',
     sizes:[ { code:'ND-1808', w:1832, d:890, h:2110 }, { code:'ND-2008', w:2016, d:890, h:2110 }, { code:'ND-2208', w:2200, d:890, h:2110 }, { code:'ND-2508', w:2532, d:890, h:2110 }, { code:'ND-2908', w:2900, d:890, h:2110 }, { code:'ND-1512', w:1500, d:1222, h:2110 }, { code:'ND-1812', w:1832, d:1222, h:2110 }, { code:'ND-2012', w:2016, d:1222, h:2110 }, { code:'ND-2212', w:2200, d:1222, h:2110 }, { code:'ND-2512', w:2532, d:1222, h:2110 }, { code:'ND-2912', w:2900, d:1222, h:2110 }, { code:'ND-1814', w:1832, d:1406, h:2110 }, { code:'ND-2014', w:2016, d:1406, h:2110 }, { code:'ND-2214', w:2200, d:1406, h:2110 }, { code:'ND-2514', w:2532, d:1406, h:2110 }, { code:'ND-1315', w:1316, d:1590, h:2110 }, { code:'ND-1515', w:1500, d:1590, h:2110 }, { code:'ND-1815', w:1832, d:1590, h:2110 }, { code:'ND-2015', w:2016, d:1590, h:2110 }, { code:'ND-2215', w:2200, d:1590, h:2110 }, { code:'ND-2515', w:2532, d:1590, h:2110 }, { code:'ND-2915', w:2900, d:1590, h:2110 }, { code:'ND-3215', w:3232, d:1590, h:2110 }, { code:'ND-1319', w:1316, d:1922, h:2110 }, { code:'ND-1519', w:1500, d:1922, h:2110 }, { code:'ND-1819', w:1832, d:1922, h:2110 }, { code:'ND-2019', w:2016, d:1922, h:2110 }, { code:'ND-2219', w:2200, d:1922, h:2110 }, { code:'ND-2519', w:2532, d:1922, h:2110 }, { code:'ND-2919', w:2900, d:1922, h:2110 }, { code:'ND-3219', w:3232, d:1922, h:2110 }, { code:'ND-1322', w:1316, d:2290, h:2110 }, { code:'ND-1522', w:1500, d:2290, h:2110 }, { code:'ND-1822', w:1832, d:2290, h:2110 }, { code:'ND-2022', w:2016, d:2290, h:2110 }, { code:'ND-2222', w:2200, d:2290, h:2110 }, { code:'ND-2522', w:2532, d:2290, h:2110 }, { code:'ND-2922', w:2900, d:2290, h:2110 }, { code:'ND-3222', w:3232, d:2290, h:2110 }, { code:'ND-2526', w:2532, d:2622, h:2110 }, { code:'ND-2926', w:2900, d:2622, h:2110 }, { code:'ND-3226', w:3232, d:2622, h:2110 }, { code:'ND-2929', w:2900, d:2990, h:2110 }, { code:'ND-3229', w:3232, d:2990, h:2110 }, { code:'ND-4415', w:4415, d:1590, h:2110 }, { code:'ND-4419', w:4415, d:1922, h:2110 }, { code:'ND-5019', w:5079, d:1922, h:2110 }, { code:'ND-4422', w:4415, d:2290, h:2110 }, { code:'ND-5022', w:5079, d:2290, h:2110 }, { code:'ND-5822', w:5815, d:2290, h:2110 }, { code:'ND-5826', w:5815, d:2622, h:2110 } ], sizesComplete:true },
   { id:'t-jn', maker:'takubo', name:'Mr.トールマン ダンディ', cat:'大型物置',
-    steel:'高級2コート焼付塗装鋼板', door:'吊り戸式引き戸2枚・片開き（右側固定パネル）', found:'ブロック基礎＋アンカー必須',
+    steel:'高級2コート焼付塗装鋼板', doorKind:'slide', door:'吊り戸式引き戸2枚・片開き（右側固定パネル）', found:'ブロック基礎＋アンカー必須',
     elev:{ openW:0.5317, openH:0.7198, ref:'JN-2922', src:'タクボ公式 型番ページ' },
     look:{ eaves:1.08, doorRib:0, wallRib:4, handle:'bar', legs:4, seen:false },
     doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
@@ -730,7 +734,7 @@ const PRODUCTS = [
     codeNote:'あかり窓付は <b>JNA-</b> で始まります。多雪型は <b>JN-S</b>／<b>JNA-S</b>、結露減少屋根は <b>JN-Z</b>／<b>JNA-Z</b>、その両方は <b>JN-SZ</b>／<b>JNA-SZ</b> で始まります。公式の仕様図（注記）で確認できた範囲では、これらは母屋の板厚や屋根裏の断熱仕様の違いであり、外形寸法はいずれも標準型と同じです。公式のサイズ表で「受注生産」になっているマスには型番が振られていないため、ここには載せていません。',
     sizes:[ { code:'JN-2215', w:2200, d:1590, h:2570 }, { code:'JN-2515', w:2532, d:1590, h:2570 }, { code:'JN-2219', w:2200, d:1922, h:2570 }, { code:'JN-2519', w:2532, d:1922, h:2570 }, { code:'JN-2919', w:2900, d:1922, h:2570 }, { code:'JN-3219', w:3232, d:1922, h:2570 }, { code:'JN-2222', w:2200, d:2290, h:2570 }, { code:'JN-2522', w:2532, d:2290, h:2570 }, { code:'JN-2922', w:2900, d:2290, h:2570 }, { code:'JN-3222', w:3232, d:2290, h:2570 }, { code:'JN-2926', w:2900, d:2622, h:2570 }, { code:'JN-3226', w:3232, d:2622, h:2570 }, { code:'JN-2929', w:2900, d:2990, h:2570 }, { code:'JN-3229', w:3232, d:2990, h:2570 }, { code:'JN-4419', w:4415, d:1922, h:2570 }, { code:'JN-5019', w:5079, d:1922, h:2570 }, { code:'JN-4422', w:4415, d:2290, h:2570 }, { code:'JN-5022', w:5079, d:2290, h:2570 }, { code:'JN-5822', w:5815, d:2290, h:2570 }, { code:'JN-4426', w:4415, d:2622, h:2570 }, { code:'JN-5026', w:5079, d:2622, h:2570 }, { code:'JN-5826', w:5815, d:2622, h:2570 }, { code:'JN-5029', w:5079, d:2990, h:2570 }, { code:'JN-5829', w:5815, d:2990, h:2570 }, { code:'JNA-2215', w:2200, d:1590, h:2570 }, { code:'JNA-2515', w:2532, d:1590, h:2570 }, { code:'JNA-2219', w:2200, d:1922, h:2570 }, { code:'JNA-2519', w:2532, d:1922, h:2570 }, { code:'JNA-2919', w:2900, d:1922, h:2570 }, { code:'JNA-2222', w:2200, d:2290, h:2570 }, { code:'JNA-2522', w:2532, d:2290, h:2570 }, { code:'JNA-2922', w:2900, d:2290, h:2570 }, { code:'JNA-2926', w:2900, d:2622, h:2570 }, { code:'JNA-2929', w:2900, d:2990, h:2570 }, { code:'JNA-4419', w:4415, d:1922, h:2570 }, { code:'JNA-5019', w:5079, d:1922, h:2570 }, { code:'JNA-4422', w:4415, d:2290, h:2570 }, { code:'JNA-5022', w:5079, d:2290, h:2570 }, { code:'JNA-5822', w:5815, d:2290, h:2570 }, { code:'JNA-4426', w:4415, d:2622, h:2570 }, { code:'JNA-5026', w:5079, d:2622, h:2570 }, { code:'JNA-5826', w:5815, d:2622, h:2570 }, { code:'JNA-5029', w:5079, d:2990, h:2570 }, { code:'JNA-5829', w:5815, d:2990, h:2570 } ], sizesComplete:true },
   { id:'t-bs', maker:'takubo', name:'バイクシャッターマン', cat:'バイク車庫',
-    steel:'焼付塗装鋼板', door:'巻上げシャッター', found:'土間コンクリート 推奨',
+    steel:'焼付塗装鋼板', doorKind:'shutter', door:'巻上げシャッター', found:'土間コンクリート 推奨',
     elev:{ openW:0.9027, openH:0.7957, ref:'BS-2226', src:'タクボ公式 仕様図' },
     look:{ eaves:1.06, doorRib:0, wallRib:0, handle:'pill', legs:4, seen:true },
     tags:{ bike:3, shutter:3, garage:1, sturdy:1, large:1 },
@@ -739,7 +743,7 @@ const PRODUCTS = [
     link:'https://www.e-ty.co.jp/seihin/nde-jne/',
     sizes:[ { code:'BS-1826WH', w:1832, d:2622, h:2570 }, { code:'BS-2226WH', w:2200, d:2622, h:2570 }, { code:'BS-2526WH', w:2532, d:2622, h:2570 }, { code:'BS-2926WH', w:2900, d:2622, h:2570 }, { code:'BS-1829WH', w:1832, d:2990, h:2570 }, { code:'BS-2229WH', w:2200, d:2990, h:2570 }, { code:'BS-2529WH', w:2532, d:2990, h:2570 }, { code:'BS-2929WH', w:2900, d:2990, h:2570 } ], sizesComplete:true },
   { id:'t-belos', maker:'takubo', name:'BELOS', cat:'中型物置', added:'2026-07-09',
-    steel:'高耐食鋼板ZAM＋粉体塗装', door:'連動吊り戸式扉2枚・片開き（右側固定パネル／開き方向は現地選択可）', found:'ブロック基礎 対応（豪雪型は公式カタログ参照）',
+    steel:'高耐食鋼板ZAM＋粉体塗装', doorKind:'slide', door:'連動吊り戸式扉2枚・片開き（右側固定パネル／開き方向は現地選択可）', found:'ブロック基礎 対応（豪雪型は公式カタログ参照）',
     elev:{ openW:0.5806, openH:0.8478, ref:'B-2518', src:'タクボ公式 型番ページ' },
     look:{ eaves:1.04, doorRib:0, wallRib:0, handle:'hbar', legs:0, seen:true },
     doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
@@ -749,7 +753,7 @@ const PRODUCTS = [
     link:'https://www.e-ty.co.jp/belos/',
     sizes:[ { code:'B-1710', w:1730, d:1000, h:2171 }, { code:'B-1714', w:1730, d:1400, h:2163 }, { code:'B-1718', w:1730, d:1800, h:2161 }, { code:'B-1722', w:1730, d:2200, h:2159 }, { code:'B-1726', w:1730, d:2600, h:2158 }, { code:'B-1730', w:1730, d:3000, h:2157 }, { code:'B-2110', w:2130, d:1000, h:2171 }, { code:'B-2114', w:2130, d:1400, h:2163 }, { code:'B-2118', w:2130, d:1800, h:2161 }, { code:'B-2122', w:2130, d:2200, h:2159 }, { code:'B-2126', w:2130, d:2600, h:2158 }, { code:'B-2130', w:2130, d:3000, h:2157 }, { code:'B-2510', w:2530, d:1000, h:2171 }, { code:'B-2514', w:2530, d:1400, h:2163 }, { code:'B-2518', w:2530, d:1800, h:2161 }, { code:'B-2522', w:2530, d:2200, h:2159 }, { code:'B-2526', w:2530, d:2600, h:2158 }, { code:'B-2530', w:2530, d:3000, h:2157 }, { code:'B-2910', w:2930, d:1000, h:2171 }, { code:'B-2914', w:2930, d:1400, h:2163 }, { code:'B-2918', w:2930, d:1800, h:2161 }, { code:'B-2922', w:2930, d:2200, h:2159 }, { code:'B-2926', w:2930, d:2600, h:2158 }, { code:'B-2930', w:2930, d:3000, h:2157 }, { code:'B-3310', w:3330, d:1000, h:2171 }, { code:'B-3314', w:3330, d:1400, h:2163 }, { code:'B-3318', w:3330, d:1800, h:2161 }, { code:'B-3322', w:3330, d:2200, h:2159 }, { code:'B-3326', w:3330, d:2600, h:2158 }, { code:'B-3330', w:3330, d:3000, h:2157 } ], sizesComplete:true },
   { id:'t-lsn', maker:'takubo', name:'リジュー', cat:'小型物置', added:'2026-07-16', roof:'gable',
-    steel:'ZAM／ガルバリウム鋼板＋高級焼付塗装', door:'吊り戸式引き戸2枚・両開き（両端は固定パネル）＋仮ロック錠', found:'ブロック基礎 対応（一般・多雪兼用）',
+    steel:'ZAM／ガルバリウム鋼板＋高級焼付塗装', doorKind:'slide', door:'吊り戸式引き戸2枚・両開き（両端は固定パネル）＋仮ロック錠', found:'ブロック基礎 対応（一般・多雪兼用）',
     elev:{ openW:0.4181, openH:0.8002, ref:'LSN-1815', src:'タクボ公式 型番ページ' },
     look:{ eaves:1.06, doorRib:3, wallRib:3, handle:'pill', legs:2, seen:true },
     doorSpec:{ front:['fix','door','door','fix'], handles:[{p:1,e:'r'},{p:2,e:'l'}], opening:'両開き' },
@@ -759,7 +763,7 @@ const PRODUCTS = [
     link:'https://www.e-ty.co.jp/seihin/ls/',
     sizes:[ { code:'LSN-1808', w:1832, d:840, h:2212 }, { code:'LSN-1815', w:1832, d:1540, h:2212 }, { code:'LSN-2215', w:2200, d:1540, h:2251 } ], sizesComplete:true },
   { id:'i-mjx', maker:'inaba', name:'シンプリー', cat:'小型物置', drawRef:'y-ese',
-    steel:'溶融亜鉛メッキ鋼板', door:'引き戸2枚・両開き（両サイドから開閉／中央からは開きません）', found:'ブロック基礎 対応',
+    steel:'溶融亜鉛メッキ鋼板', doorKind:'slide', door:'引き戸2枚・両開き（両サイドから開閉／中央からは開きません）', found:'ブロック基礎 対応',
     elev:{ openW:0.4253, openH:0.9070, ref:'MJX-159D', src:'イナバ公式 外形図/サイズ表' },
     look:{ eaves:1.03, doorRib:0, wallRib:0, handle:'pill', legs:4, seen:true },
     doorSpec:{ front:['door','door'], handles:[{p:0,e:'l'},{p:1,e:'r'}], opening:'両開き' },
@@ -769,7 +773,7 @@ const PRODUCTS = [
     link:'https://www.inaba-ss.co.jp/monooki/lineup/mjx/',
     sizes:[ { code:'MJX-094A', w:920, d:448, h:903 }, { code:'MJX-094B', w:920, d:448, h:1103 }, { code:'MJX-094D', w:920, d:448, h:1603 }, { code:'MJX-095A', w:920, d:548, h:903 }, { code:'MJX-095B', w:920, d:548, h:1103 }, { code:'MJX-095C', w:920, d:548, h:1303 }, { code:'MJX-096C', w:920, d:648, h:1303 }, { code:'MJX-096D', w:920, d:648, h:1603 }, { code:'MJX-097C', w:920, d:788, h:1303 }, { code:'MJX-097D', w:920, d:788, h:1603 }, { code:'MJX-097E', w:920, d:788, h:1903 }, { code:'MJX-114A', w:1120, d:448, h:903 }, { code:'MJX-114B', w:1120, d:448, h:1103 }, { code:'MJX-114D', w:1120, d:448, h:1603 }, { code:'MJX-115A', w:1120, d:548, h:903 }, { code:'MJX-115B', w:1120, d:548, h:1103 }, { code:'MJX-115C', w:1120, d:548, h:1303 }, { code:'MJX-115D', w:1120, d:548, h:1603 }, { code:'MJX-115E', w:1120, d:548, h:1903 }, { code:'MJX-116C', w:1120, d:648, h:1303 }, { code:'MJX-116D', w:1120, d:648, h:1603 }, { code:'MJX-116E', w:1120, d:648, h:1903 }, { code:'MJX-117B', w:1120, d:788, h:1103 }, { code:'MJX-117C', w:1120, d:788, h:1303 }, { code:'MJX-117D', w:1120, d:788, h:1603 }, { code:'MJX-117E', w:1120, d:788, h:1903 }, { code:'MJX-119D', w:1120, d:938, h:1603 }, { code:'MJX-119E', w:1120, d:938, h:1903 }, { code:'MJX-134A', w:1340, d:448, h:903 }, { code:'MJX-134B', w:1340, d:448, h:1103 }, { code:'MJX-134D', w:1340, d:448, h:1603 }, { code:'MJX-135A', w:1340, d:548, h:903 }, { code:'MJX-135B', w:1340, d:548, h:1103 }, { code:'MJX-135C', w:1340, d:548, h:1303 }, { code:'MJX-135D', w:1340, d:548, h:1603 }, { code:'MJX-135E', w:1340, d:548, h:1903 }, { code:'MJX-136C', w:1340, d:648, h:1303 }, { code:'MJX-136D', w:1340, d:648, h:1603 }, { code:'MJX-136E', w:1340, d:648, h:1903 }, { code:'MJX-137B', w:1340, d:788, h:1103 }, { code:'MJX-137C', w:1340, d:788, h:1303 }, { code:'MJX-137D', w:1340, d:788, h:1603 }, { code:'MJX-137E', w:1340, d:788, h:1903 }, { code:'MJX-139D', w:1340, d:938, h:1603 }, { code:'MJX-139E', w:1340, d:938, h:1903 }, { code:'MJX-155A', w:1540, d:548, h:903 }, { code:'MJX-155B', w:1540, d:548, h:1103 }, { code:'MJX-155C', w:1540, d:548, h:1303 }, { code:'MJX-155D', w:1540, d:548, h:1603 }, { code:'MJX-155E', w:1540, d:548, h:1903 }, { code:'MJX-156C', w:1540, d:648, h:1303 }, { code:'MJX-156D', w:1540, d:648, h:1603 }, { code:'MJX-156E', w:1540, d:648, h:1903 }, { code:'MJX-157B', w:1540, d:788, h:1103 }, { code:'MJX-157C', w:1540, d:788, h:1303 }, { code:'MJX-157D', w:1540, d:788, h:1603 }, { code:'MJX-157E', w:1540, d:788, h:1903 }, { code:'MJX-159D', w:1540, d:938, h:1603 }, { code:'MJX-159E', w:1540, d:938, h:1903 }, { code:'MJX-175B', w:1760, d:548, h:1103 }, { code:'MJX-175C', w:1760, d:548, h:1303 }, { code:'MJX-175D', w:1760, d:548, h:1603 }, { code:'MJX-175E', w:1760, d:548, h:1903 }, { code:'MJX-176C', w:1760, d:648, h:1303 }, { code:'MJX-176D', w:1760, d:648, h:1603 }, { code:'MJX-176E', w:1760, d:648, h:1903 }, { code:'MJX-177C', w:1760, d:788, h:1303 }, { code:'MJX-177D', w:1760, d:788, h:1603 }, { code:'MJX-177E', w:1760, d:788, h:1903 }, { code:'MJX-179D', w:1760, d:938, h:1603 }, { code:'MJX-179E', w:1760, d:938, h:1903 }, { code:'MJX-195C', w:1960, d:548, h:1303 }, { code:'MJX-195D', w:1960, d:548, h:1603 }, { code:'MJX-195E', w:1960, d:548, h:1903 }, { code:'MJX-196C', w:1960, d:648, h:1303 }, { code:'MJX-196D', w:1960, d:648, h:1603 }, { code:'MJX-196E', w:1960, d:648, h:1903 }, { code:'MJX-197C', w:1960, d:788, h:1303 }, { code:'MJX-197D', w:1960, d:788, h:1603 }, { code:'MJX-197E', w:1960, d:788, h:1903 }, { code:'MJX-199D', w:1960, d:938, h:1603 }, { code:'MJX-199E', w:1960, d:938, h:1903 }, { code:'MJX-216D', w:2180, d:648, h:1603 }, { code:'MJX-216E', w:2180, d:648, h:1903 }, { code:'MJX-217D', w:2180, d:788, h:1603 }, { code:'MJX-217E', w:2180, d:788, h:1903 }, { code:'MJX-219D', w:2180, d:938, h:1603 }, { code:'MJX-219E', w:2180, d:938, h:1903 } ], sizesComplete:true },
   { id:'i-fs', maker:'inaba', name:'フォルタ', cat:'中・大型物置', added:'2026-07-09',
-    steel:'指定建築材料使用の高耐食鋼板', door:'引き戸2枚・片開き（右側固定パネル）＋ディンプルキー、現地で開き方向変更可', found:'ブロック基礎 対応（大型はアンカー必須）',
+    steel:'指定建築材料使用の高耐食鋼板', doorKind:'slide', door:'引き戸2枚・片開き（右側固定パネル）＋ディンプルキー、現地で開き方向変更可', found:'ブロック基礎 対応（大型はアンカー必須）',
     elev:{ openW:0.5647, openH:0.8489, ref:'FS-2215S', src:'イナバ公式 外形図PDF' },
     look:{ eaves:1.10, doorRib:5, wallRib:5, handle:'pill', legs:4, seen:true },
     doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
@@ -779,7 +783,7 @@ const PRODUCTS = [
     link:'https://www.inaba-ss.co.jp/monooki/lineup/fs/',
     sizes:[ { code:'FS-1409S', w:1370, d:950,  h:2085 }, { code:'FS-1414S', w:1370, d:1370, h:2085 }, { code:'FS-1415S', w:1370, d:1530, h:2085 }, { code:'FS-1418S', w:1370, d:1790, h:2085 }, { code:'FS-1422S', w:1370, d:2210, h:2085 }, { code:'FS-1426S', w:1370, d:2630, h:2085 }, { code:'FS-1509S', w:1530, d:950,  h:2085 }, { code:'FS-1514S', w:1530, d:1370, h:2085 }, { code:'FS-1515S', w:1530, d:1530, h:2085 }, { code:'FS-1518S', w:1530, d:1790, h:2085 }, { code:'FS-1522S', w:1530, d:2210, h:2085 }, { code:'FS-1526S', w:1530, d:2630, h:2085 }, { code:'FS-1809S', w:1790, d:950,  h:2085 }, { code:'FS-1814S', w:1790, d:1370, h:2085 }, { code:'FS-1814H', w:1790, d:1370, h:2385 }, { code:'FS-1815S', w:1790, d:1530, h:2085 }, { code:'FS-1815H', w:1790, d:1530, h:2385 }, { code:'FS-1818S', w:1790, d:1790, h:2085 }, { code:'FS-1818H', w:1790, d:1790, h:2385 }, { code:'FS-1822S', w:1790, d:2210, h:2085 }, { code:'FS-1822H', w:1790, d:2210, h:2385 }, { code:'FS-1826S', w:1790, d:2630, h:2085 }, { code:'FS-1826H', w:1790, d:2630, h:2385 }, { code:'FS-2209S', w:2210, d:950,  h:2085 }, { code:'FS-2214S', w:2210, d:1370, h:2085 }, { code:'FS-2214H', w:2210, d:1370, h:2385 }, { code:'FS-2215S', w:2210, d:1530, h:2085 }, { code:'FS-2215H', w:2210, d:1530, h:2385 }, { code:'FS-2218S', w:2210, d:1790, h:2085 }, { code:'FS-2218H', w:2210, d:1790, h:2385 }, { code:'FS-2222S', w:2210, d:2210, h:2085 }, { code:'FS-2222H', w:2210, d:2210, h:2385 }, { code:'FS-2226S', w:2210, d:2630, h:2085 }, { code:'FS-2226H', w:2210, d:2630, h:2385 }, { code:'FS-2230S', w:2210, d:3050, h:2085 }, { code:'FS-2230H', w:2210, d:3050, h:2385 }, { code:'FS-2609S', w:2630, d:950,  h:2085 }, { code:'FS-2614S', w:2630, d:1370, h:2085 }, { code:'FS-2614H', w:2630, d:1370, h:2385 }, { code:'FS-2615S', w:2630, d:1530, h:2085 }, { code:'FS-2615H', w:2630, d:1530, h:2385 }, { code:'FS-2618S', w:2630, d:1790, h:2085 }, { code:'FS-2618H', w:2630, d:1790, h:2385 }, { code:'FS-2622S', w:2630, d:2210, h:2085 }, { code:'FS-2622H', w:2630, d:2210, h:2385 }, { code:'FS-2626S', w:2630, d:2630, h:2085 }, { code:'FS-2626H', w:2630, d:2630, h:2385 }, { code:'FS-2630S', w:2630, d:3050, h:2085 }, { code:'FS-2630H', w:2630, d:3050, h:2385 }, { code:'FS-3009S', w:3050, d:950,  h:2085 }, { code:'FS-3014S', w:3050, d:1370, h:2085 }, { code:'FS-3015S', w:3050, d:1530, h:2085 }, { code:'FS-3018S', w:3050, d:1790, h:2085 }, { code:'FS-3018H', w:3050, d:1790, h:2385 }, { code:'FS-3022S', w:3050, d:2210, h:2085 }, { code:'FS-3022H', w:3050, d:2210, h:2385 }, { code:'FS-3026S', w:3050, d:2630, h:2085 }, { code:'FS-3026H', w:3050, d:2630, h:2385 }, { code:'FS-3030S', w:3050, d:3050, h:2085 }, { code:'FS-3030H', w:3050, d:3050, h:2385 }, { code:'FS-3518S', w:3470, d:1790, h:2085 }, { code:'FS-3518H', w:3470, d:1790, h:2385 }, { code:'FS-3522S', w:3470, d:2210, h:2085 }, { code:'FS-3522H', w:3470, d:2210, h:2385 }, { code:'FS-3526S', w:3470, d:2630, h:2085 }, { code:'FS-3526H', w:3470, d:2630, h:2385 }, { code:'FS-3618H', w:3580, d:1790, h:2385 }, { code:'FS-3622H', w:3580, d:2210, h:2385 }, { code:'FS-3626H', w:3580, d:2630, h:2385 }, { code:'FS-4418H', w:4420, d:1790, h:2385 }, { code:'FS-4422H', w:4420, d:2210, h:2385 }, { code:'FS-5218H', w:5260, d:1790, h:2385 } ], sizesComplete:true },
   { id:'i-fxn', maker:'inaba', name:'バイク保管庫', cat:'バイク車庫',
-    steel:'高耐食溶融亜鉛メッキ鋼板', door:'シャッター＋床付タイプ', found:'土間コンクリート 推奨',
+    steel:'高耐食溶融亜鉛メッキ鋼板', doorKind:'shutter', door:'シャッター＋床付タイプ', found:'土間コンクリート 推奨',
     elev:{ openW:0.8887, openH:0.8168, ref:'FM-2226HD', src:'イナバ公式 外形図PDF' },
     look:{ eaves:1.07, doorRib:0, wallRib:0, handle:'pill', legs:4, seen:true },
     tags:{ bike:3, garage:2, sturdy:2, shutter:2, large:1, daily:1 },
@@ -789,7 +793,7 @@ const PRODUCTS = [
     codeNote:'現行の型番は <b>FM-</b> で始まります。末尾の <b>SD</b> は土間タイプの標準高、<b>HD</b> は土間タイプのハイルーフ、<b>HY</b> は床付タイプです。以前の <b>FXN-</b> は公式のラインナップ・データダウンロードのどちらにも見当たらず、旧世代の表記と思われます。一般型・多雪型・豪雪型は型番が同じで、外形寸法も変わりません。',
     sizes:[ { code:'FM-1422SD', w:1370, d:2210, h:2085 }, { code:'FM-1422HD', w:1370, d:2210, h:2385 }, { code:'FM-1426SD', w:1370, d:2630, h:2085 }, { code:'FM-1426HD', w:1370, d:2630, h:2385 }, { code:'FM-1526SD', w:1530, d:2630, h:2085 }, { code:'FM-1526HD', w:1530, d:2630, h:2385 }, { code:'FM-1530SD', w:1530, d:3050, h:2085 }, { code:'FM-1530HD', w:1530, d:3050, h:2385 }, { code:'FM-1826SD', w:1790, d:2630, h:2085 }, { code:'FM-1826HD', w:1790, d:2630, h:2385 }, { code:'FM-1830SD', w:1790, d:3050, h:2085 }, { code:'FM-1830HD', w:1790, d:3050, h:2385 }, { code:'FM-2226SD', w:2210, d:2630, h:2085 }, { code:'FM-2226HD', w:2210, d:2630, h:2385 }, { code:'FM-2230SD', w:2210, d:3050, h:2085 }, { code:'FM-2230HD', w:2210, d:3050, h:2385 }, { code:'FM-2235SD', w:2210, d:3470, h:2085 }, { code:'FM-2235HD', w:2210, d:3470, h:2385 }, { code:'FM-2626SD', w:2630, d:2630, h:2085 }, { code:'FM-2626HD', w:2630, d:2630, h:2385 }, { code:'FM-2630SD', w:2630, d:3050, h:2085 }, { code:'FM-2630HD', w:2630, d:3050, h:2385 }, { code:'FM-2635SD', w:2630, d:3470, h:2085 }, { code:'FM-2635HD', w:2630, d:3470, h:2385 }, { code:'FM-1422HY', w:1370, d:2210, h:2385 }, { code:'FM-1426HY', w:1370, d:2630, h:2385 }, { code:'FM-1826HY', w:1790, d:2630, h:2385 }, { code:'FM-1830HY', w:1790, d:3050, h:2385 }, { code:'FM-2226HY', w:2210, d:2630, h:2385 }, { code:'FM-2230HY', w:2210, d:3050, h:2385 }, { code:'FM-2235HY', w:2210, d:3470, h:2385 } ], sizesComplete:true },
   { id:'i-grn', maker:'inaba', name:'ガレーディア', cat:'ガレージ',
-    steel:'高耐食溶融亜鉛メッキ鋼板', door:'巻上げシャッター', found:'土間コンクリート 必須',
+    steel:'高耐食溶融亜鉛メッキ鋼板', doorKind:'shutter', door:'巻上げシャッター', found:'土間コンクリート 必須',
     elev:{ openW:0.8905, openH:0.7703, ref:'GRN-2642S', src:'イナバ公式 外形図PDF' },
     look:{ eaves:1.05, doorRib:0, wallRib:0, handle:'pill', legs:0, seen:true },
     tags:{ garage:3, large:3, bike:2, shutter:3, sturdy:2, snow:1 },
@@ -798,7 +802,7 @@ const PRODUCTS = [
     link:'https://www.inaba-ss.co.jp/monooki/lineup/grn/',
     sizes:[ { code:'GRN-2142S', w:2130, d:4275, h:2360 }, { code:'GRN-2142H', w:2130, d:4275, h:2660 }, { code:'GRN-2642S', w:2630, d:4275, h:2360 }, { code:'GRN-2642H', w:2630, d:4275, h:2660 }, { code:'GRN-3142S', w:3130, d:4275, h:2360 }, { code:'GRN-3142H', w:3130, d:4275, h:2660 }, { code:'GRN-3642S', w:3630, d:4275, h:2360 }, { code:'GRN-3642H', w:3630, d:4275, h:2660 }, { code:'GRN-2147S', w:2130, d:4775, h:2360 }, { code:'GRN-2147H', w:2130, d:4775, h:2660 }, { code:'GRN-2647S', w:2630, d:4775, h:2360 }, { code:'GRN-2647H', w:2630, d:4775, h:2660 }, { code:'GRN-3147S', w:3130, d:4775, h:2360 }, { code:'GRN-3147H', w:3130, d:4775, h:2660 }, { code:'GRN-3647S', w:3630, d:4775, h:2360 }, { code:'GRN-3647H', w:3630, d:4775, h:2660 }, { code:'GRN-2652S', w:2630, d:5275, h:2360 }, { code:'GRN-2652H', w:2630, d:5275, h:2660 }, { code:'GRN-3152S', w:3130, d:5275, h:2360 }, { code:'GRN-3152H', w:3130, d:5275, h:2660 }, { code:'GRN-3652S', w:3630, d:5275, h:2360 }, { code:'GRN-3652H', w:3630, d:5275, h:2660 }, { code:'GRN-2657S', w:2630, d:5775, h:2360 }, { code:'GRN-2657H', w:2630, d:5775, h:2660 }, { code:'GRN-2657J', w:2630, d:5775, h:2960 }, { code:'GRN-3157S', w:3130, d:5775, h:2360 }, { code:'GRN-3157H', w:3130, d:5775, h:2660 }, { code:'GRN-3157J', w:3130, d:5775, h:2960 }, { code:'GRN-3657S', w:3630, d:5775, h:2360 }, { code:'GRN-3657H', w:3630, d:5775, h:2660 }, { code:'GRN-3657J', w:3630, d:5775, h:2960 }, { code:'GRN-2662S', w:2630, d:6275, h:2360 }, { code:'GRN-2662H', w:2630, d:6275, h:2660 }, { code:'GRN-2662J', w:2630, d:6275, h:2960 }, { code:'GRN-3162S', w:3130, d:6275, h:2360 }, { code:'GRN-3162H', w:3130, d:6275, h:2660 }, { code:'GRN-3162J', w:3130, d:6275, h:2960 }, { code:'GRN-3662S', w:3630, d:6275, h:2360 }, { code:'GRN-3662H', w:3630, d:6275, h:2660 }, { code:'GRN-3662J', w:3630, d:6275, h:2960 } ], sizesComplete:true },
   { id:'i-tbj', maker:'inaba', name:'宅配ボックス', cat:'宅配ボックス', added:'2026-07-09',
-    steel:'塗装鋼板', door:'前開き扉・上下2段（上1/3:宅配ボックス／下2/3:収納庫）', found:'ブロック基礎 対応（アンカー工事必須）',
+    steel:'塗装鋼板', doorKind:'hinged', door:'前開き扉・上下2段（上1/3:宅配ボックス／下2/3:収納庫）', found:'ブロック基礎 対応（アンカー工事必須）',
     elev:{ openW:0.8306, openH:0.8227, ref:'TBJ-065C', src:'イナバ公式 組立説明書（上336+下736）' },
     look:{ eaves:1.03, doorRib:0, wallRib:0, handle:'pill', legs:2, seen:true },
     doorSpec:{ hingedRows:[0.34, 0.66], handleSide:'l', opening:'前開き' },
@@ -807,22 +811,82 @@ const PRODUCTS = [
     base:'荷物の受け取りと収納がこれ一台に。宅配ボックスと収納庫が一体になった便利な新製品です。',
     link:'https://www.inaba-ss.co.jp/monooki/lineup/tbj/',
     sizes:[ { code:'TBJ-065C', w:620, d:548, h:1303 } ], sizesComplete:true },
+  { id:'t-nde', maker:'takubo', name:'Mr.ストックマン シャッター扉', cat:'中・大型物置', added:'2026-10-08',
+    steel:'公式の特長ページに「耐食性に優れた特殊亜鉛鋼板」とあり、鋼板の種別の明記は見当たらない', doorKind:'shutter', door:'シャッター扉・全面開口。独自のラッチ機構と指づめ防止のクッションゴム。ディンプルシリンダー錠', found:'柱の埋込みが不要で、アンカーで固定する方式（移設可能）',
+    elev:{ openW:0.8832, openH:0.7536, ref:'NDE-1815H', src:'タクボ公式 型番ページ' },
+    look:{ seen:false },
+    tags:{ medium:2, large:3, shutter:3, bike:1, tires:2, snow:1, sturdy:1 },
+    features:['シャッターは独自のラッチ機構。指づめ防止のクッションゴム付き','柱の埋込みが不要で、あとから移設できる','結露減少型屋根。屋根部材の室内側に発泡ポリエチレン','軒樋・たて樋付。ディンプルシリンダー錠'],
+    base:'引き戸のMr.ストックマン ダンディと同じ外形で、扉がシャッターになった機種です。',
+    pageDesc:'外形寸法と内部寸法はMr.ストックマン ダンディと同じで、違うのは扉と開口です。NDE-1815Hの開口部は間口1,618mm、引き戸のND-1815は992mm（いずれも公式の型番ページ）。',
+    link:'https://www.e-ty.co.jp/seihin/exterior/NDE_JNE/',
+    codeNote:'公式では型番の末尾に <b>H</b> が付いた形で並んでいます。数字の読み方は引き戸のMr.ストックマン ダンディと同じで、外形寸法も同じです（公式の型番ページで NDE-1815H＝1,832×1,590×2,110mm／内部1,776×1,420×1,882mm、NDE-2929H＝2,900×2,990×2,110mm を確認。いずれも引き戸版と一致）。違うのは開口で、NDE-1815Hは間口1,618mm、引き戸のND-1815は992mmです。結露減少屋根の <b>NDE-Z</b>、多雪型の <b>NDE-S</b>、その両方の <b>NDE-SZ</b> は外形寸法が同じため載せていません。引き戸版にある間口1,316mm・1,500mm・2,016mm・3,232mm以上や、奥行890mm・1,222mm・1,406mmの段は、シャッターにはありません。',
+    sizes:[ { code:'NDE-1815H', w:1832, d:1590, h:2110 }, { code:'NDE-2215H', w:2200, d:1590, h:2110 }, { code:'NDE-1819H', w:1832, d:1922, h:2110 }, { code:'NDE-2219H', w:2200, d:1922, h:2110 }, { code:'NDE-2519H', w:2532, d:1922, h:2110 }, { code:'NDE-1822H', w:1832, d:2290, h:2110 }, { code:'NDE-2222H', w:2200, d:2290, h:2110 }, { code:'NDE-2522H', w:2532, d:2290, h:2110 }, { code:'NDE-2922H', w:2900, d:2290, h:2110 }, { code:'NDE-2526H', w:2532, d:2622, h:2110 }, { code:'NDE-2926H', w:2900, d:2622, h:2110 }, { code:'NDE-2929H', w:2900, d:2990, h:2110 } ], sizesComplete:true },
+  { id:'t-ws', maker:'takubo', name:'Mr.シャッターマン', cat:'大型物置', added:'2026-10-08',
+    steel:'公式の特長ページに「耐食性に優れた特殊亜鉛鋼板」とあり、鋼板の種別の明記は見当たらない', doorKind:'shutter', door:'シャッター扉・全面開口。独自のラッチ機構と指づめ防止のクッションゴム。ディンプルシリンダー錠', found:'柱埋め込み方式',
+    elev:{ openW:0.8832, openH:0.8191, ref:'WS-1819H', src:'タクボ公式 型番ページ' },
+    look:{ seen:false },
+    tags:{ large:3, garage:2, shutter:3, bike:2, tires:2, snow:2, sturdy:2, tall:2 },
+    features:['シャッターは独自のラッチ機構。指づめ防止のクッションゴム付き','柱埋め込み方式。水切りカバーが標準','結露減少型屋根。屋根部材の室内側に発泡ポリエチレン','軒樋・たて樋付。ディンプルシリンダー錠'],
+    base:'シャッター扉の大型物置です。高さは2,570mmのWSと2,110mmのWSBの2段があります。',
+    pageDesc:'高さは2段あり、2,570mmがWS、2,110mmがWSB。低いほうは奥行2,622mm・2,990mmの6通りにしかありません。',
+    link:'https://www.e-ty.co.jp/seihin/exterior/NDE_JNE/',
+    codeNote:'公式では型番の末尾に <b>H</b> が付いた形で並んでいます。高さは <b>WS</b> が2,570mm、<b>WSB</b> が2,110mmで、WSBは奥行2,622mm・2,990mmの6通りにしかありません（公式の型番ページで WS-1819H＝1,832×1,922×2,570mm／開口 間口1,618×高さ2,105mm、WSB-2226H＝2,200×2,622×2,110mm／開口 間口1,986×高さ1,645mm、WSB-2929H＝2,900×2,990×2,110mm を確認）。結露減少屋根の <b>Z</b>、多雪型の <b>S</b>、その両方の <b>SZ</b> は外形寸法が同じため載せていません。末尾が <b>LH</b> のものは連棟の追加棟で、外形寸法は基本棟と同じです。',
+    sizes:[ { code:'WS-1819H', w:1832, d:1922, h:2570 }, { code:'WS-2219H', w:2200, d:1922, h:2570 }, { code:'WS-2519H', w:2532, d:1922, h:2570 }, { code:'WS-2919H', w:2900, d:1922, h:2570 }, { code:'WS-1822H', w:1832, d:2290, h:2570 }, { code:'WS-2222H', w:2200, d:2290, h:2570 }, { code:'WS-2522H', w:2532, d:2290, h:2570 }, { code:'WS-2922H', w:2900, d:2290, h:2570 }, { code:'WS-1826H', w:1832, d:2622, h:2570 }, { code:'WS-2226H', w:2200, d:2622, h:2570 }, { code:'WS-2526H', w:2532, d:2622, h:2570 }, { code:'WS-2926H', w:2900, d:2622, h:2570 }, { code:'WS-1829H', w:1832, d:2990, h:2570 }, { code:'WS-2229H', w:2200, d:2990, h:2570 }, { code:'WS-2529H', w:2532, d:2990, h:2570 }, { code:'WS-2929H', w:2900, d:2990, h:2570 }, { code:'WSB-2226H', w:2200, d:2622, h:2110 }, { code:'WSB-2526H', w:2532, d:2622, h:2110 }, { code:'WSB-2926H', w:2900, d:2622, h:2110 }, { code:'WSB-2229H', w:2200, d:2990, h:2110 }, { code:'WSB-2529H', w:2532, d:2990, h:2110 }, { code:'WSB-2929H', w:2900, d:2990, h:2110 } ], sizesComplete:true },
+  { id:'i-ff', maker:'inaba', name:'ドマール', cat:'中・大型物置', added:'2026-10-06',
+    steel:'公式の商品ページに記載がない（シャッターレールと水切りスラットはアルミ製との記載あり）', doorKind:'shutter', door:'シャッター扉・全面開口。ディンプルキー。シャッターは2色から選択', found:'土間タイプ（HD）／床付タイプ（HY） 選択可',
+    look:{ seen:false },
+    tags:{ medium:3, large:2, shutter:3, sturdy:2, bike:1, tires:1 },
+    features:['全面が開くシャッター扉。重量物や農機具の出し入れを前提にした設計','シャッターレールと水切りスラットはアルミ製','錠前はピッキング対策のディンプルキー','床付タイプ（HY）は棚板3段が標準付属'],
+    base:'全面が開くシャッター扉の物置です。土間タイプと床付タイプを選べます。',
+    pageDesc:'高さは全型番2,385mmの1段のみ。土間タイプ（HD）と床付タイプ（HY）で外形寸法は変わりません。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/ff/',
+    codeNote:'公式の展開は9サイズで、それぞれに土間タイプの <b>HD</b> と床付タイプの <b>HY</b> があります（外形寸法は同じ）。型番の数字は間口と奥行で、<b>14</b>＝1,370／<b>18</b>＝1,790／<b>22</b>＝2,210／<b>26</b>＝2,630／<b>30</b>＝3,050／<b>35</b>＝3,470mm です。一般型・多雪型・豪雪型は型番が同じで、公式の型番ページでも外形寸法は変わりません。公式のダウンロードページには連結タイプの <b>L</b>・<b>L-2</b> も載っていますが、外形寸法が公式に見当たらないため、ここには載せていません。有効開口の寸法も公式に見当たらないため、収まり判定では既定値を使います。',
+    sizes:[ { code:'FF-2214HD', w:2210, d:1370, h:2385 }, { code:'FF-2214HY', w:2210, d:1370, h:2385 }, { code:'FF-2218HD', w:2210, d:1790, h:2385 }, { code:'FF-2218HY', w:2210, d:1790, h:2385 }, { code:'FF-2618HD', w:2630, d:1790, h:2385 }, { code:'FF-2618HY', w:2630, d:1790, h:2385 }, { code:'FF-2622HD', w:2630, d:2210, h:2385 }, { code:'FF-2622HY', w:2630, d:2210, h:2385 }, { code:'FF-2626HD', w:2630, d:2630, h:2385 }, { code:'FF-2626HY', w:2630, d:2630, h:2385 }, { code:'FF-2630HD', w:2630, d:3050, h:2385 }, { code:'FF-2630HY', w:2630, d:3050, h:2385 }, { code:'FF-3026HD', w:3050, d:2630, h:2385 }, { code:'FF-3026HY', w:3050, d:2630, h:2385 }, { code:'FF-3030HD', w:3050, d:3050, h:2385 }, { code:'FF-3030HY', w:3050, d:3050, h:2385 }, { code:'FF-3035HD', w:3050, d:3470, h:2385 }, { code:'FF-3035HY', w:3050, d:3470, h:2385 } ], sizesComplete:true },
+  { id:'t-tp', maker:'takubo', name:'Mr.ストックマン プラスアルファ', cat:'駐輪スペース付き物置', added:'2026-10-06',
+    steel:'公式の商品ページに記載がない', doorKind:'slide', door:'連動吊り戸式扉2枚・片開き（右引きが標準。組立時に左引きへ変更可で、物置部を左右どちらにも選べる）', found:'ブロック基礎 対応（公式にブロック基礎図の配布あり）',
+    look:{ seen:false },
+    tags:{ bike:3, large:2, medium:1, slide:2, daily:1 },
+    features:['駐輪スペースに車止め棒が付属。市販のワイヤーロックと併せて使える','連動吊り戸は上部吊りローラー方式。2万回の開閉テストに合格','組立時に物置部を左右どちらにも選べる','結露減少型屋根。軒樋・たて樋付'],
+    base:'物置と屋根付きの駐輪スペースがひと続きになった機種です。駐輪部の間口は1,515mmと1,832mmの2種類で、物置部は5通りの間口から選びます。',
+    link:'https://www.e-ty.co.jp/seihin/tp/',
+    pageDesc:'間口は物置部と駐輪部の合計で、駐輪部は壁のない開放部です。高さは全型番2,110mmの1段のみ。',
+    codeNote:'公式のサイズ表は「物置部の間口＋駐輪部の間口」で並んでいます。駐輪部が1,515mmのものが <b>TP-28/30/33/37/40</b>、1,832mmのものが <b>TP-31R/33R/37R/40R/43R</b> で、R が付くほうが駐輪部の広いタイプです。数字の下2桁は奥行（15＝1,590／19＝1,922／22＝2,290／26＝2,622mm）。外形の間口は、駐輪部1,515mmのものは物置部との単純な合計、1,832mmのものは合計より15mm大きくなります（公式の型番ページで TP-2815＝2,831mm／TP-3015＝3,015mm／TP-4015＝4,047mm／TP-31R15＝3,163mm／TP-33R15＝3,347mm／TP-37R15＝3,679mm／TP-40R15＝4,047mm を確認）。<b>TP-3315 と TP-33R15</b>、<b>TP-4015 と TP-40R15</b> は外形が同じで、物置部と駐輪部の割り振りが違います。結露減少屋根の <b>TP-Z</b>、多雪型の <b>TP-S</b>、その両方の <b>TP-SZ</b> は、公式の型番ページで外形寸法が標準型と同じと確認できたため、ここには載せていません。',
+    sizes:[ { code:'TP-2815', w:2831, d:1590, h:2110 }, { code:'TP-2819', w:2831, d:1922, h:2110 }, { code:'TP-2822', w:2831, d:2290, h:2110 }, { code:'TP-2826', w:2831, d:2622, h:2110 }, { code:'TP-3015', w:3015, d:1590, h:2110 }, { code:'TP-3019', w:3015, d:1922, h:2110 }, { code:'TP-3022', w:3015, d:2290, h:2110 }, { code:'TP-3026', w:3015, d:2622, h:2110 }, { code:'TP-3315', w:3347, d:1590, h:2110 }, { code:'TP-3319', w:3347, d:1922, h:2110 }, { code:'TP-3322', w:3347, d:2290, h:2110 }, { code:'TP-3326', w:3347, d:2622, h:2110 }, { code:'TP-3715', w:3715, d:1590, h:2110 }, { code:'TP-3719', w:3715, d:1922, h:2110 }, { code:'TP-3722', w:3715, d:2290, h:2110 }, { code:'TP-3726', w:3715, d:2622, h:2110 }, { code:'TP-4015', w:4047, d:1590, h:2110 }, { code:'TP-4019', w:4047, d:1922, h:2110 }, { code:'TP-4022', w:4047, d:2290, h:2110 }, { code:'TP-4026', w:4047, d:2622, h:2110 }, { code:'TP-31R15', w:3163, d:1590, h:2110 }, { code:'TP-31R19', w:3163, d:1922, h:2110 }, { code:'TP-31R22', w:3163, d:2290, h:2110 }, { code:'TP-31R26', w:3163, d:2622, h:2110 }, { code:'TP-33R15', w:3347, d:1590, h:2110 }, { code:'TP-33R19', w:3347, d:1922, h:2110 }, { code:'TP-33R22', w:3347, d:2290, h:2110 }, { code:'TP-33R26', w:3347, d:2622, h:2110 }, { code:'TP-37R15', w:3679, d:1590, h:2110 }, { code:'TP-37R19', w:3679, d:1922, h:2110 }, { code:'TP-37R22', w:3679, d:2290, h:2110 }, { code:'TP-37R26', w:3679, d:2622, h:2110 }, { code:'TP-40R15', w:4047, d:1590, h:2110 }, { code:'TP-40R19', w:4047, d:1922, h:2110 }, { code:'TP-40R22', w:4047, d:2290, h:2110 }, { code:'TP-40R26', w:4047, d:2622, h:2110 }, { code:'TP-43R15', w:4379, d:1590, h:2110 }, { code:'TP-43R19', w:4379, d:1922, h:2110 }, { code:'TP-43R22', w:4379, d:2290, h:2110 }, { code:'TP-43R26', w:4379, d:2622, h:2110 } ], sizesComplete:true },
+  { id:'i-bjx', maker:'inaba', name:'アイビーストッカー', cat:'ドア型収納庫', added:'2026-10-06',
+    steel:'高耐候性粉体ポリエステル樹脂の焼付塗装（膜厚40μm以上）。板厚は0.5〜0.6mm', doorKind:'hinged', door:'前開き扉・全面開口。半開き防止のラッチ機能付き把手', found:'ベースに水平調整機能あり（調整工具付属）',
+    look:{ seen:false },
+    tags:{ small:3, daily:2, garden:1 },
+    features:['全面が開くドアタイプで、横幅のある荷物も正面から入れられる','半開き防止のラッチ機能付き把手','ベースに水平調整機能。調整工具が付属','小物用フックが付属'],
+    base:'全面が開くドアタイプの収納庫です。物置より浅い奥行の段を持ち、高さは型番の末尾の英字で決まります。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/bjx/',
+    codeNote:'型番の数字は間口と奥行、末尾の英字は高さに対応します（A＝903mm／C＝1,303mm／D＝1,603mm／E＝1,903mm）。公式のダウンロードページには棚の仕様が違う <b>BJX-065DP</b>・<b>BJX-065EP</b> も載っていますが、外形寸法は BJX-065D・BJX-065E と同じのため、サイズ一覧では区別していません。イナバはこのシリーズを物置ではなく「ドア型収納庫」として扱っています。',
+    sizes:[ { code:'BJX-065A', w:600, d:515, h:903 }, { code:'BJX-095A', w:900, d:515, h:903 }, { code:'BJX-115A', w:1100, d:515, h:903 }, { code:'BJX-065C', w:600, d:515, h:1303 }, { code:'BJX-095C', w:900, d:515, h:1303 }, { code:'BJX-115C', w:1100, d:515, h:1303 }, { code:'BJX-135C', w:1320, d:515, h:1303 }, { code:'BJX-065D', w:600, d:515, h:1603 }, { code:'BJX-095D', w:900, d:515, h:1603 }, { code:'BJX-115D', w:1100, d:515, h:1603 }, { code:'BJX-135D', w:1320, d:515, h:1603 }, { code:'BJX-067D', w:600, d:755, h:1603 }, { code:'BJX-097D', w:900, d:755, h:1603 }, { code:'BJX-117D', w:1100, d:755, h:1603 }, { code:'BJX-137D', w:1320, d:755, h:1603 }, { code:'BJX-099D', w:900, d:905, h:1603 }, { code:'BJX-119D', w:1100, d:905, h:1603 }, { code:'BJX-139D', w:1320, d:905, h:1603 }, { code:'BJX-065E', w:600, d:515, h:1903 }, { code:'BJX-095E', w:900, d:515, h:1903 }, { code:'BJX-115E', w:1100, d:515, h:1903 }, { code:'BJX-135E', w:1320, d:515, h:1903 }, { code:'BJX-067E', w:600, d:755, h:1903 }, { code:'BJX-097E', w:900, d:755, h:1903 }, { code:'BJX-117E', w:1100, d:755, h:1903 }, { code:'BJX-137E', w:1320, d:755, h:1903 }, { code:'BJX-099E', w:900, d:905, h:1903 }, { code:'BJX-119E', w:1100, d:905, h:1903 }, { code:'BJX-139E', w:1320, d:905, h:1903 } ], sizesComplete:true },
+  { id:'i-bjt', maker:'inaba', name:'タイヤストッカー', cat:'タイヤ収納庫', added:'2026-10-06',
+    steel:'高耐候性粉体ポリエステル樹脂の焼付塗装（膜厚40μm以上）。板厚は0.5〜0.6mm', doorKind:'hinged', door:'前開き扉・全面開口。半開き防止のラッチ機能付き把手', found:'ベースに水平調整機能あり（調整工具付属）',
+    look:{ seen:false },
+    tags:{ small:2, medium:1, tires:3, daily:1 },
+    features:['高さを調節できるタイヤバー2本を標準装備','転がり防止用のフックを標準装備','全面が開くドアタイプ','ベースに水平調整機能。調整工具が付属'],
+    base:'タイヤの収納に向けたドアタイプの収納庫です。公式には「車2〜3台分」「最大でタイヤ12本までの収納が可能」と記載があります。',
+    link:'https://www.inaba-ss.co.jp/monooki/lineup/bjx-t/',
+    codeNote:'アイビーストッカー[BJX]と外形寸法を共有していて、末尾に <b>T</b> が付くものがタイヤ用の仕様です。奥行755mm・905mmの段にだけ用意されています。イナバはこのシリーズを物置ではなく「タイヤ収納庫」として扱っています。',
+    sizes:[ { code:'BJX-097DT', w:900, d:755, h:1603 }, { code:'BJX-097ET', w:900, d:755, h:1903 }, { code:'BJX-099DT', w:900, d:905, h:1603 }, { code:'BJX-099ET', w:900, d:905, h:1903 }, { code:'BJX-117DT', w:1100, d:755, h:1603 }, { code:'BJX-117ET', w:1100, d:755, h:1903 }, { code:'BJX-119DT', w:1100, d:905, h:1603 }, { code:'BJX-119ET', w:1100, d:905, h:1903 }, { code:'BJX-137DT', w:1320, d:755, h:1603 }, { code:'BJX-137ET', w:1320, d:755, h:1903 }, { code:'BJX-139DT', w:1320, d:905, h:1603 }, { code:'BJX-139ET', w:1320, d:905, h:1903 } ], sizesComplete:true },
   { id:'i-smx', maker:'inaba', name:'ナイソー SMX', cat:'断熱物置', added:'2026-07-11',
-    steel:'公式カタログ参照', door:'引き戸2枚・片開き（右側固定パネル）', found:'公式カタログ参照',
+    steel:'公式カタログ参照', doorKind:'slide', door:'引き戸2枚・片開き（右側固定パネル）', found:'公式カタログ参照',
     doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
     tags:{ insulation:3, medium:2, sturdy:2, premium:1 },
     features:['断熱シリーズ「ナイソー」の新型（2026年9月1日発売）','旧SMK型は2026年8月31日をもって生産終了','間口4サイズ×奥行3サイズの全9型番（公式の記載は「間口4サイズ×奥行3サイズ×高さ1サイズの全9サイズ」）'],
     base:'断熱物置「ナイソー」の新型です。湿気に弱い大切な物の保管に、心強い選択肢です。',
     sizes:[ { code:'SMX-1913H', w:1900, d:1320, h:2416 }, { code:'SMX-1919H', w:1900, d:1900, h:2416 }, { code:'SMX-2513H', w:2480, d:1320, h:2416 }, { code:'SMX-2519H', w:2480, d:1900, h:2416 }, { code:'SMX-2525H', w:2480, d:2480, h:2416 }, { code:'SMX-3119H', w:3060, d:1900, h:2416 }, { code:'SMX-3125H', w:3060, d:2480, h:2416 }, { code:'SMX-3619H', w:3640, d:1900, h:2416 }, { code:'SMX-3625H', w:3640, d:2480, h:2416 } ], codeNote:'数字は間口・奥行のおおよその値です（1913H なら間口1,900・奥行1,320）。公式の寸法表には「屋根回り寸法」と「土台回り寸法」の2種類が載っていますが、上の表は<b>土台回り（柱の外側）</b>の値です。屋根の軒先はこれより外に出ます。', sizesComplete:true },
   { id:'i-sml', maker:'inaba', name:'como lite', cat:'断熱物置', added:'2026-07-12',
-    steel:'公式カタログ参照', door:'タイプで異なる。フラッシュドア（A）・掃き出し窓（B）・喫煙所（K）は正面が出入口、守衛所（GM）は正面が窓で扉は側面', found:'公式カタログ参照',
+    steel:'公式カタログ参照', doorKind:'mixed', door:'タイプで異なる。フラッシュドア（A）・掃き出し窓（B）・喫煙所（K）は正面が出入口、守衛所（GM）は正面が窓で扉は側面', found:'公式カタログ参照',
     doorSpec:{ front:[], window:'upper', opening:'側面扉' },
     tags:{ insulation:2, medium:2, design:2, premium:1 },
     features:['断熱マルチスペース「コモ」系譜の新型ライト版（2026年9月1日発売）','ナイソーSMX型と同一リリースで発表された新製品','守衛所（GM）・フラッシュドア（A）・掃き出し窓（B）・喫煙所（K）の4タイプ。タイプごとに選べる寸法が違う（A 10／B 9／K 8／GM 6 の計33型番）'],
     base:'収納にとどまらない「もう一室」を気軽に実現できる、コモ系譜の新型です。守衛所・喫煙所・フラッシュドア・掃き出し窓の4タイプがあります。',
     sizes:[ { code:'SML-1313HGM', w:1320, d:1320, h:2416 }, { code:'SML-1913HGM', w:1900, d:1320, h:2416 }, { code:'SML-1919HGM', w:1900, d:1900, h:2416 }, { code:'SML-2513HGM', w:2480, d:1320, h:2416 }, { code:'SML-2519HGM', w:2480, d:1900, h:2416 }, { code:'SML-2525HGM', w:2480, d:2480, h:2416 }, { code:'SML-1913HK', w:1900, d:1320, h:2416 }, { code:'SML-1919HK', w:1900, d:1900, h:2416 }, { code:'SML-2513HK', w:2480, d:1320, h:2416 }, { code:'SML-2519HK', w:2480, d:1900, h:2416 }, { code:'SML-2525HK', w:2480, d:2480, h:2416 }, { code:'SML-3119HK', w:3060, d:1900, h:2416 }, { code:'SML-3125HK', w:3060, d:2480, h:2416 }, { code:'SML-3625HK', w:3640, d:2480, h:2416 }, { code:'SML-1313HA', w:1320, d:1320, h:2416 }, { code:'SML-1913HA', w:1900, d:1320, h:2416 }, { code:'SML-1919HA', w:1900, d:1900, h:2416 }, { code:'SML-2513HA', w:2480, d:1320, h:2416 }, { code:'SML-2519HA', w:2480, d:1900, h:2416 }, { code:'SML-2525HA', w:2480, d:2480, h:2416 }, { code:'SML-3119HA', w:3060, d:1900, h:2416 }, { code:'SML-3125HA', w:3060, d:2480, h:2416 }, { code:'SML-3619HA', w:3640, d:1900, h:2416 }, { code:'SML-3625HA', w:3640, d:2480, h:2416 }, { code:'SML-1913HB', w:1900, d:1320, h:2416 }, { code:'SML-1919HB', w:1900, d:1900, h:2416 }, { code:'SML-2513HB', w:2480, d:1320, h:2416 }, { code:'SML-2519HB', w:2480, d:1900, h:2416 }, { code:'SML-2525HB', w:2480, d:2480, h:2416 }, { code:'SML-3119HB', w:3060, d:1900, h:2416 }, { code:'SML-3125HB', w:3060, d:2480, h:2416 }, { code:'SML-3619HB', w:3640, d:1900, h:2416 }, { code:'SML-3625HB', w:3640, d:2480, h:2416 } ], codeNote:'末尾の記号は用途のタイプです。<b>GM</b> は守衛所タイプ、<b>A</b> はフラッシュドアタイプ、<b>B</b> は掃き出し窓タイプ、<b>K</b> は喫煙所タイプで、タイプごとに選べる寸法が違います（A が10、B が9、K が8、GM が6）。上の表は公式の寸法表の<b>土台回り寸法</b>で、屋根回り寸法はこれより間口で160mm、奥行で243mm大きくなります。高さ2,416mmに対して、内高は2,100mm、軒高は2,378mmと公式に記載があります。', sizesComplete:true },
   { id:'i-dm', maker:'inaba', name:'アルシアフィット', cat:'バイク車庫', added:'2026-07-13',
-    steel:'公式カタログ参照', door:'巻上げシャッター（シャッターケース標準装備）', found:'土間タイプ／床付タイプ 選択可',
+    steel:'公式カタログ参照', doorKind:'shutter', door:'巻上げシャッター（シャッターケース標準装備）', found:'土間タイプ／床付タイプ 選択可',
     elev:{ openW:0.8576, openH:0.8147, ref:'DM-2226HDA', src:'イナバ公式 外形図PDF' },
     look:{ eaves:1.05, doorRib:0, wallRib:0, handle:'pill', legs:4, seen:false },
     tags:{ bike:3, design:3, shutter:2, premium:2, garage:1, sturdy:1 },
@@ -832,7 +896,7 @@ const PRODUCTS = [
     codeNote:'末尾の <b>HD</b> は土間タイプ、<b>HY</b> は床付タイプです。さらに末尾の <b>A</b> が一般型・多雪型、<b>B</b> が豪雪型で、公式の寸法表では外形寸法はどちらも同じ（違うのは内部の棚の位置）とされています。',
     sizes:[ { code:'DM-1826HDA', w:1870, d:2735, h:2391 }, { code:'DM-1826HDB', w:1870, d:2735, h:2391 }, { code:'DM-1826HYA', w:1870, d:2735, h:2391 }, { code:'DM-1826HYB', w:1870, d:2735, h:2391 }, { code:'DM-1830HDA', w:1870, d:3155, h:2391 }, { code:'DM-1830HDB', w:1870, d:3155, h:2391 }, { code:'DM-1830HYA', w:1870, d:3155, h:2391 }, { code:'DM-1830HYB', w:1870, d:3155, h:2391 }, { code:'DM-2226HDA', w:2290, d:2735, h:2391 }, { code:'DM-2226HDB', w:2290, d:2735, h:2391 }, { code:'DM-2226HYA', w:2290, d:2735, h:2391 }, { code:'DM-2226HYB', w:2290, d:2735, h:2391 }, { code:'DM-2230HDA', w:2290, d:3155, h:2391 }, { code:'DM-2230HDB', w:2290, d:3155, h:2391 }, { code:'DM-2230HYA', w:2290, d:3155, h:2391 }, { code:'DM-2230HYB', w:2290, d:3155, h:2391 }, { code:'DM-2235HDA', w:2290, d:3575, h:2391 }, { code:'DM-2235HDB', w:2290, d:3575, h:2391 }, { code:'DM-2235HYA', w:2290, d:3575, h:2391 }, { code:'DM-2235HYB', w:2290, d:3575, h:2391 }, { code:'DM-2626HDA', w:2710, d:2735, h:2391 }, { code:'DM-2626HDB', w:2710, d:2735, h:2391 }, { code:'DM-2626HYA', w:2710, d:2735, h:2391 }, { code:'DM-2626HYB', w:2710, d:2735, h:2391 }, { code:'DM-2630HDA', w:2710, d:3155, h:2391 }, { code:'DM-2630HDB', w:2710, d:3155, h:2391 }, { code:'DM-2630HYA', w:2710, d:3155, h:2391 }, { code:'DM-2630HYB', w:2710, d:3155, h:2391 }, { code:'DM-2635HDA', w:2710, d:3575, h:2391 }, { code:'DM-2635HDB', w:2710, d:3575, h:2391 }, { code:'DM-2635HYA', w:2710, d:3575, h:2391 }, { code:'DM-2635HYB', w:2710, d:3575, h:2391 } ], sizesComplete:true },
   { id:'y-ese', maker:'yodoko', name:'エスモ', cat:'小型物置',
-    steel:'ガルバリウム鋼板', door:'3枚扉・両開き', found:'ブロック基礎 対応',
+    steel:'ガルバリウム鋼板', doorKind:'door3', door:'3枚扉・両開き', found:'ブロック基礎 対応',
     elev:{ openW:0.5127, openH:0.9247, ref:'ESF-1509A', src:'販売店仕様表2件で一致' },
     look:{ eaves:1.03, doorRib:0, wallRib:0, handle:'pill', legs:4, seen:true },
     doorSpec:{ front:['door','door','door'], handles:[{p:0,e:'l'},{p:2,e:'r'}], opening:'両開き' },
@@ -842,7 +906,7 @@ const PRODUCTS = [
     link:'https://www.yodomonooki.jp/products/lumberroom/esumo/',
     sizes:[ { code:'ESF-0805Y', w:800, d:513, h:1114 }, { code:'ESF-0805D', w:800, d:513, h:1614 }, { code:'ESF-0805A', w:800, d:513, h:1914 }, { code:'ESF-0807Y', w:800, d:750, h:1113 }, { code:'ESF-0807D', w:800, d:750, h:1613 }, { code:'ESF-0807A', w:800, d:750, h:1913 }, { code:'ESF-1005Y', w:1050, d:513, h:1114 }, { code:'ESF-1005G', w:1050, d:513, h:1314 }, { code:'ESF-1005D', w:1050, d:513, h:1614 }, { code:'ESF-1005A', w:1050, d:513, h:1914 }, { code:'ESF-1006Y', w:1050, d:650, h:1113 }, { code:'ESF-1006G', w:1050, d:650, h:1313 }, { code:'ESF-1006D', w:1050, d:650, h:1613 }, { code:'ESF-1006A', w:1050, d:650, h:1913 }, { code:'ESF-1007Y', w:1050, d:750, h:1113 }, { code:'ESF-1007G', w:1050, d:750, h:1313 }, { code:'ESF-1007D', w:1050, d:750, h:1613 }, { code:'ESF-1007A', w:1050, d:750, h:1913 }, { code:'ESF-1205Y', w:1200, d:513, h:1114 }, { code:'ESF-1205G', w:1200, d:513, h:1314 }, { code:'ESF-1205D', w:1200, d:513, h:1614 }, { code:'ESF-1205A', w:1200, d:513, h:1914 }, { code:'ESF-1206Y', w:1200, d:650, h:1113 }, { code:'ESF-1206G', w:1200, d:650, h:1313 }, { code:'ESF-1206D', w:1200, d:650, h:1613 }, { code:'ESF-1206A', w:1200, d:650, h:1913 }, { code:'ESF-1207Y', w:1200, d:750, h:1113 }, { code:'ESF-1207G', w:1200, d:750, h:1313 }, { code:'ESF-1207D', w:1200, d:750, h:1613 }, { code:'ESF-1207A', w:1200, d:750, h:1913 }, { code:'ESF-1305Y', w:1350, d:513, h:1114 }, { code:'ESF-1305G', w:1350, d:513, h:1314 }, { code:'ESF-1305D', w:1350, d:513, h:1614 }, { code:'ESF-1305A', w:1350, d:513, h:1914 }, { code:'ESF-1306Y', w:1350, d:650, h:1113 }, { code:'ESF-1306G', w:1350, d:650, h:1313 }, { code:'ESF-1306D', w:1350, d:650, h:1613 }, { code:'ESF-1306A', w:1350, d:650, h:1913 }, { code:'ESF-1307Y', w:1350, d:750, h:1113 }, { code:'ESF-1307G', w:1350, d:750, h:1313 }, { code:'ESF-1307D', w:1350, d:750, h:1613 }, { code:'ESF-1307A', w:1350, d:750, h:1913 }, { code:'ESF-1309A', w:1350, d:900, h:1913 }, { code:'ESF-1505Y', w:1500, d:513, h:1114 }, { code:'ESF-1505G', w:1500, d:513, h:1314 }, { code:'ESF-1505D', w:1500, d:513, h:1614 }, { code:'ESF-1505A', w:1500, d:513, h:1914 }, { code:'ESF-1506Y', w:1500, d:650, h:1113 }, { code:'ESF-1506G', w:1500, d:650, h:1313 }, { code:'ESF-1506D', w:1500, d:650, h:1613 }, { code:'ESF-1506A', w:1500, d:650, h:1913 }, { code:'ESF-1507Y', w:1500, d:750, h:1113 }, { code:'ESF-1507G', w:1500, d:750, h:1313 }, { code:'ESF-1507D', w:1500, d:750, h:1613 }, { code:'ESF-1507A', w:1500, d:750, h:1913 }, { code:'ESF-1509D', w:1500, d:900, h:1613 }, { code:'ESF-1509A', w:1500, d:900, h:1913 }, { code:'ESF-1605Y', w:1650, d:513, h:1114 }, { code:'ESF-1605G', w:1650, d:513, h:1314 }, { code:'ESF-1605D', w:1650, d:513, h:1614 }, { code:'ESF-1605A', w:1650, d:513, h:1914 }, { code:'ESF-1606Y', w:1650, d:650, h:1113 }, { code:'ESF-1606G', w:1650, d:650, h:1313 }, { code:'ESF-1606D', w:1650, d:650, h:1613 }, { code:'ESF-1606A', w:1650, d:650, h:1913 }, { code:'ESF-1607Y', w:1650, d:750, h:1113 }, { code:'ESF-1607G', w:1650, d:750, h:1313 }, { code:'ESF-1607D', w:1650, d:750, h:1613 }, { code:'ESF-1607A', w:1650, d:750, h:1913 }, { code:'ESF-1609D', w:1650, d:900, h:1613 }, { code:'ESF-1609A', w:1650, d:900, h:1913 }, { code:'ESF-1805Y', w:1800, d:513, h:1114 }, { code:'ESF-1805G', w:1800, d:513, h:1314 }, { code:'ESF-1805D', w:1800, d:513, h:1614 }, { code:'ESF-1805A', w:1800, d:513, h:1914 }, { code:'ESF-1806Y', w:1800, d:650, h:1113 }, { code:'ESF-1806G', w:1800, d:650, h:1313 }, { code:'ESF-1806D', w:1800, d:650, h:1613 }, { code:'ESF-1806A', w:1800, d:650, h:1913 }, { code:'ESF-1807Y', w:1800, d:750, h:1113 }, { code:'ESF-1807G', w:1800, d:750, h:1313 }, { code:'ESF-1807D', w:1800, d:750, h:1613 }, { code:'ESF-1807A', w:1800, d:750, h:1913 }, { code:'ESF-1809A', w:1800, d:900, h:1913 }, { code:'ESF-1906A', w:1950, d:650, h:1913 }, { code:'ESF-1907A', w:1950, d:750, h:1913 }, { code:'ESF-1909A', w:1950, d:900, h:1913 }, { code:'ESF-2106A', w:2100, d:650, h:1913 }, { code:'ESF-2107A', w:2100, d:750, h:1913 }, { code:'ESF-2109A', w:2100, d:900, h:1913 } ], sizesComplete:true },
   { id:'y-lmd', maker:'yodoko', name:'エルモ', cat:'中・大型物置',
-    steel:'高耐久ガルバリウム鋼板', door:'引き戸2枚・片開き（右側固定パネル）', found:'ブロック基礎 対応',
+    steel:'高耐久ガルバリウム鋼板', doorKind:'slide', door:'引き戸2枚・片開き（右側固定パネル）', found:'ブロック基礎 対応',
     elev:{ openW:0.4330, openH:0.9030, ref:'LMD-2515', src:'販売店仕様表2件で一致' },
     look:{ eaves:1.04, doorRib:0, wallRib:6, handle:'bar', legs:4, seen:true },
     doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
@@ -853,17 +917,18 @@ const PRODUCTS = [
     codeNote:'積雪型は <b>LMDS-</b>、豪雪型は <b>LMDU-</b> で始まります。公式で確認できた範囲では外形寸法は一般型（LMD-）と同じで、違うのは構造の補強です。数字の部分は一般型と同じ読み方をします。連結タイプの末尾に付く L・R・W は扉の開き方向の違いで、寸法は変わりません。',
     sizes:[ { code:'LMD-0815', w:811, d:1512, h:2120 }, { code:'LMD-1508', w:1512, d:811, h:2125 }, { code:'LMD-1511', w:1512, d:1162, h:2121 }, { code:'LMD-1515', w:1512, d:1512, h:2120 }, { code:'LMD-1518', w:1512, d:1863, h:2119 }, { code:'LMD-1522', w:1512, d:2213, h:2118 }, { code:'LMD-1525', w:1512, d:2564, h:2116 }, { code:'LMD-1808', w:1863, d:811, h:2125 }, { code:'LMD-1811', w:1863, d:1162, h:2121 }, { code:'LMD-1811H', w:1863, d:1162, h:2361 }, { code:'LMD-1815', w:1863, d:1512, h:2120 }, { code:'LMD-1815H', w:1863, d:1512, h:2360 }, { code:'LMD-1818', w:1863, d:1863, h:2119 }, { code:'LMD-1818H', w:1863, d:1863, h:2359 }, { code:'LMD-1822', w:1863, d:2213, h:2118 }, { code:'LMD-1822H', w:1863, d:2213, h:2358 }, { code:'LMD-1825', w:1863, d:2564, h:2116 }, { code:'LMD-1825H', w:1863, d:2564, h:2356 }, { code:'LMD-1829', w:1863, d:2914, h:2116 }, { code:'LMD-1829H', w:1863, d:2914, h:2356 }, { code:'LMD-2208', w:2213, d:811, h:2125 }, { code:'LMD-2211', w:2213, d:1162, h:2121 }, { code:'LMD-2211H', w:2213, d:1162, h:2361 }, { code:'LMD-2215', w:2213, d:1512, h:2120 }, { code:'LMD-2215H', w:2213, d:1512, h:2360 }, { code:'LMD-2218', w:2213, d:1863, h:2119 }, { code:'LMD-2218H', w:2213, d:1863, h:2359 }, { code:'LMD-2222', w:2213, d:2213, h:2118 }, { code:'LMD-2222H', w:2213, d:2213, h:2358 }, { code:'LMD-2225', w:2213, d:2564, h:2116 }, { code:'LMD-2225H', w:2213, d:2564, h:2356 }, { code:'LMD-2229', w:2213, d:2914, h:2116 }, { code:'LMD-2229H', w:2213, d:2914, h:2356 }, { code:'LMD-2508', w:2564, d:811, h:2125 }, { code:'LMD-2511', w:2564, d:1162, h:2121 }, { code:'LMD-2511H', w:2564, d:1162, h:2361 }, { code:'LMD-2515', w:2564, d:1512, h:2120 }, { code:'LMD-2515H', w:2564, d:1512, h:2360 }, { code:'LMD-2518', w:2564, d:1863, h:2119 }, { code:'LMD-2518H', w:2564, d:1863, h:2359 }, { code:'LMD-2522', w:2564, d:2213, h:2118 }, { code:'LMD-2522H', w:2564, d:2213, h:2358 }, { code:'LMD-2525', w:2564, d:2564, h:2116 }, { code:'LMD-2525H', w:2564, d:2564, h:2356 }, { code:'LMD-2529', w:2564, d:2914, h:2116 }, { code:'LMD-2529H', w:2564, d:2914, h:2356 }, { code:'LMD-2536H', w:2564, d:3615, h:2356 }, { code:'LMD-2544H', w:2564, d:4428, h:2356 }, { code:'LMD-2908', w:2914, d:811, h:2125 }, { code:'LMD-2911', w:2914, d:1162, h:2121 }, { code:'LMD-2911H', w:2914, d:1162, h:2361 }, { code:'LMD-2915', w:2914, d:1512, h:2120 }, { code:'LMD-2915H', w:2914, d:1512, h:2360 }, { code:'LMD-2918', w:2914, d:1863, h:2119 }, { code:'LMD-2918H', w:2914, d:1863, h:2359 }, { code:'LMD-2922', w:2914, d:2213, h:2118 }, { code:'LMD-2922H', w:2914, d:2213, h:2358 }, { code:'LMD-2925', w:2914, d:2564, h:2116 }, { code:'LMD-2925H', w:2914, d:2564, h:2356 }, { code:'LMD-2929', w:2914, d:2914, h:2116 }, { code:'LMD-2929H', w:2914, d:2914, h:2356 }, { code:'LMD-2951H', w:2914, d:5129, h:2356 }, { code:'LMD-2965H', w:2914, d:6531, h:2356 }, { code:'LMD-3618', w:3615, d:1863, h:2119 }, { code:'LMD-3618H', w:3615, d:1863, h:2359 }, { code:'LMD-3622', w:3615, d:2213, h:2118 }, { code:'LMD-3622H', w:3615, d:2213, h:2358 }, { code:'LMD-3625', w:3615, d:2564, h:2116 }, { code:'LMD-3625H', w:3615, d:2564, h:2356 }, { code:'LMD-3629', w:3615, d:2914, h:2116 }, { code:'LMD-3629H', w:3615, d:2914, h:2356 }, { code:'LMD-4418H', w:4428, d:1863, h:2359 }, { code:'LMD-4422H', w:4428, d:2213, h:2358 }, { code:'LMD-4425H', w:4428, d:2564, h:2356 }, { code:'LMD-4429H', w:4428, d:2914, h:2356 }, { code:'LMD-5118H', w:5129, d:1863, h:2359 }, { code:'LMD-5122H', w:5129, d:2213, h:2358 }, { code:'LMD-5125H', w:5129, d:2564, h:2356 }, { code:'LMD-5129H', w:5129, d:2914, h:2356 }, { code:'LMD-5818H', w:5830, d:1863, h:2359 }, { code:'LMD-5822H', w:5830, d:2213, h:2358 }, { code:'LMD-5825H', w:5830, d:2564, h:2356 }, { code:'LMD-5829H', w:5830, d:2914, h:2356 }, { code:'LMD-6525H', w:6531, d:2564, h:2356 }, { code:'LMD-6529H', w:6531, d:2914, h:2356 }, { code:'LMD-7225H', w:7232, d:2564, h:2356 }, { code:'LMD-7229H', w:7232, d:2914, h:2356 } ], sizesComplete:true },
   { id:'y-lod', maker:'yodoko', name:'エルモシャッター', cat:'中・大型物置',
-    steel:'公式の商品ページに記載がない', door:'シャッター扉。ピッキング対策対応のディンプル錠（スペアキー1個付）。取手を深くし、取付け位置を高くした仕様', found:'床タイプ／土間タイプ 選択可',
+    steel:'公式の商品ページに記載がない', doorKind:'shutter', door:'シャッター扉。ピッキング対策対応のディンプル錠（スペアキー1個付）。取手を深くし、取付け位置を高くした仕様', found:'床タイプ／土間タイプ 選択可',
     look:{ seen:false },
     tags:{ medium:2, large:3, tires:3, premium:2 },
     features:['シャッターにピッキング対策対応のディンプル錠','水切りにサビへ強いアルミを採用','全サイズ連棟可能。床補強オプションで耐荷重2倍'],
     base:'シャッターの取手を深くして指をかけやすくした、バイクの格納にも使える中・大型の物置です。',
+    pageDesc:'高さはすべて2,356〜2,361mmで、引き戸のエルモにある低いほうの高さの設定がありません。奥行811mmの段もシャッターにはありません。',
     link:'https://www.yodomonooki.jp/products/lumberroom/erumo_sh/',
     codeNote:'公式のサイズ一覧に載る20型番は、すべて末尾に <b>H</b> が付きます。引き戸のエルモにある低いほうの高さの設定がありません。型番のあとの（F・D）は床タイプと土間タイプの別で、外形寸法は変わりません。',
     sizesComplete:true,
     sizes:[ { code:'LOD-1811H', w:1863, d:1162, h:2361 }, { code:'LOD-1815H', w:1863, d:1512, h:2360 }, { code:'LOD-1818H', w:1863, d:1863, h:2359 }, { code:'LOD-1822H', w:1863, d:2213, h:2358 }, { code:'LOD-1825H', w:1863, d:2564, h:2356 }, { code:'LOD-1829H', w:1863, d:2914, h:2356 }, { code:'LOD-2211H', w:2213, d:1162, h:2361 }, { code:'LOD-2215H', w:2213, d:1512, h:2360 }, { code:'LOD-2218H', w:2213, d:1863, h:2359 }, { code:'LOD-2222H', w:2213, d:2213, h:2359 }, { code:'LOD-2225H', w:2213, d:2564, h:2356 }, { code:'LOD-2229H', w:2213, d:2914, h:2356 }, { code:'LOD-2518H', w:2564, d:1863, h:2359 }, { code:'LOD-2522H', w:2564, d:2213, h:2359 }, { code:'LOD-2525H', w:2564, d:2564, h:2356 }, { code:'LOD-2529H', w:2564, d:2914, h:2356 }, { code:'LOD-2918H', w:2914, d:1863, h:2359 }, { code:'LOD-2922H', w:2914, d:2213, h:2358 }, { code:'LOD-2925H', w:2914, d:2564, h:2356 }, { code:'LOD-2929H', w:2914, d:2914, h:2356 } ] },
   { id:'y-vgc', maker:'yodoko', name:'ラヴィージュ', cat:'ガレージ',
-    steel:'高耐久ガルバリウム鋼板', door:'巻上げシャッター', found:'土間コンクリート 必須',
+    steel:'高耐久ガルバリウム鋼板', doorKind:'shutter', door:'巻上げシャッター', found:'土間コンクリート 必須',
     elev:{ openW:0.8971, openH:0.8054, ref:'VGC-2652', src:'販売店仕様表2件で一致' },
     look:{ eaves:1.09, doorRib:0, wallRib:0, handle:'pill', legs:0, seen:true },
     tags:{ garage:3, large:3, shutter:2, rustproof:2, coastal:2, premium:1 },
@@ -873,7 +938,7 @@ const PRODUCTS = [
     codeNote:'Hが付く型番（例：VGC-2652H）は間口・奥行はそのままで高さだけ高い「背高タイプ」です。連結タイプでHにそろえる場合は、繋がる両方の型番にHが付きます（例：VGC-2652H+1952H）。豪雪型はVGCUから始まりますが、公式図面で確認できた範囲では外形寸法は一般型（VGC）と同じで、違うのは柱などの補強のみです。',
     sizes:[ { code:'VGC-2652', w:2653, d:5220, h:2349 }, { code:'VGC-2652H', w:2653, d:5220, h:2589 }, { code:'VGC-2655', w:2653, d:5571, h:2349 }, { code:'VGC-2655H', w:2653, d:5571, h:2589 }, { code:'VGC-2659', w:2653, d:5921, h:2349 }, { code:'VGC-2659H', w:2653, d:5921, h:2589 }, { code:'VGC-2662', w:2653, d:6272, h:2348 }, { code:'VGC-2662H', w:2653, d:6272, h:2588 }, { code:'VGC-3052', w:3003, d:5220, h:2349 }, { code:'VGC-3052H', w:3003, d:5220, h:2589 }, { code:'VGC-3055', w:3003, d:5571, h:2349 }, { code:'VGC-3055H', w:3003, d:5571, h:2589 }, { code:'VGC-3059', w:3003, d:5921, h:2349 }, { code:'VGC-3059H', w:3003, d:5921, h:2589 }, { code:'VGC-3062', w:3003, d:6272, h:2348 }, { code:'VGC-3062H', w:3003, d:6272, h:2588 }, { code:'VGC-3352', w:3354, d:5220, h:2349 }, { code:'VGC-3352H', w:3354, d:5220, h:2589 }, { code:'VGC-3355', w:3354, d:5571, h:2349 }, { code:'VGC-3355H', w:3354, d:5571, h:2589 }, { code:'VGC-3359', w:3354, d:5921, h:2349 }, { code:'VGC-3359H', w:3354, d:5921, h:2589 }, { code:'VGC-3362', w:3354, d:6272, h:2348 }, { code:'VGC-3362H', w:3354, d:6272, h:2588 }, { code:'VGC-2652+1952', w:4519, d:5220, h:2349 }, { code:'VGC-2652H+1952H', w:4519, d:5220, h:2589 }, { code:'VGC-2655+1955', w:4519, d:5571, h:2349 }, { code:'VGC-2655H+1955H', w:4519, d:5571, h:2589 }, { code:'VGC-2659+1959', w:4519, d:5921, h:2349 }, { code:'VGC-2659H+1959H', w:4519, d:5921, h:2589 }, { code:'VGC-2662+1962', w:4519, d:6272, h:2348 }, { code:'VGC-2662H+1962H', w:4519, d:6272, h:2588 }, { code:'VGC-3052+1952', w:4870, d:5220, h:2349 }, { code:'VGC-3052H+1952H', w:4870, d:5220, h:2589 }, { code:'VGC-3055+1955', w:4870, d:5571, h:2349 }, { code:'VGC-3055H+1955H', w:4870, d:5571, h:2589 }, { code:'VGC-3059+1959', w:4870, d:5921, h:2349 }, { code:'VGC-3059H+1959H', w:4870, d:5921, h:2589 }, { code:'VGC-3062+1962', w:4870, d:6272, h:2348 }, { code:'VGC-3062H+1962H', w:4870, d:6272, h:2588 }, { code:'VGC-3352+1952', w:5220, d:5220, h:2349 }, { code:'VGC-3352H+1952H', w:5220, d:5220, h:2589 }, { code:'VGC-3355+1955', w:5220, d:5571, h:2349 }, { code:'VGC-3355H+1955H', w:5220, d:5571, h:2589 }, { code:'VGC-3359+1959', w:5220, d:5921, h:2349 }, { code:'VGC-3359H+1959H', w:5220, d:5921, h:2589 }, { code:'VGC-3362+1962', w:5220, d:6272, h:2348 }, { code:'VGC-3362H+1962H', w:5220, d:6272, h:2588 }, { code:'VGCU-2652', w:2653, d:5220, h:2349 }, { code:'VGCU-2652H', w:2653, d:5220, h:2589 }, { code:'VGCU-2655', w:2653, d:5571, h:2349 }, { code:'VGCU-2655H', w:2653, d:5571, h:2589 }, { code:'VGCU-2659', w:2653, d:5921, h:2349 }, { code:'VGCU-2659H', w:2653, d:5921, h:2589 }, { code:'VGCU-2662', w:2653, d:6272, h:2348 }, { code:'VGCU-2662H', w:2653, d:6272, h:2588 }, { code:'VGCU-3052', w:3003, d:5220, h:2349 }, { code:'VGCU-3052H', w:3003, d:5220, h:2589 }, { code:'VGCU-3055', w:3003, d:5571, h:2349 }, { code:'VGCU-3055H', w:3003, d:5571, h:2589 }, { code:'VGCU-3059', w:3003, d:5921, h:2349 }, { code:'VGCU-3059H', w:3003, d:5921, h:2589 }, { code:'VGCU-3062', w:3003, d:6272, h:2348 }, { code:'VGCU-3062H', w:3003, d:6272, h:2588 }, { code:'VGCU-3352', w:3354, d:5220, h:2349 }, { code:'VGCU-3352H', w:3354, d:5220, h:2589 }, { code:'VGCU-3355', w:3354, d:5571, h:2349 }, { code:'VGCU-3355H', w:3354, d:5571, h:2589 }, { code:'VGCU-3359', w:3354, d:5921, h:2349 }, { code:'VGCU-3359H', w:3354, d:5921, h:2589 }, { code:'VGCU-3362', w:3354, d:6272, h:2348 }, { code:'VGCU-3362H', w:3354, d:6272, h:2588 }, { code:'VGCU-2652+1952', w:4519, d:5220, h:2349 }, { code:'VGCU-2652H+1952H', w:4519, d:5220, h:2589 }, { code:'VGCU-2655+1955', w:4519, d:5571, h:2349 }, { code:'VGCU-2655H+1955H', w:4519, d:5571, h:2589 }, { code:'VGCU-2659+1959', w:4519, d:5921, h:2349 }, { code:'VGCU-2659H+1959H', w:4519, d:5921, h:2589 }, { code:'VGCU-2662+1962', w:4519, d:6272, h:2348 }, { code:'VGCU-2662H+1962H', w:4519, d:6272, h:2588 }, { code:'VGCU-3052+1952', w:4870, d:5220, h:2349 }, { code:'VGCU-3052H+1952H', w:4870, d:5220, h:2589 }, { code:'VGCU-3055+1955', w:4870, d:5571, h:2349 }, { code:'VGCU-3055H+1955H', w:4870, d:5571, h:2589 }, { code:'VGCU-3059+1959', w:4870, d:5921, h:2349 }, { code:'VGCU-3059H+1959H', w:4870, d:5921, h:2589 }, { code:'VGCU-3062+1962', w:4870, d:6272, h:2348 }, { code:'VGCU-3062H+1962H', w:4870, d:6272, h:2588 }, { code:'VGCU-3352+1952', w:5220, d:5220, h:2349 }, { code:'VGCU-3352H+1952H', w:5220, d:5220, h:2589 }, { code:'VGCU-3355+1955', w:5220, d:5571, h:2349 }, { code:'VGCU-3355H+1955H', w:5220, d:5571, h:2589 }, { code:'VGCU-3359+1959', w:5220, d:5921, h:2349 }, { code:'VGCU-3359H+1959H', w:5220, d:5921, h:2589 }, { code:'VGCU-3362+1962', w:5220, d:6272, h:2348 }, { code:'VGCU-3362H+1962H', w:5220, d:6272, h:2588 } ], sizesComplete:true },
   { id:'t-pe', maker:'takubo', name:'ペインタ', cat:'小型物置', added:'2026-07-24',
-    steel:'鋼板＋UVインクジェット塗装仕上げ', door:'吊り戸式引き戸2枚・連動右引き固定（開き方向の変更不可）', found:'ブロック基礎 対応（アンカープレート4枚付属）',
+    steel:'鋼板＋UVインクジェット塗装仕上げ', doorKind:'slide', door:'吊り戸式引き戸2枚・連動右引き固定（開き方向の変更不可）', found:'ブロック基礎 対応（アンカープレート4枚付属）',
     elev:{ openW:0.4543, openH:0.9125, ref:'PY-175B', src:'タクボ公式 型番ページ' },
     look:{ eaves:1.10, doorRib:0, wallRib:0, handle:'pill', legs:2, face:'stone', seen:true },
     doorSpec:{ front:['door','door'], handles:[{p:0,e:'l'}], opening:'片開き' },
@@ -892,6 +957,18 @@ const PRODUCTS = [
    （廃盤=生産終了による削除、入替=モデルチェンジによる新旧交代）
    既存の記録は削除・改変しないこと（この台帳は追記のみ）。 */
 const UPDATE_LOG = [
+  { date:'2026-10-08', type:'新商品', title:'タクボのシャッター扉2シリーズをアーカイブに追加しました',
+    body:'タクボ（田窪工業所）の『Mr.ストックマン シャッター扉』［NDE］12型番と『Mr.シャッターマン』［WS／WSB］22型番を追加しました。これでシャッター扉の物置が3社4シリーズ・72型番になり、横に並べて比べられるようになりました。Mr.ストックマン シャッター扉は、引き戸のMr.ストックマン ダンディと外形寸法も内部寸法も同じで、違うのは扉と開口です。NDE-1815Hの開口部は間口1,618mm、引き戸のND-1815は992mm。同じ1,832mmの間口で、通せる幅が626mm違います（いずれも公式の型番ページ）。ただし引き戸版にある間口1,316mm・1,500mm・2,016mm・3,232mm以上や、奥行890mm・1,222mm・1,406mmの段は、シャッターにはありません。Mr.シャッターマンは高さが2段で、2,570mmがWS、2,110mmがWSB。低いほうは奥行2,622mm・2,990mmの6通りにしかありません。寸法は公式のサイズ表（間口×奥行の組み合わせ）と、公式の型番ページ5件の外形寸法・開口部寸法・床面積を突き合わせて確認しました。結露減少屋根のZ、多雪型のS、その両方のSZ、連棟の追加棟のLHは、いずれも外形寸法が同じのため別の型番としては載せていません。実物は見ていません。' },
+  { date:'2026-10-06', type:'改定', title:'診断の結果画面で、答え直さずに条件を変えられるようにしました',
+    body:'サイズ診断・用途診断・メーカー診断は、4問に答えると結果が出て、そこで終わりでした。設問の選択肢にない条件は出せず、たとえば高さは「約1.2m以下」「約2.4m」「制限なし」の3択だったため、軒下を1,850mmと測ってきた方はそのまま入れられませんでした。扉も1つしか選べず、「引き戸でもシャッターでもいい」が言えませんでした。結果画面に絞り込みの欄を置き、間口・奥行・高さの上限をミリ単位で入れ直せるようにしました。扉（引き戸・3枚扉・シャッター・前開き）、メーカー、種類（物置・駐輪スペース付き・ドア型／タイヤ収納庫・バイク車庫／ガレージ）は複数えらべます。いじると、その場で「条件に合うのは何シリーズ・何型番」と一覧が変わります。間口と奥行の両方を入れたときだけ、屋根の張り出しと左右・背面各100mmを見込んだ収まり判定を行い、高さは基礎ブロック分として+100mmを足して比べます。空欄は指定なしです。条件に合うものが無いときは、どの条件を外せば何シリーズ残るかを出します。絞り込んだ条件もURLに残るので、リンクを送れば相手にも同じ条件で表示されます。あわせて、メーカー診断にあった予算の設問を、扉のまわりにどれだけ余裕があるかを聞く設問に差し替えました。当サイトでは価格を扱っていないため、答えても結果に反映できない設問でした。' },
+  { date:'2026-10-06', type:'新商品', title:'『ドマール』をアーカイブに追加しました',
+    body:'イナバ（稲葉製作所）のシャッター物置、ドマール［FF］18型番を追加しました。公式の展開は9サイズで、それぞれに土間タイプ（HD）と床付タイプ（HY）があり、外形寸法は同じです。間口2,210／2,630／3,050mm、奥行1,370〜3,470mm、高さは全型番2,385mmの1段のみ。公式の型番ページには間口と奥行が載っていますが、9サイズすべてのページを開く代わりに、公式の仕様表に載る床面積と突き合わせて確認しました（例 FF-3035HD は床面積10.58m²で、間口3,050×奥行3,470mm＝10.58m²と一致）。9サイズすべてで床面積が一致しています。高さは型番ページ4件でいずれも2,385mmでした。一般型・多雪型・豪雪型は型番が同じで外形寸法も変わりません。公式のダウンロードページには連結タイプのL・L-2も載っていますが、外形寸法が公式に見当たらないため掲載していません。有効開口の寸法も公式に見当たらないため、収まり判定では既定値（本体の+5%）を使います。これにより、シャッター扉の物置がヨドコウのエルモシャッターとイナバのドマールの2シリーズになりました。実物は見ていません。' },
+  { date:'2026-10-06', type:'新商品', title:'『Mr.ストックマン プラスアルファ』をアーカイブに追加しました',
+    body:'タクボ（田窪工業所）の駐輪スペース付き物置、Mr.ストックマン プラスアルファ［TP］40型番を追加しました。物置と屋根付きの駐輪スペースがひと続きになった機種で、公式のサイズ表は「物置部の間口＋駐輪部の間口」という形で並んでいます。駐輪部の間口は1,515mmと1,832mmの2種類、物置部は1,316／1,500／1,832／2,200／2,532mmの5通り、奥行は1,590／1,922／2,290／2,622mmの4通りです。高さは全型番2,110mmで、Mr.ストックマン ダンディと同じ段しかありません。外形の間口は、駐輪部1,515mmのものは物置部との単純な合計になりますが、1,832mmのものは合計より15mm大きくなります。公式の型番ページ11件で外形寸法と床面積を確認しました（TP-2815＝2,831×1,590／4.5m²、TP-3015＝3,015×1,590／4.79m²、TP-37R15＝3,679×1,590／5.85m²など、いずれも間口×奥行と一致）。区分は「駐輪スペース付き物置」としました。駐輪部は壁のない開放部で、外形の間口の3分の1以上をそこが占めるため、寸法から探すページとサイズ帯の対象には入れていません。結露減少屋根のTP-Z、多雪型のTP-S、その両方のTP-SZは外形寸法が標準型と同じことを公式の型番ページで確認したため、別の型番としては載せていません。実物は見ていません。' },
+  { date:'2026-10-06', type:'新商品', title:'『アイビーストッカー』『タイヤストッカー』をアーカイブに追加しました',
+    body:'イナバ（稲葉製作所）のドア型収納庫アイビーストッカー［BJX］29型番と、タイヤ収納庫タイヤストッカー［BJX-T］12型番を追加しました。間口600〜1,320mm・奥行515〜905mm・高さ903〜1,903mmで、2つのシリーズは外形寸法を共有しています。タイヤストッカーは奥行755mm・905mmの段にだけあり、末尾にTが付きます。寸法は公式のダウンロードページにある型番ごとの一覧から読み取り、型番ページの外形寸法・床面積と突き合わせて確認しました（BJX-065C＝600×515×1,303mm／床面積0.31m²、BJX-117DT＝1,100×755×1,603mm／0.83m²、BJX-137ET＝1,320×755×1,903mm／1.00m²のいずれも一致）。公式のダウンロードページには棚の仕様が違うBJX-065DP・BJX-065EPも載っていますが、外形寸法が同じなので区別していません。区分は、イナバ自身の扱いに合わせて「ドア型収納庫」「タイヤ収納庫」としました。物置ではないため、寸法から探すページとサイズ帯の対象には入りません。扉はどちらも前開きで、3社の物置に前開き扉のものはありません。有効開口の寸法は公式に見当たらないため、収まり判定では既定値を使います。実物は見ていません。' },
+  { date:'2026-10-06', type:'改定', title:'サイズ診断の寸法入力を、ミリ単位の直接入力にしました',
+    body:'サイズ診断の最初の設問は、これまで間口・奥行をスライダーで選ぶ形で、刻みが5cm、範囲は間口800〜3,200mm・奥行500〜2,800mmでした。測った寸法が2,130mmであっても、2,100mmか2,150mmのどちらかに丸めて入れることになり、範囲の外にある大きさ──屋根の張り出しと作業スペースを含めて間口3,200mmまたは奥行2,800mmを超えるスペースを要する586型番のうち159型番──は、診断から一度も出てきませんでした。この設問を数値の直接入力に変え、間口・奥行を400〜20,000mmの範囲でミリ単位のまま受け取るようにしました。収録している中でいちばん小さい物置（エスモ ESF-0805Y）が要するスペースは間口1,024mm×奥行639mm、いちばん大きいものは間口7,794mm×奥行6,958mmです。入力中は「この寸法に入る型番」の数がその場で変わり、何も入らない場合はその旨が出ます。結果の各候補には、収まる型番と、屋根の張り出しと作業スペースを引いたあとの余りをミリで添えました。2026-10-06より前に共有された結果ページのURL（cm刻みの値が入っているもの）は、開いたときに同じ寸法として読み替えます。' },
   { date:'2026-10-05', type:'新商品', title:'『エルモシャッター』をアーカイブに追加しました',
     body:'ヨドコウ（淀川製鋼所）のシャッター扉タイプ、エルモシャッターを追加しました。公式サイトのサイズ一覧（画像で掲載）を開いて読み取り、間口1,863〜2,914mm・奥行1,162〜2,914mmの全20型番を掲載しています。高さはすべて2,356〜2,361mmで、引き戸のエルモにある低いほうの高さ（2,116〜2,125mm）の設定がありません。型番は20件すべてが末尾にHが付き、Hの付かないものは公式の一覧に見当たりませんでした。型番のあとに添えられる（F・D）は床タイプと土間タイプの別で、外形寸法は変わらないため、サイズ一覧では区別していません。鋼板の仕様は公式の商品ページに記載が見当たらなかったため、仕様欄にはその旨を記しています。屋根の張り出しの実測値も未取得のため、収まり判定では既定値（本体の+5%）を使います。実物は見ていません。' },
   { date:'2026-10-04', type:'改定', title:'サイズ診断の収まり判定を、機種ごとの屋根の張り出しで行うようにしました',
@@ -944,7 +1021,7 @@ const QA_ITEMS = [
   { q:'転倒防止（アンカー）工事は必ず必要ですか？',
     a:'はい、強く推奨されます。台風や強風で物置が動いたり倒れたりすると、本体の破損だけでなく、飛散して人や近隣に被害を与える恐れがあります。各メーカーとも設置を推奨しており、積雪・強風地域では建築基準法対応のため必須となる場合があります。地面がコンクリートか土かで工法が変わるため、設置業者にご相談ください。' },
   { q:'設置には本体サイズ以外にどれくらいの余裕が必要ですか？',
-    a:'本体寸法に加え、左右・背面に各10〜20cm程度の組立・点検スペースが必要です。特に屋根は本体より一回り張り出すため、収まりの判定は必ず「屋根寸法」で行ってください。加えて、設置時は本体の下に基礎用ブロック（約10cm）を敷くため、実際の高さは「本体高さ＋約10cm」になります。窓の下や軒下では特にご注意ください。' },
+    a:'左右と背面の余白について、公式に数値を出しているのはタクボのQ&amp;Aだけで、「工具を持つ手が入るよう、左右及び後ろに10cm以上」（アンカー工事を行う場合は20cm以上）とあります。組み立てのための寸法です。物置の前に必要な寸法は、3社とも公式に出していません。特に屋根は本体より一回り張り出すため、収まりの判定は必ず「屋根寸法」で行ってください。加えて、設置時は本体の下に基礎用ブロック（約10cm）を敷くため、実際の高さは「本体高さ＋約10cm」になります。窓の下や軒下では特にご注意ください。' },
   { q:'本体のほかに、設置費用として何がかかりますか？',
     a:'物置本体のほかに、据え付けの工事費と、基礎にかかるぶんが加わります。金額は設置業者の見積もりで決まるもので、公表された相場があるわけではないため、当サイトでは金額を示していません。かかるものの中身は機種で違います。物置は本体の下に基礎用コンクリートブロックを敷いて据えるのが基本ですが、ガレージのガレーディア・ラヴィージュは土間コンクリートが必須、バイク車庫は土間コンクリートを推奨する機種と、土間タイプ・床付タイプを選べる機種があります。この違いは各製品ページの「基礎」の欄に載せています。加えて、転倒防止のアンカー工事があり、機種によっては必須と明記されています。見積もりを取るときは、この3つが含まれているかをご確認ください。' },
   { q:'自分で組み立てられますか？',
@@ -980,6 +1057,12 @@ const PRODUCT_PAGES = {
   'i-fxn': 'products/inaba-bike-hokanko.html',
   'i-grn': 'products/inaba-garudia.html',
   'i-tbj': 'products/inaba-takuhai-box.html',
+  't-nde': 'products/takubo-mr-stockman-shutter.html',
+  't-ws': 'products/takubo-mr-shutterman.html',
+  'i-ff': 'products/inaba-domaru.html',
+  't-tp': 'products/takubo-mr-stockman-plus-alpha.html',
+  'i-bjx': 'products/inaba-ivy-stocker.html',
+  'i-bjt': 'products/inaba-tire-stocker.html',
   'i-smx': 'products/inaba-nyso-smx.html',
   'i-sml': 'products/inaba-como-lite.html',
   'i-dm': 'products/inaba-arcia-fit.html',
@@ -995,6 +1078,18 @@ const PRODUCT_PAGES = {
    スキーマ: { date:'YYYY-MM-DD', tag:'分類ラベル', title:'題', lead:'導入文（1〜2文）', url:'articles/スラッグ.html' }
    合わせて articles/index.html・sitemap.xml・llms.txt にも追記すること。 */
 const ARTICLES = [
+  { date:'2026-10-08', tag:'機種の見方',
+    title:'シャッターにすると開口は広くなる。高さは下がることもある',
+    lead:'タクボには、外形も内部寸法も同じで扉だけが違う型番があります。間口1,832mmで開口は引き戸992mm・シャッター1,618mm。',
+    url:'articles/monooki-shutter-vs-slide-opening.html' },
+  { date:'2026-10-06', tag:'機種の見方',
+    title:'奥行を一段深くしても、入口の幅は変わらない',
+    lead:'同じシリーズで奥行だけが違う2機種のどちらにするか。公式の寸法表を並べると、奥行を一段深くして動くのは床面積と内部の奥行だけで、入口の寸法は変わりません。',
+    url:'articles/monooki-one-step-dimension.html' },
+  { date:'2026-10-06', tag:'機種の見方',
+    title:'物置の前にどれだけ空けるか、どのメーカーも書いていない',
+    lead:'物置の前に残すスペースは何ミリか。3社の公式サイトと取扱説明書を当たりましたが、前方の寸法を数値で書いているメーカーはありませんでした。',
+    url:'articles/monooki-front-clearance.html' },
   { date:'2026-10-05', tag:'機種の見方',
     title:'シャッターのエルモは、高さが1段しかない',
     lead:'ヨドコウのエルモは高さが2段あり、低いほうは約2,120mm。ところがエルモシャッターは全20型番が2,356〜2,361mmで、低いほうの段がありません。',
@@ -1060,7 +1155,7 @@ const TAG_REASONS = {
   large:'家財を一括で受ける大容量', tall:'背高収納を可能にする天井高',
   low:'窓下寸法に収まる低全高', slide:'軽く滑らかな引き戸機構',
   door3:'有効開口を最大化する3枚扉', shutter:'全面開放を実現するシャッター',
-  cheap:'抑制された価格設定', premium:'素材・塗装の上位仕様',
+  cheap:'部材を絞った標準的な構成', premium:'素材・塗装の上位仕様',
   sturdy:'荷重試験に裏付けられた堅牢性', rustproof:'サビへの高い耐性',
   design:'住宅外構と調和する意匠', garage:'ガレージ級の空間ボリューム'
 };
@@ -1095,12 +1190,12 @@ const QUESTION_SETS = {
     label:'Approach 02 — サイズで選ぶ',
     ai:'設置スペースに合わせて、質問をご用意しています',
     questions: [
-      { type:'slider', q:'設置できるスペースを教えてください。', hint:'スライダーを動かすと、右の図が変わります。判定では屋根の張り出しと作業スペース（左右・背面 各約10cm）も自動で見込みます。' },
-      { q:'高さに制限はありますか？', hint:'設置時は本体の下に約10cmの基礎用ブロックを敷くため、「本体高さ＋約10cm」で判定します。', options:[
+      { type:'dimensions', q:'設置できるスペースを教えてください。', hint:'測った寸法をミリでそのまま入れてください。入力に合わせて、図と「入る型番の数」が変わります。判定では屋根の張り出しと、左右・背面に各100mmの作業スペースを見込みます。' },
+      { q:'高さに制限はありますか？', hint:'設置時は本体の下に約100mmの基礎用ブロックを敷くため、「本体高さ＋100mm」で判定します。', options:[
         { label:'窓の下に収めたい ── 約1.2m以下', tags:{ low:3, small:1 }, hMax:1200 },
         { label:'一般的な高さまで ── 約2.4m', tags:{ medium:1 }, hMax:2400 },
         { label:'制限なし ── 背の高い物置もOK', tags:{ tall:3 } } ] },
-      { q:'扉のタイプにご希望はありますか？', hint:'扉の前のスペースや、出し入れする物の大きさで選ぶのがおすすめです。', options:[
+      { q:'扉のタイプにご希望はありますか？', hint:'扉の前にとれるスペースと、出し入れする物の大きさで変わります。', options:[
         { label:'引き戸 ── 扉の前が狭くてもOK', tags:{ slide:3 } },
         { label:'3枚扉 ── 開口部を広く使いたい', tags:{ door3:3 } },
         { label:'シャッター ── バイクや大きな物に', tags:{ shutter:3, bike:1, garage:1 } },
@@ -1123,10 +1218,10 @@ const QUESTION_SETS = {
         { label:'扉の開けやすさ ── 毎日の使いやすさ', tags:{ slide:3, daily:2 } },
         { label:'頑丈さ ── 耐久性・雪への強さ', tags:{ sturdy:3, snow:1 } },
         { label:'サビへの強さ ── 長持ちする素材', tags:{ rustproof:3, coastal:2, premium:1 } } ] },
-      { q:'ご予算のお考えは？', hint:'同じサイズでも、グレードによって価格が変わります。', options:[
-        { label:'できるだけ抑えたい', tags:{ cheap:3, small:1 } },
-        { label:'標準的な価格帯で', tags:{ medium:1 } },
-        { label:'品質重視で、予算は柔軟に', tags:{ premium:3 } } ] },
+      { q:'扉のまわりに、どれだけ余裕がありますか？', hint:'物置の扉は3社とも手前に開きません。効くのは入口の幅と、そこへ物を回し入れる余地です。', options:[
+        { label:'前も左右も余裕がある', tags:{ shutter:1, door3:1, large:1 } },
+        { label:'前は空いているが、左右が詰まっている', tags:{ slide:2, small:1 } },
+        { label:'前が狭い ── 通路としても使う', tags:{ slide:3, low:1 } } ] },
       { q:'収納したい物の量はどのくらいですか？', hint:'迷ったら少し大きめを選ぶのが、後悔しないコツです。', options:[
         { label:'少なめ ── 小物が中心', tags:{ small:3 } },
         { label:'標準的 ── 家庭の屋外用品ひと通り', tags:{ medium:3 } },
@@ -1136,16 +1231,37 @@ const QUESTION_SETS = {
 };
 
 /* ---------- ステート ---------- */
-const state = { mode:null, step:0, answers:[], sizeSel:{ w:180, d:120 } };
+const state = { mode:null, step:0, answers:[], sizeSel:{ w:1800, d:1200 } };
 
 /* ---------- 診断結果をURLに残す ----------
-   形式: #r=<mode>.<間口cm>x<奥行cm>.<選んだ選択肢の番号を並べたもの>
-   例: #r=size.180x120.s1 / #r=use.02
+   形式: #r=<mode>.<間口mm>x<奥行mm>.<選んだ選択肢の番号を並べたもの>
+   例: #r=size.1800x1200.s1 / #r=use.02
+   2026-10-06 より前は cm 刻み（#r=size.180x120.s1）だった。当時の入力は
+   スライダーで 80〜320 しか取らなかったため、320 以下なら cm として10倍して読む。
    これにより結果ページをブックマーク・共有でき、開き直すと同じ結果が出る。 */
+/* 絞り込みの中身もURLに残す。1文字ずつに畳んでから「+f=」のうしろに置く。
+   設問の答えだけのURL（絞り込みを触っていないもの）は、これまでと同じ形のまま */
+const D_ENC = { slide:'s', door3:'3', shutter:'h', hinged:'d', mixed:'m' };
+const D_DEC = { s:'slide', '3':'door3', h:'shutter', d:'hinged', m:'mixed' };
+const M_ENC = { takubo:'t', inaba:'i', yodoko:'y' };
+const M_DEC = { t:'takubo', i:'inaba', y:'yodoko' };
+function encFilter(){
+  const f = state.filter;
+  if(!f || JSON.stringify(f) === state.filterInit) return '';
+  const set = (arr, map) => arr.length ? arr.map(x => (map ? map[x] : x)).join('') : '-';
+  return `+f=${f.w}_${f.d}_${f.h}_${set(f.doors, D_ENC)}_${set(f.makers, M_ENC)}_${set(f.cats, null)}`;
+}
+function decFilter(str){
+  const a = String(str).split('_');
+  if(a.length !== 6) return null;
+  const set = (t, map) => (!t || t === '-') ? [] : t.split('').map(c => (map ? map[c] : c)).filter(Boolean);
+  return { w:Number(a[0]) || 0, d:Number(a[1]) || 0, h:Number(a[2]) || 0,
+           doors:set(a[3], D_DEC), makers:set(a[4], M_DEC), cats:set(a[5], null) };
+}
 function encodeQuizState(){
   if(!state.mode) return '';
   const opts = state.answers.map(a => (a.oi === undefined ? '' : String(a.oi))).join('');
-  return `r=${state.mode}.${state.sizeSel.w}x${state.sizeSel.d}.${opts}`;
+  return `r=${state.mode}.${state.sizeSel.w}x${state.sizeSel.d}.${opts}${encFilter()}`;
 }
 function resultUrl(){
   const h = encodeQuizState();
@@ -1157,11 +1273,13 @@ function writeResultHash(){
   try { history.replaceState(null, '', '#' + h); } catch(e){}
 }
 function parseQuizHash(){
-  const m = (location.hash || '').match(/^#r=([a-z]+)\.(\d+)x(\d+)\.([0-9s]*)$/);
+  const m = (location.hash || '').match(/^#r=([a-z]+)\.(\d+)x(\d+)\.([0-9s]*)(?:\+f=([0-9a-z_-]*))?$/);
   if(!m) return null;
-  const [, mode, w, d, opts] = m;
+  const [, mode, w, d, opts, fil] = m;
   if(!QUESTION_SETS[mode]) return null;
-  return { mode, w:Number(w), d:Number(d), opts:opts.split('') };
+  const toMM = v => (v <= 320 ? v * 10 : v);   /* 旧形式（cm）の共有URL。上のコメント参照 */
+  return { mode, w:toMM(Number(w)), d:toMM(Number(d)), opts:opts.split(''),
+           filter: fil ? decFilter(fil) : null };
 }
 /* URL から診断結果を復元して開く */
 function restoreFromHash(){
@@ -1172,13 +1290,13 @@ function restoreFromHash(){
   for(let i = 0; i < qs.length; i++){
     const question = qs[i];
     const token = q.opts[i];
-    if(question.type === 'slider'){
+    if(question.type === 'dimensions'){
       const { w, d } = state.sizeSel;
       let tags, sizeName;
-      if(w <= 160 && d <= 100){ tags = { small:3, low:1, cheap:1 }; sizeName = '小型'; }
-      else if(w >= 280 || (w / 100) * (d / 100) >= 4.5){ tags = { large:3, garage:1, medium:1 }; sizeName = '大型'; }
+      if(w <= 1600 && d <= 1000){ tags = { small:3, low:1, cheap:1 }; sizeName = '小型'; }
+      else if(w >= 2800 || (w * d) / 1e6 >= 4.5){ tags = { large:3, garage:1, medium:1 }; sizeName = '大型'; }
       else { tags = { medium:3 }; sizeName = '中型'; }
-      state.answers.push({ label:`W${w*10}mm × D${d*10}mm ── ${sizeName}級`, tags, oi:'s' });
+      state.answers.push({ label:`W${fmtNum(w)}mm × D${fmtNum(d)}mm ── ${sizeName}級`, tags, oi:'s' });
     } else {
       const o = question.options[Number(token)];
       if(!o) return false;
@@ -1186,6 +1304,11 @@ function restoreFromHash(){
     }
   }
   state.step = qs.length;
+  /* 絞り込みは、まず答えから作り直す（「回答どおりに戻す」の戻り先になる）。
+     URLに絞り込みが入っていれば、そのあとで上書きする */
+  state.filter = null;
+  initFilter();
+  if(q.filter) state.filter = q.filter;
   modalLabel.textContent = QUESTION_SETS[q.mode].label;
   modal.classList.remove('modal-hidden');
   document.body.style.overflow = 'hidden';
@@ -1237,16 +1360,36 @@ function globalElevScale(){
    ・屋根の張り出し（奥行）: 機種ごとの実測値が無いため、従来どおり+5%で見込む
    ・作業スペース: 左右 各100mm＋背面100mm を確保
    ・高さ制限がある場合: 基礎用ブロック分 +100mm を加えて判定 */
-function bestFitSize(p, wMM, dMM, hMM){
+function sizeFits(p, s, wMM, dMM, hMM){
   const lk = p.look || {};
   const eaves = lk.eaves || (p.roof === 'gable' ? 1.03 : 1.05);
-  const c = sortedSizes(p).filter(s => {
-    const reqW = Math.round(s.w * eaves) + 200;
-    const reqD = Math.round(s.d * 1.05) + 100;
-    const okH = !hMM || (s.h + 100) <= hMM;
-    return reqW <= wMM && reqD <= dMM && okH;
-  });
+  const reqW = Math.round(s.w * eaves) + 200;
+  const reqD = Math.round(s.d * 1.05) + 100;
+  const okH = !hMM || (s.h + 100) <= hMM;
+  return reqW <= wMM && reqD <= dMM && okH;
+}
+/* 入れた寸法に対して、どれだけ余るか。屋根の張り出しと作業スペースを引いた残り */
+function fitSlack(p, s, wMM, dMM){
+  const lk = p.look || {};
+  const eaves = lk.eaves || (p.roof === 'gable' ? 1.03 : 1.05);
+  return { w: wMM - (Math.round(s.w * eaves) + 200), d: dMM - (Math.round(s.d * 1.05) + 100) };
+}
+function bestFitSize(p, wMM, dMM, hMM){
+  const c = sortedSizes(p).filter(s => sizeFits(p, s, wMM, dMM, hMM));
   return c.length ? c[c.length - 1] : null;
+}
+/* 寸法を入れている最中に出す「入る型番の数」。
+   物置のカテゴリだけを数える（ガレージ・ごみ収集庫・宅配ボックスは入れない）。
+   色違い（variant）は診断の候補から外しているので、ここでも数えない */
+const SIZE_CATS = ['小型物置', '中型物置', '中・大型物置', '大型物置'];
+function fitStats(wMM, dMM, hMM){
+  let codes = 0, series = 0;
+  PRODUCTS.forEach(p => {
+    if(p.variant || SIZE_CATS.indexOf(p.cat) < 0) return;
+    const n = (p.sizes || []).filter(s => sizeFits(p, s, wMM, dMM, hMM)).length;
+    if(n){ codes += n; series++; }
+  });
+  return { codes, series };
 }
 
 /* ---------- 製品図版（寸法データから正面図を自動生成） ----------
@@ -1478,7 +1621,8 @@ function visualWrap(p, inner, boxCls){
 let historyGuard = false;
 
 function openModal(mode){
-  state.mode = mode; state.step = 0; state.answers = [];
+  /* 診断をやり直すときは絞り込みも捨てる。残すと、前の条件で絞られた結果が出る */
+  state.mode = mode; state.step = 0; state.answers = []; state.filter = null;
   modalLabel.textContent = QUESTION_SETS[mode].label;
   modal.classList.remove('modal-hidden');
   document.body.style.overflow = 'hidden';
@@ -1556,7 +1700,7 @@ function renderStep(){
   }
   if(state.step >= qs.length){ renderPreResult(); return; }
   const q = qs[state.step];
-  if(q.type === 'slider'){ renderSliderStep(q); return; }
+  if(q.type === 'dimensions'){ renderDimensionStep(q); return; }
 
   quizBody.innerHTML = `
     <div class="step-enter">
@@ -1596,7 +1740,7 @@ function renderStep(){
 }
 
 /* ---------- 寸法入力（平面図スライダー） ---------- */
-function renderSliderStep(q){
+function renderDimensionStep(q){
   quizBody.innerHTML = `
     <div class="step-enter">
       <p class="font-mono text-[11px] tracking-widest2 uppercase text-rust">Q.01 — Dimensions</p>
@@ -1604,24 +1748,27 @@ function renderSliderStep(q){
       <p class="mt-4 text-[13px] text-neutral-500">${esc(q.hint)}</p>
 
       <div class="mt-10 grid md:grid-cols-2 gap-10 items-start">
-        <div class="space-y-10 pt-2">
+        <div class="space-y-8 pt-2">
           <div>
-            <div class="flex items-baseline justify-between font-mono text-[12px]">
+            <label for="w-mm" class="flex items-baseline justify-between font-mono text-[12px]">
               <span class="tracking-widest2 uppercase text-neutral-500">Width — 間口</span>
-              <span id="w-val" class="text-base"></span>
-            </div>
-            <input id="w-range" type="range" min="80" max="320" step="5" value="${state.sizeSel.w}" class="mt-4">
-            <div class="flex justify-between font-mono text-[10px] text-neutral-400 mt-2"><span>800</span><span>3,200 mm</span></div>
+              <span class="text-neutral-400">mm</span>
+            </label>
+            <input id="w-mm" class="mm-input mt-1" type="number" inputmode="numeric" min="400" max="20000" step="1" value="${state.sizeSel.w}" aria-describedby="w-note">
+            <p id="w-note" class="mt-2 font-mono text-[10px] text-neutral-400">置ける幅。いちばん狭いところの実測値で</p>
           </div>
           <div>
-            <div class="flex items-baseline justify-between font-mono text-[12px]">
+            <label for="d-mm" class="flex items-baseline justify-between font-mono text-[12px]">
               <span class="tracking-widest2 uppercase text-neutral-500">Depth — 奥行</span>
-              <span id="d-val" class="text-base"></span>
-            </div>
-            <input id="d-range" type="range" min="50" max="280" step="5" value="${state.sizeSel.d}" class="mt-4">
-            <div class="flex justify-between font-mono text-[10px] text-neutral-400 mt-2"><span>500</span><span>2,800 mm</span></div>
+              <span class="text-neutral-400">mm</span>
+            </label>
+            <input id="d-mm" class="mm-input mt-1" type="number" inputmode="numeric" min="400" max="20000" step="1" value="${state.sizeSel.d}" aria-describedby="d-note">
+            <p id="d-note" class="mt-2 font-mono text-[10px] text-neutral-400">壁や塀までの実測値で</p>
           </div>
-          <p id="size-summary" class="font-mono text-[12px] text-neutral-600 border-t border-line pt-5"></p>
+          <div class="border-t border-line pt-5">
+            <p id="size-fit" class="font-serif font-bold text-lg leading-snug"></p>
+            <p id="size-summary" class="mt-2 font-mono text-[11px] text-neutral-500 leading-relaxed"></p>
+          </div>
         </div>
 
         <div>
@@ -1644,32 +1791,65 @@ function renderSliderStep(q){
       <button id="size-next" class="mt-12 w-full border border-line py-5 font-serif font-bold text-xl hover:bg-ink hover:text-paper transition-colors duration-300">このサイズで進む →</button>
     </div>`;
 
-  const wR = $('#w-range'), dR = $('#d-range');
+  /* 入力できる範囲。収録分でいちばん小さい物置（エスモ ESF-0805Y）でも
+     間口1,024mm×奥行639mmのスペースを要するので、下限400mmはそれより下にある。
+     何も入らないという結果も結果として出す。上限20,000mmは打ち間違いを弾くため
+     （いちばん大きい物置が要するのは間口7,794mm×奥行6,958mm） */
+  const MM_LO = 400, MM_HI = 20000;
+  const wI = $('#w-mm'), dI = $('#d-mm');
+  const num = el => Math.round(Number(el.value)) || 0;
   const update = () => {
-    const w = Number(wR.value), d = Number(dR.value);
+    const w = num(wI), d = num(dI);
     state.sizeSel = { w, d };
-    $('#w-val').textContent = (w * 10).toLocaleString() + ' mm';
-    $('#d-val').textContent = (d * 10).toLocaleString() + ' mm';
-    const scale = 260 / 320;
+
+    /* 平面図。3,200mmを超える入力では縮尺を合わせ直す */
+    const span = Math.max(w, d, 3200);
+    const scale = 300 / span;
     const box = $('#size-box');
-    box.style.width  = Math.max(28, w * scale) + 'px';
-    box.style.height = Math.max(24, d * scale) + 'px';
-    $('#dim-w').textContent = `← ${(w*10).toLocaleString()} →`;
-    $('#dim-d').textContent = `← ${(d*10).toLocaleString()} →`;
-    const area = (w / 100) * (d / 100);
-    $('#size-summary').textContent = `設置面積 ≈ ${area.toFixed(2)} m²（畳 約${(area / 1.62).toFixed(1)}帖）`;
+    box.style.width  = Math.max(28, Math.round(w * scale)) + 'px';
+    box.style.height = Math.max(24, Math.round(d * scale)) + 'px';
+    $('#dim-w').textContent = `← ${fmtNum(w)} →`;
+    $('#dim-d').textContent = `← ${fmtNum(d)} →`;
+
+    /* 高さはこの次の質問で聞くため、ここでは高さを問わずに数える */
+    const f = w && d ? fitStats(w, d, null) : { codes:0, series:0 };
+    $('#size-fit').textContent = f.codes
+      ? `この寸法に入る型番 ${fmtNum(f.codes)}（${f.series}シリーズ）`
+      : 'この寸法に入る型番は、収録分に見当たりません';
+    const area = (w * d) / 1e6;
+    $('#size-summary').textContent = w && d
+      ? `入力した面積 ${area.toFixed(2)} m²（畳 約${(area / 1.62).toFixed(1)}帖）。屋根の張り出しと、左右・背面 各100mm を引いた上での数です`
+      : `間口・奥行を ${fmtNum(MM_LO)}〜${fmtNum(MM_HI)} mm で入れてください`;
   };
-  wR.addEventListener('input', update);
-  dR.addEventListener('input', update);
+  /* 入力中は丸めない（「1」を打った瞬間に書き換わると打てなくなる）。
+     欄を離れたときだけ範囲に収める */
+  const settle = () => {
+    [wI, dI].forEach(el => {
+      const v = num(el);
+      if(v && v < MM_LO) el.value = MM_LO;
+      else if(v > MM_HI) el.value = MM_HI;
+    });
+    update();
+  };
+  [wI, dI].forEach(el => {
+    el.addEventListener('input', update);
+    el.addEventListener('change', settle);
+  });
   update();
 
   $('#size-next').addEventListener('click', () => {
-    const { w, d } = state.sizeSel;
+    const w = num(wI), d = num(dI);
+    if(!(w >= MM_LO && w <= MM_HI && d >= MM_LO && d <= MM_HI)){
+      $('#size-fit').textContent = `間口・奥行をそれぞれ ${fmtNum(MM_LO)}〜${fmtNum(MM_HI)} mm で入れてください`;
+      ((w >= MM_LO && w <= MM_HI) ? dI : wI).focus();
+      return;
+    }
+    state.sizeSel = { w, d };
     let tags, sizeName;
-    if(w <= 160 && d <= 100){ tags = { small:3, low:1, cheap:1 }; sizeName = '小型'; }
-    else if(w >= 280 || (w / 100) * (d / 100) >= 4.5){ tags = { large:3, garage:1, medium:1 }; sizeName = '大型'; }
+    if(w <= 1600 && d <= 1000){ tags = { small:3, low:1, cheap:1 }; sizeName = '小型'; }
+    else if(w >= 2800 || (w * d) / 1e6 >= 4.5){ tags = { large:3, garage:1, medium:1 }; sizeName = '大型'; }
     else { tags = { medium:3 }; sizeName = '中型'; }
-    state.answers.push({ label:`W${w*10}mm × D${d*10}mm ── ${sizeName}級`, tags, oi:'s' });
+    state.answers.push({ label:`W${fmtNum(w)}mm × D${fmtNum(d)}mm ── ${sizeName}級`, tags, oi:'s' });
     state.step++;
     transitionTo(renderStep);
   });
@@ -1702,6 +1882,77 @@ function computeUserTags(){
   return t;
 }
 
+/* ═══════════ 結果の絞り込み ═══════════
+   2026-10-06 追加。診断は4問で終わる形だったため、答えたあとに条件を変えられなかった。
+   「引き戸でもシャッターでもいい」「高さは1,850mmまで」といった、設問の選択肢に
+   ない条件が出せない（市場調査の指摘）。結果画面に絞り込みを置いて、
+   答え直さずに条件を足し引きできるようにした。
+   扉の判別は p.doorKind を見る。door の文言を当てる作りにすると、
+   文言を直した瞬間に壊れるため。 */
+const DOOR_KINDS = [
+  ['slide', '引き戸'], ['door3', '3枚扉'], ['shutter', 'シャッター'],
+  ['hinged', '前開き'], ['mixed', 'タイプで異なる']
+];
+const CAT_GROUPS = [
+  ['m', '物置', c => /物置/.test(c) && !/駐輪/.test(c)],
+  ['c', '駐輪スペース付き', c => /駐輪/.test(c)],
+  ['s', 'ドア型・タイヤ収納庫', c => /収納庫/.test(c)],
+  ['g', 'バイク車庫・ガレージ', c => c === 'バイク車庫' || c === 'ガレージ'],
+  ['o', 'そのほか', c => c === '宅配ボックス']
+];
+const MK_KEYS = ['takubo', 'inaba', 'yodoko'];
+
+function catGroupOf(cat){
+  const g = CAT_GROUPS.find(x => x[2](cat));
+  return g ? g[0] : 'o';
+}
+
+/* 設問の答えから絞り込みの初期値をつくる。読者は答えたつもりの条件が
+   そのまま入っているところから、足し引きを始められる */
+function initFilter(){
+  const dk = [];
+  state.answers.forEach(a => {
+    const t = a.tags || {};
+    ['slide', 'door3', 'shutter'].forEach(k => {
+      if(t[k] >= 3 && dk.indexOf(k) < 0) dk.push(k);
+    });
+  });
+  state.filter = {
+    w: state.mode === 'size' ? state.sizeSel.w : 0,
+    d: state.mode === 'size' ? state.sizeSel.d : 0,
+    h: state.answers.map(a => a.hMax).filter(Boolean)[0] || 0,
+    doors: dk, makers: [], cats: []
+  };
+  state.filterInit = JSON.stringify(state.filter);
+  state.resShow = 3;
+}
+
+/* 1つのサイズが条件を満たすか。
+   間口と奥行の両方が入っているときだけ収まり判定を行う（片方だけでは判定できない）。
+   高さだけ入っているときは、基礎ブロック分 +100mm を足して上限と比べる */
+function sizeOkFilter(p, s){
+  const f = state.filter;
+  if(f.w && f.d) return sizeFits(p, s, f.w, f.d, f.h || null);
+  if(f.h) return (s.h + 100) <= f.h;
+  return true;
+}
+function passFilter(p){
+  const f = state.filter;
+  if(f.makers.length && f.makers.indexOf(p.maker) < 0) return false;
+  if(f.cats.length && f.cats.indexOf(catGroupOf(p.cat)) < 0) return false;
+  if(f.doors.length && f.doors.indexOf(p.doorKind) < 0) return false;
+  return (p.sizes || []).some(s => sizeOkFilter(p, s));
+}
+function filterStats(rows){
+  let codes = 0;
+  rows.forEach(r => { codes += (r.p.sizes || []).filter(s => sizeOkFilter(r.p, s)).length; });
+  return { codes: codes, series: rows.length };
+}
+function filterActive(){
+  const f = state.filter;
+  return !!(f.w || f.d || f.h || f.doors.length || f.makers.length || f.cats.length);
+}
+
 function renderResults(){
   const userTags = computeUserTags();
   const totalWeight = Object.values(userTags).reduce((s, v) => s + v, 0) || 1;
@@ -1715,63 +1966,181 @@ function renderResults(){
     }
     return { p, score, matched };
   }).sort((a, b) => b.score - a.score);
-
-  /* サイズ診断の場合: 入力スペースに収まるサイズを持つシリーズを優先（全サイズがマッチング対象）
-     判定は屋根張り出し＋作業スペース＋高さ制限（ブロック分込み）を考慮した実務基準 */
-  const hLimit = state.mode === 'size' ? (state.answers.map(a => a.hMax).filter(Boolean)[0] || null) : null;
-  const space = state.mode === 'size' ? { w: state.sizeSel.w * 10, d: state.sizeSel.d * 10, h: hLimit } : null;
-  let pool = scored.filter(r => r.score > 0);
-  if(pool.length === 0) pool = scored.slice(0, 1);
-  let noFit = false;
-  if(space){
-    const fitted = pool.filter(r => bestFitSize(r.p, space.w, space.d, space.h));
-    if(fitted.length) pool = fitted; else noFit = true;
-  }
-  let results = pool.slice(0, 3);
-  const maxScore = results[0].score || 1;
-
-  /* 計測: 診断の完走と、入力スペースに収まる候補が無かったか（no_fit）。
-     no_fit が多いなら、寸法データか判定基準が読者の実態と合っていない。
-     入力された間口・奥行も残す。どの寸法帯が足りないかが分かる。 */
-  if(typeof gtag === 'function'){
-    gtag('event', 'diagnosis_complete', {
-      mode: state.mode,
-      result_count: results.length,
-      no_fit: noFit ? 1 : 0,
-      space_w: space ? space.w : 0,
-      space_d: space ? space.d : 0,
-      space_h: space && space.h ? space.h : 0
-    });
-  }
+  state.scored = scored;
+  state.totalWeight = totalWeight;
+  if(!state.filter) initFilter();
 
   progressBar.style.width = '100%';
   stepLabel.textContent = 'Complete';
 
+  const f = state.filter;
+  const chips = (group, items, sel) => items.map(x =>
+    `<button class="fchip${sel.indexOf(x[0]) >= 0 ? ' active' : ''}" data-fg="${group}" data-fv="${x[0]}">${esc(x[1])}</button>`).join('');
+
   quizBody.innerHTML = `
     <div class="step-enter">
       <p class="font-mono text-[11px] tracking-widest2 uppercase text-rust">Diagnosis Result</p>
-      <h3 class="mt-5 font-serif font-extrabold text-3xl md:text-5xl leading-snug">おすすめの物置、${results.length}件です。</h3>
-      <p class="mt-4 text-[13px] text-neutral-500">ご回答との相性が良い順にご紹介します。寸法・仕様は代表的な参考値です。</p>
-      <p class="mt-3 text-[11px] leading-relaxed text-neutral-500 border border-linesoft px-3 py-2">※ <b>広告を含みます。</b>販売店へのリンク経由で紹介料が入ることがありますが、おすすめの順番には影響しません（<a href="privacy.html" class="u-link">詳しく</a>）。</p>
-      ${noFit ? `<p class="mt-3 text-[12px] font-bold text-rust">※ ご入力のスペースに（屋根の張り出し・作業スペースの余裕込みで）収まるサイズが見つかりませんでした。条件の近い候補を参考として表示しています。</p>` : ''}
+      <h3 class="mt-5 font-serif font-extrabold text-3xl md:text-5xl leading-snug">ご回答に合う物置を、お出しします。</h3>
+      <p class="mt-4 text-[13px] text-neutral-500">相性の良い順に並べています。下の欄で条件を変えると、答え直さずにその場で並び替わります。</p>
+      <p class="mt-3 text-[11px] leading-relaxed text-neutral-500 border border-linesoft px-3 py-2">※ <b>広告を含みます。</b>販売店へのリンク経由で紹介料が入ることがありますが、並び順には影響しません（<a href="privacy.html" class="u-link">詳しく</a>）。</p>
 
-      <div class="mt-12 space-y-10">
-        ${results.map((r, i) => {
-          const pct = Math.min(98, Math.round(58 + 40 * (r.score / maxScore) * Math.min(1, r.score / totalWeight / 1.2)));
-          const reasons = r.matched.sort((a, b) => b.w - a.w).slice(0, 3).map(x => TAG_REASONS[x.tag]).filter(Boolean);
-          const fit = space ? bestFitSize(r.p, space.w, space.d, space.h) : null;
-          const ds = fit || repSize(r.p);
-          const sizeCount = (r.p.sizes || []).length;
-          const dimsLabel = ds
-            ? `${esc(ds.code)}： ${esc(fmtDims(ds))}${sizeCount > 1 ? `（ほか全${sizeCount}サイズ展開）` : ''}`
-            : '公式カタログ参照';
-          const fitNote = fit ? ` お選びのスペース（間口${fmtNum(space.w)}×奥行${fmtNum(space.d)}mm）には、屋根の張り出しと作業スペース（左右・背面 各約10cm）${space.h ? '、高さ制限（ブロック約10cm込み）' : ''}を見込んでも「${esc(fit.code)}」が収まります。` : '';
-          return `
+      <div id="res-filter" class="mt-10 border border-line">
+        <div class="px-5 md:px-7 py-4 border-b border-line flex items-baseline justify-between gap-4">
+          <p class="font-mono text-[10px] tracking-widest2 uppercase text-rust">Refine — 条件を変える</p>
+          <button id="f-reset" class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500 hover:text-rust">&#8634; 回答どおりに戻す</button>
+        </div>
+        <div class="px-5 md:px-7 py-5 grid sm:grid-cols-3 gap-5">
+          <div>
+            <label for="f-w" class="font-mono text-[11px] text-neutral-500">置ける間口 <span class="text-neutral-400">mm</span></label>
+            <input id="f-w" class="mm-input mt-1" type="number" inputmode="numeric" min="0" max="20000" step="1" value="${f.w || ''}" placeholder="指定なし">
+          </div>
+          <div>
+            <label for="f-d" class="font-mono text-[11px] text-neutral-500">置ける奥行 <span class="text-neutral-400">mm</span></label>
+            <input id="f-d" class="mm-input mt-1" type="number" inputmode="numeric" min="0" max="20000" step="1" value="${f.d || ''}" placeholder="指定なし">
+          </div>
+          <div>
+            <label for="f-h" class="font-mono text-[11px] text-neutral-500">高さの上限 <span class="text-neutral-400">mm</span></label>
+            <input id="f-h" class="mm-input mt-1" type="number" inputmode="numeric" min="0" max="5000" step="1" value="${f.h || ''}" placeholder="制限なし">
+          </div>
+        </div>
+        <p class="px-5 md:px-7 pb-4 font-mono text-[10px] leading-relaxed text-neutral-400">間口と奥行の両方を入れたときだけ、屋根の張り出しと左右・背面 各100mm を見込んだ収まり判定を行います。高さは基礎ブロック分 +100mm を足して上限と比べます。空欄は指定なしです。</p>
+        <div class="px-5 md:px-7 pb-5 space-y-4 border-t border-linesoft pt-5">
+          <div><p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">扉（複数えらべます）</p><div class="mt-2 flex flex-wrap gap-2">${chips('doors', DOOR_KINDS, f.doors)}</div></div>
+          <div><p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">メーカー</p><div class="mt-2 flex flex-wrap gap-2">${chips('makers', MK_KEYS.map(k => [k, MAKERS[k]]), f.makers)}</div></div>
+          <div><p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">種類</p><div class="mt-2 flex flex-wrap gap-2">${chips('cats', CAT_GROUPS.map(g => [g[0], g[1]]), f.cats)}</div></div>
+        </div>
+      </div>
+
+      <div id="res-list" class="mt-10"></div>
+
+      <div class="mt-12 border-t border-line pt-8">
+        <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">Save &amp; Share — 結果を残す・送る</p>
+        <p class="mt-2 text-[13px] text-neutral-600"><strong>この結果はURLに残っています。</strong>絞り込んだ条件まで残るので、ブックマークすれば後で見返せますし、リンクを送れば同じ条件が相手にも表示されます。</p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <button class="share-btn" data-net="x">X（旧Twitter）</button>
+          <button class="share-btn" data-net="line">LINE</button>
+          <button class="share-btn" data-net="fb">Facebook</button>
+          <button class="share-btn" data-net="copy" id="share-copy">この結果のリンクをコピー</button>
+        </div>
+      </div>
+      <p class="mt-8 font-mono text-[10px] leading-relaxed text-neutral-400">※ 掲載の寸法・仕様は代表的な参考値です。設置時は本体の下に基礎用コンクリートブロック（基本 高さ約10cm）を敷くため、実際の高さは「本体高さ＋約10cm」となります。壁や塀との間をどれだけ空けるかについては、3社の公式に数値の案内が見当たりません（<a href="articles/monooki-front-clearance.html" class="u-link">物置の前にどれだけ空けるか</a>）。ご購入前には必ず最新のメーカーカタログと現地調査でご確認ください。</p>
+    </div>`;
+
+  wireFilter();
+  renderResultList(false);
+  $('#quiz-body').parentElement.scrollTop = 0;
+}
+
+/* 絞り込みの操作を受ける。数値欄は input ごとに一覧だけ描き直す
+   （盤ごと描き直すと、打っている途中でフォーカスが外れる） */
+function wireFilter(){
+  const panel = $('#res-filter');
+  if(!panel) return;
+  const num = el => Math.max(0, Math.round(Number(el.value)) || 0);
+  ['f-w', 'f-d', 'f-h'].forEach(id => {
+    const el = $('#' + id);
+    if(!el) return;
+    el.addEventListener('input', () => {
+      state.filter[id.slice(2)] = num(el);
+      state.resShow = 3;
+      renderResultList(true);
+    });
+  });
+  panel.querySelectorAll('.fchip').forEach(b => {
+    b.addEventListener('click', () => {
+      const arr = state.filter[b.dataset.fg];
+      const v = b.dataset.fv;
+      const i = arr.indexOf(v);
+      if(i >= 0) arr.splice(i, 1); else arr.push(v);
+      b.classList.toggle('active', i < 0);
+      state.resShow = 3;
+      renderResultList(true);
+    });
+  });
+  const reset = $('#f-reset');
+  if(reset) reset.addEventListener('click', () => {
+    state.filter = JSON.parse(state.filterInit);
+    state.resShow = 3;
+    renderResults();
+  });
+}
+
+function renderResultList(isRefine){
+  const host = $('#res-list');
+  if(!host) return;
+  const f = state.filter, scored = state.scored, totalWeight = state.totalWeight;
+  /* 絞り込みは「条件」、スコアは「並び順」として扱う。
+     2026-10-06 まではスコア0の機種を先に落としていたため、
+     たとえば「種類＝収納庫」で絞ると、収録しているアイビーストッカーも
+     タイヤストッカーも出てこなかった。scored はスコアの降順に並んでいるので、
+     全件を通してもスコアの高いものが先に来る */
+  const pool = scored;
+  let kept = pool.filter(r => passFilter(r.p));
+  const noFit = kept.length === 0;
+  if(noFit) kept = pool.filter(r => r.score > 0).slice(0, 3);
+  if(!kept.length) kept = pool.slice(0, 3);
+  const stats = noFit ? { codes:0, series:0 } : filterStats(kept);
+  const show = Math.min(kept.length, state.resShow || 3);
+  const results = kept.slice(0, show);
+  const maxScore = results[0] ? (results[0].score || 1) : 1;
+  const space = (f.w && f.d) ? { w:f.w, d:f.d, h:f.h || null } : null;
+
+  /* 計測。1回目は診断の完走、2回目以降は絞り込みの操作として送る。
+     読者が実際に入れる間口・奥行・高さが、生の値で溜まる */
+  if(typeof gtag === 'function'){
+    gtag('event', isRefine ? 'diagnosis_refine' : 'diagnosis_complete', {
+      mode: state.mode,
+      result_count: results.length,
+      no_fit: noFit ? 1 : 0,
+      space_w: f.w, space_d: f.d, space_h: f.h,
+      doors: f.doors.join('|') || '-',
+      makers: f.makers.join('|') || '-',
+      cats: f.cats.join('|') || '-'
+    });
+  }
+
+  /* 何も残らなかったときは、どの条件を外せば見つかるかを調べて出す。
+     「見当たりません」だけだと、どれが効いているのか読者に分からない */
+  let hints = [];
+  if(noFit){
+    const save = JSON.stringify(state.filter);
+    [['扉', 'doors'], ['メーカー', 'makers'], ['種類', 'cats'],
+     ['間口と奥行', 'wd'], ['高さの上限', 'h']].forEach(x => {
+      const lab = x[0], key = x[1];
+      if(key === 'wd' ? !(f.w && f.d) : key === 'h' ? !f.h : !f[key].length) return;
+      if(key === 'wd'){ state.filter.w = 0; state.filter.d = 0; }
+      else if(key === 'h'){ state.filter.h = 0; }
+      else state.filter[key] = [];
+      const n = pool.filter(r => passFilter(r.p)).length;
+      state.filter = JSON.parse(save);
+      if(n) hints.push(`${lab}の条件を外すと${n}シリーズ`);
+    });
+  }
+  const head = noFit
+    ? `<p class="text-[12px] leading-relaxed font-bold text-rust border border-rust px-4 py-3">この条件に合うものは、収録分に見当たりません。${hints.length ? '<br>' + hints.join('／') + 'が残ります。' : '絞り込みを外してみてください。'}<br><span class="font-normal text-neutral-600">以下は条件の近い候補です。</span></p>`
+    : `<p class="font-mono text-[12px] text-neutral-600 border-b border-line pb-3">条件に合うのは <b class="text-ink">${stats.series}シリーズ・${fmtNum(stats.codes)}型番</b>${filterActive() ? '' : '（絞り込みなし）'}</p>`;
+
+  const cards = results.map((r, i) => {
+    /* スコア0は絞り込みだけで残った候補。相性の数字は出さない */
+    const pct = r.score > 0
+      ? Math.min(98, Math.round(58 + 40 * (r.score / maxScore) * Math.min(1, r.score / totalWeight / 1.2)))
+      : null;
+    const reasons = r.matched.sort((a, b) => b.w - a.w).slice(0, 3).map(x => TAG_REASONS[x.tag]).filter(Boolean);
+    const fit = space ? bestFitSize(r.p, space.w, space.d, space.h) : null;
+    const ds = fit || repSize(r.p);
+    const sizeCount = (r.p.sizes || []).length;
+    const okCount = (r.p.sizes || []).filter(s => sizeOkFilter(r.p, s)).length;
+    const dimsLabel = ds
+      ? `${esc(ds.code)}： ${esc(fmtDims(ds))}${sizeCount > 1 ? `（全${sizeCount}サイズ中${okCount}サイズが条件に合います）` : ''}`
+      : '公式カタログ参照';
+    const slack = fit ? fitSlack(r.p, fit, space.w, space.d) : null;
+    const fitNote = fit ? ` お入れいただいたスペース（間口${fmtNum(space.w)}×奥行${fmtNum(space.d)}mm）には、屋根の張り出しと作業スペース（左右・背面 各100mm）${space.h ? '、高さの上限（ブロック約100mm込み）' : ''}を見込んでも「${esc(fit.code)}」が収まります。余りは間口方向に${fmtNum(slack.w)}mm、奥行方向に${fmtNum(slack.d)}mmです。` : '';
+    return `
           <article class="border border-line">
             <div class="flex items-stretch border-b border-line">
               <div class="px-5 md:px-7 py-5 border-r border-line flex flex-col justify-center min-w-[110px]">
                 <span class="font-mono text-[10px] tracking-widest2 uppercase ${i === 0 ? 'text-rust' : 'text-neutral-400'}">${i === 0 ? 'Prime' : 'No.' + String(i+1).padStart(2,'0')}</span>
-                <span class="mt-1 font-serif font-extrabold text-3xl md:text-4xl">${pct}<span class="text-sm font-mono">%</span></span>
+                <span class="mt-1 font-serif font-extrabold text-3xl md:text-4xl">${pct === null ? '&mdash;' : pct + '<span class="text-sm font-mono">%</span>'}</span>
               </div>
               <div class="px-5 md:px-7 py-5 flex-1">
                 <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">${MAKERS[r.p.maker]} — ${esc(r.p.cat)}${isNew(r.p) ? ' <span class="text-rust">● NEW</span>' : ''}</p>
@@ -1789,8 +2158,8 @@ function renderResults(){
               <div class="grid grid-cols-12 border-b border-linesoft"><dt class="col-span-4 md:col-span-3 px-5 md:px-7 py-3 font-mono text-[11px] text-neutral-500 border-r border-linesoft">特記事項</dt><dd class="col-span-8 md:col-span-9 px-5 md:px-7 py-3">${r.p.features.map(esc).join(' ／ ')}</dd></div>
             </dl>
             <div class="px-5 md:px-7 py-5">
-              <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">Rationale — おすすめの理由</p>
-              <p class="mt-2.5 text-sm leading-loose text-neutral-700">${esc(r.p.base)}${reasons.length ? ' 今回のご回答では「' + reasons.map(esc).join('」「') + '」があなたの条件にマッチしました。' : ''}${fitNote}</p>
+              <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">Rationale — 選んだ理由</p>
+              <p class="mt-2.5 text-sm leading-loose text-neutral-700">${esc(r.p.base)}${reasons.length ? ' 今回のご回答では「' + reasons.map(esc).join('」「') + '」が条件に合いました。' : ' ご回答との相性ではなく、絞り込みの条件で残った候補です。'}${fitNote}</p>
             </div>
             ${affLink(r.p)}
             ${PRODUCT_PAGES[r.p.id] ? `<a href="${PRODUCT_PAGES[r.p.id]}" class="block border-t border-line bg-ink text-paper py-4 text-center font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-rust transition-colors duration-300">全サイズと仕様を見る →</a>` : ''}
@@ -1799,33 +2168,27 @@ function renderResults(){
               <button class="quiz-restart py-4 font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">↻ もう一度</button>
             </div>
           </article>`;
-        }).join('')}
-      </div>
-      <div class="mt-12 border-t border-line pt-8">
-        <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">Save &amp; Share — 結果を残す・送る</p>
-        <p class="mt-2 text-[13px] text-neutral-600">あなたにおすすめの物置は「${esc(results[0].p.name)}」でした。<strong>この結果はURLに残っています。</strong>ブックマークすれば後で見返せますし、リンクを送れば同じ結果が相手にも表示されます。</p>
-        <div class="mt-4 flex flex-wrap gap-2">
-          <button class="share-btn" data-net="x">X（旧Twitter）</button>
-          <button class="share-btn" data-net="line">LINE</button>
-          <button class="share-btn" data-net="fb">Facebook</button>
-          <button class="share-btn" data-net="copy" id="share-copy">この結果のリンクをコピー</button>
-        </div>
-      </div>
-      <p class="mt-8 font-mono text-[10px] leading-relaxed text-neutral-400">※ 掲載の寸法・仕様は代表的な参考値です。設置時は本体の下に基礎用コンクリートブロック（基本 高さ約10cm）を敷くため、実際の高さは「本体高さ＋約10cm」となります。${space ? '<br>※ 判定では壁との余白を左右・背面 各約10cmで見ています。設置と点検の最低ラインは、小型（収納庫）なら5〜10cm、中型・大型で10cmほど（いずれも実測ではなく作業の体感）。もう少し詰められる場合があります。' : ''}ご購入前には必ず最新のメーカーカタログと現地調査でご確認ください。</p>
-    </div>`;
+  }).join('');
 
-  writeResultHash();
-  setupShare(results[0].p);
-  quizBody.querySelectorAll('.goto-maker').forEach(b => {
+  const more = kept.length > show
+    ? `<button id="res-more" class="mt-8 w-full border border-line py-4 font-serif font-bold text-base hover:bg-ink hover:text-paper transition-colors duration-300">残り${kept.length - show}件も見る →</button>`
+    : '';
+
+  host.innerHTML = head + `<div class="mt-8 space-y-10">` + cards + `</div>` + more;
+
+  const m = $('#res-more');
+  if(m) m.addEventListener('click', () => { state.resShow = kept.length; renderResultList(true); });
+  host.querySelectorAll('.goto-maker').forEach(b => {
     b.addEventListener('click', () => {
       closeModal();
       setTimeout(() => $('#makers').scrollIntoView({ behavior:'smooth' }), 150);
     });
   });
-  quizBody.querySelectorAll('.quiz-restart').forEach(b => {
-    b.addEventListener('click', () => openModal(state.mode));
+  host.querySelectorAll('.quiz-restart').forEach(b => {
+    b.addEventListener('click', () => { state.filter = null; openModal(state.mode); });
   });
-  $('#quiz-body').parentElement.scrollTop = 0;
+  writeResultHash();
+  setupShare(results[0] ? results[0].p : state.scored[0].p);
 }
 
 /* ---------- 診断結果のシェア ---------- */
@@ -1932,6 +2295,7 @@ function renderMakerLineups(){
     { label:'物置', match: cat => /物置/.test(cat) },
     { label:'バイク車庫', match: cat => cat === 'バイク車庫' },
     { label:'ガレージ', match: cat => cat === 'ガレージ' },
+    { label:'ドア型・タイヤ収納庫', match: cat => /収納庫/.test(cat) },
     { label:'宅配ボックス', match: cat => cat === '宅配ボックス' }
   ];
   ['takubo', 'inaba', 'yodoko'].forEach(mk => {

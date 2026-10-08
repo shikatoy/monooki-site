@@ -20,6 +20,8 @@
     h<数>          高さがその値の型番数
     dmakers<数>    奥行がその値に入るメーカー数
     wmakers<数>    間口がその値に入るメーカー数
+    steps_total    同じシリーズの中で1寸法だけが違う、隣り合わせの型番の組の総数
+                   （tools/build-step-pairs.py が製品ページに出している数の合計）
     codes_<id>     そのシリーズの型番数（id は PRODUCTS の id。t-nd など）
     fp_<id>        そのシリーズの間口×奥行の種類
     fpmulti_<id>   そのうち高さが2通り以上ある数
@@ -48,6 +50,22 @@ def dataset():
     return rows
 
 
+def step_pairs():
+    """1寸法だけが違う隣り合わせの組の総数。build-step-pairs.py と同じ数え方。"""
+    n = 0
+    for p in C.load_products():
+        if p["cat"] not in C.CAT_OK:
+            continue
+        szs = [dict(w=w, d=d, h=h) for _, w, d, h in p["sizes"]]
+        for ax, fixed in (("d", ("w", "h")), ("w", ("d", "h")), ("h", ("w", "d"))):
+            g = defaultdict(set)
+            for s0 in szs:
+                g[tuple(s0[k] for k in fixed)].add(s0[ax])
+            for vals in g.values():
+                n += max(0, len(vals) - 1)
+    return n
+
+
 def series_stats(rows, ids):
     """シリーズ（複数可）をまとめたときの 型番数／床の種類／高さが2通り以上ある床の数。"""
     v = [r for r in rows if r["sid"] in ids]
@@ -61,6 +79,8 @@ def expected(cid, rows):
     """id から今の正しい数を出す。分からない id は None。"""
     if cid == "total":
         return len(rows)
+    if cid == "steps_total":
+        return step_pairs()
     if cid.startswith("cells"):
         cell = defaultdict(set)
         for r in rows:

@@ -57,6 +57,12 @@ def links_for(p):
             seen.add(slug)
             bands.append((slug, "間口%s〜%sm × 奥行%s〜%sm"
                           % (m(bw), m(bw + STEP), m(bd), m(bd + STEP))))
+    # 一軸のページも物置だけの一覧（size/ の各ページに「この一覧は物置のみです」と
+    # 書いてある）。帯だけを CAT_OK で絞っていたため、宅配ボックス・断熱物置・
+    # バイク車庫のページから、その機種が載っていない一覧へリンクが張られていた
+    # （2026-10-06 に気づいた。2026-10-04 の宅配ボックスの件と同じ原因）
+    if p["cat"] not in C.CAT_OK:
+        return bands, axes
     col = {"w": 1, "d": 2, "h": 3}
     for slug, axis, limit, label in AXIS_PAGES:
         if slug in seen or not exists(slug):
