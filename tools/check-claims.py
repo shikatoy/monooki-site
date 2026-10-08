@@ -23,6 +23,7 @@
     steps_total    同じシリーズの中で1寸法だけが違う、隣り合わせの型番の組の総数
                    （tools/build-step-pairs.py が製品ページに出している数の合計）
     codes_<id>     そのシリーズの型番数（id は PRODUCTS の id。t-nd など）
+                   このシリーズ単位の3つだけは、物置以外の区分も対象にする
     fp_<id>        そのシリーズの間口×奥行の種類
     fpmulti_<id>   そのうち高さが2通り以上ある数
                    id は + でつなぐと合算できる（fp_t-nd+t-jn）
@@ -66,6 +67,17 @@ def step_pairs():
     return n
 
 
+def dataset_all():
+    """シリーズ単位の数（codes_/fp_/fpmulti_）は、物置以外のシリーズも対象にする。
+    2026-10-08：タイヤストッカー（区分はタイヤ収納庫）の型番数を記事に書いたところ、
+    CAT_OK で絞った行に sid が無く「知らない claim id」で止まった。"""
+    rows = []
+    for p in C.load_products():
+        for code, w, d, h in p["sizes"]:
+            rows.append(dict(maker=p["maker"], sid=p["id"], w=w, d=d, h=h))
+    return rows
+
+
 def series_stats(rows, ids):
     """シリーズ（複数可）をまとめたときの 型番数／床の種類／高さが2通り以上ある床の数。"""
     v = [r for r in rows if r["sid"] in ids]
@@ -103,10 +115,10 @@ def expected(cid, rows):
     m = re.fullmatch(r"(codes|fp|fpmulti)_([a-z0-9+-]+)", cid)
     if m:
         ids = set(m.group(2).split("+"))
-        known = {r["sid"] for r in rows}
-        if not ids <= known:
+        allrows = dataset_all()
+        if not ids <= {r["sid"] for r in allrows}:
             return None
-        n_codes, n_fp, n_multi = series_stats(rows, ids)
+        n_codes, n_fp, n_multi = series_stats(allrows, ids)
         return {"codes": n_codes, "fp": n_fp, "fpmulti": n_multi}[m.group(1)]
     return None
 

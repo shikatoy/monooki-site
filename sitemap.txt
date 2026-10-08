@@ -13,6 +13,7 @@ https://monooki-erabi.com/articles/monooki-options-and-anchor.html
 https://monooki-erabi.com/articles/monooki-rust-where-and-how.html
 https://monooki-erabi.com/articles/monooki-shutter-vs-slide-opening.html
 https://monooki-erabi.com/articles/monooki-size-and-placement.html
+https://monooki-erabi.com/articles/monooki-tire-bicycle-capacity.html
 https://monooki-erabi.com/articles/takubo-garage-scudo-door-types.html
 https://monooki-erabi.com/articles/takubo-height-by-series.html
 https://monooki-erabi.com/articles/yodo-shutter-height-one-step.html
