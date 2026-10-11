@@ -1002,6 +1002,8 @@ const PRODUCTS = [
                      発表を受けて当サイトに型番を追加したときは、別に '新商品' を立てる。
    既存の記録は削除・改変しないこと（この台帳は追記のみ）。 */
 const UPDATE_LOG = [
+  { date:'2026-10-11', type:'改定', title:'診断の高さを、3択から実寸の入力に変えました',
+    body:'間口と奥行は10月6日にミリの直接入力にしましたが、高さだけ「窓の下に収めたい ── 約1.2m以下」「一般的な高さまで ── 約2.4m」「制限なし」の3択のままでした。軒下を1,850mmと測ってきた方は、そのまま入れられません。結果画面の絞り込みには高さのミリ欄があるので、入口と出口で形も違っていました。高さの設問をなくし、寸法の設問で間口・奥行と一緒に入れる形にしています。空欄は制限なしです。サイズ診断は4問から3問になりました。あわせて、「制限なし」に背の高い物置を好むタグが付いていたのをやめています。制限が無いことと、背の高いものが欲しいことは別なので、空欄には何も付けません。共有したURLの形も変わりますが（#r=size.1800x1200x1850. のように高さが入ります）、10月11日より前に共有された古い形のURLも、2問目の選択肢を高さに読み替えて開けるようにしてあります。' },
   { date:'2026-10-11', type:'改定', title:'記事の見出しも、どのブラウザでも語の途中で切れないようにしました',
     body:'10日に入れた折り返しの指定（word-break: auto-phrase）は、対応しているのが Chrome 系だけで、Safari と Firefox には効きません。記事側はこの指定だけだったため、それらのブラウザでは「でもアンカー／は別」のような切れ方が残っていました。診断側と同じやり方を記事にも入れています。見出しを句読点と助詞（を・に・は・が・で・と・へ・も・の）のうしろで区切り、その塊ごとに折り返す形です。助詞の直前がひらがなのときは区切りません。記事18本の見出し461個を機械的に区切りました。公開のたびに自動で流れるようにしてあるので、新しい記事も同じになります。auto-phrase を無効にした状態で幅390pxで測り、記事タイトル・本文の見出し・記事一覧のカードのすべてで、折り返しが文節の外に出ないことを確認しました。あわせて助詞に「の」を加えたので、診断側の設問も区切り位置が細かくなっています。' },
   { date:'2026-10-11', type:'改定', title:'製品ページに「寸法の近い他社の型番」を出しました',
@@ -1273,11 +1275,7 @@ const QUESTION_SETS = {
     label:'Approach 02 — サイズで選ぶ',
     ai:'設置スペースに合わせて、質問をご用意しています',
     questions: [
-      { type:'dimensions', q:'設置できるスペースを教えてください。', hint:'測った寸法をミリでそのまま入れてください。入力に合わせて、図と「入る型番の数」が変わります。判定では屋根の張り出しと、左右・背面に各100mmの作業スペースを見込みます。' },
-      { q:'高さに制限はありますか？', hint:'設置時は本体の下に約100mmの基礎用ブロックを敷くため、「本体高さ＋100mm」で判定します。', options:[
-        { label:'窓の下に収めたい ── 約1.2m以下', tags:{ low:3, small:1 }, hMax:1200 },
-        { label:'一般的な高さまで ── 約2.4m', tags:{ medium:1 }, hMax:2400 },
-        { label:'制限なし ── 背の高い物置もOK', tags:{ tall:3 } } ] },
+      { type:'dimensions', q:'設置できるスペースを教えてください。', hint:'測った寸法をミリでそのまま入れてください。入力に合わせて、図と「入る型番の数」が変わります。判定では屋根の張り出しと、左右・背面に各100mmの作業スペースを見込みます。高さは上限がある場合だけ入れてください。' },
       { q:'扉のタイプにご希望はありますか？', hint:'扉の前にとれるスペースと、出し入れする物の大きさで変わります。', options:[
         { label:'引き戸 ── 扉の前が狭くてもOK', tags:{ slide:3 } },
         { label:'3枚扉 ── 開口部を広く使いたい', tags:{ door3:3 } },
@@ -1314,7 +1312,7 @@ const QUESTION_SETS = {
 };
 
 /* ---------- ステート ---------- */
-const state = { mode:null, step:0, answers:[], sizeSel:{ w:1800, d:1200 } };
+const state = { mode:null, step:0, answers:[], sizeSel:{ w:1800, d:1200, h:0 } };
 
 /* ---------- 診断結果をURLに残す ----------
    形式: #r=<mode>.<間口mm>x<奥行mm>.<選んだ選択肢の番号を並べたもの>
@@ -1344,7 +1342,8 @@ function decFilter(str){
 function encodeQuizState(){
   if(!state.mode) return '';
   const opts = state.answers.map(a => (a.oi === undefined ? '' : String(a.oi))).join('');
-  return `r=${state.mode}.${state.sizeSel.w}x${state.sizeSel.d}.${opts}${encFilter()}`;
+  const h = state.sizeSel.h ? 'x' + state.sizeSel.h : '';
+  return `r=${state.mode}.${state.sizeSel.w}x${state.sizeSel.d}${h}.${opts}${encFilter()}`;
 }
 function resultUrl(){
   const h = encodeQuizState();
@@ -1356,30 +1355,32 @@ function writeResultHash(){
   try { history.replaceState(null, '', '#' + h); } catch(e){}
 }
 function parseQuizHash(){
-  const m = (location.hash || '').match(/^#r=([a-z]+)\.(\d+)x(\d+)\.([0-9s]*)(?:\+f=([0-9a-z_-]*))?$/);
+  const m = (location.hash || '').match(/^#r=([a-z]+)\.(\d+)x(\d+)(?:x(\d+))?\.([0-9s]*)(?:\+f=([0-9a-z_-]*))?$/);
   if(!m) return null;
-  const [, mode, w, d, opts, fil] = m;
+  const [, mode, w, d, h, opts, fil] = m;
   if(!QUESTION_SETS[mode]) return null;
   const toMM = v => (v <= 320 ? v * 10 : v);   /* 旧形式（cm）の共有URL。上のコメント参照 */
-  return { mode, w:toMM(Number(w)), d:toMM(Number(d)), opts:opts.split(''),
+  return { mode, w:toMM(Number(w)), d:toMM(Number(d)), h:Number(h || 0), opts:opts.split(''),
            filter: fil ? decFilter(fil) : null };
 }
 /* URL から診断結果を復元して開く */
 function restoreFromHash(){
   const q = parseQuizHash();
   if(!q) return false;
-  state.mode = q.mode; state.step = 0; state.answers = []; state.sizeSel = { w:q.w, d:q.d };
   const qs = QUESTION_SETS[q.mode].questions;
+  let opts = q.opts, h = q.h;
+  /* 2026-10-11 より前に共有されたサイズ診断のURLは、高さが2問目の選択肢だった。
+     設問が1つ多いので、その1文字を高さに読み替えてから詰め直す */
+  if(q.mode === 'size' && opts.length === qs.length + 1){
+    h = h || [1200, 2400, 0][Number(opts[1])] || 0;
+    opts = [opts[0]].concat(opts.slice(2));
+  }
+  state.mode = q.mode; state.step = 0; state.answers = []; state.sizeSel = { w:q.w, d:q.d, h };
   for(let i = 0; i < qs.length; i++){
     const question = qs[i];
-    const token = q.opts[i];
+    const token = opts[i];
     if(question.type === 'dimensions'){
-      const { w, d } = state.sizeSel;
-      let tags, sizeName;
-      if(w <= 1600 && d <= 1000){ tags = { small:3, low:1, cheap:1 }; sizeName = '小型'; }
-      else if(w >= 2800 || (w * d) / 1e6 >= 4.5){ tags = { large:3, garage:1, medium:1 }; sizeName = '大型'; }
-      else { tags = { medium:3 }; sizeName = '中型'; }
-      state.answers.push({ label:`W${fmtNum(w)}mm × D${fmtNum(d)}mm ── ${sizeName}級`, tags, oi:'s' });
+      state.answers.push(sizeAnswer(state.sizeSel.w, state.sizeSel.d, state.sizeSel.h));
     } else {
       const o = question.options[Number(token)];
       if(!o) return false;
@@ -1861,6 +1862,25 @@ function renderStep(){
 }
 
 /* ---------- 寸法入力（平面図スライダー） ---------- */
+/* 寸法の設問の答え。入力からタグと見出しを決める。
+   高さは空欄＝制限なしで、そのときは何のタグも付けない
+   （制限が無いことと、背の高いものが欲しいことは別） */
+function sizeAnswer(w, d, h){
+  let tags, sizeName;
+  if(w <= 1600 && d <= 1000){ tags = { small:3, low:1, cheap:1 }; sizeName = '小型'; }
+  else if(w >= 2800 || (w * d) / 1e6 >= 4.5){ tags = { large:3, garage:1, medium:1 }; sizeName = '大型'; }
+  else { tags = { medium:3 }; sizeName = '中型'; }
+  if(h){
+    if(h <= 1400) { tags.low = 3; tags.small = Math.max(tags.small || 0, 1); }
+    else if(h <= 2400) { tags.medium = Math.max(tags.medium || 0, 1); }
+    else { tags.tall = 2; }
+  }
+  return {
+    label: `W${fmtNum(w)}mm × D${fmtNum(d)}mm${h ? ` × H${fmtNum(h)}mm以下` : '（高さの上限なし）'} ── ${sizeName}級`,
+    tags, hMax: h || undefined, oi:'s'
+  };
+}
+
 function renderDimensionStep(q){
   quizBody.innerHTML = `
     <div class="step-enter">
@@ -1885,6 +1905,14 @@ function renderDimensionStep(q){
             </label>
             <input id="d-mm" class="mm-input mt-1" type="number" inputmode="numeric" min="400" max="20000" step="1" value="${state.sizeSel.d}" aria-describedby="d-note">
             <p id="d-note" class="mt-2 font-mono text-[10px] text-neutral-400">壁や塀までの実測値で</p>
+          </div>
+          <div>
+            <label for="h-mm" class="flex items-baseline justify-between font-mono text-[12px]">
+              <span class="tracking-widest2 uppercase text-neutral-500">Height — 高さの上限</span>
+              <span class="text-neutral-400">mm</span>
+            </label>
+            <input id="h-mm" class="mm-input mt-1" type="number" inputmode="numeric" min="0" max="5000" step="1" value="${state.sizeSel.h || ''}" placeholder="制限なし" aria-describedby="h-note">
+            <p id="h-note" class="mt-2 font-mono text-[10px] leading-relaxed text-neutral-400">軒下や窓の下など、上限があるときだけ。基礎ブロック分 +100mm を足して比べます</p>
           </div>
           <div class="border-t border-line pt-5">
             <p id="size-fit" class="font-serif font-bold text-lg leading-snug"></p>
@@ -1917,11 +1945,12 @@ function renderDimensionStep(q){
      何も入らないという結果も結果として出す。上限20,000mmは打ち間違いを弾くため
      （いちばん大きい物置が要するのは間口7,794mm×奥行6,958mm） */
   const MM_LO = 400, MM_HI = 20000;
-  const wI = $('#w-mm'), dI = $('#d-mm');
+  const H_HI = 5000;                      /* 高さの打ち間違いを弾く。いちばん高い物置で2,990mm */
+  const wI = $('#w-mm'), dI = $('#d-mm'), hI = $('#h-mm');
   const num = el => Math.round(Number(el.value)) || 0;
   const update = () => {
-    const w = num(wI), d = num(dI);
-    state.sizeSel = { w, d };
+    const w = num(wI), d = num(dI), h = num(hI);
+    state.sizeSel = { w, d, h };
 
     /* 平面図。3,200mmを超える入力では縮尺を合わせ直す */
     const span = Math.max(w, d, 3200);
@@ -1932,14 +1961,14 @@ function renderDimensionStep(q){
     $('#dim-w').textContent = `← ${fmtNum(w)} →`;
     $('#dim-d').textContent = `← ${fmtNum(d)} →`;
 
-    /* 高さはこの次の質問で聞くため、ここでは高さを問わずに数える */
-    const f = w && d ? fitStats(w, d, null) : { codes:0, series:0 };
+    /* 高さは空欄なら問わない */
+    const f = w && d ? fitStats(w, d, h || null) : { codes:0, series:0 };
     $('#size-fit').textContent = f.codes
       ? `この寸法に入る型番 ${fmtNum(f.codes)}（${f.series}シリーズ）`
       : 'この寸法に入る型番は、収録分に見当たりません';
     const area = (w * d) / 1e6;
     $('#size-summary').textContent = w && d
-      ? `入力した面積 ${area.toFixed(2)} m²（畳 約${(area / 1.62).toFixed(1)}帖）。屋根の張り出しと、左右・背面 各100mm を引いた上での数です`
+      ? `入力した面積 ${area.toFixed(2)} m²（畳 約${(area / 1.62).toFixed(1)}帖）。屋根の張り出しと、左右・背面 各100mm を引いた上での数です${h ? `。高さは基礎ブロック分 +100mm を足して ${fmtNum(h)}mm 以内で見ています` : '。高さは問わずに数えています'}`
       : `間口・奥行を ${fmtNum(MM_LO)}〜${fmtNum(MM_HI)} mm で入れてください`;
   };
   /* 入力中は丸めない（「1」を打った瞬間に書き換わると打てなくなる）。
@@ -1950,9 +1979,10 @@ function renderDimensionStep(q){
       if(v && v < MM_LO) el.value = MM_LO;
       else if(v > MM_HI) el.value = MM_HI;
     });
+    if(num(hI) > H_HI) hI.value = H_HI;    /* 高さは空欄＝制限なしなので下限を当てない */
     update();
   };
-  [wI, dI].forEach(el => {
+  [wI, dI, hI].forEach(el => {
     el.addEventListener('input', update);
     el.addEventListener('change', settle);
   });
@@ -1965,12 +1995,9 @@ function renderDimensionStep(q){
       ((w >= MM_LO && w <= MM_HI) ? dI : wI).focus();
       return;
     }
-    state.sizeSel = { w, d };
-    let tags, sizeName;
-    if(w <= 1600 && d <= 1000){ tags = { small:3, low:1, cheap:1 }; sizeName = '小型'; }
-    else if(w >= 2800 || (w * d) / 1e6 >= 4.5){ tags = { large:3, garage:1, medium:1 }; sizeName = '大型'; }
-    else { tags = { medium:3 }; sizeName = '中型'; }
-    state.answers.push({ label:`W${fmtNum(w)}mm × D${fmtNum(d)}mm ── ${sizeName}級`, tags, oi:'s' });
+    const h = Math.min(num(hI), H_HI);
+    state.sizeSel = { w, d, h };
+    state.answers.push(sizeAnswer(w, d, h));
     state.step++;
     transitionTo(renderStep);
   });
