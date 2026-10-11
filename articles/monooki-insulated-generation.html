@@ -128,6 +128,15 @@
   .tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; color: var(--mute);
     border: 1px solid var(--linesoft); padding: 4px 10px; }
 
+
+  /* ───── 日本語の折り返し位置 ─────
+     既定では文字単位で折り返すため、語の途中で切れる。
+     auto-phrase は文節で折り返す指定（対応しないブラウザは無視する） */
+  .article-title, .article-lead, .article-body h2, .article-body h3,
+  .card-title, .card-desc, .cta-title {
+    word-break: auto-phrase; line-break: strict;
+  }
+  .pb { display: inline-block; }
   /* ───── 本文 ───── */
   .article-body { padding: 8px 0 56px; }
   .article-body h2 {
@@ -261,7 +270,7 @@
     <article>
       <header class="article-head">
         <p class="article-kicker">Article — 機種の見方</p>
-        <h1 class="article-title">断熱物置が、静かに入れ替わりました</h1>
+        <h1 class="article-title"><span class="pb">断熱物置が、</span><span class="pb">静かに入れ替わりました</span></h1>
         <p class="article-lead">2026年9月1日、イナバの断熱物置ナイソーが新型SMXに切り替わり、como liteも加わりました。先にヨドコウのヨド蔵が生産終了しているため、断熱物置というジャンルの顔ぶれが入れ替わっています。結露とは何が起きているのか、誰に関係する話なのかを整理しました。</p>
         <div class="article-meta">
           <time datetime="2026-09-07">2026-09-07</time>
@@ -283,7 +292,7 @@
         <p>断熱物置は、物置全体から見ればごく一部の区分です。そこで機種が入れ替わっても、ふつうは話題になりません。ただ、この区分は<strong>この2年で顔ぶれが変わっています。</strong></p>
         <p><strong>この記事は、メーカーの公式発表と当サイトの廃盤記録を突き合わせて書いています。</strong></p>
 
-        <h2>この2年で起きたこと</h2>
+        <h2><span class="pb">この2年で</span><span class="pb">起きたこと</span></h2>
                 <div class="table-wrap">
         <table>
           <thead><tr><th>時期</th><th>何が起きたか</th><th>出典</th></tr></thead>
@@ -299,13 +308,13 @@
         <p>タクボの現行ラインアップにも、断熱を掲げた区分は見当たりません。</p>
         <p>つまり<strong>この区分は、いま一社に寄っています。</strong>買い替えを考えているなら、以前と同じ感覚で選べる状態ではなくなっている、ということです。</p>
 
-        <h2>断熱物置は、何が違うのか</h2>
+        <h2><span class="pb">断熱物置は、</span><span class="pb">何が</span><span class="pb">違うのか</span></h2>
         <p>ふつうの物置は、鋼板でできています。板一枚で外と中が隔てられているので、<strong>外の温度がそのまま内側に伝わります。</strong></p>
         <p>温度が伝わると、条件によっては結露が起きます。冷えた面に、暖かく湿った空気が触れたときです。冬の朝や梅雨どきに、冷たい飲みものを入れたコップの外側に水滴がつくのと、起きていることは同じです。物置の場合、水滴がつくのは<strong>壁の内側</strong>になります。</p>
         <p>断熱物置は、壁や天井に断熱材を入れて、この温度差をやわらげる構造です。</p>
         <p><strong>「断熱物置なら結露しない」とは、メーカーも書いていません。</strong>構造として温度差が伝わりにくい、というところまでです。</p>
 
-        <h2>誰に関係する話か</h2>
+        <h2><span class="pb">誰に</span><span class="pb">関係する話か</span></h2>
         <p>しまうものによって、関係するかどうかが分かれます。</p>
         <ul>
         <li><strong>湿気や温度変化に弱いものをしまう</strong>なら、選択肢として見ておく区分です。衣類、寝具、紙もの、電子機器、食品など</li>
@@ -314,7 +323,7 @@
         <p>そして、<strong>いま断熱物置を使っていて買い替えを考えている場合</strong>は、事情が変わっています。ヨド蔵を使っていたなら同じメーカーの後継はなく、ナイソーのSMK型を使っていたなら現行はSMX型です。<strong>型番をそのまま指定しても通りません。</strong></p>
         <p>当サイトの<a href="../products/discontinued.html">廃盤・生産終了の記録</a>には、確認できた日付とあわせて残してあります。販売サイトは終わった商品のページを消していきますが、ここは消さずに置いています。</p>
 
-        <h2>寸法は公式に出そろった</h2>
+        <h2><span class="pb">寸法は</span><span class="pb">公式に</span><span class="pb">出そろった</span></h2>
         <p>発売から1か月が経ち、2機種とも公式の寸法表が出ています。<strong>ナイソー SMX が9型番、como lite が33型番</strong>で、当サイトにも全型番の外寸を載せました。</p>
         <ul>
         <li><a href="../products/inaba-nyso-smx.html">イナバ ナイソー SMX</a> … 9型番</li>
@@ -353,7 +362,7 @@
       <ul class="rel-list">
         <li><a href="takubo-height-by-series.html"><span class="rel-txt"><span class="rel-kicker">機種の見方</span><span class="rel-name">タクボのサイズ表に、高さの欄はない</span></span><span class="rel-go">&rarr;</span></a></li>
         <li><a href="monooki-narrow-space-maker.html"><span class="rel-txt"><span class="rel-kicker">選び方</span><span class="rel-name">奥行50cmを切ると、物置は1社しか選べない</span></span><span class="rel-go">&rarr;</span></a></li>
-        <li><a href="homecenter-monooki-vs-major3.html"><span class="rel-txt"><span class="rel-kicker">機種の見方</span><span class="rel-name">ホームセンターの物置と大手3社の物置は、組む側から見て何が違うのか</span></span><span class="rel-go">&rarr;</span></a></li>
+        <li><a href="kogata-chugata-ogata-chigai.html"><span class="rel-txt"><span class="rel-kicker">機種の見方</span><span class="rel-name">小型と中型・大型は何が違う？ 物置は「区分」で見ると迷いが減る</span></span><span class="rel-go">&rarr;</span></a></li>
       </ul>
     </aside>
     <!-- AUTO_ARTREL_END -->

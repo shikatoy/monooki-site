@@ -128,6 +128,15 @@
   .tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; color: var(--mute);
     border: 1px solid var(--linesoft); padding: 4px 10px; }
 
+
+  /* ───── 日本語の折り返し位置 ─────
+     既定では文字単位で折り返すため、語の途中で切れる。
+     auto-phrase は文節で折り返す指定（対応しないブラウザは無視する） */
+  .article-title, .article-lead, .article-body h2, .article-body h3,
+  .card-title, .card-desc, .cta-title {
+    word-break: auto-phrase; line-break: strict;
+  }
+  .pb { display: inline-block; }
   /* ───── 本文 ───── */
   .article-body { padding: 8px 0 56px; }
   .article-body h2 {
@@ -144,6 +153,12 @@
   .article-body h3::before { content: '—'; color: var(--rust); margin-right: 10px; }
   .article-body p { margin: 26px 0 0; font-size: 15px; line-height: 2.15; }
   .article-body strong { font-weight: 700; background: linear-gradient(transparent 62%, rgba(163, 81, 43, .18) 62%); }
+  /* ───── 引用（公式資料の文言をそのまま置く） ───── */
+  .article-body .note {
+    margin: 26px 0 0; padding: 18px 20px 18px 22px;
+    border-left: 2px solid var(--rust); background: #efe9dc;
+    font-size: 14px; line-height: 2.05; color: #3a3a36;
+  }
   /* ───── 本文中の表（Markdownの表から生成） ───── */
   .article-body table { width: 100%; border-collapse: collapse; margin: 26px 0 0; font-size: 13.5px; line-height: 1.9; }
   .article-body th, .article-body td { padding: 9px 10px; border-bottom: 1px solid var(--linesoft); text-align: left; vertical-align: top; }
@@ -261,7 +276,7 @@
     <article>
       <header class="article-head">
         <p class="article-kicker">Article — 選び方</p>
-        <h1 class="article-title">タイヤは何本入る？ 公式に本数が書いてあるのは1シリーズだけ</h1>
+        <h1 class="article-title"><span class="pb">タイヤは</span><span class="pb">何本入る？</span><span class="pb"> 公式に</span><span class="pb">本数が</span><span class="pb">書いてあるのは1シリーズだけ</span></h1>
         <p class="article-lead">物置にタイヤが何本、自転車が何台入るか。3社の公式を当たると、本数を書いているのはイナバのタイヤストッカーだけでした。そのタイヤストッカーは、普通の収納庫と外形寸法が12型番すべて同じです。違うのは中のバーとフックでした。</p>
         <div class="article-meta">
           <time datetime="2026-10-08">2026-10-08</time>
@@ -282,7 +297,7 @@
         <p>スタッドレスに履き替えたタイヤを4本、あるいは2台分の8本。物置に入るかどうかを知りたいとき、公式サイトに何本と書いてあるかを探すことになります。</p>
         <p><strong>3社を当たったところ、本数や台数を書いているのは1シリーズだけでした。</strong> イナバのタイヤストッカーです。</p>
 
-        <h2>書いてあるのは、タイヤストッカーだけ</h2>
+        <h2><span class="pb">書いてあるのは、</span><span class="pb">タイヤストッカーだけ</span></h2>
         <p>イナバのタイヤストッカー［BJX-T］の公式ページには、こうあります。</p>
         <p class="note">車2〜3台分のタイヤを収納。最大でタイヤ12本までの収納が可能</p>
         <p>タイヤバー2本と、転がり防止用のフックが標準装備だとも書かれています。</p>
@@ -300,7 +315,7 @@
         <p>自転車を置くための製品にも、台数は書かれていません。イナバはフォルタ ウィズを「開放スペース併設物置」と呼んでいて、駐輪専用とは言っていません。</p>
         <p>なお、タイヤストッカーの「最大12本」は<strong>シリーズ全体の記述</strong>です。型番ごとのページにも同じ文が載っていますが、間口900mmのものと1,320mmのもので書き分けられてはいません。</p>
 
-        <h2>タイヤストッカーは、普通の収納庫と同じ箱</h2>
+        <h2><span class="pb">タイヤストッカーは、</span><span class="pb">普通の</span><span class="pb">収納庫と</span><span class="pb">同じ箱</span></h2>
         <p>ここでもう一つ分かることがあります。タイヤストッカー［BJX-T］<span data-claim="codes_i-bjt">12</span>型番の外形寸法は、<strong>ドア型収納庫のアイビーストッカー［BJX］<span data-claim="codes_i-bjx">29</span>型番の中に、すべて同じものがあります</strong>。公式のダウンロードページにある寸法の一覧を突き合わせると、12型番すべてに同じ寸法の相手がいました。</p>
         <div class="table-wrap">
         <table>
@@ -316,7 +331,7 @@
         <p>型番も、末尾に <strong>T</strong> が付くかどうかの違いです。公式の記述で違うのは、タイヤバー2本と転がり防止フックが標準装備かどうか。箱そのものは同じものです。</p>
         <p>タイヤ用の<a class="x-link" href="monooki-narrow-space-maker.html">奥行</a>は755mmと905mmの2種類で、間口は900・1,100・1,320mm、高さは1,603mmと1,903mm。アイビーストッカーにはこれに加えて奥行515mmと高さ903mm・1,303mmの段があり、そちらにはT付きがありません。<strong>浅い側と低い側には、タイヤ用の設定が無い</strong>ということです。</p>
 
-        <h2>本数を決めているのは、寸法のほう</h2>
+        <h2><span class="pb">本数を</span><span class="pb">決めているのは、</span><span class="pb">寸法の</span><span class="pb">ほう</span></h2>
         <p>公式が本数を書かない以上、入るかどうかは自分のタイヤの寸法と突き合わせることになります。見る数字は3つです。</p>
         <ul>
         <li><strong>奥行</strong> ── 755mmか905mm。タイヤを立てて並べるか、寝かせて積むかで効く向きが変わります</li>
@@ -358,7 +373,7 @@
       <ul class="rel-list">
         <li><a href="black-monooki-size-lineup.html"><span class="rel-txt"><span class="rel-kicker">選び方</span><span class="rel-name">黒い物置は、選べる寸法が先に決まる</span></span><span class="rel-go">&rarr;</span></a></li>
         <li><a href="monooki-front-clearance.html"><span class="rel-txt"><span class="rel-kicker">機種の見方</span><span class="rel-name">物置の前にどれだけ空けるか、どのメーカーも書いていない</span></span><span class="rel-go">&rarr;</span></a></li>
-        <li><a href="monooki-door-opening-side.html"><span class="rel-txt"><span class="rel-kicker">選び方</span><span class="rel-name">物置の扉の向きは、買うときに決めなくていい</span></span><span class="rel-go">&rarr;</span></a></li>
+        <li><a href="monooki-options-and-anchor.html"><span class="rel-txt"><span class="rel-kicker">選び方</span><span class="rel-name">物置のオプションは後から足せる？ 公式が「設置後は不可」と書いているもの</span></span><span class="rel-go">&rarr;</span></a></li>
       </ul>
     </aside>
     <!-- AUTO_ARTREL_END -->

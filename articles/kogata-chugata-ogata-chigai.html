@@ -128,6 +128,15 @@
   .tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; color: var(--mute);
     border: 1px solid var(--linesoft); padding: 4px 10px; }
 
+
+  /* ───── 日本語の折り返し位置 ─────
+     既定では文字単位で折り返すため、語の途中で切れる。
+     auto-phrase は文節で折り返す指定（対応しないブラウザは無視する） */
+  .article-title, .article-lead, .article-body h2, .article-body h3,
+  .card-title, .card-desc, .cta-title {
+    word-break: auto-phrase; line-break: strict;
+  }
+  .pb { display: inline-block; }
   /* ───── 本文 ───── */
   .article-body { padding: 8px 0 56px; }
   .article-body h2 {
@@ -247,7 +256,7 @@
     <article>
       <header class="article-head">
         <p class="article-kicker">Article — 機種の見方</p>
-        <h1 class="article-title">小型と中型・大型は何が違う？　物置は「区分」で見ると迷いが減る</h1>
+        <h1 class="article-title"><span class="pb">小型と</span><span class="pb">中型・大型は</span><span class="pb">何が</span><span class="pb">違う？</span><span class="pb">　物置は</span><span class="pb">「区分」で</span><span class="pb">見ると迷いが減る</span></h1>
         <p class="article-lead">物置の「小型」と「中型・大型」は何が違うのか。据える側の視点で、一人で手が足りなくなる工程が区分ごとに違うこと、下地は変わらないこと、組みやすさは区分で逆転することを整理しました。区分で迷っている方の判断材料に。</p>
         <div class="article-meta">
           <time datetime="2026-08-23">2026-08-23</time>
@@ -270,7 +279,7 @@
         <p>物置選びで最初に迷うのは、「小さいので足りるか、大きいのが要るか」。</p>
         <p>この記事では、実際に据える側から見た区分の違いを整理します。</p>
 
-        <h2>物置はまず「小型」と「中型・大型」の2つに分かれる</h2>
+        <h2><span class="pb">物置は</span><span class="pb">まず「小型」と</span><span class="pb">「中型・大型」の</span><span class="pb">2つに分かれる</span></h2>
         <p>物置は、メーカーが違っても「小型（収納庫）」と「中型・大型」の2つに分かれます。</p>
         <p>呼び方はメーカーごとにバラバラですが、区分そのものはどのメーカーにもあります。</p>
         <p>たとえばイナバなら、小型はシンプリー、中型・大型はフォルタ。 ヨドコウなら、小型はエスモ、中型・大型はエルモ、といった具合です。</p>
@@ -278,7 +287,7 @@
         <p>「イナバは組みやすい」「ヨドは組みにくい」といったメーカー単位の話は、実はあまり当てになりません。</p>
         <p>同じメーカーでも、小型と中型・大型で評価が入れ替わるからです。 この点は、後半でくわしく触れます。</p>
 
-        <h2>一人で手が足りなくなる工程は、区分で場所が違う</h2>
+        <h2><span class="pb">一人で</span><span class="pb">手が</span><span class="pb">足りなくなる工程は、</span><span class="pb">区分で</span><span class="pb">場所が</span><span class="pb">違う</span></h2>
         <p>ここがこの記事の核心です。</p>
         <p>据え付けの途中で「これは一人では無理だ」と手が足りなくなる場面。 その工程が、区分によって違います。</p>
         <ul>
@@ -291,7 +300,7 @@
         <p>人数の目安としては、中型・大型は大人二人以上を前提に、小型は一人でも組めることが多い、とされています。</p>
         <p>ただし、これはあくまで目安です。 小型でも、屋根を載せる場面では手が増えたほうが進みます。</p>
 
-        <h2>下地づくりとブロックの並べ方は、区分で変わらない</h2>
+        <h2><span class="pb">下地づくりとブロックの</span><span class="pb">並べ方は、</span><span class="pb">区分で</span><span class="pb">変わらない</span></h2>
         <p>「大きい物置は、下地の作り方も特別なんじゃないか」。</p>
         <p>そう思われがちですが、ブロックの並べ方や下ごしらえの手順そのものは、小型でも中型・大型でも変わりません。</p>
         <p>区分が上がるとブロックの数が増えるのは事実です。</p>
@@ -302,7 +311,7 @@
         <p>区分が上がってブロックの数が増えると、そのすべての天端（上面）の高さを水平にそろえるのが難しくなります。</p>
         <p>これも目安としての傾向ですが、水平がそろっていないと、本体の組み上がりにも響いてきます。</p>
 
-        <h2>「組みやすさ」はメーカーではなく区分で見る</h2>
+        <h2><span class="pb">「組みやすさ」は</span><span class="pb">メーカーで</span><span class="pb">はなく区分で</span><span class="pb">見る</span></h2>
         <p>冒頭で触れた、「同じメーカーでも評価が入れ替わる」という話です。</p>
         <ul>
         <li><strong>中型・大型</strong>では、ヨドコウのエルモが、イナバのフォルタより組みやすい</li>
@@ -312,7 +321,7 @@
         <p>だから「どのメーカーが組みやすいか」という問いは、そのままでは答えが出ません。</p>
         <p><strong>先に「どの区分の話をしているか」を決めてから比べる。</strong> これが、実際に近い見方です。</p>
 
-        <h2>大きいほどキズが付きやすい、は「物による」</h2>
+        <h2><span class="pb">大きいほどキズが</span><span class="pb">付きやすい、</span><span class="pb">は</span><span class="pb">「物に</span><span class="pb">よる」</span></h2>
         <p>「中型・大型は本体パネルが重くて大きいから、運んだり立てたりする段階でキズが付きやすい」。</p>
         <p>そんな話もあります。</p>
         <p>傾向としてはそのとおりですが、<strong>物によっては小型・中型大型は関係なく</strong>、区分だけで決まる話ではありません。</p>
@@ -347,7 +356,7 @@
     <aside class="rel artrel">
       <p class="rel-label">Related — あわせて読む</p>
       <ul class="rel-list">
-        <li><a href="monooki-options-and-anchor.html"><span class="rel-txt"><span class="rel-kicker">選び方</span><span class="rel-name">物置のオプションは要る？基本は不要、でもアンカーは別</span></span><span class="rel-go">&rarr;</span></a></li>
+        <li><a href="monooki-options-and-anchor.html"><span class="rel-txt"><span class="rel-kicker">選び方</span><span class="rel-name">物置のオプションは後から足せる？ 公式が「設置後は不可」と書いているもの</span></span><span class="rel-go">&rarr;</span></a></li>
         <li><a href="takubo-height-by-series.html"><span class="rel-txt"><span class="rel-kicker">機種の見方</span><span class="rel-name">タクボのサイズ表に、高さの欄はない</span></span><span class="rel-go">&rarr;</span></a></li>
         <li><a href="takubo-garage-scudo-door-types.html"><span class="rel-txt"><span class="rel-kicker">機種の見方</span><span class="rel-name">タクボのガレージは、扉だけが違う</span></span><span class="rel-go">&rarr;</span></a></li>
       </ul>

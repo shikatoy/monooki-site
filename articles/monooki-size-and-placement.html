@@ -128,6 +128,15 @@
   .tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; color: var(--mute);
     border: 1px solid var(--linesoft); padding: 4px 10px; }
 
+
+  /* ───── 日本語の折り返し位置 ─────
+     既定では文字単位で折り返すため、語の途中で切れる。
+     auto-phrase は文節で折り返す指定（対応しないブラウザは無視する） */
+  .article-title, .article-lead, .article-body h2, .article-body h3,
+  .card-title, .card-desc, .cta-title {
+    word-break: auto-phrase; line-break: strict;
+  }
+  .pb { display: inline-block; }
   /* ───── 本文 ───── */
   .article-body { padding: 8px 0 56px; }
   .article-body h2 {
@@ -144,6 +153,12 @@
   .article-body h3::before { content: '—'; color: var(--rust); margin-right: 10px; }
   .article-body p { margin: 26px 0 0; font-size: 15px; line-height: 2.15; }
   .article-body strong { font-weight: 700; background: linear-gradient(transparent 62%, rgba(163, 81, 43, .18) 62%); }
+  /* ───── 引用（公式資料の文言をそのまま置く） ───── */
+  .article-body .note {
+    margin: 26px 0 0; padding: 18px 20px 18px 22px;
+    border-left: 2px solid var(--rust); background: #efe9dc;
+    font-size: 14px; line-height: 2.05; color: #3a3a36;
+  }
   /* ───── 本文中の表（Markdownの表から生成） ───── */
   .article-body table { width: 100%; border-collapse: collapse; margin: 26px 0 0; font-size: 13.5px; line-height: 1.9; }
   .article-body th, .article-body td { padding: 9px 10px; border-bottom: 1px solid var(--linesoft); text-align: left; vertical-align: top; }
@@ -261,7 +276,7 @@
     <article>
       <header class="article-head">
         <p class="article-kicker">Article — 選び方</p>
-        <h1 class="article-title">壁との隙間は何cm？ メーカーが決めた数値はない</h1>
+        <h1 class="article-title"><span class="pb">壁と</span><span class="pb">の隙間は</span><span class="pb">何cm？</span><span class="pb"> メーカーが</span><span class="pb">決めた数値は</span><span class="pb">ない</span></h1>
         <p class="article-lead">物置と壁や塀のあいだをどれだけ空けるか。3社の公式サイトと取扱説明書を当たりましたが、隙間の数値を決めているメーカーはありませんでした。公式が揃って注意を向けているのは、屋根が本体より外へ出る分です。壁に寄せるときにどの寸法で考えるかを整理しました。</p>
         <div class="article-meta">
           <time datetime="2026-10-08">2026-10-08</time>
@@ -282,7 +297,7 @@
         <p>家の外壁やブロック塀に寄せて物置を置くとき、どれだけ空けておけばいいのか。先に結果を書くと、<strong>3社とも隙間の数値を決めていません</strong>。公式サイトと取扱説明書を当たって確認しました。</p>
         <p>代わりに公式が揃って注意を向けているものが、ひとつあります。屋根が本体より外へ出る分です。</p>
 
-        <h2>隙間の数値は、どこにも書かれていない</h2>
+        <h2><span class="pb">隙間の</span><span class="pb">数値は、</span><span class="pb">どこにも書かれていない</span></h2>
         <p>イナバの「お客様確認事項」にはこうあります。</p>
         <p class="note">基礎ブロックの高さや組立スペース、収納物の出し入れ等を考慮して、設置場所の間口・奥行・高さを正確に測ってから商品選定を行ってください</p>
         <p>ヨドコウの「安全に関するご注意」も同じ形です。</p>
@@ -290,7 +305,7 @@
         <p>どちらも「正確に測ってください」で止まっていて、何ミリ空けるという数字はありません。イナバの取扱説明書、イナバとヨドコウのよくある質問も見ましたが、隙間の寸法を扱った項目はありませんでした。</p>
         <p><a href="monooki-front-clearance.html">物置の前についても同じで、3社とも数値を出していません</a>。</p>
 
-        <h2>数値が出てくるのは、隙間の話ではない</h2>
+        <h2><span class="pb">数値が</span><span class="pb">出てくるのは、</span><span class="pb">隙間の</span><span class="pb">話で</span><span class="pb">はない</span></h2>
         <p>数値を書いているのはタクボのQ&amp;Aです。ただし、これは隙間の話ではありません。</p>
         <p class="note">工具を持つ手が入るよう、左右及び後ろに１０㎝以上</p>
         <p>組み立てのための寸法で、<a class="x-link" href="monooki-options-and-anchor.html">アンカー工事</a>を行う場合は20cm以上必要だと続きます。<strong>据えたあとに残しておく隙間ではなく、据えるときに人の手が入る幅</strong>です。</p>
@@ -299,14 +314,14 @@
         <p>こちらは法律の話で、地域の慣習で異なる場合があるとも添えられています。</p>
         <p>この2つが「物置 壁 隙間」で検索すると出てくる10cm・20cm・50cmの出どころです。点検や掃除のために空けておく値として公式に案内されているものは、3社とも見当たりませんでした。</p>
 
-        <h2>3社が揃って言っているのは、屋根の出幅</h2>
+        <h2><span class="pb">3社が</span><span class="pb">揃って言っているのは、</span><span class="pb">屋根の</span><span class="pb">出幅</span></h2>
         <p>では公式は何に注意を向けているか。読み比べると、同じところを指しています。</p>
         <p>ヨドコウは「母屋の出窓、物干、<strong>軒</strong>などの寸法」と書いています。イナバの取扱説明書は、設置に注意が必要な場所として「<strong>屋根の出幅</strong>・組立施工や転倒防止工事に必要なスペースが確保しにくい場所」を挙げています。</p>
         <p>物置の屋根は、本体より外へ出ています。壁に寄せたときに先に当たるのは本体の側板ではなく、屋根の端です。</p>
         <p>どれだけ出るかは機種によって違います。当サイトが公式の正面図から読み取った範囲では、<strong>屋根の幅は本体の1.03倍から1.10倍</strong>でした。間口2,200mmの本体なら、1.03倍で左右あわせて66mm（片側33mm）、1.10倍なら220mm（片側110mm）が外へ出る計算になります。同じ「間口2,200mm」でも、片側で壁に寄せられる距離が機種によって77mm変わります。</p>
         <p>この出幅を公式が数値で書いている例は、文字として読める形では見当たりませんでした。仕様図には寸法線が入っていますが、どの数値が屋根の外々なのかは図を開いて目で追うことになります。</p>
 
-        <h2>壁に寄せるときは、本体の数字では足りない</h2>
+        <h2><span class="pb">壁に</span><span class="pb">寄せるときは、</span><span class="pb">本体の</span><span class="pb">数字で</span><span class="pb">は足りない</span></h2>
         <p>まとめると、壁との隙間を決めるのは「何cm空けるか」という一般則ではなく、次の3つです。</p>
         <div class="table-wrap">
         <table>

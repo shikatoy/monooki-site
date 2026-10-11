@@ -128,6 +128,15 @@
   .tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; color: var(--mute);
     border: 1px solid var(--linesoft); padding: 4px 10px; }
 
+
+  /* ───── 日本語の折り返し位置 ─────
+     既定では文字単位で折り返すため、語の途中で切れる。
+     auto-phrase は文節で折り返す指定（対応しないブラウザは無視する） */
+  .article-title, .article-lead, .article-body h2, .article-body h3,
+  .card-title, .card-desc, .cta-title {
+    word-break: auto-phrase; line-break: strict;
+  }
+  .pb { display: inline-block; }
   /* ───── 本文 ───── */
   .article-body { padding: 8px 0 56px; }
   .article-body h2 {
@@ -261,7 +270,7 @@
     <article>
       <header class="article-head">
         <p class="article-kicker">Article — 機種の見方</p>
-        <h1 class="article-title">シャッターのエルモは、高さが1段しかない</h1>
+        <h1 class="article-title"><span class="pb">シャッターの</span><span class="pb">エルモは、</span><span class="pb">高さが1段しかない</span></h1>
         <p class="article-lead">ヨドコウのエルモは高さが2段あり、低いほうは約2,120mm。ところがエルモシャッターは全20型番が2,356〜2,361mmで、低いほうの段がありません。奥行も811mmの段が消えます。公式のサイズ表を並べて分かったことをまとめました。</p>
         <div class="article-meta">
           <time datetime="2026-10-05">2026-10-05</time>
@@ -283,7 +292,7 @@
         <p>エルモの低いほうは2,116〜2,125mm、高いほう（型番の末尾にHが付くもの）が2,356〜2,361mm。シャッターに残っているのは、後者だけです。</p>
         <p>この記事は、ヨドコウ公式サイトのサイズ一覧を突き合わせて書いています。</p>
 
-        <h2>高さの段が、片方しか残っていない</h2>
+        <h2><span class="pb">高さの段が、</span><span class="pb">片方しか残っていない</span></h2>
         <p>公式のサイズ一覧を、そのまま並べるとこうなります。</p>
         <div class="table-wrap">
         <table>
@@ -298,7 +307,7 @@
         <p>エルモシャッターの型番は、公式のサイズ一覧に載っている<span data-claim="codes_y-lod">20</span>件すべてがLOD-○○○○Hという形で、Hの付かない型番がありません。つまり<strong>選ぶ前から高いほうに決まっています。</strong></p>
         <p>同じ間口×奥行で高さが2通り選べる組み合わせは、エルモシャッターでは<span data-claim="fpmulti_y-lod">0</span>件です。差はおよそ240mmです。軒下や塀の内側、窓の下など、上に余裕のない場所では、この240mmが入るかどうかが先に効いてきます。</p>
 
-        <h2>浅い奥行も、シャッターには無い</h2>
+        <h2><span class="pb">浅い奥行も、</span><span class="pb">シャッターに</span><span class="pb">は無い</span></h2>
         <p>消えているのは高さだけではありません。奥行も、いちばん浅い段が落ちています。</p>
         <p>エルモの公式サイズ表には、奥行811mmの型番があります。間口1,512／1,863／2,213／2,564／2,914のそれぞれにLMD-1508、LMD-1808、LMD-2208、LMD-2508、LMD-2908が並んでいます。</p>
         <p>エルモシャッターの表に、奥行811mmは<strong>1件もありません。</strong>いちばん浅い奥行は1,162mmです。</p>
@@ -318,7 +327,7 @@
         <p>なお、エルモシャッターの最小間口は1,863mmです。引き戸のエルモは1,512mmから始まり、縦長の側面扉タイプにはさらに狭いLMD-0815（間口811mm）があります。</p>
         <p><strong>なぜ浅い段と低い段が無いのかは、公式には書かれていません。</strong>サイズ一覧に載っていない、という事実までです。</p>
 
-        <h2>同じことが、間口の広いほうでも起きている</h2>
+        <h2><span class="pb">同じことが、</span><span class="pb">間口の</span><span class="pb">広いほうでも起きている</span></h2>
         <p>これはシャッターだけの話ではありません。エルモの連結タイプ（2連片引き戸・センター引き分け戸）の表を見ると、間口4,428〜7,232mmのいずれも、奥行は1,863mm以上に限られ、高さは2,356〜2,359mmの1段だけです。間口6,531mm以上では、奥行は2,564mmと2,914mmの2つだけになります。</p>
         <p>つまり<strong>本体が大きくなる方向では、引き戸でも浅い奥行と低い高さが先に消えていきます。</strong>シャッターは、その状態が最初から全サイズに当てはまっている形になります。</p>
 

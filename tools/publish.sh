@@ -22,6 +22,7 @@ python3 "$REPO/tools/build-product-head.py" || { echo "[中止] 製品ページ�
 python3 "$REPO/tools/build-product-sizes.py" || { echo "[中止] 製品ページのサイズ表の生成に失敗しました。上の理由を直してから公開してください。"; exit 1; }
 python3 "$REPO/tools/build-product-spec.py" || { echo "[中止] 製品ページの仕様・特徴の生成に失敗しました。上の理由を直してから公開してください。"; exit 1; }
 python3 "$REPO/tools/build-step-pairs.py" || echo "[警告] 寸法の段の生成に失敗しました（続行します）"
+python3 "$REPO/tools/build-near-codes.py" || echo "[警告] 近い他社型番の生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-codes.py" || echo "[警告] 型番索引の生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-bands.py" || echo "[警告] サイズ帯ページの生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-size-pages.py" || echo "[警告] 寸法ページの生成に失敗しました（続行します）"
@@ -34,6 +35,7 @@ python3 "$REPO/tools/build-size-links.py" || { echo "[中止] サイズ帯への
 python3 "$REPO/tools/build-crosslinks.py" || echo "[警告] 記事どうしのリンク生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-article-links.py" || echo "[警告] 記事導線の生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-article-related.py" || echo "[警告] あわせて読むの生成に失敗しました（続行します）"
+python3 "$REPO/tools/build-headline-breaks.py" || echo "[警告] 見出しの折り返しの生成に失敗しました（続行します）"
 
 # 廃盤・生産終了ページを作り直す（手で直さなくてよい）
 python3 "$REPO/tools/build-discontinued.py" || echo "[警告] 廃盤ページの生成に失敗しました（続行します）"

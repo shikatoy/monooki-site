@@ -23,15 +23,15 @@
   }, true);
 </script>
 <!-- ANALYTICS_END -->
-<title>物置はどこから錆びる？外す側が見た置き方と塗装の話｜物置どれがいい？</title>
-<meta name="description" content="物置はどこから錆びるのか。撤去してきた立場から言うと、部位より「置き場所」と「塗装が剥がれるか」の2つで決まります。屋根か床、木の下、床が抜ける位置について、現場で見てきた事実だけをまとめました。">
+<title>物置は何年もつ？ 錆の年数を出しているメーカーはない｜物置どれがいい？</title>
+<meta name="description" content="物置は何年もつのか。3社の公式を当たると、年数を書いているメーカーは見当たりません。出ているのは5年の保証と、錆の原因として名指しされている収納物、それに水切りと通気です。鋼板について公開されている範囲と、錆が出たときの補修手順もまとめました。">
 <meta name="keywords" content="物置 錆びやすい場所, 物置 錆びる 原因, 物置 床 抜ける, 物置 木の下 置き方, 物置 塗装 剥がれ 錆">
 <meta name="theme-color" content="#101010">
 <link rel="canonical" href="https://monooki-erabi.com/articles/monooki-rust-where-and-how.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="物置どれがいい？">
-<meta property="og:title" content="物置はどこから錆びる？外す側が見た置き方と塗装の話">
-<meta property="og:description" content="物置はどこから錆びるのか。撤去してきた立場から言うと、部位より「置き場所」と「塗装が剥がれるか」の2つで決まります。屋根か床、木の下、床が抜ける位置について、現場で見てきた事実だけをまとめました。">
+<meta property="og:title" content="物置は何年もつ？ 錆の年数を出しているメーカーはない">
+<meta property="og:description" content="物置は何年もつのか。3社の公式を当たると、年数を書いているメーカーは見当たりません。出ているのは5年の保証と、錆の原因として名指しされている収納物、それに水切りと通気です。鋼板について公開されている範囲と、錆が出たときの補修手順もまとめました。">
 <meta property="og:url" content="https://monooki-erabi.com/articles/monooki-rust-where-and-how.html">
 <meta property="og:image" content="https://monooki-erabi.com/images/og-monooki-rust-where-and-how.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -39,8 +39,8 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "物置はどこから錆びる？外す側が見た置き方と塗装の話",
-  "description": "物置はどこから錆びるのか。撤去してきた立場から言うと、部位より「置き場所」と「塗装が剥がれるか」の2つで決まります。屋根か床、木の下、床が抜ける位置について、現場で見てきた事実だけをまとめました。",
+  "headline": "物置は何年もつ？ 錆の年数を出しているメーカーはない",
+  "description": "物置は何年もつのか。3社の公式を当たると、年数を書いているメーカーは見当たりません。出ているのは5年の保証と、錆の原因として名指しされている収納物、それに水切りと通気です。鋼板について公開されている範囲と、錆が出たときの補修手順もまとめました。",
   "datePublished": "2026-09-01",
   "dateModified": "2026-09-01",
   "author": { "@type": "Organization", "name": "物置どれがいい？" },
@@ -128,6 +128,15 @@
   .tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; color: var(--mute);
     border: 1px solid var(--linesoft); padding: 4px 10px; }
 
+
+  /* ───── 日本語の折り返し位置 ─────
+     既定では文字単位で折り返すため、語の途中で切れる。
+     auto-phrase は文節で折り返す指定（対応しないブラウザは無視する） */
+  .article-title, .article-lead, .article-body h2, .article-body h3,
+  .card-title, .card-desc, .cta-title {
+    word-break: auto-phrase; line-break: strict;
+  }
+  .pb { display: inline-block; }
   /* ───── 本文 ───── */
   .article-body { padding: 8px 0 56px; }
   .article-body h2 {
@@ -200,11 +209,6 @@
   }
 /* AUTO_ARTREL_CSS */
   .rel.artrel { margin-top: 18px; }
-/* AUTO_XLINK_CSS_START */
-  /* ───── 記事どうしのリンク（tools/build-crosslinks.py が生成） ───── */
-  .x-link { border-bottom: 1px dotted var(--rust); text-decoration: none; }
-  .x-link:hover { color: var(--rust); border-bottom-style: solid; }
-/* AUTO_XLINK_CSS_END */
 /* AUTO_RELATED_CSS_START */
   /* ───── 記事末尾の導線（tools/build-article-links.py が生成） ───── */
   .rel { margin: 46px 0 0; border-top: 1px solid var(--line); padding-top: 26px; }
@@ -252,63 +256,117 @@
     <article>
       <header class="article-head">
         <p class="article-kicker">Article — 設置の実務</p>
-        <h1 class="article-title">物置は「どこから錆びるか」より、置き方と塗装で決まる</h1>
-        <p class="article-lead">物置はどこから錆びるのか。撤去してきた立場から言うと、部位より「置き場所」と「塗装が剥がれるか」の2つで決まります。屋根か床、木の下、床が抜ける位置について、現場で見てきた事実だけをまとめました。</p>
+        <h1 class="article-title"><span class="pb">物置は</span><span class="pb">何年も</span><span class="pb">つ？</span><span class="pb"> 3社と</span><span class="pb">も年数は</span><span class="pb">出していない</span></h1>
+        <p class="article-lead">物置は何年もつのか。3社の公式を当たると、年数を書いているメーカーは見当たりません。出ているのは5年の保証と、錆の原因として名指しされている収納物、それに水切りと通気です。鋼板について公開されている範囲と、錆が出たときの補修手順もまとめました。</p>
         <div class="article-meta">
           <time datetime="2026-09-01">2026-09-01</time>
           <span>Text — 編集部</span>
         </div>
         <div class="tags">
-          <span class="tag">物置 錆びやすい場所</span>
+          <span class="tag">物置 何年もつ</span>
+          <span class="tag">物置 保証期間 5年</span>
           <span class="tag">物置 錆びる 原因</span>
-          <span class="tag">物置 床 抜ける</span>
-          <span class="tag">物置 木の下 置き方</span>
-          <span class="tag">物置 塗装 剥がれ 錆</span>
+          <span class="tag">物置 ガルバリウム鋼板</span>
+          <span class="tag">物置 錆 補修</span>
         </div>
       </header>
 
       <!-- ═══════════ 本文 ═══════════ -->
       <div class="article-body">
 
-        <p>物置がどこから錆びるのかを書こうとして、これまで撤去してきた物置を思い返していたら、話が逆になりました。</p>
-        <p>最近の物置は、置き場所と塗装さえ悪くしなければ、そう簡単には錆びない、というのが外してきた私の実感です。錆びるかどうかは、部位の問題というより、2つの条件でほとんど決まると感じています。</p>
+        <p>物置は何年もつのか。錆びるまでにどれくらいか。3社の公式を当たった結果を先に書くと、<strong>年数を書いているメーカーは見当たりませんでした。</strong>出ているのは5年の保証と、錆の原因として名指しされているものだけです。</p>
 
-        <h2>錆びる条件は、場所より「2つ」で決まる</h2>
-        <p>古い物置を外して運び出していると、20年後の物置を実物で見ることになります。カタログにも新品にも写っていない姿です。</p>
-        <p>そこで見てきた範囲で言うと、最近の物置が錆びる条件は、だいたい次の2つに絞られます。</p>
-        <p>1. 木の下など、よっぽど条件の悪いところに置く 2. 塗装が剥げるようなダメージを負う</p>
-        <p>このどちらにも当てはまらなければ、目安としては、かなり長い間、錆とはほぼ無縁のまま使えている、と感じています。</p>
-        <p>何年もつと保証できる話ではありません。ただ、私が外してきた物置の多くは、置き方と塗装が保たれていれば、思ったより傷んでいませんでした。</p>
-        <p>「物置は買ってしばらくすると錆びる」という前提で見に来る方もいます。私が現場で見ている限り、そこはこの2つ次第です。</p>
+        <h2><span class="pb">保証は、</span><span class="pb">3社と</span><span class="pb">も5年</span></h2>
 
-        <h2>外しにかかって最初に気づくのは「屋根か床」</h2>
-        <p>「これは錆びてるな」と外しにかかって最初に分かるのは、屋根か床です。壁や扉、骨組みではなく、この2箇所から気づくことが多い。</p>
-        <p>よく「屋根から先に錆びる」「長く使うと屋根に穴が開く」と説明されているのを見かけます。ですが私の感覚では、先に傷むのが屋根と決まっているわけではありません。<a class="x-link" href="monooki-size-and-placement.html">設置場所</a>や状況次第で、床が先に錆びていることもあります。屋根が先か床が先か、順番は決まっていません。</p>
-        <p>ボルトの位置には偏りがあります。錆びて回らなくなり、グラインダーやボルトクリッパーで頭を落として切ることになるボルトは、屋根の外周りに付いているものが多いです。</p>
+        <p>タクボのQ&amp;Aにはこうあります。</p>
 
-        <h2>分かれ目は「傷」ではなく「塗装が剥がれるかどうか」</h2>
-        <p>「傷が付くと、そこから錆が広がって穴になる」という説明もよく見ます。ただ、外してきた実感としては、傷というより、塗装が剥がれるかどうかが分かれ目です。</p>
-        <p>細かい傷が付いていても、塗装がのっている間はそのまま保っているものが多い。逆に、塗装が剥げるようなダメージを負ったところは、そこから変わってきます。冒頭の条件の2つ目は、これのことです。</p>
-        <p>傷イコール錆び、と身構えるより、塗装が保たれているかどうかで見たほうが、実物には近いです。</p>
+        <p class="note">タクボエクステリア製品には５年間保証がついています。</p>
 
-        <h2>木の下と、地面からの湿気</h2>
-        <p>隣に何があった物置が傷んでいたか。心当たりを挙げると、木の下に置かれていたものです。</p>
-        <p>一般には、庭木の下は落ち葉が積もって腐食や雨漏りにつながりやすい、塀に寄せて通気が取れないと湿気でカビや錆が出やすい、といった説明もあります。床側についても、地面からの湿気が底板に上がってきて下から錆びる、という見方があります。このあたりは公開されている情報と重なる部分なので、補足にとどめます。</p>
-        <p>ただ、私自身が現場ではっきり心当たりとして挙げられるのは、木の下です。塀の際や室外機のそば、雨樋の下については、はっきりこうだと挙げられるものがありません。</p>
+        <p>クリーンキーパー（CK型）だけは2年間と書かれています。イナバのよくあるご質問も同じ長さです。</p>
 
-        <h2>床が抜ける位置に、決まりはない</h2>
-        <p>床が抜けている、踏むと沈む、という物置についてもよく聞かれます。ただ、抜けている位置に決まったパターンはありません。入口の踏み込むところが多いとか、四隅から、といった型があるわけではなく、設置場所や状況によってバラバラです。</p>
-        <p>「ここが抜けやすい」と一箇所を指せると分かりやすいのですが、私が見てきた範囲では、そう言い切れる偏りはありませんでした。</p>
+        <p class="note">弊社製品は、全製品に5年間（ダストボックスミニは2年間）の保証が付いております。</p>
+
+        <p>ヨドコウも5年で、ダストピットタイプとヨドストレージボックスが対象外です。3社のなかでヨドコウだけ、保証が効く条件まで書いています。</p>
+
+        <p class="note">正常な設置、組立、使用状態において、製造上の責任による使用上支障をきたす欠陥があった場合に限って保証されます。</p>
+
+        <p><strong>この5年は、錆びない期間ではありません。</strong>製造上の欠陥に対する保証です。錆の発生がどう扱われるかについては、3社とも記述が見当たりませんでした。</p>
+
+        <h2><span class="pb">錆の</span><span class="pb">原因と</span><span class="pb">して、</span><span class="pb">公式が</span><span class="pb">名指ししているもの</span></h2>
+
+        <p>年数は出ていませんが、何が錆の原因になるかは書かれています。挙がっているのは、置き場所でも部位でもなく、<strong>庫内に何を入れるかと、水切り・通気です。</strong></p>
+
+        <h3><span class="pb">タクボ ── 融雪剤と、</span><span class="pb">水切り・通気</span></h3>
+
+        <p class="note">融雪剤等が付着したタイヤはよく水洗いしてから収納してください。サビの原因になります。</p>
+
+        <p class="note">水切りや通気性をよくするとサビるのを遅らせる効果があります。</p>
+
+        <h3>ヨドコウ ── 収納物から出る成分</h3>
+
+        <p>ヨドコウは「どんなものが収納できますか」という項目で、収納物を扱っています。</p>
+
+        <p class="note">成分が漏れ出したり、成分を含んだ空気が充満したりすることで、物置の塗装面を傷め、サビの原因となります。</p>
+
+        <p>名前が挙がっているのは、園芸用肥料・農薬・融雪剤、それに漬物樽です。漬物樽には「塩分を含んだ水分がサビを誘発するため、長期保管は避けてください」とあります。一時的に置く場合は、シートや受け皿を敷くよう案内されています。</p>
+
+        <p>イナバのよくあるご質問には、錆と塗装を扱った項目が見当たりませんでした。</p>
+
+        <h2><span class="pb">どの部位から錆びるか、</span><span class="pb">と</span><span class="pb">いう記述は</span><span class="pb">公式に</span><span class="pb">無い</span></h2>
+
+        <p>「屋根から先に錆びる」「長く使うと屋根に穴が開く」という説明があります。3社の公式に、<strong>錆びる部位を挙げた記述は見当たりませんでした。</strong></p>
+
+        <p>この記事では以前、外した物置で最初に分かるのは屋根か床だ、床が抜ける位置に決まりはない、と書いていました。どちらも実物を見ない立場では確かめられないため、取り下げます。</p>
+
+        <h2><span class="pb">鋼板は、</span><span class="pb">素材名と</span><span class="pb">試験の</span><span class="pb">種類までが公開されている</span></h2>
+
+        <p>錆びにくさを年数や等級で比べられるか。できません。公開されているのは、素材の名前と、どんな試験をしているか、までです。</p>
+
+        <h3><span class="pb">ヨドコウ ── めっきの組成と、</span><span class="pb">犠牲防食作用</span></h3>
+
+        <p>ヨドコウはガルバリウム鋼板のページで、めっきの組成をアルミニウム55%・亜鉛43.4%・シリコン1.6%と示しています。仕組みについてはこうあります。</p>
+
+        <p class="note">風雨などでキズが発生した場合も、鉄より先に亜鉛が溶け出し、鋼板を保護します。</p>
+
+        <p>耐久性については「従来のトタン板（溶融亜鉛めっき鋼板）の数倍も耐久性に優れています」とありますが、倍率の内訳は示されていません。塩害地域での年数についての記述も、このページには見当たりませんでした。</p>
+
+        <h3><span class="pb">タクボ ── 試験の</span><span class="pb">種類を</span><span class="pb">公開している</span></h3>
+
+        <p>タクボは公式で、塩水を噴霧してサビないか確認する塩水噴霧試験と、紫外線の照射と水の噴霧を繰り返す耐候性試験を挙げています。試験をしていることは書かれていますが、結果の数値の公開は見当たりません。</p>
+
+        <h3><span class="pb">イナバ ── 鋼板の</span><span class="pb">種別は</span><span class="pb">機種ごと</span></h3>
+
+        <p>イナバは機種によって鋼板が違います。当サイトでは各製品ページの「主要鋼板」の欄に、公式の表記をそのまま載せています。</p>
+
+        <h2><span class="pb">錆が</span><span class="pb">出たときの手順は、</span><span class="pb">ヨドコウが</span><span class="pb">書いている</span></h2>
+
+        <p>直し方を公開しているのはヨドコウです。</p>
+
+        <p class="note">サビが出ていれば、その部分をペーパー掛け（＃４００）をして、サビを落とす</p>
+
+        <p>その上から、市販の金属補修用アクリルラッカー塗料を塗る、という手順です。塩ビの物置は塩ビ用の補修塗料を使い、「元の塗料厚さまでは再現することはできません。」とあります。目立たない箇所で試し塗りをすること、一度に厚く塗らないことも書かれています。</p>
 
         <h2>まとめ</h2>
-        <p>最近の物置がどこから錆びるかは、部位で決めきれるものではありませんでした。外してきた実感としては、こうです。</p>
+
         <ul>
-        <li>木の下など条件の悪いところに置く</li>
-        <li>塗装が剥げるダメージを負う</li>
+
+          <li>保証は3社とも5年（タクボのクリーンキーパーとイナバのダストボックスミニは2年、ヨドコウはダストピットタイプなどが対象外）</li>
+
+          <li>何年で錆びるか、という年数を出しているメーカーは見当たらない</li>
+
+          <li>ヨドコウだけ、保証が効く条件を書いている。錆の扱いについては3社とも記述が見当たらない</li>
+
+          <li>錆の原因として公式が挙げているのは、庫内に入れる物（融雪剤・肥料・農薬・漬物樽）と、水切り・通気</li>
+
+          <li>どの部位から錆びるか、という記述は公式に見当たらない</li>
+
+          <li>鋼板は、素材名と試験の種類までは公開されている。年数や等級での比較はできない</li>
+
+          <li>錆が出たときの補修手順を公開しているのはヨドコウ</li>
+
         </ul>
-        <p>この2つに当てはまらなければ、目安としては長く錆とは無縁のまま使えている、と感じています。</p>
-        <p>外しにかかって最初に気づくのは屋根か床で、順番は決まっていません。分かれ目は傷そのものより、塗装が保たれているかどうか。床が抜ける位置に決まりはありません。</p>
-        <p>どこに置くか、塗装をどう保つか。買う前に見ておく材料は、部位そのものより、この2つだと感じています。</p>
+
+        <p>実物は見ていません。ここに書いたのは、3社の公式に書かれていることと、書かれていないことの区別です。</p>
 
       </div>
     </article>
@@ -330,9 +388,9 @@
     <aside class="rel artrel">
       <p class="rel-label">Related — あわせて読む</p>
       <ul class="rel-list">
+        <li><a href="homecenter-monooki-vs-major3.html"><span class="rel-txt"><span class="rel-kicker">機種の見方</span><span class="rel-name">ホームセンターの物置は、寸法で比べられるか</span></span><span class="rel-go">&rarr;</span></a></li>
         <li><a href="monooki-okenai-basho.html"><span class="rel-txt"><span class="rel-kicker">選び方</span><span class="rel-name">物置が置けない場所、置きにくい場所。寸法だけでは決まらない</span></span><span class="rel-go">&rarr;</span></a></li>
-        <li><a href="homecenter-monooki-vs-major3.html"><span class="rel-txt"><span class="rel-kicker">機種の見方</span><span class="rel-name">ホームセンターの物置と大手3社の物置は、組む側から見て何が違うのか</span></span><span class="rel-go">&rarr;</span></a></li>
-        <li><a href="black-monooki-size-lineup.html"><span class="rel-txt"><span class="rel-kicker">選び方</span><span class="rel-name">黒い物置は、選べる寸法が先に決まる</span></span><span class="rel-go">&rarr;</span></a></li>
+        <li><a href="monooki-front-clearance.html"><span class="rel-txt"><span class="rel-kicker">機種の見方</span><span class="rel-name">物置の前にどれだけ空けるか、どのメーカーも書いていない</span></span><span class="rel-go">&rarr;</span></a></li>
       </ul>
     </aside>
     <!-- AUTO_ARTREL_END -->

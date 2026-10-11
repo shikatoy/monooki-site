@@ -128,6 +128,15 @@
   .tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; color: var(--mute);
     border: 1px solid var(--linesoft); padding: 4px 10px; }
 
+
+  /* ───── 日本語の折り返し位置 ─────
+     既定では文字単位で折り返すため、語の途中で切れる。
+     auto-phrase は文節で折り返す指定（対応しないブラウザは無視する） */
+  .article-title, .article-lead, .article-body h2, .article-body h3,
+  .card-title, .card-desc, .cta-title {
+    word-break: auto-phrase; line-break: strict;
+  }
+  .pb { display: inline-block; }
   /* ───── 本文 ───── */
   .article-body { padding: 8px 0 56px; }
   .article-body h2 {
@@ -144,6 +153,12 @@
   .article-body h3::before { content: '—'; color: var(--rust); margin-right: 10px; }
   .article-body p { margin: 26px 0 0; font-size: 15px; line-height: 2.15; }
   .article-body strong { font-weight: 700; background: linear-gradient(transparent 62%, rgba(163, 81, 43, .18) 62%); }
+  /* ───── 引用（公式資料の文言をそのまま置く） ───── */
+  .article-body .note {
+    margin: 26px 0 0; padding: 18px 20px 18px 22px;
+    border-left: 2px solid var(--rust); background: #efe9dc;
+    font-size: 14px; line-height: 2.05; color: #3a3a36;
+  }
   /* ───── 本文中の表（Markdownの表から生成） ───── */
   .article-body table { width: 100%; border-collapse: collapse; margin: 26px 0 0; font-size: 13.5px; line-height: 1.9; }
   .article-body th, .article-body td { padding: 9px 10px; border-bottom: 1px solid var(--linesoft); text-align: left; vertical-align: top; }
@@ -261,7 +276,7 @@
     <article>
       <header class="article-head">
         <p class="article-kicker">Article — 機種の見方</p>
-        <h1 class="article-title">タクボのサイズ表に、高さの欄はない</h1>
+        <h1 class="article-title"><span class="pb">タクボの</span><span class="pb">サイズ表に、</span><span class="pb">高さの欄は</span><span class="pb">ない</span></h1>
         <p class="article-lead">タクボのMr.ストックマンは、公式のサイズ表が間口×奥行だけで高さの列がありません。高さはシリーズが持っていて、Mr.トールマンとの差は公式表記で46cm。同じ広さのまま高さを変えたいとき、3社で見る場所が違います。</p>
         <div class="article-meta">
           <time datetime="2026-10-04">2026-10-04</time>
@@ -281,7 +296,7 @@
 
         <p>タクボの「Mr.ストックマン ダンディ」の公式ページでサイズ表を開くと、並んでいるのは間口と<a class="x-link" href="monooki-narrow-space-maker.html">奥行</a>だけです。高さの列がありません。ページ本文にも高さの数字は出てきません。高さは型番ではなく、シリーズのほうが持っているからです。</p>
 
-        <h2>高さを変えるとは、商品ページを移ること</h2>
+        <h2><span class="pb">高さを変えるとは、</span><span class="pb">商品ページを</span><span class="pb">移ること</span></h2>
         <p>ストックマンのサイズ表は、横軸が「間口[mm]」、縦軸が「奥行[mm]」。交差するマスに型番が入ります。この表で選べるのは床の寸法だけです。</p>
         <p>では高さはどこにあるか。別のシリーズのページです。「Mr.トールマン ダンディ」の公式ページは、見出しがこうなっています。</p>
         <p class="note">物置/高さ46cmアップ</p>
@@ -289,7 +304,7 @@
         <p>当サイトが収録している寸法でも、ストックマンは<span data-claim="codes_t-nd">51</span>型番すべてが高さ2,110mm、トールマンは<span data-claim="codes_t-jn">44</span>型番すべてが2,570mmでした。差は460mm。公式の「46cmアップ」と一致します。</p>
         <p>ただしストックマン側の商品ページには、高さの記載が見当たりません。2,110mmという数字は、このページからは読み取れないものです。</p>
 
-        <h2>同じ床寸法が両方にあるのは、20通り</h2>
+        <h2><span class="pb">同じ床寸法が</span><span class="pb">両方に</span><span class="pb">あるのは、</span><span class="pb">20通り</span></h2>
         <p>高さを選べるのは、同じ間口×奥行が2つのシリーズ両方にある場合だけです。</p>
         <div class="table-wrap">
         <table>
@@ -304,14 +319,14 @@
         <p>残りは、床の寸法を決めた時点で高さも決まります。間口2,200mm×奥行1,590mmは両方にあるので2,110mmと2,570mmから選べますが、ストックマンにしかない床寸法を選んだ場合、高さは2,110mmのほかにありません。</p>
         <p>タクボの「BELOS」も同じで、<span data-claim="fp_t-belos">30</span>通りの床寸法のうち、ひとつの床で複数の高さが選べるものは<span data-claim="fpmulti_t-belos">0</span>通りでした。</p>
 
-        <h2>イナバは表の列、ヨドコウは画像の中</h2>
+        <h2><span class="pb">イナバは</span><span class="pb">表の</span><span class="pb">列、</span><span class="pb">ヨドコウは</span><span class="pb">画像の</span><span class="pb">中</span></h2>
         <p>同じことを他の2社で見ると、見る場所が変わります。</p>
         <p>イナバの「フォルタ」は、公式ページのサイズ表に高さの列があります。品番ごとに幅・奥行・高さ・<a class="x-link" href="monooki-one-step-dimension.html">床面積</a>が並ぶので、同じ床のまま高さだけ替えた型番を、その場で見比べられます。イナバはページにこう書いています。</p>
         <p class="note">サイズは間口×奥行×高さで構成されていますが、組み合わせによっては無いサイズもあります</p>
         <p>ヨドコウの「エルモ」は、サイズのページにHTMLの表がありません。寸法はすべて画像で載っていて、ページ上の文字を追っても高さには行き当たらない作りです。画像を開けば確認できます。</p>
         <p>収録している寸法で数えると、同じ床寸法で高さが2通り以上あるのは、フォルタが<span data-claim="fp_i-fs">48</span>通り中<span data-claim="fpmulti_i-fs">24</span>通り、エルモが<span data-claim="fp_y-lmd">59</span>通り中<span data-claim="fpmulti_y-lmd">28</span>通りでした。</p>
 
-        <h2>小さいほうの機種では、3社とも同じ形</h2>
+        <h2><span class="pb">小さいほうの機種で</span><span class="pb">は、</span><span class="pb">3社と</span><span class="pb">も同じ形</span></h2>
         <p>この違いは、どのメーカーでも起きているわけではありません。</p>
         <div class="table-wrap">
         <table>

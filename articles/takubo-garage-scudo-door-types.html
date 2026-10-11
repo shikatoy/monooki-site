@@ -128,6 +128,15 @@
   .tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; color: var(--mute);
     border: 1px solid var(--linesoft); padding: 4px 10px; }
 
+
+  /* ───── 日本語の折り返し位置 ─────
+     既定では文字単位で折り返すため、語の途中で切れる。
+     auto-phrase は文節で折り返す指定（対応しないブラウザは無視する） */
+  .article-title, .article-lead, .article-body h2, .article-body h3,
+  .card-title, .card-desc, .cta-title {
+    word-break: auto-phrase; line-break: strict;
+  }
+  .pb { display: inline-block; }
   /* ───── 本文 ───── */
   .article-body { padding: 8px 0 56px; }
   .article-body h2 {
@@ -258,7 +267,7 @@
     <article>
       <header class="article-head">
         <p class="article-kicker">Article — 機種の見方</p>
-        <h1 class="article-title">タクボのガレージは、扉だけが違う</h1>
+        <h1 class="article-title"><span class="pb">タクボの</span><span class="pb">ガレージは、</span><span class="pb">扉だけが違う</span></h1>
         <p class="article-lead">ベルフォーマスクードとカールフォーマスクードは、間口・奥行・高さの組み合わせが完全に同じで、違うのは扉だけです。オーバースライド扉と巻上げシャッター扉の使い分けと、型番から扉と寸法を読む方法をまとめました。</p>
         <div class="article-meta">
           <time datetime="2026-09-07">2026-09-07</time>
@@ -281,7 +290,7 @@
         <p>違うのは扉だけです。だから迷うとしたら、そこ一点になります。</p>
         <p><strong>この記事は、メーカー公式サイトの記載を突き合わせて書いています。</strong></p>
 
-        <h2>寸法の選択肢が完全に一致している</h2>
+        <h2><span class="pb">寸法の</span><span class="pb">選択肢が</span><span class="pb">完全に</span><span class="pb">一致している</span></h2>
         <p>公式のサイズ表は、2機種とも次のようになっています。</p>
         <div class="table-wrap"><table><thead><tr><th></th><th>選べる値</th></tr></thead><tbody><tr><td>間口</td><td>2,774 / 3,124 / 3,474 mm</td></tr><tr><td>奥行</td><td>5,432 / 6,132 / 6,648 mm</td></tr><tr><td>高さ</td><td>2,450 / 2,763 / 3,250 mm</td></tr></tbody></table></div>
         <p>そして、間口と<a class="x-link" href="monooki-narrow-space-maker.html">奥行</a>の組み合わせにも同じ制限がかかっています。</p>
@@ -294,7 +303,7 @@
         <p>結果として、型番は<strong>どちらも21通り</strong>。数も組み合わせも一致しています。</p>
         <p>つまり「置ける寸法で絞ったら片方に決まる」ということが起きません。<strong>寸法で決着がつかない以上、扉で決めることになります。</strong></p>
 
-        <h2>型番から、扉と寸法が読める</h2>
+        <h2><span class="pb">型番から、</span><span class="pb">扉と</span><span class="pb">寸法が</span><span class="pb">読める</span></h2>
         <p>この2機種の型番は、意味が決まっています。覚えると、型番を見るだけで扉と大きさが分かります。</p>
         <p>``` X S - 27 53 │ │  │ └─ 奥行 5432 │ │  └──── 間口 2774 │ └───────── 高さ 2450 └─────────── オーバースライド扉 ```</p>
         <ul>
@@ -306,7 +315,7 @@
         <p>`XM-3160` なら、オーバースライド扉・高さ2,763・間口3,124・奥行6,132。`YM-3160` は、それと<strong>まったく同じ寸法で扉だけが巻上げシャッター</strong>という意味になります。</p>
         <p>見積書や図面で型番だけ書かれていても、これで中身が分かります。</p>
 
-        <h2>扉の違いは、収まる場所の違い</h2>
+        <h2><span class="pb">扉の</span><span class="pb">違いは、</span><span class="pb">収まる場所の</span><span class="pb">違い</span></h2>
         <p>扉の形式が違うと、開けたときに扉がどこへ行くかが変わります。</p>
         <p><strong>オーバースライド扉</strong>は、扉全体が一枚の板のまま、天井に沿って奥へ滑り込みます。公式の説明でも「天井に沿って収納される」とされています。<strong>扉を収めるぶんの天井まわりが埋まります。</strong></p>
         <p><strong>巻上げシャッター扉</strong>は、開口部の上でシャッターが巻き取られます。天井に沿って伸びていかないぶん、<strong>開けたあとの天井は空いたままになります。</strong></p>
@@ -350,6 +359,7 @@
         <li><a href="takubo-height-by-series.html"><span class="rel-txt"><span class="rel-kicker">機種の見方</span><span class="rel-name">タクボのサイズ表に、高さの欄はない</span></span><span class="rel-go">&rarr;</span></a></li>
         <li><a href="yodo-shutter-height-one-step.html"><span class="rel-txt"><span class="rel-kicker">機種の見方</span><span class="rel-name">シャッターのエルモは、高さが1段しかない</span></span><span class="rel-go">&rarr;</span></a></li>
         <li><a href="kogata-chugata-ogata-chigai.html"><span class="rel-txt"><span class="rel-kicker">機種の見方</span><span class="rel-name">小型と中型・大型は何が違う？ 物置は「区分」で見ると迷いが減る</span></span><span class="rel-go">&rarr;</span></a></li>
+        <li><a href="monooki-door-opening-side.html"><span class="rel-txt"><span class="rel-kicker">選び方</span><span class="rel-name">物置の扉の向きは、買うときに決めなくていい</span></span><span class="rel-go">&rarr;</span></a></li>
       </ul>
     </aside>
     <!-- AUTO_ARTREL_END -->

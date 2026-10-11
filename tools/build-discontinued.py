@@ -41,6 +41,13 @@ def load_style():
     return s[i:j]
 
 
+def count_products():
+    """いま掲載しているシリーズの数。手で書くと増えたときに古くなる"""
+    s = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+    blk = s[s.find("PRODUCTS_START"):s.find("PRODUCTS_END")]
+    return len(re.findall(r"id:'[^']+'", blk))
+
+
 def check_log():
     """更新履歴に、この表に無い廃盤・入替が増えていないか見る"""
     s = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
@@ -188,7 +195,7 @@ def build():
     <div class="cta">
       <p class="cta-label">Next — 次に</p>
       <p class="cta-title">後継や、いま買える物置をさがす。</p>
-      <p class="cta-text">現行の18製品は製品一覧に、置ける寸法から絞り込む一覧は「寸法から探す」にまとめています。</p>
+      <p class="cta-text">現行の%(nprod)d製品は製品一覧に、置ける寸法から絞り込む一覧は「寸法から探す」にまとめています。手元の型番から引くなら、<a href="codes.html">型番から探す</a>が早いです。</p>
       <a class="cta-btn" href="./">製品一覧を見る <span class="arrow">→</span></a>
     </div>
 
@@ -214,7 +221,7 @@ def build():
 
 </body>
 </html>
-""" % dict(h1=esc(h1), site=NAME, desc=esc(desc), url=url, siteurl=SITE,
+""" % dict(h1=esc(h1), site=NAME, desc=esc(desc), url=url, siteurl=SITE, nprod=count_products(),
            style=style, extra=EXTRA,
            coll=json.dumps(coll, ensure_ascii=False, indent=2),
            crumb=json.dumps(crumb, ensure_ascii=False, indent=2),

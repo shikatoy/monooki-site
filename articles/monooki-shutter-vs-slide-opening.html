@@ -128,6 +128,15 @@
   .tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; color: var(--mute);
     border: 1px solid var(--linesoft); padding: 4px 10px; }
 
+
+  /* ───── 日本語の折り返し位置 ─────
+     既定では文字単位で折り返すため、語の途中で切れる。
+     auto-phrase は文節で折り返す指定（対応しないブラウザは無視する） */
+  .article-title, .article-lead, .article-body h2, .article-body h3,
+  .card-title, .card-desc, .cta-title {
+    word-break: auto-phrase; line-break: strict;
+  }
+  .pb { display: inline-block; }
   /* ───── 本文 ───── */
   .article-body { padding: 8px 0 56px; }
   .article-body h2 {
@@ -261,7 +270,7 @@
     <article>
       <header class="article-head">
         <p class="article-kicker">Article — 機種の見方</p>
-        <h1 class="article-title">シャッターにすると開口は広くなる。高さは下がることもある</h1>
+        <h1 class="article-title"><span class="pb">シャッターに</span><span class="pb">すると開口は</span><span class="pb">広くなる。</span><span class="pb">高さは下が</span><span class="pb">ることもある</span></h1>
         <p class="article-lead">タクボには、外形も内部寸法も同じで扉だけが違う型番があります。間口1,832mmで開口は引き戸992mm・シャッター1,618mm。ただしシャッターの開口は高さが260mm低くなります。本体の高いほうでは逆に高くなります。公式の型番ページの数値で整理しました。</p>
         <div class="article-meta">
           <time datetime="2026-10-08">2026-10-08</time>
@@ -282,7 +291,7 @@
         <p>バイクや大きな物を入れるならシャッター、という話になります。では引き戸と比べて、通せる口はどれだけ変わるのか。タクボには<strong>外形寸法も内部寸法も完全に同じで、扉だけが違う型番</strong>があるので、そこだけを取り出して比べられます。</p>
         <p>収録している物置<span data-claim="total">638</span>型番のうち、シャッター扉は3社4シリーズ<span data-claim="codes_t-nde+t-ws+i-ff+y-lod">72</span>型番です。ただし開口の寸法を公表しているのはタクボだけでした。</p>
 
-        <h2>同じ箱で、扉だけが違う</h2>
+        <h2><span class="pb">同じ箱で、</span><span class="pb">扉だけが違う</span></h2>
         <p>Mr.ストックマン ダンディ（引き戸）とMr.ストックマン シャッター扉は、同じ型番の数字なら外形も内部も一致します。たとえば1815なら、どちらも外形1,832×1,590×2,110mm、内部1,776×1,420×1,882mm。違うのは開口部だけです。</p>
         <div class="table-wrap">
         <table>
@@ -296,11 +305,11 @@
         </div>
         <p>間口が広いほど、差は大きくなります。引き戸は間口の5割台しか開かず（54.1%／56.3%／53.2%）、シャッターは9割近く開きます（88.3%／90.3%／92.6%）。引き戸は開く側の戸1枚分しか動かないので、間口を広げても開口はその半分ずつしか増えません。シャッターは全面が上がるので、間口がそのまま効きます。</p>
 
-        <h2>ただし、高さは260mm下がる</h2>
+        <h2><span class="pb">ただし、</span><span class="pb">高さは260mm下が</span><span class="pb">る</span></h2>
         <p>上の表の右端をもう一度見ると、<strong>シャッターの開口の高さは3つとも1,590mm</strong>で、引き戸の1,850mmより260mm低いです。巻き上げたシャッターを納める場所が、開口の上に要るためです。</p>
         <p>幅は広くなるのに、高さは低くなる。同じ本体高さで比べるかぎり、背の高い物が通るかどうかで見るなら引き戸のほうが開口は高いことになります。</p>
 
-        <h2>引き戸の開口の高さは、本体が高くなっても変わらない</h2>
+        <h2><span class="pb">引き戸の</span><span class="pb">開口の</span><span class="pb">高さは、</span><span class="pb">本体が</span><span class="pb">高くなっても変わらない</span></h2>
         <p>ここで、もう一つ公式の数値から分かることがあります。</p>
         <div class="table-wrap">
         <table>
@@ -314,7 +323,7 @@
         <p>Mr.トールマン ダンディは<a href="takubo-height-by-series.html">Mr.ストックマン ダンディより46cm高い</a>シリーズですが、<strong>開口の高さは1,850mmのまま</strong>です。増えた460mmは内部の高さ（1,882→2,342mm）になって、開口には出てきません。間口2,900mmの組（ND-2929とJN-2922）でも、開口はどちらも1,542×1,850mmでした。</p>
         <p>つまり引き戸では、本体を高くしても入口は大きくなりません。高くなるのは、入れたあとに積み上げられる分です。</p>
 
-        <h2>シャッターは、本体の高さが開口に出る</h2>
+        <h2><span class="pb">シャッターは、</span><span class="pb">本体の</span><span class="pb">高さが開口に</span><span class="pb">出る</span></h2>
         <p>シャッターは逆です。</p>
         <div class="table-wrap">
         <table>
@@ -328,7 +337,7 @@
         <p>本体が460mm高くなると、開口も515mm高くなります。引き戸の1,850mmを超えるのは、この高いほう（Mr.シャッターマン）だけです。</p>
         <p>まとめると、本体高さ2,110mmの機種ではシャッターの開口は引き戸より<strong>260mm低く</strong>、2,570mmの機種では<strong>255mm高い</strong>。「シャッターなら高さも稼げる」は、高いほうの機種に限った話でした。</p>
 
-        <h2>寸法の選択肢は減る</h2>
+        <h2><span class="pb">寸法の</span><span class="pb">選択肢は</span><span class="pb">減る</span></h2>
         <p>もう一つ、シャッターを選ぶと起きることがあります。寸法の組み合わせが減ります。</p>
         <p>Mr.ストックマン シャッター扉は<span data-claim="codes_t-nde">12</span>型番で、引き戸版の<span data-claim="codes_t-nd">51</span>型番にある間口1,316mm・1,500mm・2,016mm・3,232mm以上や、<a class="x-link" href="monooki-narrow-space-maker.html">奥行</a>890mm・1,222mm・1,406mmの段がありません。狭い側と広い側の両端が落ちています。</p>
         <p>Mr.シャッターマンは<span data-claim="codes_t-ws">22</span>型番で、高さが2段あります。2,570mmのWSは16通りありますが、2,110mmのWSBは奥行2,622mm・2,990mmの6通りだけです。</p>

@@ -128,6 +128,15 @@
   .tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; color: var(--mute);
     border: 1px solid var(--linesoft); padding: 4px 10px; }
 
+
+  /* ───── 日本語の折り返し位置 ─────
+     既定では文字単位で折り返すため、語の途中で切れる。
+     auto-phrase は文節で折り返す指定（対応しないブラウザは無視する） */
+  .article-title, .article-lead, .article-body h2, .article-body h3,
+  .card-title, .card-desc, .cta-title {
+    word-break: auto-phrase; line-break: strict;
+  }
+  .pb { display: inline-block; }
   /* ───── 本文 ───── */
   .article-body { padding: 8px 0 56px; }
   .article-body h2 {
@@ -261,7 +270,7 @@
     <article>
       <header class="article-head">
         <p class="article-kicker">Article — 選び方</p>
-        <h1 class="article-title">黒い物置は、選べる寸法が先に決まる</h1>
+        <h1 class="article-title"><span class="pb">黒い物置は、</span><span class="pb">選べる寸法が</span><span class="pb">先に</span><span class="pb">決まる</span></h1>
         <p class="article-lead">ヨドコウの黒は本体色ではなく別シリーズで、公式サイズ表に載る型番はブラックエルモが9、ブラックエスモが5。タクボの黒は既存機種への色追加でサイズ表は分かれません。色と寸法のどちらを先に決めるかが、メーカーで入れ替わります。</p>
         <div class="article-meta">
           <time datetime="2026-09-29">2026-09-29</time>
@@ -282,7 +291,7 @@
         <p>ヨドコウの黒は、エルモやエスモの本体色として選ぶものではありません。「ブラックエルモ」「ブラックエスモ」という別のシリーズです。公式のサイズ表に載っている型番は、<strong>ブラックエルモが9、ブラックエスモが5</strong>。黒を選んだ時点で、置ける寸法はそこまで絞られます。</p>
         <p>**この記事は、メーカー公式サイトとニュースリリースの記載を突き合わせて書いています。</p>
 
-        <h2>公式のサイズ表に載っているのは、9通りと5通り</h2>
+        <h2><span class="pb">公式の</span><span class="pb">サイズ表に</span><span class="pb">載っているのは、</span><span class="pb">9通りと5通り</span></h2>
         <p>ブラックエルモは、間口3種×<a class="x-link" href="monooki-narrow-space-maker.html">奥行</a>3種の9通りです。高さは奥行につられて数mm動くだけで、実質1段です。</p>
         <div class="table-wrap">
         <table>
@@ -317,13 +326,13 @@
         <p>なお、ブラックエルモは一般型（LMD-）・積雪型（LMDS-）・豪雪型（LMDU-）の3仕様で、9通りの寸法はその3仕様に共通です。</p>
         <p>エルモ本体のほうが何通りあるかは、公式サイトのサイズ表が画像で掲載されていて、テキストでの寸法の記載が見当たりません。</p>
 
-        <h2>色ではなく、シリーズが分かれている</h2>
+        <h2><span class="pb">色で</span><span class="pb">はなく、</span><span class="pb">シリーズが</span><span class="pb">分かれている</span></h2>
         <p>エルモの公式ページには、本体色について「全てカシミヤベージュ」とあります。エスモには「屋根・本体は全てスノーシルバー」とあります。どちらも本体色は選べません。選べるのは扉色で、どちらも全5色です。</p>
         <p>黒は、その本体色に一色足したものではありません。商品一覧に「ブラックエルモ」「ブラックエスモ」として別に並んでいます。ブラックエスモの発売は2025年1月30日、ブラックエルモの発売は2026年2月2日です。扉色の数も本体側とは違い、ブラックエルモはブラック（BK）とショコラウッド（CW）の2色、ブラックエスモは6色です。</p>
         <p>シリーズが別なら、サイズ表も別になります。だから黒は「エルモの中から黒を選ぶ」ではなく、「ブラックエルモの9通りから選ぶ」という手順になります。</p>
         <p>なぜこの9通り・5通りなのかは、<strong>公式には書かれていません。</strong></p>
 
-        <h2>タクボの黒は、扱いが違う</h2>
+        <h2><span class="pb">タクボの</span><span class="pb">黒は、</span><span class="pb">扱いが違う</span></h2>
         <p>タクボは2026年4月9日、アイボリーブラック本体色を「中型物置の９機種に新たに採用」と発表しています。既存の機種に色を足したもので、ムーンホワイトとの2色展開です。</p>
         <p>Mr.ストックマン ダンディの公式サイズ表は、間口1,316〜5,815mm、奥行890〜2,990mmの組み合わせで並んでいます。この表が色ごとに分かれている記載はありません。</p>
         <p>同じ「黒い物置」でも、ヨドコウは別シリーズ、タクボは既存機種の本体色ということになります。置き場所の寸法が先に決まっている場合、タクボなら寸法で絞ってから色を見る流れになりますが、ヨドコウの黒では、その9通り・5通りに自分の寸法が入るかどうかを先に見ることになります。</p>

@@ -128,6 +128,15 @@
   .tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; color: var(--mute);
     border: 1px solid var(--linesoft); padding: 4px 10px; }
 
+
+  /* ───── 日本語の折り返し位置 ─────
+     既定では文字単位で折り返すため、語の途中で切れる。
+     auto-phrase は文節で折り返す指定（対応しないブラウザは無視する） */
+  .article-title, .article-lead, .article-body h2, .article-body h3,
+  .card-title, .card-desc, .cta-title {
+    word-break: auto-phrase; line-break: strict;
+  }
+  .pb { display: inline-block; }
   /* ───── 本文 ───── */
   .article-body { padding: 8px 0 56px; }
   .article-body h2 {
@@ -261,7 +270,7 @@
     <article>
       <header class="article-head">
         <p class="article-kicker">Article — 機種の見方</p>
-        <h1 class="article-title">奥行を一段深くしても、入口の幅は変わらない</h1>
+        <h1 class="article-title"><span class="pb">奥行を</span><span class="pb">一段深くしても、</span><span class="pb">入口の</span><span class="pb">幅は</span><span class="pb">変わらない</span></h1>
         <p class="article-lead">同じシリーズで奥行だけが違う2機種のどちらにするか。公式の寸法表を並べると、奥行を一段深くして動くのは床面積と内部の奥行だけで、入口の寸法は変わりません。間口を一段広げたときだけ入口も広がります。3軸それぞれで何が動くかを、公式数値で整理しました。</p>
         <div class="article-meta">
           <time datetime="2026-10-06">2026-10-06</time>
@@ -282,7 +291,7 @@
         <p>同じシリーズの中に、寸法が一つだけ違う型番が並んでいます。<a class="x-link" href="monooki-narrow-space-maker.html">奥行</a>950mmと1,370mm。間口1,832mmと2,016mm。どちらにするかで迷うとき、カタログの数字は増えた分しか見せてくれません。</p>
         <p>ところが、一段動かしたときに何が動いて何が動かないかは、公式の寸法表を並べると決まっています。タクボは型番ページに外部寸法・開口部寸法・内部寸法の3つを別々に載せているので、同じシリーズで一つだけ違う型番を2つ開けば、その場で確かめられます。</p>
 
-        <h2>奥行を一段深くすると、動くのは2つだけ</h2>
+        <h2><span class="pb">奥行を</span><span class="pb">一段深くすると、</span><span class="pb">動くのは2つだけ</span></h2>
         <p>グランプレステージ ジャンプで、間口と高さを同じにして奥行だけを変えた2型番です。</p>
         <div class="table-wrap">
         <table>
@@ -311,7 +320,7 @@
         <p>奥行が700mm深くなり、内部の奥行も700mm深くなっています。開口部は同じ。内部の高さだけが1,882mmから1,868mmへ14mm下がっていて、これは屋根が奥へ向かって下がる分です。</p>
         <p>つまり奥行の一段は、入口の大きさを変えずに奥を伸ばす変更です。入口を通ったあとに置ける量が増えるだけで、通せるものの大きさは変わりません。</p>
 
-        <h2>高さを一段上げると、入口の高さが同じだけ上がる</h2>
+        <h2><span class="pb">高さを一段上げると、</span><span class="pb">入口の</span><span class="pb">高さが同じだけ上が</span><span class="pb">る</span></h2>
         <p>今度は間口と奥行を同じにして、高さだけを変えた2型番です。</p>
         <div class="table-wrap">
         <table>
@@ -327,7 +336,7 @@
         <p>高さが800mm上がって、開口部の高さも800mm、内部の高さも800mm上がりました。床面積と開口部の間口は動きません。</p>
         <p>高さの一段は、床の広さを変えずに縦を伸ばす変更です。</p>
 
-        <h2>間口を一段広げたときだけ、入口も広がる</h2>
+        <h2><span class="pb">間口を</span><span class="pb">一段広げたときだけ、</span><span class="pb">入口も</span><span class="pb">広が</span><span class="pb">る</span></h2>
         <p>3つの軸のうち、入口の幅に効くのは間口だけです。グランプレステージ ジャンプで、奥行530mm・高さ1,100mmを保ったまま間口を上げていくと、こうなります。</p>
         <div class="table-wrap">
         <table>
@@ -353,7 +362,7 @@
         <p>間口が184mm広がって、開口部は121mm。固定パネルが片側にあり、動く戸の側が広がるためです。</p>
         <p>入口の幅は<a href="monooki-front-clearance.html">前に残す寸法</a>にもつながります。間口を一段動かす判断だけは、床の広さと入口の両方を動かすことになります。</p>
 
-        <h2>一段の大きさは、シリーズごとに違う</h2>
+        <h2><span class="pb">一段の</span><span class="pb">大きさは、</span><span class="pb">シリーズごとに違う</span></h2>
         <p>「一段」が何ミリなのかは、シリーズで揃っていません。奥行で並べると、差がはっきりします。</p>
         <div class="table-wrap">
         <table>

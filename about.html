@@ -97,7 +97,7 @@ tailwind.config = {
       <div class="py-16 md:py-24 fade-up">
         <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">About — 運営者情報</p>
         <h1 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">運営者情報。</h1>
-        <p class="mt-8 text-[13px] leading-loose text-neutral-500 max-w-2xl">このサイトを書いているのは、実際に物置を組み立てて据えてきた人間です。何者が、どういう立場で書いているのかをここに記しています。</p>
+        <p class="mt-8 text-[13px] leading-loose text-neutral-500 max-w-2xl">何者が、どういう立場で、何を根拠に書いているのかをここに記しています。掲載している数の数え方も載せています。</p>
       </div>
     </div>
     <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-14 md:py-20 max-w-3xl">
@@ -109,9 +109,9 @@ tailwind.config = {
         <div class="grid grid-cols-1 md:grid-cols-4 gap-1 md:gap-4 py-4 border-b border-linesoft"><dt class="font-mono text-[11px] tracking-widest2 uppercase text-neutral-500 md:col-span-1">連絡先</dt><dd class="m-0 text-[15px] leading-loose md:col-span-3"><a href="contact.html" class="u-link">お問い合わせフォーム</a></dd></div>
       </dl>
       <h2 class="mt-14 first:mt-0 pt-7 border-t border-line font-serif font-bold leading-snug" style="font-size:clamp(1.3rem,4vw,1.75rem)">このサイトについて</h2>
-      <p class="mt-6 text-[15px] leading-loose">物置は、カタログを見ても「自分の家にどれが合うか」が分かりにくい商品です。そして、実際に据えてみて初めて分かることが、たくさんあります。</p>
-      <p class="mt-6 text-[15px] leading-loose">このサイトでは、3メーカーの製品を条件から比較できるようにしたうえで、<strong>設置の現場で分かったことを記事にしています。</strong></p>
-      <p class="mt-6 text-[15px] leading-loose">扱うのは、カタログに書かれていないことと、ネット上の情報が古くなっている部分が中心です。逆に、公式サイトを見れば分かることは、あまり書きません。</p>
+      <p class="mt-6 text-[15px] leading-loose">物置は、カタログを見ても「自分の家にどれが合うか」が分かりにくい商品です。メーカーごとに寸法表の形が違い、横に並べて比べる場所がありません。</p>
+      <p class="mt-6 text-[15px] leading-loose">このサイトでは、3メーカーの型番を同じ形に並べ直して、<strong>置ける寸法から比べられるようにしています。</strong>記事は、その作業のなかで公式資料を突き合わせて分かったことを書いています。</p>
+      <p class="mt-6 text-[15px] leading-loose">扱うのは、公式を横に並べてはじめて見えることと、ネット上に出回っている数値が公式に見当たらない場合です。公式サイトを1つ見れば分かることは、あまり書きません。</p>
       <h2 class="mt-14 first:mt-0 pt-7 border-t border-line font-serif font-bold leading-snug" style="font-size:clamp(1.3rem,4vw,1.75rem)">立場について</h2>
       <p class="mt-6 text-[15px] leading-loose">誤解を避けるため、はっきりさせておきます。</p>
       <ul class="mt-6 list-none p-0">
@@ -120,8 +120,32 @@ tailwind.config = {
         <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">掲載している寸法・仕様は代表的な参考値です。購入前には、最新のメーカーカタログと専門業者による現地調査をご確認ください</li>
         <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">各メーカー名・商品名は、各社の商標または登録商標です</li>
       </ul>
+      <h2 class="mt-14 first:mt-0 pt-7 border-t border-line font-serif font-bold leading-snug" style="font-size:clamp(1.3rem,4vw,1.75rem)">掲載データについて</h2>
+      <p class="mt-6 text-[15px] leading-loose">掲載しているのは <strong><span data-claim="series_all">25</span>シリーズ・<span data-claim="codes_all">969</span>型番</strong>です（タクボ・イナバ・ヨドコウ）。このうち、寸法から絞り込める対象は <strong><span data-claim="total">638</span>型番</strong>。小型物置・中型物置・中・大型物置・大型物置の4区分です。断熱物置、駐輪スペース付き物置、ドア型・タイヤ収納庫、バイク車庫、ガレージ、宅配ボックスは、寸法の絞り込みの対象には入れていません。</p>
+      <h3 class="mt-10 font-serif font-bold leading-snug" style="font-size:clamp(1.05rem,3.2vw,1.25rem)">何を1型番と数えているか</h3>
+      <p class="mt-6 text-[15px] leading-loose">同じ外形寸法のものは、別の型番として数えていません。具体的には次のものです。</p>
+      <ul class="mt-6 list-none p-0">
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">結露減少屋根（末尾 <strong>Z</strong>）、多雪型（<strong>S</strong>）、その両方（<strong>SZ</strong>）── 公式の型番ページで外形寸法が標準型と同じと確認できたもの</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">連棟の追加棟（末尾 <strong>LH</strong>）── 外形寸法は基本棟と同じ</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">土間タイプと床付タイプ（<strong>HD</strong> / <strong>HY</strong> など）── 外形寸法が同じ</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">一般型・多雪型・豪雪型で型番が変わらないもの</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">色違い・コラボモデル ── 索引と比較には出しますが、診断の候補からは外しています</li>
+      </ul>
+      <p class="mt-6 text-[15px] leading-loose">次のものは、そもそも載せていません。</p>
+      <ul class="mt-6 list-none p-0">
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">公式に外形寸法が見当たらないもの（例：ドマールの連結タイプ L・L-2）</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">公式のサイズ表で「受注生産」になっていて、型番が振られていないマス</li>
+      </ul>
+      <h3 class="mt-10 font-serif font-bold leading-snug" style="font-size:clamp(1.05rem,3.2vw,1.25rem)">数値の根拠を3つに分けています</h3>
+      <ul class="mt-6 list-none p-0">
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose"><strong>メーカー公式</strong> ── 型番ページ、サイズ表、外形図PDF、組立説明書、仕様図、よくあるご質問。外形寸法はすべてここから取っています</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose"><strong>販売店の仕様表で一致を確認したもの</strong> ── 公式に見当たらない数値のうち、販売店の仕様表を2件以上つき合わせて一致したものだけを使っています。現在これに当たるのは、エスモ・エルモ・ラヴィージュの有効開口の3件です。各製品ページの出典欄に「販売店仕様表2件で一致」と書いています</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose"><strong>公式に記載がない</strong> ── 調べて見当たらなかったものは、そう書きます。推測で埋めることはしません</li>
+      </ul>
+      <p class="mt-6 text-[15px] leading-loose">外形寸法は、公式のサイズ表と型番ページに加えて、公式が載せている床面積との突き合わせでも検算しています。本文に書いた数は、データから引き直して照合する検査（<code>tools/check-claims.py</code>）を公開前に通しています。</p>
       <h2 class="mt-14 first:mt-0 pt-7 border-t border-line font-serif font-bold leading-snug" style="font-size:clamp(1.3rem,4vw,1.75rem)">記事の書き方について</h2>
-      <p class="mt-6 text-[15px] leading-loose">記事に数値を出すときは、<strong>実際に測った数字か、作業の体感からの目安か</strong>を書き分けています。体感の場合は、その旨を明記します。</p>
+      <p class="mt-6 text-[15px] leading-loose"><strong>実物は見ていません。</strong>記事に出す数値は、メーカーの公式資料（型番ページ・サイズ表・外形図・組立説明書・よくあるご質問）と、自分で当たった公開情報だけです。</p>
+      <p class="mt-6 text-[15px] leading-loose">以前は「作業の体感からの目安」として書いた数値がありました。2026年10月に記事18本を見直し、公式で確かめられなかったものは取り下げています。経緯は<a href="index.html#journal" class="u-link">更新履歴</a>に残しています。</p>
       <p class="mt-6 text-[15px] leading-loose">また、当サイトは<strong>バリューコマース株式会社のアフィリエイトプログラムに参加しています。</strong>一部のページに販売店への広告リンクを掲載しており、そこから購入・お見積もりがあった場合に紹介料が支払われることがあります。<strong>紹介料の有無は、掲載内容や診断結果の順番には影響しません。</strong>詳しくは<a href="privacy.html" class="u-link">プライバシーポリシー</a>に記載しています。</p>
       <p class="mt-6 text-[15px] leading-loose">また、確認できていないことは<strong>「確認できていない」と書きます。</strong>推測で埋めることはしません。</p>
       <p class="mt-6 text-[15px] leading-loose">物置は「小型（収納庫）」と「中型・大型」で性質が変わるため、メーカー単位でひとくくりにせず、区分とセットで書くようにしています。</p>

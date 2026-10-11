@@ -12,7 +12,9 @@
     <span data-claim="cells">104</span>ありました
 
 付けられる id
-    total          物置（CAT_OK）の型番の総数
+    total          寸法の絞り込みの対象（CAT_OK の4区分）の型番の総数
+    series_all     掲載しているシリーズの数（区分を問わない）
+    codes_all      掲載している型番の総数（区分を問わない）
     cells          間口×奥行を300mm刻みにした升目のうち、埋まっている数
     cells1/2/3     そのうち1社だけ／2社／3社がそろう升目の数
     d<数>          奥行がその値の型番数（例 d448）
@@ -91,6 +93,10 @@ def expected(cid, rows):
     """id から今の正しい数を出す。分からない id は None。"""
     if cid == "total":
         return len(rows)
+    if cid == "series_all":
+        return len(C.load_products())
+    if cid == "codes_all":
+        return sum(len(p["sizes"]) for p in C.load_products())
     if cid == "steps_total":
         return step_pairs()
     if cid.startswith("cells"):

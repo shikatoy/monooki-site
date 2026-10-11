@@ -64,6 +64,16 @@ def build():
     </div>
 
     <div class="note">
+      <label for="code-q" style="display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#6b6b66">型番で絞る</label>
+      <input id="code-q" type="search" inputmode="latin" autocomplete="off" spellcheck="false"
+             placeholder="例：FS-2215S／LMD-2515／GP-115D"
+             style="width:100%%;margin-top:10px;padding:12px 2px;border:0;border-bottom:1px solid #171717;background:transparent;font-family:'IBM Plex Mono',monospace;font-size:20px;letter-spacing:.06em;outline:none;border-radius:0">
+      <p id="code-hit" style="margin:10px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6b6b66;min-height:1.2em"></p>
+      <p style="margin:14px 0 0">※打ち込んだ文字を含む型番だけが残ります。シリーズ名でも絞れます。<b>見当たらないときは、生産が終わっている可能性があります。</b><a href="discontinued.html">廃盤・生産終了</a>のページに、公式発表で確認できたものを記録しています。</p>
+      <p style="margin:14px 0 0">※旧型番の寸法は載せていません。買い替え先をさがすときは、<b>いま置いてある物置を実際に測って</b>、<a href="../size/">寸法から探す</a>で当たるのが確実です。型番の数字は、メーカーが違えば指す寸法も違います。</p>
+    </div>
+
+    <div class="note">
       <p style="margin:0">※型番の頭の英字でシリーズが分かります。たとえば <b>GP</b> はタクボのグランプレステージ ジャンプ、<b>FS</b> はイナバのフォルタ、<b>LMD</b> はヨドコウのエルモです。下のボタンから飛べます。</p>
       <p style="margin:14px 0 0">※<b>各社で数字の付け方が似ていても、実際の寸法は同じではありません。</b>たとえば型番に「2215」を含むものは3社にありますが、間口は2,200／2,210／2,220mm、奥行は1,530〜1,590mmと差があります。<b>買い替えのときは、型番の数字ではなく実寸で確認してください。</b></p>
       <p style="margin:14px 0 0">※寸法は各メーカーの公表値をもとにしています。ご購入前に必ず公式サイト・最新カタログでご確認ください。</p>
@@ -79,6 +89,51 @@ def build():
       <p class="cta-text">シリーズごとの仕様は機種ごとのページに、置ける寸法から絞り込む一覧は「寸法から探す」にまとめています。廃盤になった物置は別ページに記録しています。</p>
       <a class="cta-btn" href="./">製品一覧を見る <span class="arrow">→</span></a>
     </div>
+
+    <script>
+    /* 型番の絞り込み。打った文字を含む行だけ残し、残りが無いシリーズは見出しごと隠す */
+    (function(){
+      var q = document.getElementById('code-q');
+      if(!q) return;
+      var hit = document.getElementById('code-hit');
+      var secs = [];
+      [].forEach.call(document.querySelectorAll('.grp'), function(g){
+        var els = [g], n = g.nextElementSibling;
+        while(n && !n.classList.contains('grp') && !n.classList.contains('cta') && !n.classList.contains('links')){
+          els.push(n); n = n.nextElementSibling;
+        }
+        var tbl = null;
+        els.forEach(function(e){ if(e.tagName === 'TABLE') tbl = e; });
+        secs.push({
+          els: els,
+          rows: tbl ? [].slice.call(tbl.tBodies[0].rows) : [],
+          name: (g.textContent || '').toUpperCase()
+        });
+      });
+      var norm = function(t){ return t.toUpperCase().replace(/[\s\u3000ー−―‐]/g, ''); };
+      function run(){
+        var v = norm(q.value.trim());
+        var n = 0;
+        secs.forEach(function(s){
+          var shown = 0;
+          var byName = v && s.name.indexOf(v) >= 0;
+          s.rows.forEach(function(r){
+            var ok = !v || byName || norm(r.cells[0].textContent).indexOf(v) >= 0;
+            r.style.display = ok ? '' : 'none';
+            if(ok) shown++;
+          });
+          var vis = !v || shown > 0;
+          s.els.forEach(function(e){ e.style.display = vis ? '' : 'none'; });
+          n += shown;
+        });
+        hit.textContent = v
+          ? (n ? n.toLocaleString() + '型番' : '見当たりません。廃盤のページも見てみてください')
+          : '';
+      }
+      q.addEventListener('input', run);
+      run();
+    })();
+    </script>
 
     <div class="links">
       <a href="./">製品一覧</a>

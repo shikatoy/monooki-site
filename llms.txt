@@ -19,13 +19,13 @@
   - 「黒い物置は、選べる寸法が先に決まる｜ヨドコウとタクボで扱いが違う」(/articles/black-monooki-size-lineup.html, 2026-09-29): ヨドコウの黒は本体色ではなく別シリーズで、公式サイズ表に載る型番はブラックエルモが9、ブラックエスモが5。タクボの黒は既存機種への色追加でサイズ表は分かれません。
   - 「奥行50cmを切ると、物置は1社しか選べない」(/articles/monooki-narrow-space-maker.html, 2026-09-27): 3社の全型番を並べると、奥行448mmはイナバ、513mmはヨドコウ、530mmはタクボと、50mmずつずれて1社ずつ並んでいます。狭い場所ほどメーカーは選ぶものではなく決まるもの。
   - 「断熱物置が世代交代しました｜結露と、選べる機種の話」(/articles/monooki-insulated-generation.html, 2026-09-07): 2026年9月1日、イナバの断熱物置ナイソーが新型SMXに切り替わり、como liteも加わりました。先にヨドコウのヨド蔵が生産終了しているため、断熱物置というジャンルの顔ぶれが入れ替わっています。
-  - 「物置はどこから錆びる？外す側が見た置き方と塗装の話」(/articles/monooki-rust-where-and-how.html, 2026-09-01): 物置はどこから錆びるのか。撤去してきた立場から言うと、部位より「置き場所」と「塗装が剥がれるか」の2つで決まります。
+  - 「物置は何年もつ？ 3社とも年数は出していない」(/articles/monooki-rust-where-and-how.html, 2026-09-01): 3社の公式を当たると、何年もつかを書いているメーカーは見当たりません。出ているのは5年の保証と、錆の原因として名指しされているものだけです。
   - 「タクボのガレージは扉だけが違う｜スクード2機種の見分け方」(/articles/takubo-garage-scudo-door-types.html, 2026-09-07): ベルフォーマスクードとカールフォーマスクードは、間口・奥行・高さの組み合わせが完全に同じで、違うのは扉だけです。オーバースライド扉と巻上げシャッター扉の使い分けと、型番から扉と寸法を読む方法をまとめました。
-  - 「物置が置けない場所と置きにくい場所。寸法だけでは決まらない」(/articles/monooki-okenai-basho.html, 2026-08-24): 物置は置きたい場所の広さだけでは据えられません。屋上やベランダに置けないのは重さより風のため。
+  - 「物置が置けない場所と置きにくい場所。寸法だけでは決まらない」(/articles/monooki-okenai-basho.html, 2026-08-24): 屋上とベランダは、イナバ・ヨドコウとも公式に設置を禁止しています。挙げている理由は重さではなく風です。
   - 「物置の扉はどっち側が開く？固定側と開く側の見分け方」(/articles/monooki-door-opening-side.html, 2026-08-23): 物置の扉がどちら側に開くかは、小型か中型・大型かの区分で決まります。
-  - 「ホームセンター物置と大手3社比較｜中身とOEMの話」(/articles/homecenter-monooki-vs-major3.html, 2026-08-23): ホームセンターのオリジナル物置と大手3社は何が違うのか。専門メーカーのOEMという中身の話、箱を開けて手が感じる部材やネジの違い、扉の建て付けの直し方まで、数多く組み立ててきた経験から判断材料としてお伝えします。
+  - 「ホームセンターの物置は、寸法で比べられるか」(/articles/homecenter-monooki-vs-major3.html, 2026-08-23): DCMの商品ページは坪数までで、間口×奥行×高さの数値がありません。一方コーナンは寸法で絞り込めます。店によって出し方が違います。
   - 「物置の小型と中型・大型は何が違う？区分で選ぶ」(/articles/kogata-chugata-ogata-chigai.html, 2026-08-23): 物置の「小型」と「中型・大型」は何が違うのか。据える側の視点で、一人で手が足りなくなる工程が区分ごとに違うこと、下地は変わらないこと、組みやすさは区分で逆転することを整理しました。
-  - 「物置のオプションは要る？基本は不要、でもアンカーは別」(/articles/monooki-options-and-anchor.html, 2026-08-06): オプションは基本的にほとんど要りません。ただし転倒防止のアンカー工事だけは別枠です。基本は必須、家の壁や塀に囲まれた場所なら不要。
+  - 「物置のオプションは後から足せる？ 公式が「設置後は不可」と書いているもの」(/articles/monooki-options-and-anchor.html, 2026-08-06): オプションの多くは後からでも頼めます。タクボが「設置後納入はできません」と書いているのは、明かり窓と壁パネル2枚用のサッシ窓です。
   - 「物置の置き方は誰が決める？サイズ選びの前に知ること」(/articles/monooki-size-and-placement.html, 2026-08-06): 物置の置き方を決めているのは、実は施主自身です。カタログには置き方が書かれておらず、業者も基本は希望どおりに置きます。
 - コラム: トップページ内の短文コラム（物置と外構にまつわる読みもの）
 
@@ -53,13 +53,13 @@
 - 記事「黒い物置は、選べる寸法が先に決まる｜ヨドコウとタクボで扱いが違う」: /articles/black-monooki-size-lineup.html
 - 記事「奥行50cmを切ると、物置は1社しか選べない」: /articles/monooki-narrow-space-maker.html
 - 記事「断熱物置が世代交代しました｜結露と、選べる機種の話」: /articles/monooki-insulated-generation.html
-- 記事「物置はどこから錆びる？外す側が見た置き方と塗装の話」: /articles/monooki-rust-where-and-how.html
+- 記事「物置は何年もつ？ 3社とも年数は出していない」: /articles/monooki-rust-where-and-how.html
 - 記事「タクボのガレージは扉だけが違う｜スクード2機種の見分け方」: /articles/takubo-garage-scudo-door-types.html
 - 記事「物置が置けない場所と置きにくい場所。寸法だけでは決まらない」: /articles/monooki-okenai-basho.html
 - 記事「物置の扉はどっち側が開く？固定側と開く側の見分け方」: /articles/monooki-door-opening-side.html
-- 記事「ホームセンター物置と大手3社比較｜中身とOEMの話」: /articles/homecenter-monooki-vs-major3.html
+- 記事「ホームセンターの物置は、寸法で比べられるか」: /articles/homecenter-monooki-vs-major3.html
 - 記事「物置の小型と中型・大型は何が違う？区分で選ぶ」: /articles/kogata-chugata-ogata-chigai.html
-- 記事「物置のオプションは要る？基本は不要、でもアンカーは別」: /articles/monooki-options-and-anchor.html
+- 記事「物置のオプションは後から足せる？ 公式が「設置後は不可」と書いているもの」: /articles/monooki-options-and-anchor.html
 - 記事「物置の置き方は誰が決める？サイズ選びの前に知ること」: /articles/monooki-size-and-placement.html
 - 運営者情報: /about.html
 - プライバシーポリシー: /privacy.html
