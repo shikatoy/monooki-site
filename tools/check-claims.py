@@ -15,6 +15,9 @@
     total          寸法の絞り込みの対象（CAT_OK の4区分）の型番の総数
     series_all     掲載しているシリーズの数（区分を問わない）
     codes_all      掲載している型番の総数（区分を問わない）
+    shapes_all     外形寸法の種類（シリーズ内で同じ間口×奥行×高さは1つに数える／区分を問わない）
+    shapes_ok      そのうち、寸法の絞り込みの対象（CAT_OK の4区分）のもの
+    inner_all      公式の内部寸法・開口部寸法を載せている型番の数（INNER の件数）
     cells          間口×奥行を300mm刻みにした升目のうち、埋まっている数
     cells1/2/3     そのうち1社だけ／2社／3社がそろう升目の数
     d<数>          奥行がその値の型番数（例 d448）
@@ -97,6 +100,17 @@ def expected(cid, rows):
         return len(C.load_products())
     if cid == "codes_all":
         return sum(len(p["sizes"]) for p in C.load_products())
+    if cid == "inner_all":
+        return len(C.load_inner())
+    if cid in ("shapes_all", "shapes_ok"):
+        # 外形寸法の種類。シリーズをまたぐ同寸は別に数える（別商品なので）
+        sh = set()
+        for p in C.load_products():
+            if cid == "shapes_ok" and p["cat"] not in C.CAT_OK:
+                continue
+            for code, w, d, h in p["sizes"]:
+                sh.add((p["id"], w, d, h))
+        return len(sh)
     if cid == "steps_total":
         return step_pairs()
     if cid.startswith("cells"):

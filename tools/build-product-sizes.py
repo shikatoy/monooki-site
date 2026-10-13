@@ -28,7 +28,10 @@ PAGES = {
     "i-smx": "inaba-nyso-smx",            "i-sml": "inaba-como-lite",
     "i-bjx": "inaba-ivy-stocker",         "i-bjt": "inaba-tire-stocker",
     "t-tp": "takubo-mr-stockman-plus-alpha",
-    "i-ff": "inaba-domaru",
+    "i-ff": "inaba-domaru",            "i-fw": "inaba-forta-with",
+    "i-kmw": "inaba-nyso-sister",       "i-fp": "inaba-forta-plus",
+    "i-fk": "inaba-forta-roof-slope",   "i-fb": "inaba-forta-large",
+    "i-ft": "inaba-forta-tall",
     "t-nde": "takubo-mr-stockman-shutter", "t-ws": "takubo-mr-shutterman",
 }
 

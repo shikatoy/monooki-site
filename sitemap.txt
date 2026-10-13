@@ -25,9 +25,15 @@ https://monooki-erabi.com/products/inaba-arcia-fit.html
 https://monooki-erabi.com/products/inaba-bike-hokanko.html
 https://monooki-erabi.com/products/inaba-como-lite.html
 https://monooki-erabi.com/products/inaba-domaru.html
+https://monooki-erabi.com/products/inaba-forta-large.html
+https://monooki-erabi.com/products/inaba-forta-plus.html
+https://monooki-erabi.com/products/inaba-forta-roof-slope.html
+https://monooki-erabi.com/products/inaba-forta-tall.html
+https://monooki-erabi.com/products/inaba-forta-with.html
 https://monooki-erabi.com/products/inaba-forta.html
 https://monooki-erabi.com/products/inaba-garudia.html
 https://monooki-erabi.com/products/inaba-ivy-stocker.html
+https://monooki-erabi.com/products/inaba-nyso-sister.html
 https://monooki-erabi.com/products/inaba-nyso-smx.html
 https://monooki-erabi.com/products/inaba-simply.html
 https://monooki-erabi.com/products/inaba-takuhai-box.html
@@ -82,6 +88,8 @@ https://monooki-erabi.com/size/band-w270-d180.html
 https://monooki-erabi.com/size/band-w270-d210.html
 https://monooki-erabi.com/size/band-w270-d240.html
 https://monooki-erabi.com/size/band-w270-d270.html
+https://monooki-erabi.com/size/band-w300-d150.html
+https://monooki-erabi.com/size/band-w300-d210.html
 https://monooki-erabi.com/size/band-w300-d240.html
 https://monooki-erabi.com/size/band-w420-d210.html
 https://monooki-erabi.com/size/band-w90-d30.html

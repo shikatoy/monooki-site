@@ -121,27 +121,45 @@ tailwind.config = {
         <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">各メーカー名・商品名は、各社の商標または登録商標です</li>
       </ul>
       <h2 class="mt-14 first:mt-0 pt-7 border-t border-line font-serif font-bold leading-snug" style="font-size:clamp(1.3rem,4vw,1.75rem)">掲載データについて</h2>
-      <p class="mt-6 text-[15px] leading-loose">掲載しているのは <strong><span data-claim="series_all">25</span>シリーズ・<span data-claim="codes_all">969</span>型番</strong>です（タクボ・イナバ・ヨドコウ）。このうち、寸法から絞り込める対象は <strong><span data-claim="total">638</span>型番</strong>。小型物置・中型物置・中・大型物置・大型物置の4区分です。断熱物置、駐輪スペース付き物置、ドア型・タイヤ収納庫、バイク車庫、ガレージ、宅配ボックスは、寸法の絞り込みの対象には入れていません。</p>
-      <h3 class="mt-10 font-serif font-bold leading-snug" style="font-size:clamp(1.05rem,3.2vw,1.25rem)">何を1型番と数えているか</h3>
-      <p class="mt-6 text-[15px] leading-loose">同じ外形寸法のものは、別の型番として数えていません。具体的には次のものです。</p>
+      <p class="mt-6 text-[15px] leading-loose">掲載しているのは <strong><span data-claim="series_all">31</span>シリーズ・<span data-claim="codes_all">1,117</span>型番</strong>です（タクボ・イナバ・ヨドコウ）。このうち、寸法から絞り込める対象は <strong><span data-claim="total">676</span>型番</strong>。小型物置・中型物置・中・大型物置・大型物置の4区分です。断熱物置、駐輪スペース付き物置、ドア型・タイヤ収納庫、バイク車庫、ガレージ、宅配ボックスは、寸法の絞り込みの対象には入れていません。</p>
+      <h3 class="mt-10 font-serif font-bold leading-snug" style="font-size:clamp(1.05rem,3.2vw,1.25rem)">型番の数え方</h3>
+      <p class="mt-6 text-[15px] leading-loose">外形寸法が同じでも、メーカーが別の型番を立てているものは、型番として並べています。寸法から絞り込める <strong><span data-claim="total">676</span>型番</strong>を外形寸法の種類で数え直すと <strong><span data-claim="shapes_ok">647</span>通り</strong>で、差の29件がこれに当たります。</p>
+      <ul class="mt-6 list-none p-0">
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">あかり窓付（Mr.トールマン ダンディの <strong>JNA-</strong>）── 20件。公式の仕様図で外形寸法は標準型と同じ</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">土間タイプと床付タイプ（ドマールの <strong>HD</strong> / <strong>HY</strong>）── 9件。外形寸法は同じ</li>
+      </ul>
+      <p class="mt-6 text-[15px] leading-loose">逆に、次のものは別の型番が立っていても載せていません。外形寸法が同じで、寸法で探すときに同じ候補が重なるだけだからです。</p>
       <ul class="mt-6 list-none p-0">
         <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">結露減少屋根（末尾 <strong>Z</strong>）、多雪型（<strong>S</strong>）、その両方（<strong>SZ</strong>）── 公式の型番ページで外形寸法が標準型と同じと確認できたもの</li>
         <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">連棟の追加棟（末尾 <strong>LH</strong>）── 外形寸法は基本棟と同じ</li>
-        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">土間タイプと床付タイプ（<strong>HD</strong> / <strong>HY</strong> など）── 外形寸法が同じ</li>
-        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">一般型・多雪型・豪雪型で型番が変わらないもの</li>
-        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">色違い・コラボモデル ── 索引と比較には出しますが、診断の候補からは外しています</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">本体色の違い（フォルタ ウィズの末尾 <strong>F</strong> など）── 外形寸法は同じ</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">開放スペースを物置の左右どちらに付けるかの違い（フォルタ ウィズ、Mr.ストックマン プラスアルファ）── 外形寸法は同じ</li>
       </ul>
+      <p class="mt-6 text-[15px] leading-loose">一般型・多雪型・豪雪型で型番が変わらないものは、はじめから1型番です。色違い・コラボモデルは、索引と比較には出しますが、診断の候補からは外しています。</p>
       <p class="mt-6 text-[15px] leading-loose">次のものは、そもそも載せていません。</p>
       <ul class="mt-6 list-none p-0">
-        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">公式に外形寸法が見当たらないもの（例：ドマールの連結タイプ L・L-2）</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">連棟・連続型（ヨドコウのエルモコンビとエルモ連続型、イナバの連続型物置、末尾が <strong>-2</strong> の2棟分の型番など）── 1型番＝1つの外形寸法で組んでいるため、素直に乗りません</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">ドマールの末尾 <strong>L</strong>（14型番）── 外形寸法は <strong>L</strong> の無いものと同じですが、<strong>L</strong> が何を指すかの説明が公式の商品ページに見当たりません</li>
         <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">公式のサイズ表で「受注生産」になっていて、型番が振られていないマス</li>
       </ul>
-      <h3 class="mt-10 font-serif font-bold leading-snug" style="font-size:clamp(1.05rem,3.2vw,1.25rem)">数値の根拠を3つに分けています</h3>
+      <h3 class="mt-10 font-serif font-bold leading-snug" style="font-size:clamp(1.05rem,3.2vw,1.25rem)">内寸と開口部について</h3>
+      <p class="mt-6 text-[15px] leading-loose">物置に何が入るかを決めるのは外形寸法ではなく内寸です。型番ごとの内寸と開口部の寸法を、メーカー公式の資料から取って<strong><span data-claim="inner_all">421</span>型番</strong>に載せています。該当する製品ページに「内寸と開口部」の表として出しています。</p>
       <ul class="mt-6 list-none p-0">
-        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose"><strong>メーカー公式</strong> ── 型番ページ、サイズ表、外形図PDF、組立説明書、仕様図、よくあるご質問。外形寸法はすべてここから取っています</li>
-        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose"><strong>販売店の仕様表で一致を確認したもの</strong> ── 公式に見当たらない数値のうち、販売店の仕様表を2件以上つき合わせて一致したものだけを使っています。現在これに当たるのは、エスモ・エルモ・ラヴィージュの有効開口の3件です。各製品ページの出典欄に「販売店仕様表2件で一致」と書いています</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose"><strong>タクボ 240型番</strong> ── 型番ページの寸法表から。内寸は3辺、開口部は間口と高さ</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose"><strong>ヨドコウ 163型番</strong>（エスモ90／エルモ56／エルモシャッター17） ── 型番ごとの仕様図DXFから。図面の中に「室内有効巾」「室内有効奥行」「有効開口巾」「有効開口高サ」のラベルがあります。<strong>室内有効の「高さ」は公式がラベルしていないため、内寸の高さは空欄です</strong></li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose"><strong>イナバ 18型番</strong>（ドマール） ── 型番ページの仕様ダウンロードにある「FFシリーズ寸法表」のPDFから。<strong>開口部の巾は公式の表でも列が空</strong>（全面が開くため）、内高は一般型と多雪型で値が違い型番ごとに1つに決まらないため、どちらも空欄です。他のイナバのシリーズも同じ形のPDFを出していますが、ページごとに表の組み方が違い、型番の書き方も揃っていないため、取り違いを防げる形にできていません。まだ取り込んでいません</li>
+      </ul>
+      <ul class="mt-6 list-none p-0">
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">内寸の高さは梁下などの一番低いところ、開口部の高さは扉のところで測った値です。そのため、開口部の高さが内寸の高さより大きい型番があります（ND-2512 など21型番）。公式の表記どおりです</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">公式の表記が同じシリーズの他の型番と合わないものは入れていません。現在これに当たるのは <strong>PY-177B</strong> 1件で、公式ページの内部寸法の奥行が420mm（外形750mm）となっていて、同シリーズの差110mmと合いません</li>
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose">ヨドコウの仕様図DXFは、図面が分解されていて数値も図面内の文字として置かれています。ラベルと数値は位置の近さで対応づけているため、取り違いが起きないよう、当サイトの外形寸法との差がシリーズごとに一定になっているかを1件ずつ確かめ、外れたものは載せていません。エルモは87型番のうち56型番、エルモシャッターは20型番のうち17型番です</li>
+      </ul>
+      <h3 class="mt-10 font-serif font-bold leading-snug" style="font-size:clamp(1.05rem,3.2vw,1.25rem)">数値の根拠を2つに分けています</h3>
+      <ul class="mt-6 list-none p-0">
+        <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose"><strong>メーカー公式</strong> ── 型番ページ、サイズ表、シリーズ寸法表、外形図PDF、仕様図DXF、組立説明書、よくあるご質問。外形寸法と有効開口はすべてここから取っています</li>
         <li class="mt-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.85em] before:w-2 before:h-px before:bg-rust text-[15px] leading-loose"><strong>公式に記載がない</strong> ── 調べて見当たらなかったものは、そう書きます。推測で埋めることはしません</li>
       </ul>
+      <p class="mt-6 text-[15px] leading-loose">2026年10月12日まで、エスモ・エルモ・ラヴィージュの有効開口の3件を「販売店の仕様表2件で一致を確認したもの」として、3つめの区分に置いていました。ヨドコウ公式の仕様図DXFに「有効開口巾」「有効開口高サ」のラベル付きで数値が入っていることが分かり、3件とも当サイトの値と一致したため、出どころを公式に差し替えてこの区分をなくしました。</p>
       <p class="mt-6 text-[15px] leading-loose">外形寸法は、公式のサイズ表と型番ページに加えて、公式が載せている床面積との突き合わせでも検算しています。本文に書いた数は、データから引き直して照合する検査（<code>tools/check-claims.py</code>）を公開前に通しています。</p>
       <h2 class="mt-14 first:mt-0 pt-7 border-t border-line font-serif font-bold leading-snug" style="font-size:clamp(1.3rem,4vw,1.75rem)">記事の書き方について</h2>
       <p class="mt-6 text-[15px] leading-loose"><strong>実物は見ていません。</strong>記事に出す数値は、メーカーの公式資料（型番ページ・サイズ表・外形図・組立説明書・よくあるご質問）と、自分で当たった公開情報だけです。</p>

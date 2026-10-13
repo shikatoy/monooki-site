@@ -56,6 +56,24 @@ def load_products():
     return out
 
 
+def load_inner():
+    """index.html の INNER を読む。型番 → (内寸W, 内寸D, 内寸H, 開口W, 開口H)。
+    外形寸法は PRODUCTS 側。ここに無い型番は、公式に内寸が見当たらないもの。"""
+    s = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+    i = s.find("INNER_START")
+    if i < 0:
+        return {}
+    j = s.index("const INNER", i)
+    k = s.index("};", j)
+    out = {}
+    for m in re.finditer(r"'([^']+)':\s*\[([^\]]+)\]", s[j:k]):
+        v = [None if x.strip() == "null" else float(x) for x in m.group(2).split(",")]
+        if len(v) != 5:
+            raise SystemExit("[中止] INNER の %s が5つの値になっていません" % m.group(1))
+        out[m.group(1)] = tuple(v)
+    return out
+
+
 def load_style():
     s = open(os.path.join(ROOT, "products", "index.html"), encoding="utf-8").read()
     i = s.find("<style"); j = s.find("</style>") + len("</style>")

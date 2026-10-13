@@ -21,6 +21,7 @@ python3 "$REPO/tools/build-product-index.py" || { echo "[中止] 製品一覧の
 python3 "$REPO/tools/build-product-head.py" || { echo "[中止] 製品ページの見出し情報の生成に失敗しました。上の理由を直してから公開してください。"; exit 1; }
 python3 "$REPO/tools/build-product-sizes.py" || { echo "[中止] 製品ページのサイズ表の生成に失敗しました。上の理由を直してから公開してください。"; exit 1; }
 python3 "$REPO/tools/build-product-spec.py" || { echo "[中止] 製品ページの仕様・特徴の生成に失敗しました。上の理由を直してから公開してください。"; exit 1; }
+python3 "$REPO/tools/build-product-inner.py" || echo "[警告] 内寸と開口部の表の生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-step-pairs.py" || echo "[警告] 寸法の段の生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-near-codes.py" || echo "[警告] 近い他社型番の生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-codes.py" || echo "[警告] 型番索引の生成に失敗しました（続行します）"

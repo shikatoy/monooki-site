@@ -153,6 +153,12 @@
   .article-body h3::before { content: '—'; color: var(--rust); margin-right: 10px; }
   .article-body p { margin: 26px 0 0; font-size: 15px; line-height: 2.15; }
   .article-body strong { font-weight: 700; background: linear-gradient(transparent 62%, rgba(163, 81, 43, .18) 62%); }
+  /* ───── 引用（公式資料の文言をそのまま置く） ───── */
+  .article-body .note {
+    margin: 26px 0 0; padding: 18px 20px 18px 22px;
+    border-left: 2px solid var(--rust); background: #efe9dc;
+    font-size: 14px; line-height: 2.05; color: #3a3a36;
+  }
   .article-body ul, .article-body ol { margin: 26px 0 0; padding-left: 0; list-style: none; counter-reset: li; }
   .article-body li { position: relative; margin: 14px 0 0; padding-left: 30px; font-size: 15px; line-height: 2.1; }
   .article-body ul > li::before { content: ''; position: absolute; left: 8px; top: 15px; width: 8px; height: 1px; background: var(--rust); }
