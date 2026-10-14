@@ -301,61 +301,36 @@ tailwind.config = {
   </div>
 </section>
 
-<!-- ═══════════ 探し方の3つの入口 ═══════════ -->
-<section id="find" aria-label="探し方">
+<!-- ═══════════ 探し方（4つの入口・単一バナー） ═══════════ -->
+<section id="shindan" aria-label="探し方">
   <div class="border-b border-line">
     <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-5 flex items-center justify-between font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">
-      <span>Find — 探し方は3つ</span>
-      <span class="hidden md:inline">タクボ・イナバ・ヨドコウ</span>
+      <h2 class="font-mono font-normal"><span class="hidden sm:inline">Find / </span>探し方は4つ</h2>
+      <span class="text-rust">診断は3〜4問 / 約1分</span>
     </div>
   </div>
-  <div class="border-b border-line">
-    <div class="max-w-[1440px] mx-auto px-5 md:px-10 grid md:grid-cols-3">
-        <a href="size/" class="group block py-8 md:py-10 md:px-8 border-b md:border-b-0 border-linesoft md:border-r md:last:border-r-0 md:border-line">
-          <p class="font-mono text-[10px] tracking-widest2 uppercase text-rust">01</p>
-          <h2 class="jp-break mt-3 font-serif font-extrabold text-2xl md:text-3xl leading-snug group-hover:text-rust transition-colors">置ける寸法から</h2>
-          <p class="jp-break mt-3 text-[13px] leading-loose text-neutral-600">置ける間口と奥行が決まっている方へ。寸法の帯から、3メーカーを横断して絞り込めます。</p>
-          <span class="mt-4 inline-block font-mono text-[10px] tracking-widest2 uppercase u-link">寸法から探す →</span>
-        </a>
-        <a href="#shindan" class="group block py-8 md:py-10 md:px-8 border-b md:border-b-0 border-linesoft md:border-r md:last:border-r-0 md:border-line">
-          <p class="font-mono text-[10px] tracking-widest2 uppercase text-rust">02</p>
-          <h2 class="jp-break mt-3 font-serif font-extrabold text-2xl md:text-3xl leading-snug group-hover:text-rust transition-colors">収納する物から</h2>
-          <p class="jp-break mt-3 text-[13px] leading-loose text-neutral-600">しまう物と置き場所で3〜4問。答えた条件は、結果の画面でそのまま変えられます。</p>
-          <span class="mt-4 inline-block font-mono text-[10px] tracking-widest2 uppercase u-link">診断をはじめる →</span>
-        </a>
-        <a href="products/codes.html" class="group block py-8 md:py-10 md:px-8 border-b md:border-b-0 border-linesoft md:border-r md:last:border-r-0 md:border-line">
-          <p class="font-mono text-[10px] tracking-widest2 uppercase text-rust">03</p>
-          <h2 class="jp-break mt-3 font-serif font-extrabold text-2xl md:text-3xl leading-snug group-hover:text-rust transition-colors">型番から</h2>
-          <p class="jp-break mt-3 text-[13px] leading-loose text-neutral-600">見積書に書かれた型番や、いま置いてある物置の型番から、寸法とシリーズを引けます。</p>
-          <span class="mt-4 inline-block font-mono text-[10px] tracking-widest2 uppercase u-link">型番から探す →</span>
-        </a>
-    </div>
-  </div>
-</section>
 
-<!-- ═══════════ 診断エントリー（分割バナー） ═══════════ -->
-<section id="shindan">
   <div class="border-b border-line">
-    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-5 flex items-center justify-between font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">
-      <span><span class="hidden sm:inline">Matching System / </span>物置マッチング診断</span>
-      <span class="text-rust">3〜4問 / 約1分</span>
+  <button data-mode="size" class="entry-banner block w-full text-left">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-10 md:py-16 grid grid-cols-12 items-center gap-3 md:gap-6">
+      <span class="entry-num col-span-3 md:col-span-1 font-mono text-sm md:text-base text-neutral-400 transition-colors">[ 01 ]</span>
+      <span class="jp-break col-span-9 md:col-span-4 font-serif font-bold text-2xl md:text-4xl tracking-wide">置ける寸法から</span>
+      <span class="entry-desc jp-break col-span-12 md:col-span-5 mt-1 md:mt-0 text-[13px] leading-relaxed text-neutral-500 transition-colors">置ける間口と奥行が決まっている方へ。間口・奥行・高さを入れると、収まる型番を3メーカー横断で絞り込みます。</span>
+      <span class="col-span-12 md:col-span-2 text-right font-mono text-2xl"><span class="arrow">→</span></span>
+    </div>
+  </button>
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 pb-8 md:pb-12 -mt-6 md:-mt-10 grid grid-cols-12 gap-3 md:gap-6">
+      <div class="col-span-12 md:col-span-5 md:col-start-6">
+        <a href="size/" class="font-mono text-[10px] tracking-widest2 uppercase u-link">診断を開かずに寸法の帯を見る →</a>
+      </div>
     </div>
   </div>
 
   <button data-mode="use" class="entry-banner block w-full text-left border-b border-line">
     <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-10 md:py-16 grid grid-cols-12 items-center gap-3 md:gap-6">
-      <span class="entry-num col-span-3 md:col-span-1 font-mono text-sm md:text-base text-neutral-400 transition-colors">[ 01 ]</span>
-      <span class="col-span-9 md:col-span-4 font-serif font-bold text-3xl md:text-5xl tracking-wide">用途で選ぶ</span>
-      <span class="entry-desc col-span-12 md:col-span-5 mt-1 md:mt-0 text-[13px] leading-relaxed text-neutral-500 transition-colors">「何を、どのくらいの頻度でしまうか」から、ぴったりの構造や扉のタイプを一緒に考える、いちばん定番の選び方です。</span>
-      <span class="col-span-12 md:col-span-2 text-right font-mono text-2xl"><span class="arrow">→</span></span>
-    </div>
-  </button>
-
-  <button data-mode="size" class="entry-banner block w-full text-left border-b border-line">
-    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-10 md:py-16 grid grid-cols-12 items-center gap-3 md:gap-6">
       <span class="entry-num col-span-3 md:col-span-1 font-mono text-sm md:text-base text-neutral-400 transition-colors">[ 02 ]</span>
-      <span class="col-span-9 md:col-span-4 font-serif font-bold text-3xl md:text-5xl tracking-wide">サイズで選ぶ</span>
-      <span class="entry-desc col-span-12 md:col-span-5 mt-1 md:mt-0 text-[13px] leading-relaxed text-neutral-500 transition-colors">設置できるスペースが決まっている方はこちら。間口・奥行・高さをスライダーで入力すると、無理なく収まるサイズをご案内します。</span>
+      <span class="jp-break col-span-9 md:col-span-4 font-serif font-bold text-2xl md:text-4xl tracking-wide">収納する物から</span>
+      <span class="entry-desc jp-break col-span-12 md:col-span-5 mt-1 md:mt-0 text-[13px] leading-relaxed text-neutral-500 transition-colors">しまう物と置き場所で3〜4問。答えた条件は、結果の画面でそのまま変えられます。</span>
       <span class="col-span-12 md:col-span-2 text-right font-mono text-2xl"><span class="arrow">→</span></span>
     </div>
   </button>
@@ -363,11 +338,20 @@ tailwind.config = {
   <button data-mode="maker" class="entry-banner block w-full text-left border-b border-line">
     <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-10 md:py-16 grid grid-cols-12 items-center gap-3 md:gap-6">
       <span class="entry-num col-span-3 md:col-span-1 font-mono text-sm md:text-base text-neutral-400 transition-colors">[ 03 ]</span>
-      <span class="col-span-9 md:col-span-4 font-serif font-bold text-3xl md:text-5xl tracking-wide">メーカーで選ぶ</span>
-      <span class="entry-desc col-span-12 md:col-span-5 mt-1 md:mt-0 text-[13px] leading-relaxed text-neutral-500 transition-colors">扉の軽さのタクボ、頑丈さのイナバ、サビに強いヨドコウ。それぞれの持ち味から、相性のよいメーカーを見つける選び方です。</span>
+      <span class="jp-break col-span-9 md:col-span-4 font-serif font-bold text-2xl md:text-4xl tracking-wide">メーカーから</span>
+      <span class="entry-desc jp-break col-span-12 md:col-span-5 mt-1 md:mt-0 text-[13px] leading-relaxed text-neutral-500 transition-colors">扉の軽さのタクボ、頑丈さのイナバ、サビに強いヨドコウ。それぞれの持ち味から絞り込む選び方です。</span>
       <span class="col-span-12 md:col-span-2 text-right font-mono text-2xl"><span class="arrow">→</span></span>
     </div>
   </button>
+
+  <a href="products/codes.html" class="entry-banner block w-full text-left border-b border-line">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-10 md:py-16 grid grid-cols-12 items-center gap-3 md:gap-6">
+      <span class="entry-num col-span-3 md:col-span-1 font-mono text-sm md:text-base text-neutral-400 transition-colors">[ 04 ]</span>
+      <span class="jp-break col-span-9 md:col-span-4 font-serif font-bold text-2xl md:text-4xl tracking-wide">型番から</span>
+      <span class="entry-desc jp-break col-span-12 md:col-span-5 mt-1 md:mt-0 text-[13px] leading-relaxed text-neutral-500 transition-colors">見積書に書かれた型番や、いま置いてある物置の型番から、寸法とシリーズを引けます。</span>
+      <span class="col-span-12 md:col-span-2 text-right font-mono text-2xl"><span class="arrow">→</span></span>
+    </div>
+  </a>
 </section>
 
 <!-- ═══════════ 診断モーダル ═══════════ -->
@@ -1498,6 +1482,8 @@ const INNER = {
                      発表を受けて当サイトに型番を追加したときは、別に '新商品' を立てる。
    既存の記録は削除・改変しないこと（この台帳は追記のみ）。 */
 const UPDATE_LOG = [
+  { date:'2026-10-14', type:'改定', title:'トップページの探し方を、1つの帯にまとめました',
+    body:'トップページには「探し方は3つ」の帯と「物置マッチング診断」の帯が続けて並んでいて、どちらにも01・02・03と番号が振られていました。上の帯の「収納する物から」を押すと下の帯まで移動し、そこで「用途で選ぶ」をもう一度押す形でした。同じ入口が二重になっていたので、帯を1つにしました。01 置ける寸法から／02 収納する物から／03 メーカーから／04 型番から の4行で、どの行も1回押せば目的の画面に着きます。01から03は診断をその場で開き、04は型番索引に移ります。診断を開かずに寸法の帯の一覧を見たい場合は、01の中の小さなリンクから入れます。掲載しているデータと診断の中身は変えていません。' },
   { date:'2026-10-13', type:'改定', title:'イナバはドマール18型番だけ内寸を載せました。他のシリーズは見送りです',
     body:'イナバも型番ページの仕様ダウンロードに「◯◯シリーズ寸法表」のPDFを置いていて、内部寸法と開口部寸法が型番ごとに入っています。PDFの埋め込みフォントを復号し、文字の描画位置まで取り出して表の列に割り当てる形までは出来ました。ドマール（FF）18型番は、当サイトの外形寸法との差が間口157mm（土間タイプ）または57mm（床付タイプ）、奥行164mmまたは122mm、開口部の高さ437mmまたは499mmで、18型番すべてがどれかに収まりました。読み違いが無いと言えるので載せています。開口部の巾は公式の表でも列が空です（全面が開くため）。内高は一般型と多雪型で値が違い、型番ごとに1つに決まらないので載せていません。残りのシリーズは見送ります。シリーズごとにPDFの表の組み方が違い、MJXは型番の「MJX-」を先頭の行だけに書いて2行目以降は「136C(F)」のように省く、FSとKMWは群見出しの文字そのものが取り出せない、FPは列の英字が2ページ分重なって出てくる、といった具合です。1件ずつ検算して通せる形にできていないため、入れていません。公式の数値を取り違えて載せるくらいなら、載せないほうがいいという判断です。内寸を載せている型番は、タクボ240・ヨドコウ163・イナバ18の合計421になりました。' },
   { date:'2026-10-13', type:'改定', title:'ヨドコウ163型番にも、公式の内寸と開口部の寸法を載せました',
@@ -1632,7 +1618,7 @@ const QA_ITEMS = [
   { q:'鍵をなくしてしまいました。',
     a:'本体の錠前に刻印された「鍵番号」があれば、スペアキーを注文できます。購入した販売店、または各メーカーのパーツショップで手配が可能です。鍵番号が分からない場合は、メーカーの問い合わせ窓口にご相談ください。' },
   { q:'サイズ選びで失敗しないコツは？',
-    a:'「収納量は一回り大きめ、設置計画は一回り慎重に」が基本です。収納物は年々増える傾向があるため容量に余裕を持たせつつ、屋根の張り出しや作業スペースの余裕も忘れずに確認しましょう。当サイトの「サイズで選ぶ」診断は、これらの余裕を見込んで最適なサイズをご提案します。' }
+    a:'「収納量は一回り大きめ、設置計画は一回り慎重に」が基本です。収納物は年々増える傾向があるため容量に余裕を持たせつつ、屋根の張り出しや作業スペースの余裕も忘れずに確認しましょう。当サイトの「置ける寸法から」の診断は、これらの余裕を見込んで最適なサイズをご提案します。' }
 ];
 /* ===== QA_ITEMS_END ===== */
 
@@ -1774,7 +1760,7 @@ const TAG_REASONS = {
 /* ---------- 設問セット ---------- */
 const QUESTION_SETS = {
   use: {
-    label:'Approach 01 — 用途で選ぶ',
+    label:'Approach 02 — 収納する物から',
     ai:'収納したい物に合わせて、質問をご用意しています',
     questions: [
       { q:'主に収納したい物は何ですか？', hint:'いちばん近いものをお選びください。', options:[
@@ -1798,7 +1784,7 @@ const QUESTION_SETS = {
     ]
   },
   size: {
-    label:'Approach 02 — サイズで選ぶ',
+    label:'Approach 01 — 置ける寸法から',
     ai:'設置スペースに合わせて、質問をご用意しています',
     questions: [
       { type:'dimensions', q:'設置できるスペースを教えてください。', hint:'測った寸法をミリでそのまま入れてください。入力に合わせて、図と「入る型番の数」が変わります。判定では屋根の張り出しと、左右・背面に各100mmの作業スペースを見込みます。高さは上限がある場合だけ入れてください。' },
@@ -1814,7 +1800,7 @@ const QUESTION_SETS = {
     ]
   },
   maker: {
-    label:'Approach 03 — メーカーで選ぶ',
+    label:'Approach 03 — メーカーから',
     ai:'お好みに合わせて、質問をご用意しています',
     questions: [
       { q:'お好みのデザインはどれですか？', hint:'お庭や外構との調和も、性能と同じくらい大切です。', options:[
@@ -2303,7 +2289,7 @@ window.addEventListener('popstate', () => {
     try { history.pushState({ quizGuard: true }, ''); } catch(e){}   // ガードを張り直す
   }
 });
-document.querySelectorAll('.entry-banner').forEach(b => b.addEventListener('click', () => openModal(b.dataset.mode)));
+document.querySelectorAll('.entry-banner[data-mode]').forEach(b => b.addEventListener('click', () => openModal(b.dataset.mode)));
 $('#modal-close').addEventListener('click', closeModal);
 document.addEventListener('keydown', e => { if(e.key === 'Escape' && !modal.classList.contains('modal-hidden')) closeModal(); });
 
