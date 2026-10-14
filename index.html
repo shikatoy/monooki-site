@@ -87,20 +87,6 @@ tailwind.config = {
 
   .tate { writing-mode: vertical-rl; text-orientation: mixed; }
 
-  /* ───── マーキー ───── */
-  .marquee { overflow: hidden; white-space: nowrap; }
-  .marquee-inner { display: inline-block; animation: marq 36s linear infinite; }
-  @keyframes marq { to { transform: translateX(-50%); } }
-  /* 押せるマーキー: ホバー / キーボード操作 / タップで一時停止 */
-  .marquee:hover .marquee-inner,
-  .marquee:focus-within .marquee-inner,
-  .marquee.is-paused .marquee-inner { animation-play-state: paused; }
-  .marquee a { transition: color .2s ease, -webkit-text-stroke-color .2s ease; }
-  .marquee a:hover, .marquee a:focus-visible { color: #a3512b; }
-  .marquee a.outline-k:hover, .marquee a.outline-k:focus-visible { -webkit-text-stroke-color: #a3512b; color: transparent; }
-  .marquee a:focus-visible { outline: 1px solid #a3512b; outline-offset: 4px; }
-  @media (prefers-reduced-motion: reduce) { .marquee-inner { animation: none; } .marquee { overflow-x: auto; } }
-
   /* ───── モーダル ───── */
   .modal { transition: opacity .4s ease, visibility .4s ease; }
   .modal-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
@@ -202,7 +188,6 @@ tailwind.config = {
 
   /* ───── アウトライン文字 ───── */
   .outline-w { -webkit-text-stroke: 1px rgba(255,255,255,.55); color: transparent; }
-  .outline-k { -webkit-text-stroke: 1px rgba(16,16,16,.35); color: transparent; }
 
   /* ───── フォーム下線 ───── */
   .ed-input { background: transparent; border: 0; border-bottom: 1px solid #171717; border-radius: 0; padding: 12px 0; width: 100%; font-size: 15px; outline: none; transition: border-color .3s ease; }
@@ -290,13 +275,6 @@ tailwind.config = {
           空間と用途を美しく調和させる、<br>物置のコンシェルジュ。
         </p>
       </div>
-    </div>
-  </div>
-
-  <!-- マーキー -->
-  <div class="marquee border-b border-line py-4 select-none" aria-label="製品カテゴリーへのショートカット">
-    <div class="marquee-inner font-mono text-lg md:text-2xl tracking-[.3em] uppercase">
-      <a href="#makers" class="outline-k">Takubo</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#makers">Inaba</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#makers" class="outline-k">Yodoko</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#archive" data-fil-group="cat" data-fil-val="物置">物置</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#archive" class="outline-k" data-fil-group="cat" data-fil-val="バイク車庫">バイク車庫</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#archive" data-fil-group="cat" data-fil-val="ガレージ">ガレージ</a>&nbsp;&nbsp;■&nbsp;&nbsp;<span aria-hidden="true"><a href="#makers" class="outline-k" tabindex="-1">Takubo</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#makers" tabindex="-1">Inaba</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#makers" class="outline-k" tabindex="-1">Yodoko</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#archive" data-fil-group="cat" data-fil-val="物置" tabindex="-1">物置</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#archive" class="outline-k" data-fil-group="cat" data-fil-val="バイク車庫" tabindex="-1">バイク車庫</a>&nbsp;&nbsp;■&nbsp;&nbsp;<a href="#archive" data-fil-group="cat" data-fil-val="ガレージ" tabindex="-1">ガレージ</a>&nbsp;&nbsp;■&nbsp;&nbsp;</span>
     </div>
   </div>
 </section>
@@ -1479,6 +1457,8 @@ const INNER = {
                      発表を受けて当サイトに型番を追加したときは、別に '新商品' を立てる。
    既存の記録は削除・改変しないこと（この台帳は追記のみ）。 */
 const UPDATE_LOG = [
+  { date:'2026-10-14', type:'改定', title:'トップページで横に流れていた帯をやめました',
+    body:'ヒーローの下に、タクボ・イナバ・ヨドコウ・物置・バイク車庫・ガレージの6語が横に流れる帯を置いていました。外しました。6語のうち3つはすぐ下の「三大メーカー。」へ移動するだけ、残る3つは索引の絞り込みボタンを裏で押す作りで、その索引には最初から物置・バイク車庫・ガレージ・ドア型/タイヤ収納庫・宅配ボックスの5つのボタンが見える形で並んでいます。帯のほうは3つしか持っていないので、見えている操作盤より選べる数が少ない状態でした。動いている文字は押しにくく、スマホでは触れると6秒だけ止まる作りで、押したいものを押す操作になっていませんでした。置き場所もヒーローと探し方の帯のあいだで、入口までの間に1行はさまっていました。カテゴリーの絞り込みは索引のボタンから、メーカーは探し方の03とナビから、これまでどおり使えます。' },
   { date:'2026-10-14', type:'改定', title:'トップページの探し方を、1つの帯にまとめました',
     body:'トップページには「探し方は3つ」の帯と「物置マッチング診断」の帯が続けて並んでいて、どちらにも01・02・03と番号が振られていました。上の帯の「収納する物から」を押すと下の帯まで移動し、そこで「用途で選ぶ」をもう一度押す形でした。同じ入口が二重になっていたので、帯を1つにしました。01 置ける寸法から／02 収納する物から／03 メーカーから／04 型番から の4つを横に並べ、どれも1回押せば目的の画面に着く形にしました（画面の狭い端末では2列になります）。01から03は診断をその場で開き、04は型番索引に移ります。診断を開かずに寸法の帯の一覧を見たい場合は、01の中の小さなリンクから入れます。縦に積んだ大きなバナーをやめたので、この部分の高さは4分の1ほどになりました。掲載しているデータと診断の中身は変えていません。' },
   { date:'2026-10-13', type:'改定', title:'イナバはドマール18型番だけ内寸を載せました。他のシリーズは見送りです',
@@ -3205,24 +3185,6 @@ renderIndex();
   if(cl) cl.addEventListener('click', clearCompare);
   if(cx) cx.addEventListener('click', closeCompare);
   renderTray();
-})();
-/* ───── マーキー：クリックで索引を絞り込み／タップで一時停止 ───── */
-(function(){
-  const mq = document.querySelector('.marquee');
-  if(!mq) return;
-  let timer;
-  mq.addEventListener('touchstart', () => {
-    mq.classList.add('is-paused');
-    clearTimeout(timer);
-    timer = setTimeout(() => mq.classList.remove('is-paused'), 6000);
-  }, { passive: true });
-  mq.addEventListener('click', e => {
-    const a = e.target.closest('a[data-fil-group]');
-    if(!a) return;
-    const btn = document.querySelector(
-      `.idx-filter[data-group="${a.dataset.filGroup}"][data-val="${a.dataset.filVal}"]`);
-    if(btn) btn.click();
-  });
 })();
 
 document.querySelectorAll('.idx-filter').forEach(b => {
