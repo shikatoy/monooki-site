@@ -25,7 +25,7 @@
 <!-- ANALYTICS_END -->
 <title>物置どれがいい？｜イナバ・ヨド・タクボの全型番を寸法から比較</title>
 <meta name="description" content="イナバ・ヨドコウ・タクボの物置を、公式の寸法表にもとづく全型番のサイズ表で比較できます。置き場所の間口・奥行・高さを入れると、屋根の張り出しと基礎ブロック分を含めて収まる機種に絞り込み。見積書の型番から逆引きする索引もあります。">
-<meta name="theme-color" content="#101010">
+<meta name="theme-color" content="#161616">
 <meta name="google-site-verification" content="UyOuUgdHmuNVYiGnNzDQvFTut000UJ1k8QNdAMbVAC8" />
 <!-- OGP/canonical: 公開URL設定済み（https://monooki-erabi.com/） -->
 <link rel="canonical" href="https://monooki-erabi.com/">
@@ -65,10 +65,10 @@ tailwind.config = {
         mono: ['"IBM Plex Mono"', 'monospace']
       },
       colors: {
-        ink: '#101010',
-        paper: '#f8f6f0',
-        line: '#171717',
-        linesoft: '#dcdcd8',
+        ink: '#161616',
+        paper: '#ffffff',
+        line: '#161616',
+        linesoft: '#e0e0e0',
         rust: '#a3512b'
       },
       letterSpacing: { widest2: '.28em' }
@@ -83,7 +83,7 @@ tailwind.config = {
   ::selection { background: #a3512b; color: #fff; }
 
   /* ───── 配色（案C ベージュ基調）: 診断・索引・コラムを一段濃い生成りに ───── */
-  #shindan, #archive, #articles { background: #efe9dc; }
+  #shindan, #archive, #articles { background: #f4f4f4; }
 
   .tate { writing-mode: vertical-rl; text-orientation: mixed; }
 
@@ -96,14 +96,14 @@ tailwind.config = {
 
   /* ───── 罫線ホバー（選択肢） ───── */
   .opt-row { position: relative; transition: color .25s ease; }
-  .opt-row::before { content: ''; position: absolute; inset: 0; background: #101010; transform: scaleY(0); transform-origin: bottom; transition: transform .28s cubic-bezier(.22,1,.36,1); z-index: 0; }
+  .opt-row::before { content: ''; position: absolute; inset: 0; background: #161616; transform: scaleY(0); transform-origin: bottom; transition: transform .28s cubic-bezier(.22,1,.36,1); z-index: 0; }
   .opt-row:hover::before { transform: scaleY(1); }
   .opt-row:hover { color: #fff; }
   .opt-row > * { position: relative; z-index: 1; }
 
   /* ───── エントリーバナー ───── */
   .entry-banner { position: relative; overflow: hidden; transition: color .3s ease; }
-  .entry-banner::before { content: ''; position: absolute; inset: 0; background: #101010; transform: translateY(101%); transition: transform .38s cubic-bezier(.22,1,.36,1); }
+  .entry-banner::before { content: ''; position: absolute; inset: 0; background: #161616; transform: translateY(101%); transition: transform .38s cubic-bezier(.22,1,.36,1); }
   .entry-banner:hover::before { transform: translateY(0); }
   .entry-banner:hover { color: #fff; }
   .entry-banner > * { position: relative; }
@@ -124,7 +124,7 @@ tailwind.config = {
   .qa-item.col-item.qa-open .qa-panel { max-height: 2400px; }
 
   /* ───── 図版（ハッチ地） ───── */
-  .hatch-bg { background-image: repeating-linear-gradient(45deg, transparent, transparent 7px, rgba(16,16,16,.05) 7px, rgba(16,16,16,.05) 8px); }
+  .hatch-bg { background-image: repeating-linear-gradient(45deg, transparent, transparent 7px, rgba(22,22,22,.05) 7px, rgba(22,22,22,.05) 8px); }
 
   /* ───── 更新履歴 → 商品カードへのリンク ───── */
   .journal-link { color: #a3512b; border-bottom: 1px solid currentColor; transition: opacity .25s ease; }
@@ -133,8 +133,8 @@ tailwind.config = {
   [id^="product-"]:target { outline: 2px solid #a3512b; outline-offset: -2px; }
 
   /* ───── 診断結果シェアボタン ───── */
-  .share-btn { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em; border: 1px solid #171717; padding: 9px 16px; background: transparent; cursor: pointer; transition: all .25s ease; }
-  .share-btn:hover { background: #101010; color: #f8f6f0; }
+  .share-btn { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em; border: 1px solid #161616; padding: 9px 16px; background: transparent; cursor: pointer; transition: all .25s ease; }
+  .share-btn:hover { background: #161616; color: #ffffff; }
 
   /* ───── 日本語の折り返し位置 ─────
      既定では文字単位で折り返すため「お出しし／ます。」のように語の途中で切れる。
@@ -162,43 +162,43 @@ tailwind.config = {
   .u-link.nav-active::after { transform: scaleX(1); transform-origin: left; background: #a3512b; }
 
   /* ───── メーカー別ラインアップの製品名リンク（濃色地） ───── */
-  .ln-link { border-bottom: 1px solid rgba(248,246,240,.3); transition: color .25s ease, border-color .25s ease; }
+  .ln-link { border-bottom: 1px solid rgba(255,255,255,.3); transition: color .25s ease, border-color .25s ease; }
   .ln-link:hover { color: #d08a5f; border-color: #d08a5f; }
 
   /* ───── 比較 ───── */
   #compare-tray.tray-open { transform: translateY(0); }
-  .cmp-chip { display:inline-flex; align-items:center; gap:8px; border:1px solid #171717; padding:5px 10px; font-size:11px; }
+  .cmp-chip { display:inline-flex; align-items:center; gap:8px; border:1px solid #161616; padding:5px 10px; font-size:11px; }
   .cmp-chip button { font-family:'IBM Plex Mono',monospace; color:#a3512b; }
-  .cmp-on { background:#101010 !important; color:#f8f6f0 !important; }
+  .cmp-on { background:#161616 !important; color:#ffffff !important; }
   .cmp-table { width:100%; border-collapse:collapse; font-size:13px; }
-  .cmp-table th, .cmp-table td { border:1px solid #dcdcd8; padding:12px 14px; vertical-align:top; line-height:1.9; text-align:left; }
-  .cmp-table thead th { border-color:#171717; background:#efe9dc; font-family:'Shippori Mincho B1',serif; font-weight:700; font-size:15px; }
-  .cmp-table tbody th { width:110px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#6b6b66; font-weight:400; white-space:nowrap; background:#faf8f3; }
+  .cmp-table th, .cmp-table td { border:1px solid #e0e0e0; padding:12px 14px; vertical-align:top; line-height:1.9; text-align:left; }
+  .cmp-table thead th { border-color:#161616; background:#f4f4f4; font-family:'Shippori Mincho B1',serif; font-weight:700; font-size:15px; }
+  .cmp-table tbody th { width:110px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#6b6b6b; font-weight:400; white-space:nowrap; background:#ffffff; }
   .cmp-wrap { overflow-x:auto; }
   @media (min-width:768px){ .cmp-table { font-size:14px; } .cmp-table tbody th { width:140px; } }
 
   /* ───── 索引フィルタ ───── */
-  .idx-filter { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; border: 1px solid #171717; padding: 6px 14px; transition: all .25s ease; }
-  .idx-filter:hover { background: #e6dfd0; }
-  .idx-filter.active { background: #101010; color: #ffffff; }
+  .idx-filter { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; border: 1px solid #161616; padding: 6px 14px; transition: all .25s ease; }
+  .idx-filter:hover { background: #e8e8e8; }
+  .idx-filter.active { background: #161616; color: #ffffff; }
   /* 結果画面の絞り込みチップ。索引のフィルタと同じ体裁にそろえる */
-  .fchip { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; border: 1px solid #171717; padding: 6px 12px; transition: all .25s ease; }
-  .fchip:hover { background: #e6dfd0; }
-  .fchip.active { background: #101010; color: #ffffff; }
+  .fchip { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; border: 1px solid #161616; padding: 6px 12px; transition: all .25s ease; }
+  .fchip:hover { background: #e8e8e8; }
+  .fchip.active { background: #161616; color: #ffffff; }
 
   /* ───── アウトライン文字 ───── */
   .outline-w { -webkit-text-stroke: 1px rgba(255,255,255,.55); color: transparent; }
 
   /* ───── フォーム下線 ───── */
-  .ed-input { background: transparent; border: 0; border-bottom: 1px solid #171717; border-radius: 0; padding: 12px 0; width: 100%; font-size: 15px; outline: none; transition: border-color .3s ease; }
+  .ed-input { background: transparent; border: 0; border-bottom: 1px solid #161616; border-radius: 0; padding: 12px 0; width: 100%; font-size: 15px; outline: none; transition: border-color .3s ease; }
   .ed-input:focus { border-bottom-color: #a3512b; border-bottom-width: 2px; margin-bottom: -1px; }
-  .ed-input::placeholder { color: #b9b9b4; }
+  .ed-input::placeholder { color: #bababa; }
 
   /* ───── 寸法入力（設計図風） ───── */
-  .mm-input { background: transparent; border: 0; border-bottom: 1px solid #171717; border-radius: 0; padding: 4px 0; width: 100%; outline: none; color: #101010; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 30px; line-height: 1.2; letter-spacing: .02em; -moz-appearance: textfield; transition: border-color .3s ease; }
+  .mm-input { background: transparent; border: 0; border-bottom: 1px solid #161616; border-radius: 0; padding: 4px 0; width: 100%; outline: none; color: #161616; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 30px; line-height: 1.2; letter-spacing: .02em; -moz-appearance: textfield; transition: border-color .3s ease; }
   .mm-input::-webkit-outer-spin-button, .mm-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
   .mm-input:focus { border-bottom-color: #a3512b; border-bottom-width: 2px; margin-bottom: -1px; }
-  #size-box { transition: width .2s ease, height .2s ease; background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(16,16,16,.08) 5px, rgba(16,16,16,.08) 6px); }
+  #size-box { transition: width .2s ease, height .2s ease; background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(22,22,22,.08) 5px, rgba(22,22,22,.08) 6px); }
 
   /* ───── 汎用アニメーション ───── */
   .fade-up { animation: fadeUp .7s cubic-bezier(.22,1,.36,1) both; }
@@ -1457,6 +1457,8 @@ const INNER = {
                      発表を受けて当サイトに型番を追加したときは、別に '新商品' を立てる。
    既存の記録は削除・改変しないこと（この台帳は追記のみ）。 */
 const UPDATE_LOG = [
+  { date:'2026-10-14', type:'改定', title:'サイト全体の配色を、生成り色からグレーに変えました',
+    body:'地色をベージュ（#f8f6f0）から白に、区画の色を#efe9dcから#f4f4f4に変えました。文字の黒は#161616、細い罫は#e0e0e0です。茶色のアクセント（#a3512b）はそのままです。黄みの強い色を画面の広い面に敷いていたため、紙が日に焼けたような見え方になっていました。地色の色みを抜いて明るさの差だけで区切る形に変えています。本文と地色の明暗の比は7.23から7.81に、アクセントと地色の比は5.16から5.57になり、読みやすさの数値は下がっていません。製品の正面図と写真が地色に溶けなくなるので、索引と製品ページでは製品が前に出ます。タクボ ペインタの柄の色は製品の実際の色なので変えていません。トップ・記事・製品ページ・サイズ帯ページ・運営者情報を含む117ファイルをまとめて差し替えました。' },
   { date:'2026-10-14', type:'改定', title:'トップページで横に流れていた帯をやめました',
     body:'ヒーローの下に、タクボ・イナバ・ヨドコウ・物置・バイク車庫・ガレージの6語が横に流れる帯を置いていました。外しました。6語のうち3つはすぐ下の「三大メーカー。」へ移動するだけ、残る3つは索引の絞り込みボタンを裏で押す作りで、その索引には最初から物置・バイク車庫・ガレージ・ドア型/タイヤ収納庫・宅配ボックスの5つのボタンが見える形で並んでいます。帯のほうは3つしか持っていないので、見えている操作盤より選べる数が少ない状態でした。動いている文字は押しにくく、スマホでは触れると6秒だけ止まる作りで、押したいものを押す操作になっていませんでした。置き場所もヒーローと探し方の帯のあいだで、入口までの間に1行はさまっていました。カテゴリーの絞り込みは索引のボタンから、メーカーは探し方の03とナビから、これまでどおり使えます。' },
   { date:'2026-10-14', type:'改定', title:'トップページの探し方を、1つの帯にまとめました',
@@ -3041,7 +3043,7 @@ function openCompare(){
     <div class="cmp-wrap mt-10">
       <table class="cmp-table">
         <thead>
-          <tr><th style="background:#faf8f3"></th>${compareSel.map(id => {
+          <tr><th style="background:#ffffff"></th>${compareSel.map(id => {
             const p = PRODUCTS.find(x => x.id === id);
             return `<th>${p ? esc(p.name) : '—'}</th>`;
           }).join('')}</tr>

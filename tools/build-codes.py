@@ -64,11 +64,11 @@ def build():
     </div>
 
     <div class="note">
-      <label for="code-q" style="display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#6b6b66">型番で絞る</label>
+      <label for="code-q" style="display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#6b6b6b">型番で絞る</label>
       <input id="code-q" type="search" inputmode="latin" autocomplete="off" spellcheck="false"
              placeholder="例：FS-2215S／LMD-2515／GP-115D"
-             style="width:100%%;margin-top:10px;padding:12px 2px;border:0;border-bottom:1px solid #171717;background:transparent;font-family:'IBM Plex Mono',monospace;font-size:20px;letter-spacing:.06em;outline:none;border-radius:0">
-      <p id="code-hit" style="margin:10px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6b6b66;min-height:1.2em"></p>
+             style="width:100%%;margin-top:10px;padding:12px 2px;border:0;border-bottom:1px solid #161616;background:transparent;font-family:'IBM Plex Mono',monospace;font-size:20px;letter-spacing:.06em;outline:none;border-radius:0">
+      <p id="code-hit" style="margin:10px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6b6b6b;min-height:1.2em"></p>
       <p style="margin:14px 0 0">※打ち込んだ文字を含む型番だけが残ります。シリーズ名でも絞れます。<b>見当たらないときは、生産が終わっている可能性があります。</b><a href="discontinued.html">廃盤・生産終了</a>のページに、公式発表で確認できたものを記録しています。</p>
       <p style="margin:14px 0 0">※旧型番の寸法は載せていません。買い替え先をさがすときは、<b>いま置いてある物置を実際に測って</b>、<a href="../size/">寸法から探す</a>で当たるのが確実です。型番の数字は、メーカーが違えば指す寸法も違います。</p>
     </div>

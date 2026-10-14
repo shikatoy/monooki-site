@@ -53,23 +53,23 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
                src:url('_ogfonts/sm-jp-700.woff2') format('woff2'); }
   * { margin:0; padding:0; box-sizing:border-box; }
   html,body { width:600px; height:315px; }
-  body { background:#f8f6f0; -webkit-font-smoothing:antialiased; }
+  body { background:#ffffff; -webkit-font-smoothing:antialiased; }
   .frame { position:absolute; left:11px; top:11px; right:11px; bottom:11px;
-           border:1px solid #101010; }
+           border:1px solid #161616; }
   .hdr, .ftr { position:absolute; left:38px; right:38px;
                display:flex; justify-content:space-between; align-items:baseline; }
   .hdr { top:35px; }
   .ftr { top:267.5px; }
   .mono { font-family:'DejaVu Sans Mono',monospace; font-size:10px; line-height:14px;
-          letter-spacing:.2em; color:#101010; }
+          letter-spacing:.2em; color:#161616; }
   .rust { color:#a3512b; }
   .ftr .jp { font-family:'SMB1',serif; font-weight:700; font-size:9.5px;
-             line-height:14px; letter-spacing:0; color:#101010; }
-  .rule { position:absolute; left:38px; right:38px; height:1px; background:#101010; }
+             line-height:14px; letter-spacing:0; color:#161616; }
+  .rule { position:absolute; left:38px; right:38px; height:1px; background:#161616; }
   .r1 { top:58px; } .r2 { top:256px; }
   .ttl { position:absolute; left:38px; top:58px; height:198px; width:400px;
          display:flex; flex-direction:column; justify-content:center;
-         font-family:'SMB1',serif; font-weight:700; color:#101010;
+         font-family:'SMB1',serif; font-weight:700; color:#161616;
          font-size:32px; line-height:46.5px; letter-spacing:0; }
   .ttl .ln { white-space:nowrap; }
   .ttl.s2 { font-size:28px; line-height:41px; }
@@ -81,7 +81,7 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
   <div class="rule r1"></div>
   <div class="ttl __CLS__">__TITLE__</div>
   <svg class="shed" width="105" height="41" viewBox="0 0 105 41" fill="none"
-       stroke="#7d7b76" stroke-width="1">
+       stroke="#7d7d7d" stroke-width="1">
     <rect x="4.5" y="0.5" width="96" height="5.5"/>
     <rect x="8.5" y="12.5" width="87" height="25"/>
     <line x1="52" y1="12.5" x2="52" y2="37.5"/>

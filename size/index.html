@@ -25,7 +25,7 @@
 <!-- ANALYTICS_END -->
 <title>寸法から物置をさがす｜奥行・高さ・間口で絞り込む｜物置どれがいい？</title>
 <meta name="description" content="置ける場所の寸法から物置をさがせます。奥行・高さ・間口ごとに、タクボ・イナバ・ヨドコウの型番を横断して並べています。">
-<meta name="theme-color" content="#101010">
+<meta name="theme-color" content="#161616">
 <link rel="canonical" href="https://monooki-erabi.com/size/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="物置どれがいい？">
@@ -44,12 +44,12 @@
 <style>
   /* ═══════ 記事一覧ページ専用スタイル（index.html とは独立。共通化しないこと） ═══════ */
   :root {
-    --ink: #101010;
-    --paper: #f8f6f0;
-    --line: #171717;
-    --linesoft: #dcdcd8;
+    --ink: #161616;
+    --paper: #ffffff;
+    --line: #161616;
+    --linesoft: #e0e0e0;
     --rust: #a3512b;
-    --mute: #6b6b66;
+    --mute: #6b6b6b;
   }
   *, *::before, *::after { box-sizing: border-box; }
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -70,7 +70,7 @@
   /* ───── ヘッダー ───── */
   .site-header {
     position: sticky; top: 0; z-index: 40;
-    background: rgba(248, 246, 240, .95);
+    background: rgba(255,255,255, .95);
     backdrop-filter: blur(4px);
     border-bottom: 1px solid var(--line);
   }
@@ -106,7 +106,7 @@
     display: grid; grid-template-columns: 1fr; gap: 12px;
     transition: opacity .3s ease;
   }
-  .card-date { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .12em; color: #8f8f8a; }
+  .card-date { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .12em; color: #8f8f8f; }
   .card-date .card-tag { display: block; margin-top: 6px; font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--rust); }
   .card-title {
     margin: 0; font-family: 'Shippori Mincho B1', serif; font-weight: 700;
@@ -127,7 +127,7 @@
   .site-footer { background: var(--ink); color: var(--paper); }
   .site-footer-inner { max-width: 1440px; margin: 0 auto; padding: 48px 20px; }
   .footer-meta { display: flex; flex-direction: column; gap: 12px;
-    font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .18em; color: #8f8f8a; }
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .18em; color: #8f8f8f; }
   .footer-meta a { text-decoration: none; }
   .footer-meta a:hover { color: var(--paper); }
 
@@ -150,9 +150,9 @@
   .crumbs { margin:28px 0 0; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:var(--mute); }
   .crumbs a { text-decoration:none; border-bottom:1px solid var(--linesoft); }
   .crumbs a:hover { color:var(--rust); border-bottom-color:currentColor; }
-  .crumbs span { margin:0 8px; color:#b9b9b4; }
-  .note { margin:22px 0 0; padding:18px 20px; border:1px solid var(--linesoft); background:#efe9dc; font-size:13px; line-height:2; }
-  .cta { margin:40px 0 0; padding:34px 26px; border:1px solid var(--line); background:#efe9dc; }
+  .crumbs span { margin:0 8px; color:#bababa; }
+  .note { margin:22px 0 0; padding:18px 20px; border:1px solid var(--linesoft); background:#f4f4f4; font-size:13px; line-height:2; }
+  .cta { margin:40px 0 0; padding:34px 26px; border:1px solid var(--line); background:#f4f4f4; }
   .cta-label { margin:0; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--rust); }
   .cta-title { margin:16px 0 0; font-family:'Shippori Mincho B1',serif; font-weight:800; font-size:clamp(1.25rem,4vw,1.6rem); line-height:1.7; }
   .cta-text { margin:16px 0 0; font-size:13px; line-height:2.1; color:var(--mute); }
@@ -169,7 +169,7 @@
   .sz-table td:nth-child(2), .sz-table th:nth-child(2),
   .sz-table td:nth-child(3), .sz-table th:nth-child(3) { text-align:left; }
   .sz-table td:nth-child(3) { font-family:'IBM Plex Mono',monospace; letter-spacing:.02em; }
-  .sz-table tbody tr:hover { background:#efe9dc; }
+  .sz-table tbody tr:hover { background:#f4f4f4; }
   .sz-table a { text-decoration:none; border-bottom:1px solid var(--linesoft); }
   .sz-table a:hover { color:var(--rust); border-bottom-color:currentColor; }
   .sz-sum { margin:26px 0 0; border:1px solid var(--line); }

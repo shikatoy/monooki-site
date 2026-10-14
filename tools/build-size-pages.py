@@ -96,9 +96,9 @@ EXTRA_CSS = """
   .crumbs { margin:28px 0 0; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:var(--mute); }
   .crumbs a { text-decoration:none; border-bottom:1px solid var(--linesoft); }
   .crumbs a:hover { color:var(--rust); border-bottom-color:currentColor; }
-  .crumbs span { margin:0 8px; color:#b9b9b4; }
-  .note { margin:22px 0 0; padding:18px 20px; border:1px solid var(--linesoft); background:#efe9dc; font-size:13px; line-height:2; }
-  .cta { margin:40px 0 0; padding:34px 26px; border:1px solid var(--line); background:#efe9dc; }
+  .crumbs span { margin:0 8px; color:#bababa; }
+  .note { margin:22px 0 0; padding:18px 20px; border:1px solid var(--linesoft); background:#f4f4f4; font-size:13px; line-height:2; }
+  .cta { margin:40px 0 0; padding:34px 26px; border:1px solid var(--line); background:#f4f4f4; }
   .cta-label { margin:0; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--rust); }
   .cta-title { margin:16px 0 0; font-family:'Shippori Mincho B1',serif; font-weight:800; font-size:clamp(1.25rem,4vw,1.6rem); line-height:1.7; }
   .cta-text { margin:16px 0 0; font-size:13px; line-height:2.1; color:var(--mute); }
@@ -115,7 +115,7 @@ EXTRA_CSS = """
   .sz-table td:nth-child(2), .sz-table th:nth-child(2),
   .sz-table td:nth-child(3), .sz-table th:nth-child(3) { text-align:left; }
   .sz-table td:nth-child(3) { font-family:'IBM Plex Mono',monospace; letter-spacing:.02em; }
-  .sz-table tbody tr:hover { background:#efe9dc; }
+  .sz-table tbody tr:hover { background:#f4f4f4; }
   .sz-table a { text-decoration:none; border-bottom:1px solid var(--linesoft); }
   .sz-table a:hover { color:var(--rust); border-bottom-color:currentColor; }
   .sz-sum { margin:26px 0 0; border:1px solid var(--line); }
@@ -166,7 +166,7 @@ def page_html(cfg, rows, series, style, nav_links, desc, scope, split_p):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>%(h1)s｜%(site)s</title>
 <meta name="description" content="%(desc)s">
-<meta name="theme-color" content="#101010">
+<meta name="theme-color" content="#161616">
 <link rel="canonical" href="%(url)s">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="%(site)s">
@@ -283,7 +283,7 @@ def hub_html(style, cards):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>寸法から物置をさがす｜奥行・高さ・間口で絞り込む｜%(site)s</title>
 <meta name="description" content="%(desc)s">
-<meta name="theme-color" content="#101010">
+<meta name="theme-color" content="#161616">
 <link rel="canonical" href="%(url)s">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="%(site)s">

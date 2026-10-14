@@ -62,7 +62,7 @@ def block(p, rows):
         name = ('<a href="%s">%s</a>' % (os.path.basename(q["page"]), C.esc(q["name"]))
                 if q.get("page") else C.esc(q["name"]))
         tr.append(
-            "<tr><td class=\"l\">%s<br><span class=\"m\" style=\"font-size:11px;color:#6b6b66\">%s</span></td>"
+            "<tr><td class=\"l\">%s<br><span class=\"m\" style=\"font-size:11px;color:#6b6b6b\">%s</span></td>"
             "<td class=\"l m\">%s<br>%s×%s×%s</td>"
             "<td class=\"l m\">%s<br>%s×%s×%s</td>"
             "<td>%d</td></tr>"

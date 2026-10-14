@@ -85,19 +85,19 @@ EXTRA_CSS = """
   .crumbs { margin:28px 0 0; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:var(--mute); }
   .crumbs a { text-decoration:none; border-bottom:1px solid var(--linesoft); }
   .crumbs a:hover { color:var(--rust); border-bottom-color:currentColor; }
-  .crumbs span { margin:0 8px; color:#b9b9b4; }
-  .note { margin:22px 0 0; padding:18px 20px; border:1px solid var(--linesoft); background:#efe9dc; font-size:13px; line-height:2; }
-  .note a { color:inherit; text-decoration:none; border-bottom:1px solid #b9b9b4; }
+  .crumbs span { margin:0 8px; color:#bababa; }
+  .note { margin:22px 0 0; padding:18px 20px; border:1px solid var(--linesoft); background:#f4f4f4; font-size:13px; line-height:2; }
+  .note a { color:inherit; text-decoration:none; border-bottom:1px solid #bababa; }
   .note a:hover { color:var(--rust); border-bottom-color:currentColor; }
   .tbl { width:100%; border-collapse:collapse; margin:18px 0 0; font-size:13px; }
   .tbl th, .tbl td { padding:10px 8px; border-bottom:1px solid var(--linesoft); text-align:right; font-variant-numeric:tabular-nums; }
   .tbl th { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--mute); font-weight:400; border-bottom:1px solid var(--line); white-space:nowrap; }
   .tbl td.l, .tbl th.l { text-align:left; }
   .tbl td.m { font-family:'IBM Plex Mono',monospace; letter-spacing:.02em; }
-  .tbl tbody tr:hover { background:#efe9dc; }
+  .tbl tbody tr:hover { background:#f4f4f4; }
   .tbl a { text-decoration:none; border-bottom:1px solid var(--linesoft); }
   .tbl a:hover { color:var(--rust); border-bottom-color:currentColor; }
-  .grp { margin:44px 0 0; padding:14px 16px; border:1px solid var(--line); background:#efe9dc; }
+  .grp { margin:44px 0 0; padding:14px 16px; border:1px solid var(--line); background:#f4f4f4; }
   .grp h2 { margin:0; font-family:'Shippori Mincho B1',serif; font-weight:700; font-size:17px; line-height:1.6; }
   .grp p { margin:5px 0 0; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:var(--mute); }
   .grp a { text-decoration:none; border-bottom:1px solid var(--linesoft); }
@@ -109,7 +109,7 @@ EXTRA_CSS = """
   .links a { border:1px solid var(--line); padding:9px 14px; font-size:12px; text-decoration:none; }
   .links a:hover { background:var(--ink); color:var(--paper); }
   .links a.is-here { background:var(--ink); color:var(--paper); pointer-events:none; }
-  .cta { margin:40px 0 0; padding:34px 26px; border:1px solid var(--line); background:#efe9dc; }
+  .cta { margin:40px 0 0; padding:34px 26px; border:1px solid var(--line); background:#f4f4f4; }
   .cta-label { margin:0; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--rust); }
   .cta-title { margin:16px 0 0; font-family:'Shippori Mincho B1',serif; font-weight:800; font-size:clamp(1.25rem,4vw,1.6rem); line-height:1.7; }
   .cta-text { margin:16px 0 0; font-size:13px; line-height:2.1; color:var(--mute); }
@@ -137,7 +137,7 @@ def shell(title, desc, url, up, crumbs, body, style, jsonld):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>%(title)s｜%(site)s</title>
 <meta name="description" content="%(desc)s">
-<meta name="theme-color" content="#101010">
+<meta name="theme-color" content="#161616">
 <link rel="canonical" href="%(url)s">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="%(site)s">

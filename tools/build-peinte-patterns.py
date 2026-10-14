@@ -129,7 +129,7 @@ CSS = CSSBEG + """
   .pat svg { display: block; width: 100%; height: auto; }
   .pat { margin: 0; border: 1px solid var(--line); background: #fff; display: flex; flex-direction: column; }
   .pat figcaption { flex: 1 1 auto; padding: 9px 11px; border-top: 1px solid var(--linesoft);
-    background: #efe9dc; display: flex; flex-direction: column; justify-content: center; }
+    background: #f4f4f4; display: flex; flex-direction: column; justify-content: center; }
   .pat-cat { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 9px;
     letter-spacing: .1em; color: var(--mute); }
   .pat-name { display: block; margin-top: 3px; font-family: 'Shippori Mincho B1', serif;

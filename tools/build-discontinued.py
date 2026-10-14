@@ -74,10 +74,10 @@ EXTRA = """
   .crumbs { margin:28px 0 0; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:var(--mute); }
   .crumbs a { text-decoration:none; border-bottom:1px solid var(--linesoft); }
   .crumbs a:hover { color:var(--rust); border-bottom-color:currentColor; }
-  .crumbs span { margin:0 8px; color:#b9b9b4; }
-  .note { margin:22px 0 0; padding:18px 20px; border:1px solid var(--linesoft); background:#efe9dc; font-size:13px; line-height:2; }
+  .crumbs span { margin:0 8px; color:#bababa; }
+  .note { margin:22px 0 0; padding:18px 20px; border:1px solid var(--linesoft); background:#f4f4f4; font-size:13px; line-height:2; }
   .dc { margin:34px 0 0; border:1px solid var(--line); }
-  .dc-head { padding:16px 18px; border-bottom:1px solid var(--line); background:#efe9dc; }
+  .dc-head { padding:16px 18px; border-bottom:1px solid var(--line); background:#f4f4f4; }
   .dc-name { margin:0; font-family:'Shippori Mincho B1',serif; font-weight:700; font-size:18px; line-height:1.6; }
   .dc-meta { margin:6px 0 0; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:var(--mute); }
   .dc-rows { }
@@ -87,7 +87,7 @@ EXTRA = """
   .dc-row dd { margin:0; }
   .dc-row a { border-bottom:1px solid var(--linesoft); text-decoration:none; }
   .dc-row a:hover { color:var(--rust); border-bottom-color:currentColor; }
-  .cta { margin:40px 0 0; padding:34px 26px; border:1px solid var(--line); background:#efe9dc; }
+  .cta { margin:40px 0 0; padding:34px 26px; border:1px solid var(--line); background:#f4f4f4; }
   .cta-label { margin:0; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--rust); }
   .cta-title { margin:16px 0 0; font-family:'Shippori Mincho B1',serif; font-weight:800; font-size:clamp(1.25rem,4vw,1.6rem); line-height:1.7; }
   .cta-text { margin:16px 0 0; font-size:13px; line-height:2.1; color:var(--mute); }
@@ -138,7 +138,7 @@ def build():
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>%(h1)s｜%(site)s</title>
 <meta name="description" content="%(desc)s">
-<meta name="theme-color" content="#101010">
+<meta name="theme-color" content="#161616">
 <link rel="canonical" href="%(url)s">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="%(site)s">

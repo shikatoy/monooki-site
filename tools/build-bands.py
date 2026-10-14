@@ -169,7 +169,7 @@ def build():
       <p style="margin:14px 0 0">※本体の下には基礎用コンクリートブロック（基本 高さ約10cm）を敷きます。<b>実際の高さは「本体高さ＋約10cm」</b>になります。</p>
     </div>
 
-    <div class="grp" style="background:#fffdf9">%(sums)s</div>
+    <div class="grp" style="background:#ffffff">%(sums)s</div>
 
     <table class="tbl">
       <thead><tr><th class="l">メーカー</th><th class="l">シリーズ</th><th class="l">型番</th><th>間口 mm</th><th>奥行 mm</th><th>高さ mm</th></tr></thead>

@@ -21,7 +21,7 @@ CSS = CSSBEG + """
   @media (min-width: 620px) { .dfig-grid { grid-template-columns: 1fr 1fr; } }
   .dfig figure { margin: 0; border: 1px solid var(--line); background: #fff; }
   .dfig svg { display: block; width: 100%; height: auto; }
-  .dfig figcaption { padding: 11px 14px; border-top: 1px solid var(--linesoft); background: #efe9dc; }
+  .dfig figcaption { padding: 11px 14px; border-top: 1px solid var(--linesoft); background: #f4f4f4; }
   .dfig-t { display: block; font-family: 'Shippori Mincho B1', serif; font-weight: 700; font-size: 14px; }
   .dfig-s { display: block; margin-top: 4px; font-size: 12px; line-height: 1.8; color: var(--mute); }
   .dfig-note { margin: 14px 0 0; font-size: 12px; line-height: 1.95; color: var(--mute); }
@@ -40,12 +40,12 @@ def panel(mirror):
 
     o = []
     # 地面
-    o.append('<line x1="10" y1="%d" x2="%d" y2="%d" stroke="#101010" stroke-width="2"/>' % (BODY_B, W - 10, BODY_B))
+    o.append('<line x1="10" y1="%d" x2="%d" y2="%d" stroke="#161616" stroke-width="2"/>' % (BODY_B, W - 10, BODY_B))
     # 屋根
-    o.append('<rect x="%d" y="%d" width="%d" height="%d" fill="none" stroke="#101010" stroke-width="1.6"/>'
+    o.append('<rect x="%d" y="%d" width="%d" height="%d" fill="none" stroke="#161616" stroke-width="1.6"/>'
              % (X1 - 8, ROOF_Y, (X2 - X1) + 16, BODY_Y - ROOF_Y))
     # 本体の外枠
-    o.append('<rect x="%d" y="%d" width="%d" height="%d" fill="none" stroke="#101010" stroke-width="1.6"/>'
+    o.append('<rect x="%d" y="%d" width="%d" height="%d" fill="none" stroke="#161616" stroke-width="1.6"/>'
              % (X1, BODY_Y, X2 - X1, BODY_B - BODY_Y))
     # 開口（戸が退いてできた空き。中は暗がり）
     ox1, ox2 = sorted([fx(X1), fx(MID)])
@@ -53,14 +53,14 @@ def panel(mirror):
              % (ox1 + 1, BODY_Y + 1, ox2 - ox1 - 1, BODY_B - BODY_Y - 2))
     # 戸が重なっている側（固定パネル＋引いてきた戸の2枚）
     dx1, dx2 = sorted([fx(MID), fx(X2)])
-    o.append('<rect x="%.1f" y="%d" width="%.1f" height="%d" fill="#ffffff" stroke="#101010" stroke-width="1.4"/>'
+    o.append('<rect x="%.1f" y="%d" width="%.1f" height="%d" fill="#ffffff" stroke="#161616" stroke-width="1.4"/>'
              % (dx1, BODY_Y, dx2 - dx1, BODY_B - BODY_Y))
     inner = fx(MID + (X2 - MID) * 0.42)
-    o.append('<line x1="%.1f" y1="%d" x2="%.1f" y2="%d" stroke="#101010" stroke-width="1.2" opacity=".55"/>'
+    o.append('<line x1="%.1f" y1="%d" x2="%.1f" y2="%d" stroke="#161616" stroke-width="1.2" opacity=".55"/>'
              % (inner, BODY_Y + 4, inner, BODY_B - 4))
     # 取っ手
     gx = fx(MID + 7)
-    o.append('<line x1="%.1f" y1="86" x2="%.1f" y2="104" stroke="#101010" stroke-width="2.6"/>' % (gx, gx))
+    o.append('<line x1="%.1f" y1="86" x2="%.1f" y2="104" stroke="#161616" stroke-width="2.6"/>' % (gx, gx))
     # 引いた向きの矢印
     ay = BODY_B + 14
     a1, a2 = fx(MID - 34), fx(MID + 40)
