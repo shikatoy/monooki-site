@@ -1446,6 +1446,8 @@ const INNER = {
                      発表を受けて当サイトに型番を追加したときは、別に '新商品' を立てる。
    既存の記録は削除・改変しないこと（この台帳は追記のみ）。 */
 const UPDATE_LOG = [
+  { date:'2026-10-14', type:'改定', title:'索引のカードに、間口・奥行・高さと型番数を出しました',
+    body:'索引のカードは、図版・メーカー・区分・製品名・特徴の文・2つのボタンで、寸法が出ていませんでした。寸法で選ぶサイトの一覧に寸法が無く、いちばん効く情報を詳細ページに置いたままでした。全カードに同じ順・同じ書式で、間口・奥行・高さの範囲と、そのシリーズの型番数を出します。数値は掲載データ（PRODUCTS）から引いているので、型番を足せば自動で変わります。特徴の文は、長さがカードごとに違って並べて比べにくかったので、先頭の2つまでにしました（全部は製品ページにあります）。あわせて、2つのボタンをカードの下端でそろえ、行ごとに位置が揃うようにしています。9件を表示したときのカード一覧の高さは、画面幅1280で1,856pxから2,111pxになりました。' },
   { date:'2026-10-14', type:'改定', title:'文字の大きさを揃え、リンクの押せる範囲を広げました',
     body:'サイト全体の見直しの1回目です。文字の大きさに基準がなく、同じ役目の文字がページごとに9pxから16pxまで5種類に分かれていました。9pxと10pxは11pxへ、12pxは13pxへ、13pxは14pxへ上げ、11px未満を無くしました。欧文の小さなラベルの字間も0.28emから0.2emに詰めています。リンクの押せる範囲も広げました。パンくず、一覧のシリーズ名、型番索引の見出し、フッターのリンクなどに、高さ12〜20pxのものが多数ありました（トップで127か所中63か所）。文字の下線の位置を動かさずに当たり判定だけを広げる方法を採り、すべてのページで高さ24px以上を満たしています（文中のリンクは基準の例外）。画面幅320pxで表が横にはみ出していた箇所も直しました。運営者情報とプライバシーポリシーは、入れ物の最大幅が二重に指定されていて1行が91字になっていたので、記事と同じ46字前後に収めました。' },
   { date:'2026-10-14', type:'改定', title:'探し方の4つの入口を、独立したタイルにしました',
@@ -3119,6 +3121,22 @@ function variantBadge(p){
   return `<p class="vbadge">${esc(p.variant.kind)}${of}</p>`;
 }
 
+/* 索引カードの寸法。全カードで同じ順・同じ書式にする（出典：PRODUCTS の sizes） */
+function sizeDigest(p){
+  const S = p.sizes || [];
+  if(!S.length) return '';
+  const span = k => {
+    const a = S.map(x => x[k]).filter(v => typeof v === 'number');
+    if(!a.length) return '&mdash;';
+    const lo = Math.min(...a), hi = Math.max(...a);
+    const f = v => v.toLocaleString();
+    return (lo === hi ? f(lo) : f(lo) + '〜' + f(hi)) + ' mm';
+  };
+  const row = (label, val) => `<div class="flex justify-between gap-3 py-0.5"><dt class="text-neutral-500">${label}</dt><dd class="font-mono">${val}</dd></div>`;
+  return `<dl class="mt-4 border-t border-linesoft pt-3 text-[13px] leading-relaxed">
+      ${row('間口', span('w'))}${row('奥行', span('d'))}${row('高さ', span('h'))}${row('型番', S.length + ' 件')}
+    </dl>`;
+}
 function renderIndex(){
   const grid = document.querySelector('#index-grid');
   if(!grid) return;
@@ -3131,14 +3149,17 @@ function renderIndex(){
   const shown = idxExpanded ? items : items.slice(0, IDX_PREVIEW);
   if(count) count.textContent = `${shown.length} / ${items.length} 点を表示`;
   grid.innerHTML = items.length ? shown.map(p => `
-    <div id="product-${p.id}" class="border-r border-b border-line p-6 md:p-8 group fade-up">
+    <div id="product-${p.id}" class="flex flex-col border-r border-b border-line p-6 md:p-8 group fade-up">
       ${visualWrap(p, productVisual(p, null, false), 'aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-white/60')}
       <p class="mt-5 font-mono text-[11px] tracking-widest2 uppercase text-neutral-500">${MAKERS[p.maker]} — ${esc(p.cat)}${isNew(p) ? ' <span class="text-rust">● NEW</span>' : ''}</p>
       <h4 class="mt-2 font-serif font-bold text-lg leading-snug">${esc(p.name)}</h4>
       ${variantBadge(p)}
-      <p class="mt-2 text-[13px] leading-relaxed text-neutral-500">${p.features.map(esc).join('・')}</p>
-      ${PRODUCT_PAGES[p.id] ? `<a href="${PRODUCT_PAGES[p.id]}" class="block mt-4 w-full bg-ink text-paper py-2.5 text-center font-mono text-[11px] tracking-widest2 uppercase hover:bg-rust transition-colors duration-300">この物置の詳細 →</a>` : ''}
+      ${sizeDigest(p)}
+      <p class="mt-3 text-[13px] leading-relaxed text-neutral-500">${p.features.slice(0, 2).map(esc).join('・')}</p>
+      <div class="mt-auto pt-4">
+      ${PRODUCT_PAGES[p.id] ? `<a href="${PRODUCT_PAGES[p.id]}" class="block w-full bg-ink text-paper py-2.5 text-center font-mono text-[11px] tracking-widest2 uppercase hover:bg-rust transition-colors duration-300">この物置の詳細 →</a>` : ''}
       <button class="cmp-toggle mt-2 w-full border border-line py-2.5 font-mono text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300 ${compareSel.includes(p.id) ? 'cmp-on' : ''}" data-pid="${p.id}">${compareSel.includes(p.id) ? '✓ 比較中' : '＋ 比較に追加'}</button>
+      </div>
     </div>`).join('')
   : `<div class="col-span-full border-r border-b border-line p-12 text-center font-mono text-[11px] tracking-widest text-neutral-400">NO RESULT ── 該当する製品が見つかりませんでした。</div>`;
   grid.querySelectorAll('.cmp-toggle').forEach(b => b.addEventListener('click', () => toggleCompare(b.dataset.pid)));
