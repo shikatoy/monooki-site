@@ -130,15 +130,15 @@ CSS = CSSBEG + """
   .pat { margin: 0; border: 1px solid var(--line); background: #fff; display: flex; flex-direction: column; }
   .pat figcaption { flex: 1 1 auto; padding: 9px 11px; border-top: 1px solid var(--linesoft);
     background: #f4f4f4; display: flex; flex-direction: column; justify-content: center; }
-  .pat-cat { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  .pat-cat { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
     letter-spacing: .1em; color: var(--mute); }
   .pat-name { display: block; margin-top: 3px; font-family: 'Shippori Mincho B1', serif;
-    font-weight: 700; font-size: 13px; line-height: 1.45; }
+    font-weight: 700; font-size: 14px; line-height: 1.45; }
   .pat-body { margin: 22px 0 0; display: flex; gap: 10px; flex-wrap: wrap; }
   .pat-body span { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--linesoft);
     background: #fff; padding: 7px 12px; font-size: 12.5px; }
   .pat-body i { width: 15px; height: 15px; border: 1px solid var(--linesoft); font-style: normal; }
-  .pat-note { margin: 18px 0 0; font-size: 12px; line-height: 1.95; color: var(--mute); }
+  .pat-note { margin: 18px 0 0; font-size: 13px; line-height: 1.95; color: var(--mute); }
 """ + CSSEND + "\n"
 
 

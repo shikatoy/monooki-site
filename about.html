@@ -58,7 +58,7 @@ tailwind.config = {
         linesoft: '#e0e0e0',
         rust: '#a3512b'
       },
-      letterSpacing: { widest2: '.28em' }
+      letterSpacing: { widest2: '.2em' }
     }
   }
 }
@@ -75,6 +75,14 @@ tailwind.config = {
   .ed-input { background: transparent; border: 0; border-bottom: 1px solid #161616; border-radius: 0; padding: 12px 0; width: 100%; font-size: 15px; outline: none; transition: border-color .3s ease; }
   .ed-input:focus { border-bottom-color: #a3512b; border-bottom-width: 2px; margin-bottom: -1px; }
   .ed-input::placeholder { color: #bababa; }
+  /* TAPTARGET */
+  /* ───── タップの的を24px以上に（WCAG 2.2 / 2.5.8）───── */
+  dd > a.u-link, nav a.u-link, .flex > a.u-link,
+  a.u-link.font-mono, a.font-mono.u-link { position: relative; }
+  dd > a.u-link::before, nav a.u-link::before, .flex > a.u-link::before,
+  a.u-link.font-mono::before, a.font-mono.u-link::before
+    { content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 24px; }
 </style>
 </head>
 <body class="bg-paper text-ink font-sans min-h-screen flex flex-col">
@@ -86,7 +94,7 @@ tailwind.config = {
       <span class="w-8 h-8 bg-ink text-paper font-serif font-bold text-sm flex items-center justify-center select-none"><svg viewBox="0 0 128 128" width="23" height="23" fill="currentColor" aria-hidden="true"><rect x="10" y="27" width="108" height="14" rx="1"/><rect x="22" y="47" width="38" height="54"/><rect x="68" y="47" width="38" height="54"/></svg></span>
       <span class="font-serif font-bold text-base md:text-lg tracking-wide">物置どれがいい？</span>
     </a>
-    <a href="./" data-home="" class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase u-link">← トップへ戻る</a>
+    <a href="./" data-home="" class="font-mono text-[11px] md:text-[11px] tracking-widest2 uppercase u-link">← トップへ戻る</a>
   </div>
 </header>
 
@@ -95,12 +103,12 @@ tailwind.config = {
   <section>
     <div class="max-w-[1440px] mx-auto px-5 md:px-10 border-b border-line">
       <div class="py-16 md:py-24 fade-up">
-        <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">About — 運営者情報</p>
+        <p class="font-mono text-[11px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">About — 運営者情報</p>
         <h1 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">運営者情報。</h1>
-        <p class="mt-8 text-[13px] leading-loose text-neutral-500 max-w-2xl">何者が、どういう立場で、何を根拠に書いているのかをここに記しています。掲載している数の数え方も載せています。</p>
+        <p class="mt-8 text-[14px] leading-loose text-neutral-500 max-w-2xl">何者が、どういう立場で、何を根拠に書いているのかをここに記しています。掲載している数の数え方も載せています。</p>
       </div>
     </div>
-    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-14 md:py-20 max-w-3xl">
+    <div class="mx-auto px-5 md:px-10 py-14 md:py-20 max-w-3xl">
       <dl class="mt-8 border-t border-line">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-1 md:gap-4 py-4 border-b border-linesoft"><dt class="font-mono text-[11px] tracking-widest2 uppercase text-neutral-500 md:col-span-1">サイト名</dt><dd class="m-0 text-[15px] leading-loose md:col-span-3">物置どれがいい？</dd></div>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-1 md:gap-4 py-4 border-b border-linesoft"><dt class="font-mono text-[11px] tracking-widest2 uppercase text-neutral-500 md:col-span-1">URL</dt><dd class="m-0 text-[15px] leading-loose md:col-span-3"><a href="./" class="u-link">https://monooki-erabi.com/</a></dd></div>
@@ -177,18 +185,18 @@ tailwind.config = {
 <footer class="bg-ink text-paper">
   <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-12">
     <div class="border border-neutral-500 p-6 md:p-8">
-      <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-rust">Disclaimer — 注意書き</p>
+      <p class="font-mono text-[11px] md:text-[11px] tracking-widest2 uppercase text-rust">Disclaimer — 注意書き</p>
       <p class="mt-4 font-serif font-bold text-sm md:text-base leading-loose">
         ※当サイトは物置選びの参考としてご利用ください。実際の設置スペースやサイズ違いによるトラブルの責任は負いかねます。ご購入前には、必ず専門業者による現地の設置・測量調査をご依頼ください。
       </p>
-      <p class="mt-3 pt-3 border-t border-neutral-700 font-serif font-bold text-xs md:text-sm leading-loose text-neutral-300">
+      <p class="mt-3 pt-3 border-t border-neutral-700 font-serif font-bold text-[13px] md:text-sm leading-loose text-neutral-300">
         ※設置の際は、本体の下に基礎用コンクリートブロック（基本 高さ約10cm）を敷きます。実際の高さは「本体高さ＋約10cm」となるため、高さに制限のある場所ではブロック分を含めた収まりをご確認ください。
       </p>
       <p class="mt-3 pt-3 border-t border-neutral-700 text-[11px] leading-relaxed text-neutral-400">
         お問い合わせの際にいただいたお名前・メールアドレスは、お問い合わせへの回答のみに使用し、それ以外の目的では利用しません。掲載情報の正確性・完全性は保証されず、ご利用により生じた損害について当サイトは責任を負いかねます。
       </p>
     </div>
-    <div class="mt-8 flex flex-col md:flex-row justify-between gap-3 font-mono text-[10px] tracking-widest text-neutral-500">
+    <div class="mt-8 flex flex-col md:flex-row justify-between gap-3 font-mono text-[11px] tracking-widest text-neutral-500">
       <a href="./" data-home="" class="u-link hover:text-paper transition-colors">← 物置どれがいい？ トップへ</a>
       <span>© 2026 物置どれがいい？ — 非公式情報比較メディア</span>
     </div>

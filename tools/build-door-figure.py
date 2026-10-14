@@ -23,8 +23,8 @@ CSS = CSSBEG + """
   .dfig svg { display: block; width: 100%; height: auto; }
   .dfig figcaption { padding: 11px 14px; border-top: 1px solid var(--linesoft); background: #f4f4f4; }
   .dfig-t { display: block; font-family: 'Shippori Mincho B1', serif; font-weight: 700; font-size: 14px; }
-  .dfig-s { display: block; margin-top: 4px; font-size: 12px; line-height: 1.8; color: var(--mute); }
-  .dfig-note { margin: 14px 0 0; font-size: 12px; line-height: 1.95; color: var(--mute); }
+  .dfig-s { display: block; margin-top: 4px; font-size: 13px; line-height: 1.8; color: var(--mute); }
+  .dfig-note { margin: 14px 0 0; font-size: 13px; line-height: 1.95; color: var(--mute); }
 """ + CSSEND + "\n"
 
 W, H = 260, 172

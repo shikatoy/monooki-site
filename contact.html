@@ -59,7 +59,7 @@ tailwind.config = {
         linesoft: '#e0e0e0',
         rust: '#a3512b'
       },
-      letterSpacing: { widest2: '.28em' }
+      letterSpacing: { widest2: '.2em' }
     }
   }
 }
@@ -87,7 +87,7 @@ tailwind.config = {
       <span class="w-8 h-8 bg-ink text-paper font-serif font-bold text-sm flex items-center justify-center select-none"><svg viewBox="0 0 128 128" width="23" height="23" fill="currentColor" aria-hidden="true"><rect x="10" y="27" width="108" height="14" rx="1"/><rect x="22" y="47" width="38" height="54"/><rect x="68" y="47" width="38" height="54"/></svg></span>
       <span class="font-serif font-bold text-base md:text-lg tracking-wide">物置どれがいい？</span>
     </a>
-    <a href="./" data-home="" class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase u-link">← トップへ戻る</a>
+    <a href="./" data-home="" class="font-mono text-[11px] md:text-[11px] tracking-widest2 uppercase u-link">← トップへ戻る</a>
   </div>
 </header>
 
@@ -96,13 +96,13 @@ tailwind.config = {
   <section>
     <div class="max-w-[1440px] mx-auto px-5 md:px-10 grid md:grid-cols-12 border-b border-line">
       <div class="md:col-span-5 py-16 md:py-24 md:pr-14 md:border-r border-line fade-up">
-        <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">Correspondence</p>
+        <p class="font-mono text-[11px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">Correspondence</p>
         <h1 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">お問い合わせ。</h1>
-        <p class="mt-8 text-[13px] leading-loose text-neutral-500 max-w-sm">
+        <p class="mt-8 text-[14px] leading-loose text-neutral-500 max-w-sm">
           物置選びの迷いや設置場所のお悩み、掲載内容へのご意見など、どうぞお気軽にお寄せください。編集部より折り返しご連絡いたします。
         </p>
         <div class="mt-10 border-t border-line pt-5">
-          <p class="font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">Mail — 宛先</p>
+          <p class="font-mono text-[11px] tracking-widest2 uppercase text-neutral-500">Mail — 宛先</p>
           <a href="mailto:doreiimono@gmail.com" class="mt-2 inline-block font-mono text-sm u-link">doreiimono@gmail.com</a>
           <p class="mt-3 text-[11px] leading-relaxed text-neutral-400">フォームを送信すると、お使いのメールソフトの送信画面が開きます。直接メールをお送りいただいても構いません。</p>
         </div>
@@ -110,17 +110,17 @@ tailwind.config = {
       <div class="md:col-span-7 py-16 md:py-24 md:pl-14 fade-up">
         <form id="contact-form" action="https://formspree.io/f/xnpaqrzp" method="POST" novalidate>
           <div>
-            <label for="cf-name" class="block font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">01 — 名前 <span class="text-rust">*</span></label>
+            <label for="cf-name" class="block font-mono text-[11px] tracking-widest2 uppercase text-neutral-500">01 — 名前 <span class="text-rust">*</span></label>
             <input id="cf-name" name="お名前" type="text" class="ed-input mt-1" placeholder="山田 太郎" autocomplete="name">
             <p id="cf-name-err" class="hidden mt-2 text-[11px] font-mono text-rust"></p>
           </div>
           <div class="mt-12">
-            <label for="cf-email" class="block font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">02 — メールアドレス <span class="text-rust">*</span></label>
+            <label for="cf-email" class="block font-mono text-[11px] tracking-widest2 uppercase text-neutral-500">02 — メールアドレス <span class="text-rust">*</span></label>
             <input id="cf-email" name="email" type="email" class="ed-input mt-1" placeholder="taro@example.com" autocomplete="email">
             <p id="cf-email-err" class="hidden mt-2 text-[11px] font-mono text-rust"></p>
           </div>
           <div class="mt-12">
-            <label for="cf-msg" class="block font-mono text-[10px] tracking-widest2 uppercase text-neutral-500">03 — お問い合わせ内容 <span class="text-rust">*</span></label>
+            <label for="cf-msg" class="block font-mono text-[11px] tracking-widest2 uppercase text-neutral-500">03 — お問い合わせ内容 <span class="text-rust">*</span></label>
             <textarea id="cf-msg" name="お問い合わせ内容" rows="5" class="ed-input mt-1 resize-y" placeholder="設置場所の状況、収納したい物、選定のお悩みなど。"></textarea>
             <p id="cf-msg-err" class="hidden mt-2 text-[11px] font-mono text-rust"></p>
           </div>
@@ -128,7 +128,7 @@ tailwind.config = {
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
           <input type="hidden" name="_subject" value="【物置どれがいい？】お問い合わせ">
 
-          <p class="mt-12 text-[12px] leading-relaxed text-neutral-500">
+          <p class="mt-12 text-[13px] leading-relaxed text-neutral-500">
             送信いただいた内容は、お問い合わせへの回答のみに使用します。詳しくは<a href="privacy.html" class="u-link">プライバシーポリシー</a>をご確認ください。
           </p>
 
@@ -138,7 +138,7 @@ tailwind.config = {
           </button>
           <div class="mt-2 h-px w-32 bg-ink"></div>
 
-          <p id="cf-fail" class="hidden mt-8 border border-rust p-5 text-[13px] leading-loose">
+          <p id="cf-fail" class="hidden mt-8 border border-rust p-5 text-[14px] leading-loose">
             送信できませんでした。通信の状態をご確認のうえ、もう一度お試しください。<br>
             繰り返し失敗する場合は、お手数ですが <a href="mailto:doreiimono@gmail.com" class="u-link font-mono">doreiimono@gmail.com</a> 宛に直接お送りください。
           </p>
@@ -162,18 +162,18 @@ tailwind.config = {
 <footer class="bg-ink text-paper">
   <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-12">
     <div class="border border-neutral-500 p-6 md:p-8">
-      <p class="font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-rust">Disclaimer — 注意書き</p>
+      <p class="font-mono text-[11px] md:text-[11px] tracking-widest2 uppercase text-rust">Disclaimer — 注意書き</p>
       <p class="mt-4 font-serif font-bold text-sm md:text-base leading-loose">
         ※当サイトは物置選びの参考としてご利用ください。実際の設置スペースやサイズ違いによるトラブルの責任は負いかねます。ご購入前には、必ず専門業者による現地の設置・測量調査をご依頼ください。
       </p>
-      <p class="mt-3 pt-3 border-t border-neutral-700 font-serif font-bold text-xs md:text-sm leading-loose text-neutral-300">
+      <p class="mt-3 pt-3 border-t border-neutral-700 font-serif font-bold text-[13px] md:text-sm leading-loose text-neutral-300">
         ※設置の際は、本体の下に基礎用コンクリートブロック（基本 高さ約10cm）を敷きます。実際の高さは「本体高さ＋約10cm」となるため、高さに制限のある場所ではブロック分を含めた収まりをご確認ください。
       </p>
       <p class="mt-3 pt-3 border-t border-neutral-700 text-[11px] leading-relaxed text-neutral-400">
         お問い合わせの際にいただいたお名前・メールアドレスは、お問い合わせへの回答のみに使用し、それ以外の目的では利用しません。掲載情報の正確性・完全性は保証されず、ご利用により生じた損害について当サイトは責任を負いかねます。
       </p>
     </div>
-    <div class="mt-8 flex flex-col md:flex-row justify-between gap-3 font-mono text-[10px] tracking-widest text-neutral-500">
+    <div class="mt-8 flex flex-col md:flex-row justify-between gap-3 font-mono text-[11px] tracking-widest text-neutral-500">
       <a href="./" data-home="" class="u-link hover:text-paper transition-colors">← 物置どれがいい？ トップへ</a>
       <a href="about.html" class="u-link hover:text-paper transition-colors">運営者情報</a>
       <a href="privacy.html" class="u-link hover:text-paper transition-colors">プライバシーポリシー</a>

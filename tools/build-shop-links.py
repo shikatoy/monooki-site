@@ -30,7 +30,7 @@ CSS = CSSBEG + """
   .shop:hover { border-color:var(--rust); box-shadow:4px 4px 0 var(--rust); transform:translate(-1px,-1px); }
   .shop-txt { flex:1; min-width:0; padding:10px 14px; display:flex; flex-direction:column; justify-content:center; gap:4px; }
   .shop-lead { font-family:'Shippori Mincho B1',serif; font-weight:700; font-size:14px; line-height:1.5; }
-  .shop-sub { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.12em; color:var(--mute); }
+  .shop-sub { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.12em; color:var(--mute); }
   .shop-sub b { color:var(--rust); }
   .shop-go { flex:0 0 46px; display:flex; align-items:center; justify-content:center;
     background:var(--rust); color:#fff; font-size:17px; transition:background .2s ease; }

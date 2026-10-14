@@ -17,7 +17,7 @@ CSSBEG, CSSEND = "/* AUTO_RELATED_CSS_START */", "/* AUTO_RELATED_CSS_END */"
 CSS = CSSBEG + """
   /* ───── 記事末尾の導線（tools/build-article-links.py が生成） ───── */
   .rel { margin: 46px 0 0; border-top: 1px solid var(--line); padding-top: 26px; }
-  .rel-label { margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  .rel-label { margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
     letter-spacing: .22em; text-transform: uppercase; color: var(--mute); }
   .rel-note { margin: 10px 0 18px; font-size: 12.5px; line-height: 1.9; color: var(--mute); }
   .rel-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
@@ -29,11 +29,11 @@ CSS = CSSBEG + """
     transition: border-color .2s ease, box-shadow .2s ease; }
   .rel-list a:hover { border-color: var(--rust); box-shadow: 3px 3px 0 var(--rust); }
   .rel-txt { flex: 1; min-width: 0; }
-  .rel-kicker { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  .rel-kicker { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
     letter-spacing: .14em; color: var(--mute); }
   .rel-name { display: block; margin-top: 3px; font-family: 'Shippori Mincho B1', serif;
     font-weight: 700; font-size: 15px; line-height: 1.4; }
-  .rel-go { flex: 0 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--rust); }
+  .rel-go { flex: 0 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--rust); }
 """ + CSSEND + "\n"
 
 

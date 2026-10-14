@@ -93,24 +93,24 @@ def load_style():
 EXTRA_CSS = """
 <style>
   /* 製品ページから流用（products/index.html の CSS に無いもの） */
-  .crumbs { margin:28px 0 0; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:var(--mute); }
+  .crumbs { margin:28px 0 0; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--mute); }
   .crumbs a { text-decoration:none; border-bottom:1px solid var(--linesoft); }
   .crumbs a:hover { color:var(--rust); border-bottom-color:currentColor; }
   .crumbs span { margin:0 8px; color:#bababa; }
-  .note { margin:22px 0 0; padding:18px 20px; border:1px solid var(--linesoft); background:#f4f4f4; font-size:13px; line-height:2; }
+  .note { margin:22px 0 0; padding:18px 20px; border:1px solid var(--linesoft); background:#f4f4f4; font-size:14px; line-height:2; }
   .cta { margin:40px 0 0; padding:34px 26px; border:1px solid var(--line); background:#f4f4f4; }
-  .cta-label { margin:0; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--rust); }
+  .cta-label { margin:0; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--rust); }
   .cta-title { margin:16px 0 0; font-family:'Shippori Mincho B1',serif; font-weight:800; font-size:clamp(1.25rem,4vw,1.6rem); line-height:1.7; }
-  .cta-text { margin:16px 0 0; font-size:13px; line-height:2.1; color:var(--mute); }
+  .cta-text { margin:16px 0 0; font-size:14px; line-height:2.1; color:var(--mute); }
   .cta-btn { display:inline-flex; align-items:center; gap:14px; margin:26px 0 0;
     font-family:'Shippori Mincho B1',serif; font-weight:700; font-size:18px;
     text-decoration:none; border-bottom:1px solid var(--ink); padding-bottom:4px; }
   .cta-btn .arrow { font-family:'IBM Plex Mono',monospace; transition:transform .3s cubic-bezier(.22,1,.36,1); }
   .cta-btn:hover { color:var(--rust); border-bottom-color:var(--rust); }
   .cta-btn:hover .arrow { transform:translateX(10px); }
-  .sz-table { width:100%; border-collapse:collapse; margin:26px 0 0; font-size:13px; }
+  .sz-table { width:100%; border-collapse:collapse; margin:26px 0 0; font-size:14px; }
   .sz-table th, .sz-table td { padding:10px 8px; border-bottom:1px solid var(--linesoft); text-align:right; font-variant-numeric:tabular-nums; }
-  .sz-table th { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--mute); font-weight:400; border-bottom:1px solid var(--line); white-space:nowrap; }
+  .sz-table th { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--mute); font-weight:400; border-bottom:1px solid var(--line); white-space:nowrap; }
   .sz-table td:nth-child(1), .sz-table th:nth-child(1),
   .sz-table td:nth-child(2), .sz-table th:nth-child(2),
   .sz-table td:nth-child(3), .sz-table th:nth-child(3) { text-align:left; }
@@ -119,11 +119,11 @@ EXTRA_CSS = """
   .sz-table a { text-decoration:none; border-bottom:1px solid var(--linesoft); }
   .sz-table a:hover { color:var(--rust); border-bottom-color:currentColor; }
   .sz-sum { margin:26px 0 0; border:1px solid var(--line); }
-  .sz-sum p { margin:0; padding:12px 16px; font-size:13px; line-height:1.9; border-bottom:1px solid var(--linesoft); }
+  .sz-sum p { margin:0; padding:12px 16px; font-size:14px; line-height:1.9; border-bottom:1px solid var(--linesoft); }
   .sz-sum p:last-child { border-bottom:0; }
   .sz-sum b { font-weight:700; }
   .sz-links { margin:40px 0 0; display:flex; flex-wrap:wrap; gap:10px; }
-  .sz-links a { border:1px solid var(--line); padding:9px 14px; font-size:12px; text-decoration:none; }
+  .sz-links a { border:1px solid var(--line); padding:9px 14px; font-size:13px; text-decoration:none; }
   .sz-links a:hover { background:var(--ink); color:var(--paper); }
   .sz-links a.is-here { background:var(--ink); color:var(--paper); pointer-events:none; }
   @media (min-width:768px){ .sz-table th, .sz-table td { font-size:14px; padding:12px 10px; } }
