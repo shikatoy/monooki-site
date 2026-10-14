@@ -304,47 +304,47 @@ tailwind.config = {
 <!-- ═══════════ 探し方（4つの入口・横一列） ═══════════ -->
 <section id="shindan" aria-label="探し方">
   <div class="border-b border-line">
-    <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-4 flex items-center justify-between font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">
+    <div class="px-5 md:px-10 py-4 flex items-center justify-between font-mono text-[10px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">
       <h2 class="font-mono font-normal"><span class="hidden sm:inline">Find / </span>探し方は4つ</h2>
       <span class="text-rust">診断は3〜4問 / 約1分</span>
     </div>
   </div>
 
   <div class="border-b border-line">
-    <div class="max-w-[1440px] mx-auto px-5 md:px-10 grid grid-cols-2 md:grid-cols-4">
-      <div class="flex flex-col border-b border-r border-linesoft even:border-r-0 md:border-b-0 md:border-r md:last:border-r-0 md:border-line">
-        <button data-mode="size" class="entry-banner flex flex-col items-start flex-1 w-full text-left py-6 md:py-8 px-4 md:px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4">
+      <div class="flex flex-col border-b border-r border-linesoft md:border-b-0 md:border-line">
+        <button data-mode="size" class="entry-banner flex flex-col items-start flex-1 w-full text-left py-6 md:py-8 px-5 md:px-10">
           <span class="entry-num block font-mono text-[10px] tracking-widest2 uppercase text-rust transition-colors">01</span>
           <span class="jp-break mt-2 block font-serif font-bold text-lg md:text-2xl leading-snug">置ける寸法から</span>
           <span class="entry-desc jp-break mt-2 hidden md:block text-[12px] leading-relaxed text-neutral-500 transition-colors">間口・奥行・高さを入れると、収まる型番を3メーカー横断で絞り込みます。</span>
-          <span class="mt-3 block font-mono text-[10px] tracking-widest2 uppercase">診断をひらく <span class="arrow">→</span></span>
+          <span class="mt-auto pt-4 block font-mono text-[10px] tracking-widest2 uppercase">診断をひらく <span class="arrow">→</span></span>
         </button>
-        <div class="pb-5 md:pb-6 px-4 md:px-6">
+        <div class="pb-5 md:pb-6 px-5 md:px-10">
           <a href="size/" class="font-mono text-[10px] tracking-widest2 uppercase u-link">寸法の帯の一覧 →</a>
         </div>
       </div>
-      <div class="flex flex-col border-b border-r border-linesoft even:border-r-0 md:border-b-0 md:border-r md:last:border-r-0 md:border-line">
-        <button data-mode="use" class="entry-banner flex flex-col items-start flex-1 w-full text-left py-6 md:py-8 px-4 md:px-6">
+      <div class="flex flex-col border-b border-linesoft md:border-b-0 md:border-r md:border-line">
+        <button data-mode="use" class="entry-banner flex flex-col items-start flex-1 w-full text-left py-6 md:py-8 px-5 md:px-10">
           <span class="entry-num block font-mono text-[10px] tracking-widest2 uppercase text-rust transition-colors">02</span>
           <span class="jp-break mt-2 block font-serif font-bold text-lg md:text-2xl leading-snug">収納する物から</span>
           <span class="entry-desc jp-break mt-2 hidden md:block text-[12px] leading-relaxed text-neutral-500 transition-colors">しまう物と置き場所で3〜4問。答えた条件は、結果の画面で変えられます。</span>
-          <span class="mt-3 block font-mono text-[10px] tracking-widest2 uppercase">診断をひらく <span class="arrow">→</span></span>
+          <span class="mt-auto pt-4 block font-mono text-[10px] tracking-widest2 uppercase">診断をひらく <span class="arrow">→</span></span>
         </button>
       </div>
-      <div class="flex flex-col border-b border-r border-linesoft even:border-r-0 md:border-b-0 md:border-r md:last:border-r-0 md:border-line">
-        <button data-mode="maker" class="entry-banner flex flex-col items-start flex-1 w-full text-left py-6 md:py-8 px-4 md:px-6">
+      <div class="flex flex-col border-r border-linesoft md:border-line">
+        <button data-mode="maker" class="entry-banner flex flex-col items-start flex-1 w-full text-left py-6 md:py-8 px-5 md:px-10">
           <span class="entry-num block font-mono text-[10px] tracking-widest2 uppercase text-rust transition-colors">03</span>
           <span class="jp-break mt-2 block font-serif font-bold text-lg md:text-2xl leading-snug">メーカーから</span>
           <span class="entry-desc jp-break mt-2 hidden md:block text-[12px] leading-relaxed text-neutral-500 transition-colors">扉の軽さのタクボ、頑丈さのイナバ、サビに強いヨドコウ。持ち味から絞り込みます。</span>
-          <span class="mt-3 block font-mono text-[10px] tracking-widest2 uppercase">診断をひらく <span class="arrow">→</span></span>
+          <span class="mt-auto pt-4 block font-mono text-[10px] tracking-widest2 uppercase">診断をひらく <span class="arrow">→</span></span>
         </button>
       </div>
-      <div class="flex flex-col border-b border-r border-linesoft even:border-r-0 md:border-b-0 md:border-r md:last:border-r-0 md:border-line">
-        <a href="products/codes.html" class="entry-banner flex flex-col items-start flex-1 w-full text-left py-6 md:py-8 px-4 md:px-6">
+      <div class="flex flex-col">
+        <a href="products/codes.html" class="entry-banner flex flex-col items-start flex-1 w-full text-left py-6 md:py-8 px-5 md:px-10">
           <span class="entry-num block font-mono text-[10px] tracking-widest2 uppercase text-rust transition-colors">04</span>
           <span class="jp-break mt-2 block font-serif font-bold text-lg md:text-2xl leading-snug">型番から</span>
           <span class="entry-desc jp-break mt-2 hidden md:block text-[12px] leading-relaxed text-neutral-500 transition-colors">見積書に書かれた型番や、いま置いてある物置の型番から、寸法とシリーズを引けます。</span>
-          <span class="mt-3 block font-mono text-[10px] tracking-widest2 uppercase">型番索引へ <span class="arrow">→</span></span>
+          <span class="mt-auto pt-4 block font-mono text-[10px] tracking-widest2 uppercase">型番索引へ <span class="arrow">→</span></span>
         </a>
       </div>
     </div>
