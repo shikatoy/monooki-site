@@ -160,7 +160,10 @@ def build_page(fm, h1, body_html, tag):
     desc = fm["description"]
     kw = ", ".join(fm.get("keywords", []))
     date = fm.get("date", "")
-    ogimg = SITE + "images/og-image.png"          # 記事ごとのOG画像はまだ無い
+    # 記事ごとのOG画像（images/og-<slug>.png）があればそれを使う。無ければ共通の絵
+    ogimg = SITE + "images/og-image.png"
+    if os.path.exists(os.path.join(ROOT, "images", "og-%s.png" % slug)):
+        ogimg = SITE + "images/og-%s.png" % slug
     crumb = fm.get("crumb") or re.sub(r"^.*?[｜|]", "", title).strip() or title
 
     def one(pat, rep, label):

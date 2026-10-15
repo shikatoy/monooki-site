@@ -34,17 +34,26 @@ OUT = os.path.join(ROOT, "images")
 # 1行は 32px で12字まで。はみ出したら自動で字を小さくする
 TITLES = {
     "monooki-options-and-anchor":      "物置のオプションは要る？基本は不要、でもアンカーは別",
-    "monooki-size-and-placement":      "物置の置き方は誰が決める？サイズ選びの前に知ること",
+    "monooki-size-and-placement":      "壁との隙間は何cm？\nメーカーが決めた数値はない",
     # ここから今回ぶん
     "kogata-chugata-ogata-chigai":     "小型と中型・大型は何が違う？\n物置は「区分」で見る",
-    "homecenter-monooki-vs-major3":    "ホームセンターの物置と\n大手3社は、何が違うのか",
-    "monooki-door-opening-side":       "扉の向きは、\n買うときに決めなくていい",
+    "homecenter-monooki-vs-major3":    "ホームセンターの物置は\n寸法で比べられるか",
+    "monooki-door-opening-side":       "物置の扉の向きは、\n買うときに決めなくていい",
     "monooki-okenai-basho":            "物置が置けない場所、\n置きにくい場所",
     # 2026-09-07 追加
-    "monooki-rust-where-and-how":      "物置は、\nどこから錆びるのか",
+    "monooki-rust-where-and-how":      "物置は何年もつ？\n3社とも年数は出していない",
     "takubo-garage-scudo-door-types":  "タクボのガレージは、\n扉だけが違う",
-    "monooki-insulated-generation":    "断熱物置が、\n静かに入れ替わった",
+    "monooki-insulated-generation":    "断熱物置が、\n静かに入れ替わりました",
     "monooki-narrow-space-maker":      "奥行50cmを切ると、\n1社しか選べない",
+    # 2026-10-15 追加（既定の絵のままだった記事）
+    "black-monooki-size-lineup":         "黒い物置は、\n選べる寸法が先に決まる",
+    "monooki-front-clearance":           "物置の前にどれだけ空けるか\nどのメーカーも書いていない",
+    "monooki-naisun-koukai":             "物置の内寸は3社とも\n公開している",
+    "monooki-one-step-dimension":        "奥行を一段深くしても\n入口の幅は変わらない",
+    "monooki-shutter-vs-slide-opening":  "シャッターにすると\n開口は広くなる",
+    "monooki-tire-bicycle-capacity":     "タイヤは何本入る？\n公式に本数があるのは1社",
+    "takubo-height-by-series":           "タクボのサイズ表に\n高さの欄はない",
+    "yodo-shutter-height-one-step":      "シャッターのエルモは\n高さが1段しかない",
 }
 
 # 元の5枚を実測して合わせた寸法（600×315 を 2倍で書き出す）
