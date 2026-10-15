@@ -520,7 +520,7 @@ tailwind.config = {
   </div>
   <div class="max-w-[1440px] mx-auto px-5 md:px-10">
     <div id="article-list"></div>
-    <p class="py-10"><a href="articles/" class="u-link font-mono text-[11px] tracking-widest2 uppercase">記事一覧ページへ →</a></p>
+    <p class="py-10"><a href="articles/" id="article-more" class="u-link font-mono text-[11px] tracking-widest2 uppercase">記事をすべて見る →</a></p>
   </div>
   <div class="border-b border-line py-14"></div>
 </section>
@@ -572,13 +572,19 @@ tailwind.config = {
 
     <!-- 免責事項 -->
     <div class="mt-4 border border-neutral-700 p-6 md:p-8">
-      <p class="font-mono text-[11px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">Site Policy — 免責事項</p>
+      <details class="group/det">
+      <summary class="flex cursor-pointer list-none items-center justify-between font-mono text-[11px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">
+        <span>Site Policy — 免責事項</span>
+        <span class="ml-4 shrink-0 text-[13px] group-open/det:hidden">＋ 開く</span>
+        <span class="ml-4 shrink-0 text-[13px] hidden group-open/det:inline">− 閉じる</span>
+      </summary>
       <div class="mt-4 grid md:grid-cols-2 gap-x-10 gap-y-3 text-[13px] leading-relaxed text-neutral-400">
         <p>掲載の製品情報は各メーカーの公式発表をもとに更新していますが、内容の正確性・完全性・最新性を保証するものではありません。仕様・寸法・価格・販売状況は、必ず各メーカーの公式サイト・最新カタログでご確認ください。</p>
         <p>当サイトからリンクする外部サイト（メーカー公式サイトを含む）の内容について、当サイトは一切の責任を負いません。リンク先のご利用は各サイトの規約に従ってください。</p>
         <p>当サイトの情報のご利用により生じたいかなる損害についても、当サイトは責任を負いかねますので、あらかじめご了承ください。</p>
         <p>お問い合わせの際にいただいたお名前・メールアドレスは、お問い合わせへの回答のみに使用し、それ以外の目的では利用しません。</p>
       </div>
+      </details>
     </div>
 
     <!-- お問い合わせ（コンパクト） -->
@@ -1446,6 +1452,8 @@ const INNER = {
                      発表を受けて当サイトに型番を追加したときは、別に '新商品' を立てる。
    既存の記録は削除・改変しないこと（この台帳は追記のみ）。 */
 const UPDATE_LOG = [
+  { date:'2026-10-15', type:'改定', title:'トップページの縦の長さを3割詰めました',
+    body:'スマホで見たときのトップページが22,922pxありました。画面にして約59枚ぶんです。中身を削らずに、出す量と折りたたみを見直しました。記事は19本すべてを並べていたのを新しい8本にし、残りは「記事をすべて見る（19本）」から記事一覧ページへ送ります。記事の説明文はスマホで2行までにしました（パソコンは全文）。更新履歴は3件表示のままですが、本文が長くなっていたので、折りたたんでいる間はスマホ2行・パソコン3行までにしました。「これまでの更新をすべて見る」を押すと全文に戻ります。索引はスマホだけ初期表示を9件から6件にしました。1列に並ぶぶん、9件で4,800pxを使っていたためです。パソコンは9件のままです。フッターの免責事項は折りたたみにしました。設置の注意書きは折りたたんでいません。結果はスマホ22,922px→15,920px、パソコン13,123px→10,957pxです。' },
   { date:'2026-10-14', type:'改定', title:'索引のカードに、間口・奥行・高さと型番数を出しました',
     body:'索引のカードは、図版・メーカー・区分・製品名・特徴の文・2つのボタンで、寸法が出ていませんでした。寸法で選ぶサイトの一覧に寸法が無く、いちばん効く情報を詳細ページに置いたままでした。全カードに同じ順・同じ書式で、間口・奥行・高さの範囲と、そのシリーズの型番数を出します。数値は掲載データ（PRODUCTS）から引いているので、型番を足せば自動で変わります。特徴の文は、長さがカードごとに違って並べて比べにくかったので、先頭の2つまでにしました（全部は製品ページにあります）。あわせて、2つのボタンをカードの下端でそろえ、行ごとに位置が揃うようにしています。9件を表示したときのカード一覧の高さは、画面幅1280で1,856pxから2,111pxになりました。' },
   { date:'2026-10-14', type:'改定', title:'文字の大きさを揃え、リンクの押せる範囲を広げました',
@@ -2901,7 +2909,7 @@ function renderJournal(){
       <span class="col-span-4 md:col-span-2 font-mono text-[11px] tracking-widest2 uppercase ${HOT_TYPES.includes(e.type) ? 'text-rust' : 'text-neutral-400'}">${esc(e.type)}${isFreshEntry ? ' ●' : ''}</span>
       <div class="col-span-12 md:col-span-8">
         <p class="font-serif font-bold text-base md:text-xl leading-snug">${linkifyJournalTitle(e.title)}</p>
-        ${e.body ? `<p class="mt-2 text-[14px] leading-loose text-neutral-500">${esc(e.body)}</p>` : ''}
+        ${e.body ? `<p class="mt-2 ${journalExpanded ? '' : 'line-clamp-2 md:line-clamp-3'} text-[14px] leading-loose text-neutral-500">${esc(e.body)}</p>` : ''}
       </div>
     </div>`;
   }).join('');
@@ -3111,7 +3119,8 @@ function restoreCompareFromHash(){
 
 /* 索引は初期6件だけ表示する。トップページが索引だけで12画面分になっていたため。
    絞り込みを変えたときは折りたたみ直す（idxExpanded = false に戻す） */
-const IDX_PREVIEW = 9;
+/* 画面の広さで初期表示を変える。スマホは1列なので、9件だと索引だけで4,000px超になる */
+const IDX_PREVIEW = window.matchMedia('(min-width: 768px)').matches ? 9 : 6;
 let idxExpanded = false;
 /* 色違い・コラボの印。variant:{ of:'親のid', kind:'色違い'|'コラボ'|'仕様違い' } */
 function variantBadge(p){
@@ -3214,15 +3223,18 @@ document.querySelectorAll('.idx-filter').forEach(b => {
 document.querySelectorAll('.idx-filter[data-val="all"]').forEach(x => x.classList.add('active'));
 
 /* ---------- 記事一覧レンダリング ---------- */
+const ARTICLES_PREVIEW = 8;   /* トップに出す本数。残りは記事一覧ページへ */
 function renderArticles(){
   const list = document.querySelector('#article-list');
   if(!list) return;
-  list.innerHTML = ARTICLES.map(a => `
+  const more = document.querySelector('#article-more');
+  if(more) more.textContent = `記事をすべて見る（${ARTICLES.length}本）→`;
+  list.innerHTML = ARTICLES.slice(0, ARTICLES_PREVIEW).map(a => `
     <a href="${esc(a.url)}" class="grid grid-cols-12 items-baseline gap-4 py-8 md:py-10 border-b border-line group">
       <span class="col-span-11 md:col-span-2 font-mono text-[11px] text-neutral-400">${esc(a.date)}<span class="block mt-1 text-rust uppercase tracking-widest2 text-[11px]">${esc(a.tag)}</span></span>
       <span class="col-span-12 md:col-span-9 order-last md:order-none">
         <span class="block font-serif font-bold text-xl md:text-3xl leading-snug group-hover:text-rust transition-colors duration-300">${esc(a.title)}</span>
-        <span class="mt-3 block text-[14px] leading-loose text-neutral-500">${esc(a.lead)}</span>
+        <span class="mt-3 line-clamp-2 md:line-clamp-none text-[14px] leading-loose text-neutral-500">${esc(a.lead)}</span>
       </span>
       <span class="col-span-1 justify-self-end self-center font-mono text-xl transition-transform duration-300 group-hover:translate-x-2">→</span>
     </a>`).join('');
