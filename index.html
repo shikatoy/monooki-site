@@ -83,7 +83,8 @@ tailwind.config = {
   ::selection { background: #a3512b; color: #fff; }
 
   /* ───── 配色（案C ベージュ基調）: 診断・索引・コラムを一段濃い生成りに ───── */
-  #shindan, #archive, #articles { background: #f4f4f4; }
+  #archive, #articles { background: #f4f4f4; }
+  #shindan { background: #e4e4e4; }   /* 診断の帯だけ一段濃く */
 
   .tate { writing-mode: vertical-rl; text-orientation: mixed; }
 
@@ -264,10 +265,10 @@ tailwind.config = {
           <p class="max-w-md text-sm leading-loose text-neutral-600">
             タクボ・イナバ・ヨドコウ。定番3メーカーの中から、収納したい物や設置スペースにぴったり合う一台を、いっしょにお探しします。質問は3〜4問、1分ほどで終わりますので、お気軽にお試しください。
           </p>
-          <a href="#shindan" class="group inline-flex items-center gap-4 bg-ink text-paper px-7 py-4 md:px-9 md:py-5 border border-ink hover:bg-paper hover:text-ink transition-colors">
+          <button data-mode="use" class="start-quiz group inline-flex items-center gap-4 bg-ink text-paper px-7 py-4 md:px-9 md:py-5 border border-ink hover:bg-paper hover:text-ink transition-colors">
             <span class="font-serif font-bold text-lg md:text-xl tracking-wide">診断をはじめる</span>
-            <span class="font-mono text-xl leading-none">↓</span>
-          </a>
+            <span class="font-mono text-xl leading-none transition-transform group-hover:translate-x-1">→</span>
+          </button>
         </div>
       </div>
       <div class="hidden md:flex md:col-span-3 border-l border-line items-center justify-center py-16">
@@ -290,25 +291,25 @@ tailwind.config = {
 
   <div class="border-b border-line">
     <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-6 md:py-8 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
-      <button data-mode="size" class="entry-tile group flex flex-col text-left bg-paper border border-line p-4 md:p-5 hover:bg-ink hover:text-paper transition-colors">
+      <button data-mode="size" class="entry-tile group flex flex-col text-left bg-paper border-2 border-line p-4 md:p-5 hover:bg-ink hover:text-paper transition-colors">
         <span class="font-mono text-[11px] tracking-widest2 uppercase text-rust group-hover:text-paper transition-colors">01</span>
         <span class="jp-break mt-2 block font-serif font-bold text-lg md:text-2xl leading-snug">置ける寸法から</span>
         <span class="jp-break mt-2 hidden md:block text-[13px] leading-relaxed text-neutral-500 group-hover:text-neutral-300 transition-colors">間口・奥行・高さを入れると、収まる型番を3メーカー横断で絞り込みます。</span>
         <span class="mt-auto pt-4 block font-mono text-[11px] tracking-widest2 uppercase">診断をひらく <span class="inline-block transition-transform group-hover:translate-x-2">→</span></span>
       </button>
-      <button data-mode="use" class="entry-tile group flex flex-col text-left bg-paper border border-line p-4 md:p-5 hover:bg-ink hover:text-paper transition-colors">
+      <button data-mode="use" class="entry-tile group flex flex-col text-left bg-paper border-2 border-line p-4 md:p-5 hover:bg-ink hover:text-paper transition-colors">
         <span class="flex w-full items-center justify-between font-mono text-[11px] tracking-widest2 uppercase text-rust group-hover:text-paper transition-colors"><span>02</span><span class="tracking-normal">はじめての方へ</span></span>
         <span class="jp-break mt-2 block font-serif font-bold text-lg md:text-2xl leading-snug">収納する物から</span>
         <span class="jp-break mt-2 hidden md:block text-[13px] leading-relaxed text-neutral-500 group-hover:text-neutral-300 transition-colors">しまう物と置き場所で3〜4問。答えた条件は、結果の画面で変えられます。</span>
         <span class="mt-auto pt-4 block font-mono text-[11px] tracking-widest2 uppercase">診断をひらく <span class="inline-block transition-transform group-hover:translate-x-2">→</span></span>
       </button>
-      <button data-mode="maker" class="entry-tile group flex flex-col text-left bg-paper border border-line p-4 md:p-5 hover:bg-ink hover:text-paper transition-colors">
+      <button data-mode="maker" class="entry-tile group flex flex-col text-left bg-paper border-2 border-line p-4 md:p-5 hover:bg-ink hover:text-paper transition-colors">
         <span class="font-mono text-[11px] tracking-widest2 uppercase text-rust group-hover:text-paper transition-colors">03</span>
         <span class="jp-break mt-2 block font-serif font-bold text-lg md:text-2xl leading-snug">メーカーから</span>
         <span class="jp-break mt-2 hidden md:block text-[13px] leading-relaxed text-neutral-500 group-hover:text-neutral-300 transition-colors">扉の軽さのタクボ、頑丈さのイナバ、サビに強いヨドコウ。持ち味から絞り込みます。</span>
         <span class="mt-auto pt-4 block font-mono text-[11px] tracking-widest2 uppercase">診断をひらく <span class="inline-block transition-transform group-hover:translate-x-2">→</span></span>
       </button>
-      <a href="products/codes.html" class="entry-tile group flex flex-col text-left bg-paper border border-line p-4 md:p-5 hover:bg-ink hover:text-paper transition-colors">
+      <a href="products/codes.html" class="entry-tile group flex flex-col text-left bg-paper border-2 border-line p-4 md:p-5 hover:bg-ink hover:text-paper transition-colors">
         <span class="font-mono text-[11px] tracking-widest2 uppercase text-rust group-hover:text-paper transition-colors">04</span>
         <span class="jp-break mt-2 block font-serif font-bold text-lg md:text-2xl leading-snug">型番から</span>
         <span class="jp-break mt-2 hidden md:block text-[13px] leading-relaxed text-neutral-500 group-hover:text-neutral-300 transition-colors">見積書に書かれた型番や、いま置いてある物置の型番から、寸法とシリーズを引けます。</span>
@@ -1452,6 +1453,12 @@ const INNER = {
                      発表を受けて当サイトに型番を追加したときは、別に '新商品' を立てる。
    既存の記録は削除・改変しないこと（この台帳は追記のみ）。 */
 const UPDATE_LOG = [
+  { date:'2026-10-15', type:'改定', title:'診断の入口を4つのタイルに戻し、帯の色と枠で目立たせました',
+    body:'前の版で入口の作りそのものを設問の形に変えましたが、やりすぎでした。4つのタイルに戻しています。目立たせ方は、形ではなく色と枠で付けました。タイルの枠を2pxにし、タイルが乗っている帯の地色を#f4f4f4から#e4e4e4に一段濃くしています。白いタイルと帯の明暗の比が1.1から1.3になり、タイルの輪郭がはっきりします。索引とコラムの帯は#f4f4f4のままで、診断の帯だけを濃くしました。あわせて、黒いボタンに触れたときの色を錆色から白への反転に変えています（索引の「この物置の詳細」「残り◯点をすべて見る」、比較画面の「全サイズと仕様を見る」）。錆色の塗りは、広告であることを示す帯と、診断の進捗バーだけに残しました。' },
+  { date:'2026-10-15', type:'改定', title:'診断の入口を、最初の設問をページに出す形に変えました',
+    body:'タイルを黒く塗っただけでは、押せる場所であることは分かっても、何の道具なのかが伝わりませんでした。形のほうを変えています。診断の1問目をそのままページに置きました。黒い見出し帯に「物置マッチング診断 ── 3〜4問 / 約1分」、その下に「Q.01 何から絞り込みますか」と、A・B・Cの3つの選択肢が並びます。押すと、その答えのまま診断の続きが開きます。診断の画面に出る設問と同じ組み方（問番号・見出し・A/B/Cの行・右端の矢印）にしてあるので、画面が変わっても同じ道具を操作している形になります。型番索引と寸法の帯への入口は、診断の選択肢と同じ重さに見えないよう、枠の下に小さくまとめました。前の版で使っていた錆色の大きな面（ボタンの地色と、触れたときのタイルの塗り）はやめています。錆色は問番号のような小さな字だけに戻し、面は白・黒・薄い灰の3つで組み直しました。' },
+  { date:'2026-10-15', type:'改定', title:'診断の入口を、見てすぐ分かる形にしました',
+    body:'2つ直しました。1つめ。ヒーローの「診断をはじめる」が、押しても下の帯まで移動するだけで、診断は始まりませんでした。10月14日に入口を4つのタイルに作り替えたときから、ボタンの名前と動きが合っていませんでした。押すとその場で診断（収納する物から）が開くようにし、矢印も下向きから右向きに変えています。2つめ。4つのタイルが白地で、まわりの地色との差が小さく、押せる道具だと分かりにくい状態でした。診断に入る01〜03を黒いタイルにし、04の型番索引だけ白のまま枠を太くしています。診断が主、索引が従という関係も形で分かるようにしました。触れると錆色に変わります。文字と背景の明暗比は、黒地の見出しで18.1、説明文で7.17、番号で6.45、錆色に変わったときも4.5以上を確保しています。' },
   { date:'2026-10-15', type:'改定', title:'記事18本すべてに、その記事の絵を用意しました',
     body:'SNSやLINEで共有したときに出る絵が、18本のうち11本で共通の絵（サイト名だけが載ったもの）のままでした。見出しを11本ぶん書き、全記事に1枚ずつ用意しています。あわせて、絵があるのに記事側の指定が共通のままだった3本と、記事を書き直したあとも絵の見出しが古いままだった3本（ホームセンター・錆び・断熱）も作り直しました。絵の中の見出しは本文のタイトルそのままではなく、1行12字で2行に収まる長さに書き直しています。もうひとつ、原因のほうも直しました。記事を公開するツール（publish-article.py）が、OG画像の指定を共通の絵で固定して書き出していたため、記事を書き直すたびに専用の絵の指定が消えていました。images/og-<記事名>.png があればそれを使うようにしたので、今後は消えません。' },
   { date:'2026-10-15', type:'改定', title:'SNSで共有したときに出る絵を、新しい配色に作り直しました',
@@ -2279,7 +2286,7 @@ window.addEventListener('popstate', () => {
     try { history.pushState({ quizGuard: true }, ''); } catch(e){}   // ガードを張り直す
   }
 });
-document.querySelectorAll('.entry-tile[data-mode]').forEach(b => b.addEventListener('click', () => openModal(b.dataset.mode)));
+document.querySelectorAll('.entry-tile[data-mode], .start-quiz[data-mode]').forEach(b => b.addEventListener('click', () => openModal(b.dataset.mode)));
 $('#modal-close').addEventListener('click', closeModal);
 document.addEventListener('keydown', e => { if(e.key === 'Escape' && !modal.classList.contains('modal-hidden')) closeModal(); });
 
@@ -2809,7 +2816,7 @@ function renderResultList(isRefine){
               <p class="mt-2.5 text-sm leading-loose text-neutral-700">${esc(r.p.base)}${reasons.length ? ' 今回のご回答では「' + reasons.map(esc).join('」「') + '」が条件に合いました。' : ' ご回答との相性ではなく、絞り込みの条件で残った候補です。'}${fitNote}</p>
             </div>
             ${affLink(r.p)}
-            ${PRODUCT_PAGES[r.p.id] ? `<a href="${PRODUCT_PAGES[r.p.id]}" class="block border-t border-line bg-ink text-paper py-4 text-center font-mono text-[11px] md:text-[11px] tracking-widest2 uppercase hover:bg-rust transition-colors duration-300">全サイズと仕様を見る →</a>` : ''}
+            ${PRODUCT_PAGES[r.p.id] ? `<a href="${PRODUCT_PAGES[r.p.id]}" class="block border-t border-line bg-ink text-paper py-4 text-center font-mono text-[11px] md:text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">全サイズと仕様を見る →</a>` : ''}
             <div class="border-t border-line grid grid-cols-2 divide-x divide-line">
               <button class="goto-maker py-4 font-mono text-[11px] md:text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300" data-brand="${r.p.maker}">メーカー別に見る →</button>
               <button class="quiz-restart py-4 font-mono text-[11px] md:text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">↻ もう一度</button>
@@ -3183,7 +3190,7 @@ function renderIndex(){
       ${sizeDigest(p)}
       <p class="mt-3 text-[13px] leading-relaxed text-neutral-500">${p.features.slice(0, 2).map(esc).join('・')}</p>
       <div class="mt-auto pt-4">
-      ${PRODUCT_PAGES[p.id] ? `<a href="${PRODUCT_PAGES[p.id]}" class="block w-full bg-ink text-paper py-2.5 text-center font-mono text-[11px] tracking-widest2 uppercase hover:bg-rust transition-colors duration-300">この物置の詳細 →</a>` : ''}
+      ${PRODUCT_PAGES[p.id] ? `<a href="${PRODUCT_PAGES[p.id]}" class="block w-full bg-ink text-paper border border-ink py-2.5 text-center font-mono text-[11px] tracking-widest2 uppercase hover:bg-paper hover:text-ink transition-colors duration-300">この物置の詳細 →</a>` : ''}
       <button class="cmp-toggle mt-2 w-full border border-line py-2.5 font-mono text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300 ${compareSel.includes(p.id) ? 'cmp-on' : ''}" data-pid="${p.id}">${compareSel.includes(p.id) ? '✓ 比較中' : '＋ 比較に追加'}</button>
       </div>
     </div>`).join('')
@@ -3227,7 +3234,7 @@ function renderIndexMore(rest){
   const box = document.querySelector('#idx-more');
   if(!box) return;
   box.innerHTML = rest > 0
-    ? `<button id="idx-more-btn" class="w-full bg-ink text-paper py-4 font-mono text-[11px] tracking-widest2 uppercase hover:bg-rust transition-colors duration-300">残り ${rest} 点の物置をすべて見る ↓</button>`
+    ? `<button id="idx-more-btn" class="w-full bg-ink text-paper border border-ink py-4 font-mono text-[11px] tracking-widest2 uppercase hover:bg-paper hover:text-ink transition-colors duration-300">残り ${rest} 点の物置をすべて見る ↓</button>`
     : '';
   const btn = document.querySelector('#idx-more-btn');
   if(btn) btn.addEventListener('click', () => { idxExpanded = true; renderIndex(); });
