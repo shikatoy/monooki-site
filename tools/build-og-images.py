@@ -16,6 +16,10 @@
         sm-jp-700.woff2 / sm-lat-700.woff2
         （npm の @fontsource/shippori-mincho-b1 の files/ から取れる。OFL）
    どちらも無い環境では動かないので、画像を足すときだけ手で回す。
+   フォント2つは tools/_ogfonts/ に置いてある（.gitignore 済み。無くなったら
+   npm pack @fontsource/shippori-mincho-b1 の files/ から
+   shippori-mincho-b1-japanese-700-normal.woff2 → sm-jp-700.woff2
+   shippori-mincho-b1-latin-700-normal.woff2    → sm-lat-700.woff2 として置き直す）
 
 寸法は最初に作った5枚を実測して合わせてある。触ると既存と揃わなくなる。
 """

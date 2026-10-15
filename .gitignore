@@ -12,3 +12,5 @@ tools/__pycache__/
 # エージェントが作る作業用の一時ファイル（公開不要）
 .scratch*
 _scratch*
+# OG画像の生成に使うフォント（2MB。必要なときだけ npm から取る。公開不要）
+tools/_ogfonts/
