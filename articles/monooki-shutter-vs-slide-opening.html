@@ -230,6 +230,11 @@
     { content: ''; position: absolute; left: 0; right: 0;
     top: 50%; transform: translateY(-50%); height: 24px; }
   .crumbs { line-height: 2; }
+/* AUTO_PLINK_CSS_START */
+  /* ───── 本文から製品ページへのリンク（tools/build-product-mentions.py が生成） ───── */
+  .p-link { border-bottom: 1px solid var(--linesoft); text-decoration: none; }
+  .p-link:hover { color: var(--rust); border-bottom-color: currentColor; }
+/* AUTO_PLINK_CSS_END */
 /* AUTO_XLINK_CSS_START */
   /* ───── 記事どうしのリンク（tools/build-crosslinks.py が生成） ───── */
   .x-link { border-bottom: 1px dotted var(--rust); text-decoration: none; }
@@ -304,7 +309,7 @@
         <p>収録している物置<span data-claim="total">676</span>型番のうち、シャッター扉は3社4シリーズ<span data-claim="codes_t-nde+t-ws+i-ff+y-lod">72</span>型番です。ただし開口の寸法を公表しているのはタクボだけでした。</p>
 
         <h2><span class="pb">同じ箱で、</span><span class="pb">扉だけが違う</span></h2>
-        <p>Mr.ストックマン ダンディ（引き戸）とMr.ストックマン シャッター扉は、同じ型番の数字なら外形も内部も一致します。たとえば1815なら、どちらも外形1,832×1,590×2,110mm、内部1,776×1,420×1,882mm。違うのは開口部だけです。</p>
+        <p><a class="p-link" href="../products/takubo-mr-stockman-dandy.html">Mr.ストックマン ダンディ</a>（引き戸）とMr.ストックマン シャッター扉は、同じ型番の数字なら外形も内部も一致します。たとえば1815なら、どちらも外形1,832×1,590×2,110mm、内部1,776×1,420×1,882mm。違うのは開口部だけです。</p>
         <div class="table-wrap">
         <table>
           <thead><tr><th>型番</th><th>外形の間口</th><th>引き戸の開口</th><th>シャッターの開口</th><th>幅の差</th></tr></thead>
@@ -346,7 +351,7 @@
           </tbody>
         </table>
         </div>
-        <p>本体が460mm高くなると、開口も515mm高くなります。引き戸の1,850mmを超えるのは、この高いほう（Mr.シャッターマン）だけです。</p>
+        <p>本体が460mm高くなると、開口も515mm高くなります。引き戸の1,850mmを超えるのは、この高いほう（<a class="p-link" href="../products/takubo-mr-shutterman.html">Mr.シャッターマン</a>）だけです。</p>
         <p>まとめると、本体高さ2,110mmの機種ではシャッターの開口は引き戸より<strong>260mm低く</strong>、2,570mmの機種では<strong>255mm高い</strong>。「シャッターなら高さも稼げる」は、高いほうの機種に限った話でした。</p>
 
         <h2><span class="pb">寸法の</span><span class="pb">選択肢は</span><span class="pb">減る</span></h2>

@@ -233,6 +233,11 @@
     { content: ''; position: absolute; left: 0; right: 0;
     top: 50%; transform: translateY(-50%); height: 24px; }
   .crumbs { line-height: 2; }
+/* AUTO_PLINK_CSS_START */
+  /* ───── 本文から製品ページへのリンク（tools/build-product-mentions.py が生成） ───── */
+  .p-link { border-bottom: 1px solid var(--linesoft); text-decoration: none; }
+  .p-link:hover { color: var(--rust); border-bottom-color: currentColor; }
+/* AUTO_PLINK_CSS_END */
 /* AUTO_XLINK_CSS_START */
   /* ───── 記事どうしのリンク（tools/build-crosslinks.py が生成） ───── */
   .x-link { border-bottom: 1px dotted var(--rust); text-decoration: none; }
@@ -303,7 +308,7 @@
       <!-- ═══════════ 本文 ═══════════ -->
       <div class="article-body">
 
-        <p>3社の全型番を並べて数えたところ、<strong>奥行が500mmを下回る物置は、1機種群しかありませんでした。</strong>イナバのシンプリー、奥行448mmの<span data-claim="d448">9</span>型番です。</p>
+        <p>3社の全型番を並べて数えたところ、<strong>奥行が500mmを下回る物置は、1機種群しかありませんでした。</strong>イナバの<a class="p-link" href="../products/inaba-simply.html">シンプリー</a>、奥行448mmの<span data-claim="d448">9</span>型番です。</p>
         <p>狭い場所ほど、メーカーは選ぶものではなく<strong>決まるもの</strong>になります。</p>
 
         <h2><span class="pb">浅い側は、</span><span class="pb">50mmずつずれて1社ずつ並んでいる</span></h2>
@@ -336,7 +341,7 @@
         <h2>まとめ</h2>
         <ul>
         <li>奥行500mm未満はイナバのシンプリー（448mm）だけ。50mm刻みで会社が入れ替わる（<a class="x-link" href="monooki-insulated-generation.html">断熱</a>物置のナイソーシスターに480mmがありますが、絞り込みの対象外です）</li>
-        <li>間口1m未満はヨドコウのエスモ（800mm）だけ。タクボは1,120mmから（同じく、ナイソーシスターに900mmがあります）</li>
+        <li>間口1m未満はヨドコウの<a class="p-link" href="../products/yodoko-esmo.html">エスモ</a>（800mm）だけ。タクボは1,120mmから（同じく、ナイソーシスターに900mmがあります）</li>
         <li>3社そろう寸法は<span data-claim="cells">120</span>升目のうち<span data-claim="cells3">25</span>。<strong>狭いほど、メーカーは決まる</strong></li>
         </ul>
         <p>置き場所の間口・奥行・高さを先に測ってください。そのうえで<a href="../size/">寸法から探す</a>を見れば、その寸法に何が残るかが分かります。</p>

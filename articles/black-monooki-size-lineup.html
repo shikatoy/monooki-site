@@ -230,6 +230,11 @@
     { content: ''; position: absolute; left: 0; right: 0;
     top: 50%; transform: translateY(-50%); height: 24px; }
   .crumbs { line-height: 2; }
+/* AUTO_PLINK_CSS_START */
+  /* ───── 本文から製品ページへのリンク（tools/build-product-mentions.py が生成） ───── */
+  .p-link { border-bottom: 1px solid var(--linesoft); text-decoration: none; }
+  .p-link:hover { color: var(--rust); border-bottom-color: currentColor; }
+/* AUTO_PLINK_CSS_END */
 /* AUTO_XLINK_CSS_START */
   /* ───── 記事どうしのリンク（tools/build-crosslinks.py が生成） ───── */
   .x-link { border-bottom: 1px dotted var(--rust); text-decoration: none; }
@@ -300,7 +305,7 @@
       <!-- ═══════════ 本文 ═══════════ -->
       <div class="article-body">
 
-        <p>ヨドコウの黒は、エルモやエスモの本体色として選ぶものではありません。「ブラックエルモ」「ブラックエスモ」という別のシリーズです。公式のサイズ表に載っている型番は、<strong>ブラックエルモが9、ブラックエスモが5</strong>。黒を選んだ時点で、置ける寸法はそこまで絞られます。</p>
+        <p>ヨドコウの黒は、エルモやエスモの本体色として選ぶものではありません。「ブラック<a class="p-link" href="../products/yodoko-elmo.html">エルモ</a>」「ブラック<a class="p-link" href="../products/yodoko-esmo.html">エスモ</a>」という別のシリーズです。公式のサイズ表に載っている型番は、<strong>ブラックエルモが9、ブラックエスモが5</strong>。黒を選んだ時点で、置ける寸法はそこまで絞られます。</p>
         <p>**この記事は、メーカー公式サイトとニュースリリースの記載を突き合わせて書いています。</p>
 
         <h2><span class="pb">公式の</span><span class="pb">サイズ表に</span><span class="pb">載っているのは、</span><span class="pb">9通りと5通り</span></h2>

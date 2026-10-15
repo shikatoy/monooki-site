@@ -236,6 +236,11 @@
     { content: ''; position: absolute; left: 0; right: 0;
     top: 50%; transform: translateY(-50%); height: 24px; }
   .crumbs { line-height: 2; }
+/* AUTO_PLINK_CSS_START */
+  /* ───── 本文から製品ページへのリンク（tools/build-product-mentions.py が生成） ───── */
+  .p-link { border-bottom: 1px solid var(--linesoft); text-decoration: none; }
+  .p-link:hover { color: var(--rust); border-bottom-color: currentColor; }
+/* AUTO_PLINK_CSS_END */
 /* AUTO_XLINK_CSS_START */
   /* ───── 記事どうしのリンク（tools/build-crosslinks.py が生成） ───── */
   .x-link { border-bottom: 1px dotted var(--rust); text-decoration: none; }
@@ -348,12 +353,12 @@
           </tbody>
         </table>
         </div>
-        <p><span data-claim="codes_t-tp">40</span>型番はMr.ストックマン プラスアルファ（TP）です。物置部と駐輪部が一体になった型で、内部寸法がその2つに分けて書かれています。<span data-claim="codes_t-belos">30</span>型番はBELOSで、内部寸法の行が「間口2,477×奥行1,644」のように間口と奥行で終わり、高さの数字がありません。</p>
+        <p><span data-claim="codes_t-tp">40</span>型番は<a class="p-link" href="../products/takubo-mr-stockman-plus-alpha.html">Mr.ストックマン プラスアルファ</a>（TP）です。物置部と駐輪部が一体になった型で、内部寸法がその2つに分けて書かれています。<span data-claim="codes_t-belos">30</span>型番はBELOSで、内部寸法の行が「間口2,477×奥行1,644」のように間口と奥行で終わり、高さの数字がありません。</p>
 
         <h2><span class="pb">イナバ ── 型番ページの</span><span class="pb">「仕様ダウンロード」に</span><span class="pb">シリーズ寸法表が</span><span class="pb">ある</span></h2>
         <p>イナバの型番ページには「仕様ダウンロード」という欄があり、そこに「◯◯シリーズ寸法表」のPDFが置かれています。中身は「詳細寸法表」で、列はこうです。</p>
         <p class="note">機種 ／ 面積（㎡） ／ 屋根回り寸法 ／ 側板回り寸法 ／ 内部寸法 ／ 有効開口寸法 ／ 内高</p>
-        <p>シンプリー［MJX］とフォルタ ウィズ［FW］の2シリーズで確かめました。型番ごとに数値が並んでいます。</p>
+        <p><a class="p-link" href="../products/inaba-simply.html">シンプリー</a>［MJX］と<a class="p-link" href="../products/inaba-forta-with.html">フォルタ ウィズ</a>［FW］の2シリーズで確かめました。型番ごとに数値が並んでいます。</p>
         <p>フォルタ ウィズの寸法表には、内寸と開口のほかにこうも書いてあります。</p>
         <p class="note">軒高 S:2045 H:2345</p>
         <p class="note">棚板はS:346〜1446まで12段調節 H:346〜1746まで15段調節 （100㎜ピッチ）</p>
@@ -441,7 +446,7 @@
 
         <h2><span class="pb">当サイトの</span><span class="pb">数値も</span><span class="pb">直しました</span></h2>
         <p>この照合で2つ出ました。</p>
-        <p><strong>1つめ。</strong> グランプレステージ ジャンプのGP-139A・GP-139B・GP-139Cの間口を1,120mmと載せていましたが、タクボの型番ページは1,304mmと書いています。同じページの床面積1.17m²も1,304×900で合います（1,120×900なら1.01m²です）。1,304mmに直しました。残りの308型番は食い違いがありませんでした。</p>
+        <p><strong>1つめ。</strong> グランプレステージ ジャンプの<a class="p-link" href="../products/takubo-grand-prestage-jump.html">GP-139A</a>・GP-139B・GP-139Cの間口を1,120mmと載せていましたが、タクボの型番ページは1,304mmと書いています。同じページの床面積1.17m²も1,304×900で合います（1,120×900なら1.01m²です）。1,304mmに直しました。残りの308型番は食い違いがありませんでした。</p>
         <p><strong>2つめ。</strong> 有効開口の3件（エスモ・エルモ・ラヴィージュ）を「販売店の仕様表2件で一致を確認したもの」として載せていました。ヨドコウの仕様図DXFと突き合わせたところ、3件とも数値は一致していました。出どころをメーカー公式に差し替えています。</p>
         <p>どちらも<a href="../#journal">更新履歴</a>に記録しました。</p>
 

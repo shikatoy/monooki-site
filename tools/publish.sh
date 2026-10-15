@@ -33,6 +33,7 @@ python3 "$REPO/tools/build-door-figure.py" || echo "[警告] 扉の図の生成�
 python3 "$REPO/tools/build-peinte-patterns.py" || echo "[警告] ペインタの柄の生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-shop-links.py" || echo "[警告] 製品ページの出口の生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-size-links.py" || { echo "[中止] サイズ帯への導線の生成に失敗しました。"; exit 1; }
+python3 "$REPO/tools/build-product-mentions.py" || echo "[警告] 本文から製品ページへのリンク生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-crosslinks.py" || echo "[警告] 記事どうしのリンク生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-article-links.py" || echo "[警告] 記事導線の生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-article-related.py" || echo "[警告] あわせて読むの生成に失敗しました（続行します）"

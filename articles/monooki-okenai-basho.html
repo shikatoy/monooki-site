@@ -227,6 +227,11 @@
     { content: ''; position: absolute; left: 0; right: 0;
     top: 50%; transform: translateY(-50%); height: 24px; }
   .crumbs { line-height: 2; }
+/* AUTO_PLINK_CSS_START */
+  /* ───── 本文から製品ページへのリンク（tools/build-product-mentions.py が生成） ───── */
+  .p-link { border-bottom: 1px solid var(--linesoft); text-decoration: none; }
+  .p-link:hover { color: var(--rust); border-bottom-color: currentColor; }
+/* AUTO_PLINK_CSS_END */
 /* AUTO_XLINK_CSS_START */
   /* ───── 記事どうしのリンク（tools/build-crosslinks.py が生成） ───── */
   .x-link { border-bottom: 1px dotted var(--rust); text-decoration: none; }
@@ -341,7 +346,7 @@
 
         <h2><span class="pb">地面の</span><span class="pb">傾きは、</span><span class="pb">アジャスターで</span><span class="pb">吸収で</span><span class="pb">きる分だけ</span></h2>
 
-        <p>地面に多少の傾きがあるのはよくあることです。本体の脚には高さを調整する機構があり、イナバのシンプリー（MJX）の組立説明書に、その範囲が出ています。</p>
+        <p>地面に多少の傾きがあるのはよくあることです。本体の脚には高さを調整する機構があり、イナバの<a class="p-link" href="../products/inaba-simply.html">シンプリー</a>（MJX）の組立説明書に、その範囲が出ています。</p>
 
         <p class="note">調整範囲0～32mmまで</p>
 

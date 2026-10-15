@@ -354,7 +354,7 @@ tailwind.config = {
 <!-- ═══════════ 比較トレイ（選択中バー） ═══════════ -->
 <div id="compare-tray" class="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper translate-y-full transition-transform duration-300">
   <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-4 flex flex-wrap items-center gap-3 md:gap-5">
-    <span class="font-mono text-[11px] tracking-widest2 uppercase text-neutral-500 shrink-0">Compare</span>
+    <span id="compare-state" class="font-mono text-[11px] tracking-widest2 text-neutral-500 shrink-0">Compare</span>
     <div id="compare-chips" class="flex flex-wrap gap-2 flex-1 min-w-[140px]"></div>
     <button id="compare-clear" class="font-mono text-[11px] tracking-widest2 uppercase text-neutral-500 hover:text-rust transition-colors shrink-0">クリア</button>
     <button id="compare-go" class="shrink-0 border border-line px-5 py-2.5 font-mono text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300">比較する →</button>
@@ -1452,6 +1452,8 @@ const INNER = {
                      発表を受けて当サイトに型番を追加したときは、別に '新商品' を立てる。
    既存の記録は削除・改変しないこと（この台帳は追記のみ）。 */
 const UPDATE_LOG = [
+  { date:'2026-10-15', type:'改定', title:'記事の本文から製品ページへ行けるようにし、比較の状態を出しました',
+    body:'2つの変更です。1つめ。記事の本文に出てくるシリーズ名と型番を、その製品ページへのリンクにしました。これまでは記事の末尾に製品ページへの導線があるだけで、本文中でシリーズ名や型番に触れてもそこからは行けませんでした。対象は段落と箇条書きの中だけで、見出しと表には入れていません。同じ行き先は1記事に1回、1記事あたり最大4本までです。12記事に29本付きました。長い製品名の一部を切り取らない（「フォルタ ウィズ」の中の「フォルタ」を拾わない）、型番の途中で切らない、すでにリンクがある箇所には入れない、という3つの歯止めを入れ、本文に出てくる順に付けています。生成は tools/build-product-mentions.py で、公開のたびに付け直します。2つめ。比較トレイに状態を出しました。1件だけ選んだときは「比較する」ボタンが押せない状態で出るだけで、なぜ押せないのかが分かりませんでした。「比較 1 / 3 ── あと1件えらぶと比べられます」のように、いま何件で、あと何件選べるのかを出しています。' },
   { date:'2026-10-15', type:'改定', title:'見出しの階層を直し、索引で0件になったときの出口を作りました',
     body:'3つまとめての変更です。1つめ。トップページの見出しの階層を直しました。「探し方は4つ」の帯のラベルが h2 で、同じ h2 の「索引。」と比べて文字の大きさが7分の1でした。帯のラベルは見出しではないので、ただの段落に戻しています。索引のカードの製品名も h4 でしたが、親が「索引。」の h2 なので1段飛ばしでした。h3 に直しています。見出しの並びは h1 → h2（三大メーカー。／索引。／よくあるご質問。／記事。／更新履歴。）→ h3 になりました。2つめ。探し方の02「収納する物から」に「はじめての方へ」と添えました。4つが同じ重さで並ぶと、どれを押せばいいか決められない方がいます。他を狭めずに、最初の1つを示すだけの表示です。3つめ。索引の絞り込みで該当0件になったとき、これまでは「該当する製品が見つかりませんでした」と出るだけでした。どの条件を外せば何点に戻るかを出し、その場で外せるようにしています（例：ヨドコウ×宅配ボックスで0件のとき、「メーカーの指定（ヨドコウ）を外す → 1点」「種類の指定（宅配ボックス）を外す → 4点」）。診断の結果画面には同じ仕組みが10月11日から入っていて、索引だけ取り残されていました。' },
   { date:'2026-10-15', type:'改定', title:'トップページの縦の長さを3割詰めました',
@@ -3003,6 +3005,15 @@ function renderTray(){
   chips.querySelectorAll('[data-off]').forEach(b => b.addEventListener('click', () => toggleCompare(b.dataset.off)));
   if(go) go.disabled = compareSel.length < 2;
   if(go) go.style.opacity = compareSel.length < 2 ? '.4' : '1';
+  /* 「比較する」が押せない理由と、あと何件選べるかを出す（押せないボタンだけが出ていた） */
+  const st = document.querySelector('#compare-state');
+  if(st){
+    const n = compareSel.length;
+    st.textContent = n === 0 ? 'Compare'
+      : n < 2 ? `比較 ${n} / ${CMP_MAX} ── あと1件えらぶと比べられます`
+      : n < CMP_MAX ? `比較 ${n} / ${CMP_MAX} ── あと${CMP_MAX - n}件まで追加できます`
+      : `比較 ${n} / ${CMP_MAX} ── 上限です`;
+  }
 }
 
 function writeCompareHash(){

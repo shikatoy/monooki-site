@@ -221,6 +221,11 @@
     { content: ''; position: absolute; left: 0; right: 0;
     top: 50%; transform: translateY(-50%); height: 24px; }
   .crumbs { line-height: 2; }
+/* AUTO_PLINK_CSS_START */
+  /* ───── 本文から製品ページへのリンク（tools/build-product-mentions.py が生成） ───── */
+  .p-link { border-bottom: 1px solid var(--linesoft); text-decoration: none; }
+  .p-link:hover { color: var(--rust); border-bottom-color: currentColor; }
+/* AUTO_PLINK_CSS_END */
 /* AUTO_RELATED_CSS_START */
   /* ───── 記事末尾の導線（tools/build-article-links.py が生成） ───── */
   .rel { margin: 46px 0 0; border-top: 1px solid var(--line); padding-top: 26px; }
@@ -294,7 +299,7 @@
         <h2><span class="pb">物置は</span><span class="pb">まず「小型」と</span><span class="pb">「中型・大型」の</span><span class="pb">2つに分かれる</span></h2>
         <p>物置は、メーカーが違っても「小型（収納庫）」と「中型・大型」の2つに分かれます。</p>
         <p>呼び方はメーカーごとにバラバラですが、区分そのものはどのメーカーにもあります。</p>
-        <p>たとえばイナバなら、小型はシンプリー、中型・大型はフォルタ。 ヨドコウなら、小型はエスモ、中型・大型はエルモ、といった具合です。</p>
+        <p>たとえばイナバなら、小型は<a class="p-link" href="../products/inaba-simply.html">シンプリー</a>、中型・大型は<a class="p-link" href="../products/inaba-forta.html">フォルタ</a>。 ヨドコウなら、小型は<a class="p-link" href="../products/yodoko-esmo.html">エスモ</a>、中型・大型は<a class="p-link" href="../products/yodoko-elmo.html">エルモ</a>、といった具合です。</p>
         <p>ここで先に押さえておきたいことがあります。</p>
         <p>「イナバは組みやすい」「ヨドは組みにくい」といったメーカー単位の話は、実はあまり当てになりません。</p>
         <p>同じメーカーでも、小型と中型・大型で評価が入れ替わるからです。 この点は、後半でくわしく触れます。</p>

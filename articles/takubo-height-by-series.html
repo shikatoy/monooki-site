@@ -236,6 +236,11 @@
     { content: ''; position: absolute; left: 0; right: 0;
     top: 50%; transform: translateY(-50%); height: 24px; }
   .crumbs { line-height: 2; }
+/* AUTO_PLINK_CSS_START */
+  /* ───── 本文から製品ページへのリンク（tools/build-product-mentions.py が生成） ───── */
+  .p-link { border-bottom: 1px solid var(--linesoft); text-decoration: none; }
+  .p-link:hover { color: var(--rust); border-bottom-color: currentColor; }
+/* AUTO_PLINK_CSS_END */
 /* AUTO_XLINK_CSS_START */
   /* ───── 記事どうしのリンク（tools/build-crosslinks.py が生成） ───── */
   .x-link { border-bottom: 1px dotted var(--rust); text-decoration: none; }
@@ -310,7 +315,7 @@
 
         <h2><span class="pb">高さを変えるとは、</span><span class="pb">商品ページを</span><span class="pb">移ること</span></h2>
         <p>ストックマンのサイズ表は、横軸が「間口[mm]」、縦軸が「奥行[mm]」。交差するマスに型番が入ります。この表で選べるのは床の寸法だけです。</p>
-        <p>では高さはどこにあるか。別のシリーズのページです。「Mr.トールマン ダンディ」の公式ページは、見出しがこうなっています。</p>
+        <p>では高さはどこにあるか。別のシリーズのページです。「<a class="p-link" href="../products/takubo-mr-tallman-dandy.html">Mr.トールマン ダンディ</a>」の公式ページは、見出しがこうなっています。</p>
         <p class="note">物置/高さ46cmアップ</p>
         <p>本文にも「高さはなんと257cm！」とあります。ストックマンと同じく連棟が組めることも、同じページに書かれています。2つは兄弟で、違いは高さです。</p>
         <p>当サイトが収録している寸法でも、ストックマンは<span data-claim="codes_t-nd">51</span>型番すべてが高さ2,110mm、トールマンは<span data-claim="codes_t-jn">44</span>型番すべてが2,570mmでした。差は460mm。公式の「46cmアップ」と一致します。</p>
@@ -329,13 +334,13 @@
         </table>
         </div>
         <p>残りは、床の寸法を決めた時点で高さも決まります。間口2,200mm×奥行1,590mmは両方にあるので2,110mmと2,570mmから選べますが、ストックマンにしかない床寸法を選んだ場合、高さは2,110mmのほかにありません。</p>
-        <p>タクボの「BELOS」も同じで、<span data-claim="fp_t-belos">30</span>通りの床寸法のうち、ひとつの床で複数の高さが選べるものは<span data-claim="fpmulti_t-belos">0</span>通りでした。</p>
+        <p>タクボの「<a class="p-link" href="../products/takubo-belos.html">BELOS</a>」も同じで、<span data-claim="fp_t-belos">30</span>通りの床寸法のうち、ひとつの床で複数の高さが選べるものは<span data-claim="fpmulti_t-belos">0</span>通りでした。</p>
 
         <h2><span class="pb">イナバは</span><span class="pb">表の</span><span class="pb">列、</span><span class="pb">ヨドコウは</span><span class="pb">画像の</span><span class="pb">中</span></h2>
         <p>同じことを他の2社で見ると、見る場所が変わります。</p>
         <p>イナバの「フォルタ」は、公式ページのサイズ表に高さの列があります。品番ごとに幅・奥行・高さ・<a class="x-link" href="monooki-one-step-dimension.html">床面積</a>が並ぶので、同じ床のまま高さだけ替えた型番を、その場で見比べられます。イナバはページにこう書いています。</p>
         <p class="note">サイズは間口×奥行×高さで構成されていますが、組み合わせによっては無いサイズもあります</p>
-        <p>ヨドコウの「エルモ」は、サイズのページにHTMLの表がありません。寸法はすべて画像で載っていて、ページ上の文字を追っても高さには行き当たらない作りです。画像を開けば確認できます。</p>
+        <p>ヨドコウの「<a class="p-link" href="../products/yodoko-elmo.html">エルモ</a>」は、サイズのページにHTMLの表がありません。寸法はすべて画像で載っていて、ページ上の文字を追っても高さには行き当たらない作りです。画像を開けば確認できます。</p>
         <p>収録している寸法で数えると、同じ床寸法で高さが2通り以上あるのは、フォルタが<span data-claim="fp_i-fs">48</span>通り中<span data-claim="fpmulti_i-fs">24</span>通り、エルモが<span data-claim="fp_y-lmd">59</span>通り中<span data-claim="fpmulti_y-lmd">28</span>通りでした。</p>
 
         <h2><span class="pb">小さいほうの機種で</span><span class="pb">は、</span><span class="pb">3社と</span><span class="pb">も同じ形</span></h2>

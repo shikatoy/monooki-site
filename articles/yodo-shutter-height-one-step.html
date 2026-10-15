@@ -230,6 +230,11 @@
     { content: ''; position: absolute; left: 0; right: 0;
     top: 50%; transform: translateY(-50%); height: 24px; }
   .crumbs { line-height: 2; }
+/* AUTO_PLINK_CSS_START */
+  /* ───── 本文から製品ページへのリンク（tools/build-product-mentions.py が生成） ───── */
+  .p-link { border-bottom: 1px solid var(--linesoft); text-decoration: none; }
+  .p-link:hover { color: var(--rust); border-bottom-color: currentColor; }
+/* AUTO_PLINK_CSS_END */
 /* AUTO_XLINK_CSS_START */
   /* ───── 記事どうしのリンク（tools/build-crosslinks.py が生成） ───── */
   .x-link { border-bottom: 1px dotted var(--rust); text-decoration: none; }
@@ -321,7 +326,7 @@
 
         <h2><span class="pb">浅い奥行も、</span><span class="pb">シャッターに</span><span class="pb">は無い</span></h2>
         <p>消えているのは高さだけではありません。奥行も、いちばん浅い段が落ちています。</p>
-        <p>エルモの公式サイズ表には、奥行811mmの型番があります。間口1,512／1,863／2,213／2,564／2,914のそれぞれにLMD-1508、LMD-1808、LMD-2208、LMD-2508、LMD-2908が並んでいます。</p>
+        <p>エルモの公式サイズ表には、奥行811mmの型番があります。間口1,512／1,863／2,213／2,564／2,914のそれぞれに<a class="p-link" href="../products/yodoko-elmo.html">LMD-1508</a>、LMD-1808、LMD-2208、LMD-2508、LMD-2908が並んでいます。</p>
         <p>エルモシャッターの表に、奥行811mmは<strong>1件もありません。</strong>いちばん浅い奥行は1,162mmです。</p>
         <p>さらに、間口を広げるともう2段落ちます。</p>
         <div class="table-wrap">

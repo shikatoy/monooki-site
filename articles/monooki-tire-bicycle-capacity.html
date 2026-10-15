@@ -236,6 +236,11 @@
     { content: ''; position: absolute; left: 0; right: 0;
     top: 50%; transform: translateY(-50%); height: 24px; }
   .crumbs { line-height: 2; }
+/* AUTO_PLINK_CSS_START */
+  /* ───── 本文から製品ページへのリンク（tools/build-product-mentions.py が生成） ───── */
+  .p-link { border-bottom: 1px solid var(--linesoft); text-decoration: none; }
+  .p-link:hover { color: var(--rust); border-bottom-color: currentColor; }
+/* AUTO_PLINK_CSS_END */
 /* AUTO_XLINK_CSS_START */
   /* ───── 記事どうしのリンク（tools/build-crosslinks.py が生成） ───── */
   .x-link { border-bottom: 1px dotted var(--rust); text-decoration: none; }
@@ -310,7 +315,7 @@
         <p><strong>3社を当たったところ、本数や台数を書いているのは1シリーズだけでした。</strong> イナバのタイヤストッカーです。</p>
 
         <h2><span class="pb">書いてあるのは、</span><span class="pb">タイヤストッカーだけ</span></h2>
-        <p>イナバのタイヤストッカー［BJX-T］の公式ページには、こうあります。</p>
+        <p>イナバの<a class="p-link" href="../products/inaba-tire-stocker.html">タイヤストッカー</a>［BJX-T］の公式ページには、こうあります。</p>
         <p class="note">車2〜3台分のタイヤを収納。最大でタイヤ12本までの収納が可能</p>
         <p>タイヤバー2本と、転がり防止用のフックが標準装備だとも書かれています。</p>
         <p>ほかはどうか。</p>
@@ -328,7 +333,7 @@
         <p>なお、タイヤストッカーの「最大12本」は<strong>シリーズ全体の記述</strong>です。型番ごとのページにも同じ文が載っていますが、間口900mmのものと1,320mmのもので書き分けられてはいません。</p>
 
         <h2><span class="pb">タイヤストッカーは、</span><span class="pb">普通の</span><span class="pb">収納庫と</span><span class="pb">同じ箱</span></h2>
-        <p>ここでもう一つ分かることがあります。タイヤストッカー［BJX-T］<span data-claim="codes_i-bjt">12</span>型番の外形寸法は、<strong>ドア型収納庫のアイビーストッカー［BJX］<span data-claim="codes_i-bjx">29</span>型番の中に、すべて同じものがあります</strong>。公式のダウンロードページにある寸法の一覧を突き合わせると、12型番すべてに同じ寸法の相手がいました。</p>
+        <p>ここでもう一つ分かることがあります。タイヤストッカー［BJX-T］<span data-claim="codes_i-bjt">12</span>型番の外形寸法は、<strong>ドア型収納庫の<a class="p-link" href="../products/inaba-ivy-stocker.html">アイビーストッカー</a>［BJX］<span data-claim="codes_i-bjx">29</span>型番の中に、すべて同じものがあります</strong>。公式のダウンロードページにある寸法の一覧を突き合わせると、12型番すべてに同じ寸法の相手がいました。</p>
         <div class="table-wrap">
         <table>
           <thead><tr><th>外形寸法</th><th>タイヤストッカー</th><th>アイビーストッカー</th></tr></thead>
