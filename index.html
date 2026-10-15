@@ -283,7 +283,7 @@ tailwind.config = {
 <section id="shindan" aria-label="探し方">
   <div class="border-b border-line">
     <div class="max-w-[1440px] mx-auto px-5 md:px-10 py-4 flex items-center justify-between font-mono text-[11px] md:text-[11px] tracking-widest2 uppercase text-neutral-500">
-      <h2 class="font-mono font-normal"><span class="hidden sm:inline">Find / </span>探し方は4つ</h2>
+      <p class="font-mono"><span class="hidden sm:inline">Find / </span>探し方は4つ</p>
       <a href="size/" class="u-link">寸法の帯の一覧 →</a>
     </div>
   </div>
@@ -297,7 +297,7 @@ tailwind.config = {
         <span class="mt-auto pt-4 block font-mono text-[11px] tracking-widest2 uppercase">診断をひらく <span class="inline-block transition-transform group-hover:translate-x-2">→</span></span>
       </button>
       <button data-mode="use" class="entry-tile group flex flex-col text-left bg-paper border border-line p-4 md:p-5 hover:bg-ink hover:text-paper transition-colors">
-        <span class="font-mono text-[11px] tracking-widest2 uppercase text-rust group-hover:text-paper transition-colors">02</span>
+        <span class="flex w-full items-center justify-between font-mono text-[11px] tracking-widest2 uppercase text-rust group-hover:text-paper transition-colors"><span>02</span><span class="tracking-normal">はじめての方へ</span></span>
         <span class="jp-break mt-2 block font-serif font-bold text-lg md:text-2xl leading-snug">収納する物から</span>
         <span class="jp-break mt-2 hidden md:block text-[13px] leading-relaxed text-neutral-500 group-hover:text-neutral-300 transition-colors">しまう物と置き場所で3〜4問。答えた条件は、結果の画面で変えられます。</span>
         <span class="mt-auto pt-4 block font-mono text-[11px] tracking-widest2 uppercase">診断をひらく <span class="inline-block transition-transform group-hover:translate-x-2">→</span></span>
@@ -1452,6 +1452,8 @@ const INNER = {
                      発表を受けて当サイトに型番を追加したときは、別に '新商品' を立てる。
    既存の記録は削除・改変しないこと（この台帳は追記のみ）。 */
 const UPDATE_LOG = [
+  { date:'2026-10-15', type:'改定', title:'見出しの階層を直し、索引で0件になったときの出口を作りました',
+    body:'3つまとめての変更です。1つめ。トップページの見出しの階層を直しました。「探し方は4つ」の帯のラベルが h2 で、同じ h2 の「索引。」と比べて文字の大きさが7分の1でした。帯のラベルは見出しではないので、ただの段落に戻しています。索引のカードの製品名も h4 でしたが、親が「索引。」の h2 なので1段飛ばしでした。h3 に直しています。見出しの並びは h1 → h2（三大メーカー。／索引。／よくあるご質問。／記事。／更新履歴。）→ h3 になりました。2つめ。探し方の02「収納する物から」に「はじめての方へ」と添えました。4つが同じ重さで並ぶと、どれを押せばいいか決められない方がいます。他を狭めずに、最初の1つを示すだけの表示です。3つめ。索引の絞り込みで該当0件になったとき、これまでは「該当する製品が見つかりませんでした」と出るだけでした。どの条件を外せば何点に戻るかを出し、その場で外せるようにしています（例：ヨドコウ×宅配ボックスで0件のとき、「メーカーの指定（ヨドコウ）を外す → 1点」「種類の指定（宅配ボックス）を外す → 4点」）。診断の結果画面には同じ仕組みが10月11日から入っていて、索引だけ取り残されていました。' },
   { date:'2026-10-15', type:'改定', title:'トップページの縦の長さを3割詰めました',
     body:'スマホで見たときのトップページが22,922pxありました。画面にして約59枚ぶんです。中身を削らずに、出す量と折りたたみを見直しました。記事は19本すべてを並べていたのを新しい8本にし、残りは「記事をすべて見る（19本）」から記事一覧ページへ送ります。記事の説明文はスマホで2行までにしました（パソコンは全文）。更新履歴は3件表示のままですが、本文が長くなっていたので、折りたたんでいる間はスマホ2行・パソコン3行までにしました。「これまでの更新をすべて見る」を押すと全文に戻ります。索引はスマホだけ初期表示を9件から6件にしました。1列に並ぶぶん、9件で4,800pxを使っていたためです。パソコンは9件のままです。フッターの免責事項は折りたたみにしました。設置の注意書きは折りたたんでいません。結果はスマホ22,922px→15,920px、パソコン13,123px→10,957pxです。' },
   { date:'2026-10-14', type:'改定', title:'索引のカードに、間口・奥行・高さと型番数を出しました',
@@ -3161,7 +3163,7 @@ function renderIndex(){
     <div id="product-${p.id}" class="flex flex-col border-r border-b border-line p-6 md:p-8 group fade-up">
       ${visualWrap(p, productVisual(p, null, false), 'aspect-[4/3] hatch-bg flex items-center justify-center overflow-hidden transition-colors duration-300 group-hover:bg-white/60')}
       <p class="mt-5 font-mono text-[11px] tracking-widest2 uppercase text-neutral-500">${MAKERS[p.maker]} — ${esc(p.cat)}${isNew(p) ? ' <span class="text-rust">● NEW</span>' : ''}</p>
-      <h4 class="mt-2 font-serif font-bold text-lg leading-snug">${esc(p.name)}</h4>
+      <h3 class="mt-2 font-serif font-bold text-lg leading-snug">${esc(p.name)}</h3>
       ${variantBadge(p)}
       ${sizeDigest(p)}
       <p class="mt-3 text-[13px] leading-relaxed text-neutral-500">${p.features.slice(0, 2).map(esc).join('・')}</p>
@@ -3170,9 +3172,41 @@ function renderIndex(){
       <button class="cmp-toggle mt-2 w-full border border-line py-2.5 font-mono text-[11px] tracking-widest2 uppercase hover:bg-ink hover:text-paper transition-colors duration-300 ${compareSel.includes(p.id) ? 'cmp-on' : ''}" data-pid="${p.id}">${compareSel.includes(p.id) ? '✓ 比較中' : '＋ 比較に追加'}</button>
       </div>
     </div>`).join('')
-  : `<div class="col-span-full border-r border-b border-line p-12 text-center font-mono text-[11px] tracking-widest text-neutral-400">NO RESULT ── 該当する製品が見つかりませんでした。</div>`;
+  : noResultHTML();
   grid.querySelectorAll('.cmp-toggle').forEach(b => b.addEventListener('click', () => toggleCompare(b.dataset.pid)));
+  grid.querySelectorAll('.idx-relax').forEach(b => b.addEventListener('click', () => {
+    idxFilter[b.dataset.group] = 'all';
+    document.querySelectorAll(`.idx-filter[data-group="${b.dataset.group}"]`)
+      .forEach(x => x.classList.toggle('active', x.dataset.val === 'all'));
+    idxExpanded = false;
+    renderIndex();
+  }));
   renderIndexMore(items.length - shown.length);
+}
+/* 絞り込みで0件になったとき、どの条件を外せば何件に戻るかを出す。
+   診断の結果画面と同じ考え方（条件を1つ緩める案を示す） */
+function noResultHTML(){
+  const count = (maker, cat) => PRODUCTS.filter(p =>
+    (maker === 'all' || p.maker === maker) &&
+    (cat === 'all' || (p.cat || '').includes(cat))).length;
+  const outs = [];
+  if(idxFilter.maker !== 'all'){
+    const n = count('all', idxFilter.cat);
+    if(n > 0) outs.push({ group:'maker', label:'メーカーの指定（' + String(MAKERS[idxFilter.maker]).split(' /')[0] + '）', n });
+  }
+  if(idxFilter.cat !== 'all'){
+    const n = count(idxFilter.maker, 'all');
+    if(n > 0) outs.push({ group:'cat', label:'種類の指定（' + esc(idxFilter.cat) + '）', n });
+  }
+  const buttons = outs.map(o =>
+    `<button class="idx-relax mt-3 w-full border border-line py-3 px-4 text-left text-[14px] leading-relaxed hover:bg-ink hover:text-paper transition-colors duration-300" data-group="${o.group}">
+       ${o.label}を外す <span class="font-mono text-[11px]">→ ${o.n} 点</span>
+     </button>`).join('');
+  return `<div class="col-span-full border-r border-b border-line p-8 md:p-12">
+      <p class="font-mono text-[11px] tracking-widest2 uppercase text-neutral-400">No Result</p>
+      <p class="mt-3 text-[14px] leading-loose">いまの組み合わせに当てはまる製品はありません。</p>
+      ${buttons || ''}
+    </div>`;
 }
 function renderIndexMore(rest){
   const box = document.querySelector('#idx-more');
