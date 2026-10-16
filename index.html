@@ -646,6 +646,18 @@ const PHOTO = {
   't-pe':'TKMO5000203',    /* ペインタ W1695 D750 H1900 */
   'i-grn':'INWH010007',    /* ガレーディア シャッター閉 */
   'i-fxn':'INWH040026',    /* バイク保管庫 シャッター閉 */
+  /* 2026-10-16 追加（エクスショップのシリーズ一覧から） */
+  'i-kmw':'INMO230001', /* ナイソーシスター 一般型 シリーズ */
+  'i-bjx':'INMO250001', /* アイビーストッカー シリーズ */
+  'i-bjt':'INMO260001', /* タイヤストッカー シリーズ */
+  'i-smx':'INMO262001', /* ナイソー 一般型 シリーズ */
+  'i-fw':'INMO000991', /* FORTA with シリーズ */
+  'i-fk':'INMO111835', /* FORTA 屋根傾斜変更タイプ シリーズ */
+  'i-fp':'INMO700040', /* FORTA プラス シリーズ */
+  'i-ff':'INWH050002', /* ドマール 一般型 シリーズ */
+  't-tp':'TKMO3700001', /* Mr.ストックマン プラスアルファ シリーズ */
+  't-nde':'TKMO4510004', /* Mr.ストックマンダンディ シャッター扉タイプ 一般型 シリーズ */
+  'y-vgc':'YDWH010003', /* ラヴィージュIII */
 };
 function photoUrl(p){
   const c = PHOTO[p.id];
@@ -1453,6 +1465,8 @@ const INNER = {
                      発表を受けて当サイトに型番を追加したときは、別に '新商品' を立てる。
    既存の記録は削除・改変しないこと（この台帳は追記のみ）。 */
 const UPDATE_LOG = [
+  { date:'2026-10-16', type:'改定', title:'索引に出る写真を11シリーズ増やし、写真のあるものを先に並べました',
+    body:'索引の上の方が、寸法から描いた正面図ばかりになっていました。並び順が更新の新しい順で、直近に足した6シリーズに写真が無かったためです。提携先（エクスショップ）のシリーズ一覧から画像の品番を調べ、11シリーズ分を足しました。ナイソーシスター・アイビーストッカー・タイヤストッカー・ナイソー・フォルタ ウィズ・フォルタ 屋根傾斜変更タイプ・フォルタプラス・ドマール・Mr.ストックマン プラスアルファ・Mr.ストックマン シャッター扉・ラヴィージュです。写真のあるシリーズは12から23になりました。残る8シリーズ（バイクシャッターマン、Mr.シャッターマン、フォルタ大型、フォルタ縦長大型、宅配ボックス、como lite、アルシアフィット、エルモシャッター）は提携先のシリーズ一覧に無く、取り違えるくらいならと見送りました。アルシアフィットは、提携先に名前の似た別シリーズ（アルシア）があるため特に避けています。あわせて、写真が出ないときに図へ戻す処理を入れました。提携先で画像が差し替わっても、空白にはなりません。並び順は、写真のあるものを先に、その中で更新の新しい順に変えました。図しか無い8シリーズは後ろに回ります。発売日順と検索順位順も検討しましたが、発売日は3社とも公式に出しておらず、検索順位は当サイトのデータとして持っていないため、採っていません。' },
   { date:'2026-10-15', type:'訂正', title:'更新履歴の説明が、実際に出している記録と合っていませんでした',
     body:'更新履歴の欄に「記録は2種類あります」と書き、新商品・廃盤・入替と、メーカー発表の2つだけを説明していました。実際にここへ出しているのは4種類で、ほかに訂正（当サイトが載せていた数値や記述が間違っていたときの記録。いま4件）と、公開（サイトを公開した日の記録。1件）が並んでいます。訂正は10月12日に足した種類で、そのとき説明文を直し忘れていました。説明文を実際に合わせ、あわせて、サイトの作り（配色や画面の組み方）を変えたときの記録は台帳に残すだけでここには出していない、という但し書きも入れました。表示している記録は24件、台帳にはそのほかに43件の改定の記録があります。' },
   { date:'2026-10-15', type:'改定', title:'よくあるご質問を11件から6件にし、メーカー欄の重複を外しました',
@@ -2177,6 +2191,12 @@ function svgElevation(p, size, showDims = true){
     </g>` : ''}
   </svg>`;
 }
+/* 写真が取れなかったとき（提携先に画像が無い・URLが変わった）は、寸法から描いた正面図に戻す */
+function photoFallback(img){
+  const p = PRODUCTS.find(x => x.id === img.dataset.pid);
+  if(!p){ img.remove(); return; }
+  img.outerHTML = svgElevation(p, null, img.dataset.vdims === '1');
+}
 function productVisual(p, size, showDims = true){
   /* 未発売の製品は、実物の写真がまだ無い。似た絵を当てず、発売前であることを出す */
   if(p.soon){
@@ -2188,7 +2208,8 @@ function productVisual(p, size, showDims = true){
   }
   const ph = p.img || photoUrl(p);
   return ph
-    ? `<img src="${esc(ph)}" alt="${esc(p.name)}" loading="lazy" class="w-full h-full object-contain bg-white">`
+    ? `<img src="${esc(ph)}" alt="${esc(p.name)}" loading="lazy" class="w-full h-full object-contain bg-white"
+           data-pid="${esc(p.id)}" data-vdims="${showDims ? 1 : 0}" onerror="photoFallback(this)">`
     : svgElevation(p, size, showDims);
 }
 /* 画像の飛び先: 自分の製品ページ（無ければメーカー公式）。
@@ -3171,8 +3192,13 @@ function renderIndex(){
   const items = PRODUCTS.filter(p =>
     (idxFilter.maker === 'all' || p.maker === idxFilter.maker) &&
     (idxFilter.cat === 'all' || (p.cat || '').includes(idxFilter.cat)));
-  /* 更新（追加）が新しい順に並べる。added未設定の初期掲載品はサイト公開日扱い */
-  items.sort((a, b) => new Date(b.added || '2026-07-07') - new Date(a.added || '2026-07-07'));
+  /* 写真のあるものを先に、その中で更新（追加）が新しい順。
+     図（寸法から描いた正面図）しか無いものは後ろへ。
+     added未設定の初期掲載品はサイト公開日扱い。2026-10-16 */
+  const hasPhoto = p => !!(p.img || PHOTO[p.id]);
+  items.sort((a, b) =>
+    (hasPhoto(b) - hasPhoto(a)) ||
+    (new Date(b.added || '2026-07-07') - new Date(a.added || '2026-07-07')));
   const count = document.querySelector('#idx-count');
   const shown = idxExpanded ? items : items.slice(0, IDX_PREVIEW);
   if(count) count.textContent = `${shown.length} / ${items.length} 点を表示`;
