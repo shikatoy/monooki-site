@@ -16,6 +16,7 @@ https://monooki-erabi.com/articles/monooki-narrow-space-maker.html
 https://monooki-erabi.com/articles/monooki-okenai-basho.html
 https://monooki-erabi.com/articles/monooki-one-step-dimension.html
 https://monooki-erabi.com/articles/monooki-options-and-anchor.html
+https://monooki-erabi.com/articles/monooki-parts-after-discontinued.html
 https://monooki-erabi.com/articles/monooki-rust-where-and-how.html
 https://monooki-erabi.com/articles/monooki-shutter-vs-slide-opening.html
 https://monooki-erabi.com/articles/monooki-size-and-placement.html

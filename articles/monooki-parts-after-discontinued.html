@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ANALYTICS_START -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B5453D0GBM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-B5453D0GBM');
+  /* 提携先（バリューコマース経由）のクリックを数える。
+     読者が最後まで進んだかを見る唯一の出口なので、ここだけは必ず取る。 */
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    var a = (t && t.closest) ? t.closest('a[href]') : null;
+    if (!a || !/valuecommerce\.com/.test(a.href)) return;
+    gtag('event', 'affiliate_click', {
+      page_path: location.pathname,
+      link_url: String(a.href).slice(0, 100)
+    });
+  }, true);
+</script>
+<!-- ANALYTICS_END -->
+<title>物置が廃盤になったあと、部品は何年手に入るか｜物置どれがいい？</title>
+<meta name="description" content="廃盤になった物置の補修部品を、各社が何年保有するか。公式に年数を書いているのは3社のうちヨドコウだけでした。保証期間との違いと、廃盤がどこで知らされるかも並べます。">
+<meta name="keywords" content="物置 廃盤, 補修部品, 生産終了, 部品 保有期間, ヨドコウ, イナバ, タクボ">
+<meta name="theme-color" content="#161616">
+<link rel="canonical" href="https://monooki-erabi.com/articles/monooki-parts-after-discontinued.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="物置どれがいい？">
+<meta property="og:title" content="物置が廃盤になったあと、部品は何年手に入るか">
+<meta property="og:description" content="廃盤になった物置の補修部品を、各社が何年保有するか。公式に年数を書いているのは3社のうちヨドコウだけでした。保証期間との違いと、廃盤がどこで知らされるかも並べます。">
+<meta property="og:url" content="https://monooki-erabi.com/articles/monooki-parts-after-discontinued.html">
+<meta property="og:image" content="https://monooki-erabi.com/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "物置が廃盤になったあと、部品は何年手に入るか",
+  "description": "廃盤になった物置の補修部品を、各社が何年保有するか。公式に年数を書いているのは3社のうちヨドコウだけでした。保証期間との違いと、廃盤がどこで知らされるかも並べます。",
+  "datePublished": "2026-10-19",
+  "dateModified": "2026-10-19",
+  "author": { "@type": "Organization", "name": "物置どれがいい？" },
+  "publisher": { "@type": "Organization", "name": "物置どれがいい？" },
+  "mainEntityOfPage": "https://monooki-erabi.com/articles/monooki-parts-after-discontinued.html",
+  "image": "https://monooki-erabi.com/images/og-image.png",
+  "inLanguage": "ja",
+  "keywords": "物置 廃盤, 補修部品, 生産終了, 部品 保有期間, ヨドコウ, イナバ, タクボ"
+}
+</script>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192.png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700;800&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ═══════ 記事ページ専用スタイル（index.html とは独立。共通化しないこと） ═══════ */
+  :root {
+    --ink: #161616;
+    --paper: #ffffff;
+    --line: #161616;
+    --linesoft: #e0e0e0;
+    --rust: #a3512b;
+    --mute: #6b6b6b;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 16px;
+    line-height: 2;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--rust); color: #fff; }
+  a { color: inherit; }
+  img { max-width: 100%; height: auto; }
+
+  .mono { font-family: 'IBM Plex Mono', monospace; letter-spacing:.2em; text-transform: uppercase; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+  /* ───── ヘッダー ───── */
+  .site-header {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(255,255,255, .95);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header-inner {
+    max-width: 1440px; margin: 0 auto; padding: 0 20px;
+    height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand-mark {
+    width: 32px; height: 32px; background: var(--ink); color: var(--paper);
+    font-family: 'Shippori Mincho B1', serif; font-weight: 700; font-size: 14px;
+    display: flex; align-items: center; justify-content: center; user-select: none;
+  }
+  .brand-name { font-family: 'Shippori Mincho B1', serif; font-weight: 700; font-size: 16px; letter-spacing: .02em; }
+  .header-link { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing:.2em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
+  .header-link:hover { color: var(--rust); }
+
+  /* ───── パンくず ───── */
+  .crumbs { margin: 28px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .18em; color: var(--mute); }
+  .crumbs a { text-decoration: none; border-bottom: 1px solid var(--linesoft); }
+  .crumbs a:hover { color: var(--rust); border-bottom-color: currentColor; }
+  .crumbs span { margin: 0 8px; color: #bababa; }
+
+  /* ───── 記事ヘッダー ───── */
+  .article-head { padding: 40px 0 48px; border-bottom: 1px solid var(--line); }
+  .article-kicker { margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing:.2em; text-transform: uppercase; color: var(--rust); }
+  .article-title {
+    margin: 22px 0 0;
+    font-family: 'Shippori Mincho B1', serif; font-weight: 800;
+    font-size: clamp(1.8rem, 5.4vw, 2.9rem); line-height: 1.45; letter-spacing: -.01em;
+  }
+  .article-lead { margin: 26px 0 0; font-size: 14px; line-height: 2.1; color: var(--mute); }
+  .article-meta { margin: 30px 0 0; display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: center;
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .2em; color: #8f8f8f; }
+  .tags { margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em; color: var(--mute);
+    border: 1px solid var(--linesoft); padding: 4px 10px; }
+
+
+  /* ───── 日本語の折り返し位置 ─────
+     既定では文字単位で折り返すため、語の途中で切れる。
+     auto-phrase は文節で折り返す指定（対応しないブラウザは無視する） */
+  .article-title, .article-lead, .article-body h2, .article-body h3,
+  .card-title, .card-desc, .cta-title {
+    word-break: auto-phrase; line-break: strict;
+  }
+  .pb { display: inline-block; }
+  /* ───── 本文 ───── */
+  .article-body { padding: 8px 0 56px; }
+  .article-body h2 {
+    margin: 72px 0 0; padding-top: 26px; border-top: 1px solid var(--line);
+    font-family: 'Shippori Mincho B1', serif; font-weight: 700;
+    font-size: clamp(1.3rem, 4vw, 1.75rem); line-height: 1.7; letter-spacing: -.01em;
+  }
+  .article-body > h2:first-child { margin-top: 44px; padding-top: 0; border-top: 0; }
+  .article-body h3 {
+    margin: 48px 0 0;
+    font-family: 'Shippori Mincho B1', serif; font-weight: 700;
+    font-size: clamp(1.05rem, 3.2vw, 1.25rem); line-height: 1.8;
+  }
+  .article-body h3::before { content: '—'; color: var(--rust); margin-right: 10px; }
+  .article-body p { margin: 26px 0 0; font-size: 15px; line-height: 2.15; }
+  .article-body strong { font-weight: 700; background: linear-gradient(transparent 62%, rgba(163, 81, 43, .18) 62%); }
+  /* ───── 引用（公式資料の文言をそのまま置く） ───── */
+  .article-body .note {
+    margin: 26px 0 0; padding: 18px 20px 18px 22px;
+    border-left: 2px solid var(--rust); background: #f4f4f4;
+    font-size: 14px; line-height: 2.05; color: #3a3a3a;
+  }
+  /* ───── 本文中の表（Markdownの表から生成） ───── */
+  .article-body table { width: 100%; border-collapse: collapse; margin: 26px 0 0; font-size: 13.5px; line-height: 1.9; }
+  .article-body th, .article-body td { padding: 9px 10px; border-bottom: 1px solid var(--linesoft); text-align: left; vertical-align: top; }
+  .article-body th { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .1em; color: var(--mute); font-weight: 400; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .article-body td { font-variant-numeric: tabular-nums; }
+  .article-body tbody tr:hover { background: #f4f4f4; }
+  .article-body .table-wrap { margin: 26px 0 0; overflow-x: auto; }
+  .article-body .table-wrap table { margin: 0; }
+  @media (min-width: 768px) { .article-body table { font-size: 14.5px; } }
+  .article-body ul, .article-body ol { margin: 26px 0 0; padding-left: 0; list-style: none; counter-reset: li; }
+  .article-body li { position: relative; margin: 14px 0 0; padding-left: 30px; font-size: 15px; line-height: 2.1; }
+  .article-body ul > li::before { content: ''; position: absolute; left: 8px; top: 15px; width: 8px; height: 1px; background: var(--rust); }
+  .article-body ol > li { counter-increment: li; }
+  .article-body ol > li::before {
+    content: counter(li, decimal-leading-zero); position: absolute; left: 0; top: 1px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .05em; color: var(--rust);
+  }
+
+  /* ───── 記事フッター（導線） ───── */
+  .cta {
+    margin: 8px 0 0; padding: 34px 26px; border: 1px solid var(--line); background: #f4f4f4;
+  }
+  .cta-label { margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing:.2em; text-transform: uppercase; color: var(--rust); }
+  .cta-title { margin: 16px 0 0; font-family: 'Shippori Mincho B1', serif; font-weight: 800; font-size: clamp(1.25rem, 4vw, 1.6rem); line-height: 1.7; }
+  .cta-text { margin: 16px 0 0; font-size: 14px; line-height: 2.1; color: var(--mute); }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 14px; margin: 26px 0 0;
+    font-family: 'Shippori Mincho B1', serif; font-weight: 700; font-size: 18px;
+    text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 4px;
+  }
+  .cta-btn .arrow { font-family: 'IBM Plex Mono', monospace; transition: transform .3s cubic-bezier(.22,1,.36,1); }
+  .cta-btn:hover { color: var(--rust); border-bottom-color: var(--rust); }
+  .cta-btn:hover .arrow { transform: translateX(10px); }
+
+  .nav-links { margin: 40px 0 64px; display: flex; flex-wrap: wrap; gap: 14px 28px; }
+  .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .18em; text-decoration: none; border-bottom: 1px solid var(--linesoft); padding-bottom: 3px; }
+  .nav-links a:hover { color: var(--rust); border-bottom-color: currentColor; }
+
+  /* ───── サイトフッター ───── */
+  .site-footer { background: var(--ink); color: var(--paper); }
+  .site-footer-inner { max-width: 1440px; margin: 0 auto; padding: 48px 20px; }
+  .disclaimer { border: 1px solid #737373; padding: 24px; }
+  .disclaimer-label { margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing:.2em; text-transform: uppercase; color: var(--rust); }
+  .disclaimer p { margin: 16px 0 0; font-family: 'Shippori Mincho B1', serif; font-weight: 700; font-size: 14px; line-height: 2.1; }
+  .disclaimer p + p { padding-top: 14px; border-top: 1px solid #404040; color: #d4d4d4; }
+  .footer-meta { margin: 30px 0 0; display: flex; flex-direction: column; gap: 12px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #8f8f8f; }
+  .footer-meta a { text-decoration: none; }
+  .footer-meta a:hover { color: var(--paper); }
+
+  @media (min-width: 768px) {
+    body { font-size: 17px; }
+    .wrap { padding: 0 40px; }
+    .site-header-inner { padding: 0 40px; }
+    .brand-name { font-size: 18px; }
+    .header-link { font-size: 11px; }
+    .article-head { padding: 56px 0 60px; }
+    .article-body p, .article-body li { font-size: 16px; }
+    .cta { padding: 44px 40px; }
+    .site-footer-inner { padding: 56px 40px; }
+    .disclaimer { padding: 32px; }
+    .footer-meta { flex-direction: row; justify-content: space-between; }
+  }
+  /* TAPTARGET */
+  /* ───── タップの的を24px以上に（WCAG 2.2 / 2.5.8）
+     下線の位置を変えないよう、当たり判定だけ ::before で広げる ───── */
+  .crumbs a, .footer-meta a, .header-link,
+  .tbl a, .grp a, .sizes td a,
+  h2 > a, h3 > a, dd > a { position: relative; }
+  .crumbs a::before, .footer-meta a::before, .header-link::before,
+  .tbl a::before, .grp a::before, .sizes td a::before,
+  h2 > a::before, h3 > a::before, dd > a::before
+    { content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 24px; }
+  .crumbs { line-height: 2; }
+/* AUTO_ARTREL_CSS */
+  .rel.artrel { margin-top: 18px; }
+/* AUTO_PLINK_CSS_START */
+  /* ───── 本文から製品ページへのリンク（tools/build-product-mentions.py が生成） ───── */
+  .p-link { border-bottom: 1px solid var(--linesoft); text-decoration: none; }
+  .p-link:hover { color: var(--rust); border-bottom-color: currentColor; }
+/* AUTO_PLINK_CSS_END */
+/* AUTO_RELATED_CSS_START */
+  /* ───── 記事末尾の導線（tools/build-article-links.py が生成） ───── */
+  .rel { margin: 46px 0 0; border-top: 1px solid var(--line); padding-top: 26px; }
+  .rel-label { margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--mute); }
+  .rel-note { margin: 10px 0 18px; font-size: 12.5px; line-height: 1.9; color: var(--mute); }
+  .rel-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  @media (min-width: 700px) { .rel-list { grid-template-columns: 1fr 1fr; } }
+  .rel-list li { margin: 0; padding: 0; }
+  .rel-list li::before { content: none; }
+  .rel-list a { display: flex; align-items: center; gap: 12px; border: 1px solid var(--linesoft);
+    background: #fff; padding: 12px 14px; text-decoration: none;
+    transition: border-color .2s ease, box-shadow .2s ease; }
+  .rel-list a:hover { border-color: var(--rust); box-shadow: 3px 3px 0 var(--rust); }
+  .rel-txt { flex: 1; min-width: 0; }
+  .rel-kicker { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    letter-spacing: .14em; color: var(--mute); }
+  .rel-name { display: block; margin-top: 3px; font-family: 'Shippori Mincho B1', serif;
+    font-weight: 700; font-size: 15px; line-height: 1.4; }
+  .rel-go { flex: 0 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--rust); }
+  /* 記事の末尾に置く、販売店への出口（広告）。本文の中には入れない */
+  .rel-ad { margin: 22px 0 0; border-top: 1px solid var(--linesoft); padding-top: 16px; }
+  .rel-ad-label { margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    letter-spacing: .14em; color: var(--rust); }
+  .rel-ad-list { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .rel-ad-list li { margin: 0; padding: 0; }
+  .rel-ad-list li::before { content: none; }
+  .rel-ad-list a { display: inline-flex; align-items: center; min-height: 24px;
+    border: 1px solid var(--rust); color: var(--rust); padding: 6px 12px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em;
+    text-decoration: none; }
+  .rel-ad-list a:hover { background: var(--rust); color: #fff; }
+  .rel-ad-note { margin: 12px 0 0; font-size: 12.5px; line-height: 1.9; color: var(--mute); }
+/* AUTO_RELATED_CSS_END */
+</style>
+</head>
+<body>
+
+<!-- ═══════════ ヘッダー ═══════════ -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="../" class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 128 128" width="23" height="23" fill="currentColor" aria-hidden="true"><rect x="10" y="27" width="108" height="14" rx="1"/><rect x="22" y="47" width="38" height="54"/><rect x="68" y="47" width="38" height="54"/></svg></span>
+      <span class="brand-name">物置どれがいい？</span>
+    </a>
+    <a href="../" class="header-link">← トップへ戻る</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <nav class="crumbs" aria-label="パンくずリスト">
+      <a href="../">トップ</a><span>/</span><a href="./">記事</a><span>/</span>物置が廃盤になったあと、部品は何年手に入るか
+    </nav>
+
+    <!-- ═══════════ 記事ヘッダー ═══════════ -->
+    <article>
+      <header class="article-head">
+        <p class="article-kicker">Article — 選び方</p>
+        <h1 class="article-title"><span class="pb">物置が</span><span class="pb">廃盤に</span><span class="pb">なったあと、</span><span class="pb">部品は</span><span class="pb">何年手に</span><span class="pb">入るか</span></h1>
+        <p class="article-lead">廃盤になった物置の補修部品を、各社が何年保有するか。公式に年数を書いているのは3社のうちヨドコウだけでした。保証期間との違いと、廃盤がどこで知らされるかも並べます。</p>
+        <div class="article-meta">
+          <time datetime="2026-10-19">2026-10-19</time>
+          <span>Text — 編集部</span>
+        </div>
+        <div class="tags">
+          <span class="tag">物置 廃盤</span>
+          <span class="tag">補修部品</span>
+          <span class="tag">生産終了</span>
+          <span class="tag">部品 保有期間</span>
+          <span class="tag">ヨドコウ</span>
+          <span class="tag">イナバ</span>
+          <span class="tag">タクボ</span>
+        </div>
+      </header>
+
+      <!-- ═══════════ 本文 ═══════════ -->
+      <div class="article-body">
+
+        <p>物置は、買ってから10年20年と使うものです。その間にシリーズが廃盤になることがあります。そのとき、扉の戸車や錠が壊れたら部品は手に入るのか。3社の公式ページを当たりました。</p>
+
+        <h2><span class="pb">年数を</span><span class="pb">書いているのは、</span><span class="pb">ヨドコウだけ</span></h2>
+        <div class="table-wrap">
+        <table>
+          <thead><tr><th>メーカー</th><th>公式の記載</th><th>どこに書いてあるか</th></tr></thead>
+          <tbody>
+            <tr><td>ヨドコウ</td><td><strong>「商品廃番後、約10年間を基本に保有しております」</strong></td><td>公式サイトのよくある質問</td></tr>
+            <tr><td>イナバ</td><td><strong>年数の記載なし。</strong> 戸車などが壊れた場合の部品は用意があり、販売店へ申し出る案内（「一部の部品を除く」）</td><td>公式サイトのよくあるご質問</td></tr>
+            <tr><td>タクボ</td><td><strong>年数の記載なし。</strong> 部品交換・修理は、購入した販売店か近隣のホームセンターの物置売場へ、という案内</td><td>公式サイトのQ&amp;A</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p>イナバには公式のパーツショップがあり、販売店経由とあわせて部品を取り寄せる窓口は用意されています。ただし<strong>いつまで</strong>という記述は見当たりません。タクボも同じで、窓口の案内はありますが年数はありません。</p>
+        <p>ヨドコウは年数に加えて、交換部品は機能が同じでも仕様が異なる場合がある、と書き添えています。</p>
+
+        <h2><span class="pb">保証期間と、</span><span class="pb">部品の</span><span class="pb">保有期間は</span><span class="pb">別の</span><span class="pb">もの</span></h2>
+        <p>ここは混同しやすいところです。タクボの公式Q&amp;Aには5年と2年という数字が出てきますが、これは<strong>保証期間</strong>で、廃盤後に部品が何年手に入るかではありません（タクボエクステリア製品が5年、クリーンキーパーCK型が2年）。</p>
+        <p>保証は「買ってから一定期間、不具合があったら対応する」約束です。部品の保有は「生産をやめたあと、直すための部品を何年持っておくか」です。前者が切れても後者が残っていることも、その逆もあります。保証そのものの比較は、<a href="monooki-rust-where-and-how.html">物置は何年もつか</a>にまとめています。</p>
+
+        <h2><span class="pb">廃盤は、</span><span class="pb">どこで知らされるか</span></h2>
+        <p>3社で扱いが違いました。</p>
+        <ul>
+        <li><strong>イナバ</strong> ── 公式ニュースに「生産終了のお知らせ」を出します。2026年7月6日付の「ナイソー」SMK型の例では、2026年8月31日で生産終了、後継のSMX型と<a class="p-link" href="../products/inaba-como-lite.html">como lite</a> SML型が9月1日発売、と書かれています。生産終了後は在庫がなくなり次第の受注生産になる、という記述もあります</li>
+        <li><strong>ヨドコウ</strong> ── 廃番案内を出します。ヨド蔵MD／SAがその例です</li>
+        <li><strong>タクボ</strong> ── 公式インフォメーションに、生産終了や廃番の告知が見当たりません。新製品の発表はありますが、旧機種を置き換えるという書き方はされていません</li>
+        </ul>
+        <p>いずれも2026年10月19日に確認した範囲です。</p>
+
+        <h2><span class="pb">いま使っている物置が</span><span class="pb">現行かどうかを確かめる</span></h2>
+        <p>告知のされ方が揃っていない以上、<strong>現行ラインアップに載っているかどうかで見るのが確実</strong>です。手元の物置に貼ってある型番や、見積書に書かれた記号から引けます。</p>
+        <p>当サイトの<a href="../products/codes.html">型番から探す</a>に、3社の全<span data-claim="codes_all">1,117</span>型番を並べています。ここに無ければ、生産が終わっている可能性があります。確認できた廃盤と後継は<a href="../products/discontinued.html">廃盤・生産終了になった物置と、その後継</a>に記録しています。</p>
+
+        <h2>まとめ</h2>
+        <ul>
+        <li>廃盤後の部品保有期間を公式に書いているのは、3社のうち<strong>ヨドコウだけ</strong>（約10年が基本）</li>
+        <li>イナバとタクボは、部品を取り寄せる窓口は案内していますが、年数の記載は見当たりません</li>
+        <li>タクボの5年・2年は保証期間で、部品の保有期間ではありません</li>
+        <li>廃盤の告知はイナバが公式ニュース、ヨドコウが廃番案内。タクボは告知が見当たりません</li>
+        <li>実際に部品があるかは製品と時期によって変わります。各メーカーへ直接お問い合わせください</li>
+        </ul>
+
+      </div>
+    </article>
+
+    <!-- AUTO_RELATED_START -->
+    <aside class="rel">
+      <p class="rel-label">Products — この記事に出てくる物置</p>
+      <p class="rel-note">本文に出てきた順に並べています。サイズ展開と仕様は、機種ごとのページにまとめてあります。</p>
+      <ul class="rel-list">
+        <li><a href="../products/inaba-como-lite.html"><span class="rel-txt"><span class="rel-kicker">イナバ — 断熱物置</span><span class="rel-name">como lite</span></span><span class="rel-go">&rarr;</span></a></li>
+      </ul>
+    </aside>
+    <!-- AUTO_RELATED_END -->
+
+    <!-- AUTO_ARTREL_START -->
+    <aside class="rel artrel">
+      <p class="rel-label">Related — あわせて読む</p>
+      <ul class="rel-list">
+        <li><a href="monooki-narrow-space-maker.html"><span class="rel-txt"><span class="rel-kicker">選び方</span><span class="rel-name">奥行50cmを切ると、物置は1社しか選べない</span></span><span class="rel-go">&rarr;</span></a></li>
+        <li><a href="monooki-insulated-generation.html"><span class="rel-txt"><span class="rel-kicker">機種の見方</span><span class="rel-name">断熱物置が、静かに入れ替わりました</span></span><span class="rel-go">&rarr;</span></a></li>
+        <li><a href="takubo-height-by-series.html"><span class="rel-txt"><span class="rel-kicker">機種の見方</span><span class="rel-name">タクボのサイズ表に、高さの欄はない</span></span><span class="rel-go">&rarr;</span></a></li>
+      </ul>
+    </aside>
+    <!-- AUTO_ARTREL_END -->
+
+    <!-- ═══════════ お問い合わせ導線 ═══════════ -->
+    <aside class="cta">
+      <p class="cta-label">Consultation — ご相談</p>
+      <p class="cta-title">物置選びの疑問に、お答えします。</p>
+      <p class="cta-text">「うちは砂利敷きだけれど自分で置けるか」「この寸法で扉の前は足りるか」など、設置まわりの迷いはお気軽にお寄せください。編集部より折り返しご連絡いたします。</p>
+      <a href="../contact.html" class="cta-btn">お問い合わせへ <span class="arrow">→</span></a>
+    </aside>
+
+    <nav class="nav-links">
+      <a href="./">← 記事一覧へ</a>
+      <a href="../">物置マッチング診断（トップ）へ</a>
+      <a href="../contact.html">お問い合わせ</a>
+      <a href="../about.html">運営者情報</a>
+    </nav>
+
+  </div>
+</main>
+
+<!-- ═══════════ フッター ═══════════ -->
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="disclaimer">
+      <p class="disclaimer-label">Disclaimer — 注意書き</p>
+      <p>※当サイトは物置選びの参考としてご利用ください。実際の設置スペースやサイズ違いによるトラブルの責任は負いかねます。ご購入前には、必ず専門業者による現地の設置・測量調査をご依頼ください。</p>
+      <p>※設置の際は、本体の下に基礎用コンクリートブロック（基本 高さ約10cm）を敷きます。実際の高さは「本体高さ＋約10cm」となるため、高さに制限のある場所ではブロック分を含めた収まりをご確認ください。</p>
+    </div>
+    <div class="footer-meta">
+      <a href="../">← 物置どれがいい？ トップへ</a>
+      <a href="../about.html">運営者情報</a>
+      <a href="../privacy.html">プライバシーポリシー</a>
+      <span>© 2026 物置どれがいい？ — 非公式情報比較メディア</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
