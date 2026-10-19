@@ -190,6 +190,17 @@
   .grp { margin:44px 0 0; padding:14px 16px; border:1px solid var(--line); background:#f4f4f4; }
   .grp h2 { margin:0; font-family:'Shippori Mincho B1',serif; font-weight:700; font-size:17px; line-height:1.6; }
   .grp p { margin:5px 0 0; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; color:var(--mute); }
+  /* BANDAD */
+  /* ───── サイズ帯のシリーズ行に置く、販売店への出口（広告） ───── */
+  .band-row { display:flex; flex-wrap:wrap; align-items:baseline;
+    justify-content:space-between; gap:6px 12px; }
+  .band-txt { flex:1 1 auto; min-width:0; }
+  .band-ad { margin-left:10px; display:inline-flex; align-items:center; gap:7px; min-height:24px;
+    padding:2px 8px; border:1px solid var(--rust); color:var(--rust);
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em;
+    text-decoration:none; white-space:nowrap; }
+  .band-ad b { font-weight:500; }
+  .band-ad:hover { background:var(--rust); color:#fff; }
   .grp a { text-decoration:none; border-bottom:1px solid var(--linesoft); }
   .grp a:hover { color:var(--rust); }
   /* GRPD */
@@ -316,7 +327,7 @@
       <p style="margin:14px 0 0">※本体の下には基礎用コンクリートブロック（基本 高さ約10cm）を敷きます。<b>実際の高さは「本体高さ＋約10cm」</b>になります。</p>
     </div>
 
-    <div class="grp" style="background:#ffffff"><p><b>タクボ Mr.ストックマン ダンディ</b> — 2型番／間口 2,200 mm・奥行 1,222・1,406 mm</p><p><b>イナバ フォルタ</b> — 2型番／間口 2,210 mm・奥行 1,370 mm</p><p><b>イナバ ドマール</b> — 2型番／間口 2,210 mm・奥行 1,370 mm</p><p><b>タクボ BELOS</b> — 1型番／間口 2,130 mm・奥行 1,400 mm</p><p><b>イナバ フォルタ 屋根傾斜変更タイプ</b> — 1型番／間口 2,210 mm・奥行 1,370 mm</p></div>
+    <div class="grp" style="background:#ffffff"><p class="band-row"><span class="band-txt"><b>タクボ Mr.ストックマン ダンディ</b> — 2型番／間口 2,200 mm・奥行 1,222・1,406 mm</span><a class="band-ad" href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_mo_search_execute%26se_series%3Dseries%253Atakubo_s2" rel="nofollow sponsored" target="_blank"><b>広告</b><span>販売店で見る →</span></a></p><p class="band-row"><span class="band-txt"><b>イナバ フォルタ</b> — 2型番／間口 2,210 mm・奥行 1,370 mm</span><a class="band-ad" href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_mo_search_execute%26se_series%3Dseries%253Ainaba_s12" rel="nofollow sponsored" target="_blank"><b>広告</b><span>販売店で見る →</span></a></p><p class="band-row"><span class="band-txt"><b>イナバ ドマール</b> — 2型番／間口 2,210 mm・奥行 1,370 mm</span><a class="band-ad" href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_wh_search_execute%26se_series%3Dseries%253Ainaba_s1" rel="nofollow sponsored" target="_blank"><b>広告</b><span>販売店で見る →</span></a></p><p class="band-row"><span class="band-txt"><b>タクボ BELOS</b> — 1型番／間口 2,130 mm・奥行 1,400 mm</span><a class="band-ad" href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_mo_search_execute%26se_series%3Dseries%253Atakubo_s28" rel="nofollow sponsored" target="_blank"><b>広告</b><span>販売店で見る →</span></a></p><p class="band-row"><span class="band-txt"><b>イナバ フォルタ 屋根傾斜変更タイプ</b> — 1型番／間口 2,210 mm・奥行 1,370 mm</span><a class="band-ad" href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_mo_search_execute%26se_series%3Dseries%253Ainaba_s15" rel="nofollow sponsored" target="_blank"><b>広告</b><span>販売店で見る →</span></a></p></div>
 
     <table class="tbl">
       <thead><tr><th class="l">メーカー</th><th class="l">シリーズ</th><th class="l">型番</th><th>間口 mm</th><th>奥行 mm</th><th>高さ mm</th></tr></thead>
@@ -335,6 +346,7 @@
     </div>
 
     <p class="fine">この一覧は<b>物置のみ</b>です。車庫・ガレージ・バイク保管庫は含めていません。寸法は各メーカーの公表値をもとにしています。ご購入前に必ず公式サイト・最新カタログでご確認ください。</p>
+    <p class="fine">シリーズ名の横の<b>「広告」</b>は販売店（エクスショップ）への提携リンクで、そこから購入・お見積もりがあった場合に紹介料が支払われることがあります。並べる順は<b>型番の多い順</b>で、紹介料では変えていません。販売店に取り扱いの無いシリーズには付きません。くわしくは<a href="../about.html">運営者情報</a>に記しています。</p>
 
     <div class="links">
       <a href="./">寸法から探す</a>

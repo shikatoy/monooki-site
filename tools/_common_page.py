@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """生成ページ共通の読み込み・雛形。build-*.py から使う。"""
-import os, re
+import os, re, urllib.parse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://monooki-erabi.com/"
@@ -14,6 +14,42 @@ KUBUN = {"小型物置": "小型（収納庫）", "中型物置": "中型・大�
 
 def esc(t):
     return t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+
+
+SID, PID = "3777863", "892682808"
+
+
+def load_exshop():
+    """index.html の EXSHOP を読む。{製品id: 販売店のシリーズ識別子}。
+       'wh:' が頭に付いているものは倉庫・ガレージのカテゴリ。
+       提携先リンクの出典はここ1か所だけ。表を2つ持つと必ず食い違う
+       （2026-10-19 まで build-shop-links.py が別表を持っていて、9シリーズずれていた）"""
+    s = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+    i = s.find("const EXSHOP")
+    if i < 0:
+        return {}
+    j = s.find("};", i)
+    return dict(re.findall(r"'([a-z0-9\-]+)'\s*:\s*'([^']+)'", s[i:j]))
+
+
+def exshop_url(code):
+    """販売店（エクスショップ）の一覧のURL。書き方は index.html の affUrl と同じ3通り。
+         'inaba_s5'      物置・収納のシリーズ一覧
+         'wh:inaba_s1'   倉庫・ガレージのシリーズ一覧
+         'word:ペインタ' 商品名で絞った一覧（販売店側にシリーズの枠が無いとき）"""
+    cat = "wh" if code.startswith("wh:") else "mo"
+    if code.startswith("word:"):
+        q = "&search_word_like_ex=" + urllib.parse.quote(code[5:], safe="")
+    else:
+        slug = code[3:] if code.startswith("wh:") else code
+        q = "&se_series=" + urllib.parse.quote("series:" + slug, safe="")
+    return "https://www.ex-shop.net/index.php?action=public_item_%s_search_execute%s" % (cat, q)
+
+
+def aff_url(code):
+    """提携（バリューコマース）を通した行き先。生のURLは使わない"""
+    return ("//ck.jp.ap.valuecommerce.com/servlet/referral?sid=%s&pid=%s&vc_url=%s"
+            % (SID, PID, urllib.parse.quote(exshop_url(code), safe="")))
 
 
 def load_products():
@@ -114,6 +150,17 @@ EXTRA_CSS = """
   .grp { margin:44px 0 0; padding:14px 16px; border:1px solid var(--line); background:#f4f4f4; }
   .grp h2 { margin:0; font-family:'Shippori Mincho B1',serif; font-weight:700; font-size:17px; line-height:1.6; }
   .grp p { margin:5px 0 0; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; color:var(--mute); }
+  /* BANDAD */
+  /* ───── サイズ帯のシリーズ行に置く、販売店への出口（広告） ───── */
+  .band-row { display:flex; flex-wrap:wrap; align-items:baseline;
+    justify-content:space-between; gap:6px 12px; }
+  .band-txt { flex:1 1 auto; min-width:0; }
+  .band-ad { margin-left:10px; display:inline-flex; align-items:center; gap:7px; min-height:24px;
+    padding:2px 8px; border:1px solid var(--rust); color:var(--rust);
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em;
+    text-decoration:none; white-space:nowrap; }
+  .band-ad b { font-weight:500; }
+  .band-ad:hover { background:var(--rust); color:#fff; }
   .grp a { text-decoration:none; border-bottom:1px solid var(--linesoft); }
   .grp a:hover { color:var(--rust); }
   /* GRPD */

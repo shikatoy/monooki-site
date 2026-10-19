@@ -658,7 +658,8 @@ const EXSHOP = {
   'y-ese':'yodoko_s1',  'y-lmd':'yodoko_s3',
   't-gp':'takubo_s13',  't-nd':'takubo_s2',  't-jn':'takubo_s6',
   't-belos':'takubo_s28','t-lsn':'takubo_s29',
-  't-pe':'takubo_s13',            /* ペインタはグランプレステージの枠に同居 */
+  't-pe':'word:ペインタ',        /* 2026-10-19 訂正。takubo_s13 はグランプレステージ ジャンプの枠で、
+                                   ペインタのリンクが別シリーズに飛んでいた。商品名で絞る形に変更 */
   'i-grn':'wh:inaba_s3',          /* ガレーディア（倉庫・ガレージ） */
   'i-fxn':'wh:inaba_s9',          /* バイク保管庫（倉庫・ガレージ） */
   /* 2026-10-16 追加。スラッグはエクスショップのシリーズ一覧から */
@@ -675,10 +676,18 @@ const EXSHOP = {
   'y-vgc':'wh:yodoko_s4', /* ラヴィージュ 一般型（倉庫・ガレージ） */
 };
 function affUrl(code){
-  /* code が 'wh:' で始まるものは倉庫・ガレージのカテゴリ */
+  /* 書き方は3通り。
+       'inaba_s5'      … 物置・収納のシリーズ一覧
+       'wh:inaba_s1'   … 倉庫・ガレージのシリーズ一覧
+       'word:ペインタ' … 商品名で絞った一覧（販売店側にシリーズの枠が無いとき）
+     識別子はカテゴリごとに振られているので、mo と wh で同じ番号でも別のシリーズを指す */
   const wh = code.indexOf('wh:') === 0;
+  const wd = code.indexOf('word:') === 0;
   const act = wh ? 'public_item_wh_search_execute' : 'public_item_mo_search_execute';
-  const dest = 'https://www.ex-shop.net/index.php?action=' + act + '&se_series=series%3A' + (wh ? code.slice(3) : code);
+  const q = wd
+    ? '&search_word_like_ex=' + encodeURIComponent(code.slice(5))
+    : '&se_series=series%3A' + (wh ? code.slice(3) : code);
+  const dest = 'https://www.ex-shop.net/index.php?action=' + act + q;
   return '//ck.jp.ap.valuecommerce.com/servlet/referral?sid=' + VC.sid + '&pid=' + VC.pid + '&vc_url=' + encodeURIComponent(dest);
 }
 function affLink(p){

@@ -10,9 +10,14 @@
 """
 import os, re, glob, sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import _common_page as C                                  # noqa: E402
+
+ROOT = os.path.dirname(HERE)
 BEG, END = "<!-- AUTO_RELATED_START -->", "<!-- AUTO_RELATED_END -->"
 CSSBEG, CSSEND = "/* AUTO_RELATED_CSS_START */", "/* AUTO_RELATED_CSS_END */"
+MAX_ADS = 4          # 広告の出口は1記事4本まで。並べすぎると記事の末尾が広告の壁になる
 
 CSS = CSSBEG + """
   /* ───── 記事末尾の導線（tools/build-article-links.py が生成） ───── */
@@ -34,6 +39,19 @@ CSS = CSSBEG + """
   .rel-name { display: block; margin-top: 3px; font-family: 'Shippori Mincho B1', serif;
     font-weight: 700; font-size: 15px; line-height: 1.4; }
   .rel-go { flex: 0 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--rust); }
+  /* 記事の末尾に置く、販売店への出口（広告）。本文の中には入れない */
+  .rel-ad { margin: 22px 0 0; border-top: 1px solid var(--linesoft); padding-top: 16px; }
+  .rel-ad-label { margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    letter-spacing: .14em; color: var(--rust); }
+  .rel-ad-list { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .rel-ad-list li { margin: 0; padding: 0; }
+  .rel-ad-list li::before { content: none; }
+  .rel-ad-list a { display: inline-flex; align-items: center; min-height: 24px;
+    border: 1px solid var(--rust); color: var(--rust); padding: 6px 12px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em;
+    text-decoration: none; }
+  .rel-ad-list a:hover { background: var(--rust); color: #fff; }
+  .rel-ad-note { margin: 12px 0 0; font-size: 12.5px; line-height: 1.9; color: var(--mute); }
 """ + CSSEND + "\n"
 
 
@@ -80,14 +98,36 @@ FIND = [
 ]
 
 
-def build_block(hits):
+def ad_block(hits, ex):
+    """販売店（広告）への出口。本文には入れず、記事を読み終えた位置にだけ置く。
+       並びは本文での初出順で、紹介料では変えない。
+       販売店に取り扱いの無いシリーズには出さない（無理にカテゴリ一覧へ逃がさない）"""
+    rows = [(p, ex[p["id"]]) for p in hits if p["id"] in ex][:MAX_ADS]
+    if not rows:
+        return ""
+    lis = "\n        ".join(
+        '<li><a href="%s" rel="nofollow sponsored" target="_blank">%sの価格・見積もりを見る &rarr;</a></li>'
+        % (C.aff_url(code), p["name"]) for p, code in rows)
+    return ('      <div class="rel-ad">\n'
+            '        <p class="rel-ad-label">広告 — 販売店（エクスショップ）で見る</p>\n'
+            '        <ul class="rel-ad-list">\n        %s\n        </ul>\n'
+            '        <p class="rel-ad-note">提携リンクです。ここから購入・お見積もりがあった場合に紹介料が'
+            '支払われることがあります。並びは本文に出てきた順で、紹介料では変えていません。'
+            '販売店に取り扱いの無いシリーズと、%d件を超えたぶんは出していません。'
+            '上の一覧から、機種ごとのページへ行けます。</p>\n'
+            '      </div>\n') % (lis, MAX_ADS)
+
+
+def build_block(hits, ex=None):
+    ex = ex or {}
     if hits:
         rows = "\n        ".join(card("../" + p["page"], "%s — %s" % (p["maker"], p["cat"]), p["name"]) for p in hits)
         return ('%s\n    <aside class="rel">\n'
                 '      <p class="rel-label">Products — この記事に出てくる物置</p>\n'
                 '      <p class="rel-note">本文に出てきた順に並べています。サイズ展開と仕様は、機種ごとのページにまとめてあります。</p>\n'
                 '      <ul class="rel-list">\n        %s\n      </ul>\n'
-                '    </aside>\n    %s\n') % (BEG, rows, END)
+                '%s'
+                '    </aside>\n    %s\n') % (BEG, rows, ad_block(hits, ex), END)
     rows = "\n        ".join(card(h, k, n) for h, k, n in FIND)
     return ('%s\n    <aside class="rel">\n'
             '      <p class="rel-label">Find — 条件から物置をさがす</p>\n'
@@ -98,6 +138,7 @@ def build_block(hits):
 
 def main():
     products = load_products(ROOT)
+    ex = C.load_exshop()        # 提携先リンクの出典は index.html の EXSHOP だけ
     if len(products) < 5:
         print("[中止] 製品データを読めませんでした（%d件）" % len(products)); return 1
     changed = 0
@@ -112,7 +153,7 @@ def main():
         if "</style>" not in s or "</article>" not in s:
             print("[飛ばす] 構造が想定と違います:", os.path.basename(f)); continue
         s = s.replace("</style>", CSS + "</style>", 1)
-        s = s.replace("</article>\n", "</article>\n\n    " + build_block(hits), 1)
+        s = s.replace("</article>\n", "</article>\n\n    " + build_block(hits, ex), 1)
         if s != orig:
             open(f, "w", encoding="utf-8").write(s); changed += 1
         print("  %-42s %s" % (os.path.basename(f),

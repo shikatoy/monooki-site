@@ -260,6 +260,19 @@
   .rel-name { display: block; margin-top: 3px; font-family: 'Shippori Mincho B1', serif;
     font-weight: 700; font-size: 15px; line-height: 1.4; }
   .rel-go { flex: 0 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--rust); }
+  /* 記事の末尾に置く、販売店への出口（広告）。本文の中には入れない */
+  .rel-ad { margin: 22px 0 0; border-top: 1px solid var(--linesoft); padding-top: 16px; }
+  .rel-ad-label { margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    letter-spacing: .14em; color: var(--rust); }
+  .rel-ad-list { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .rel-ad-list li { margin: 0; padding: 0; }
+  .rel-ad-list li::before { content: none; }
+  .rel-ad-list a { display: inline-flex; align-items: center; min-height: 24px;
+    border: 1px solid var(--rust); color: var(--rust); padding: 6px 12px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em;
+    text-decoration: none; }
+  .rel-ad-list a:hover { background: var(--rust); color: #fff; }
+  .rel-ad-note { margin: 12px 0 0; font-size: 12.5px; line-height: 1.9; color: var(--mute); }
 /* AUTO_RELATED_CSS_END */
 </style>
 </head>
@@ -374,6 +387,16 @@
         <li><a href="../products/inaba-forta-plus.html"><span class="rel-txt"><span class="rel-kicker">イナバ — 断熱物置</span><span class="rel-name">フォルタプラス</span></span><span class="rel-go">&rarr;</span></a></li>
         <li><a href="../products/inaba-nyso-sister.html"><span class="rel-txt"><span class="rel-kicker">イナバ — 断熱物置</span><span class="rel-name">ナイソーシスター</span></span><span class="rel-go">&rarr;</span></a></li>
       </ul>
+      <div class="rel-ad">
+        <p class="rel-ad-label">広告 — 販売店（エクスショップ）で見る</p>
+        <ul class="rel-ad-list">
+        <li><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_mo_search_execute%26se_series%3Dseries%253Ainaba_s3" rel="nofollow sponsored" target="_blank">ナイソー SMXの価格・見積もりを見る &rarr;</a></li>
+        <li><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_mo_search_execute%26se_series%3Dseries%253Ainaba_s12" rel="nofollow sponsored" target="_blank">フォルタの価格・見積もりを見る &rarr;</a></li>
+        <li><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_mo_search_execute%26se_series%3Dseries%253Ainaba_s16" rel="nofollow sponsored" target="_blank">フォルタプラスの価格・見積もりを見る &rarr;</a></li>
+        <li><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_mo_search_execute%26se_series%3Dseries%253Ainaba_s5" rel="nofollow sponsored" target="_blank">ナイソーシスターの価格・見積もりを見る &rarr;</a></li>
+        </ul>
+        <p class="rel-ad-note">提携リンクです。ここから購入・お見積もりがあった場合に紹介料が支払われることがあります。並びは本文に出てきた順で、紹介料では変えていません。販売店に取り扱いの無いシリーズと、4件を超えたぶんは出していません。上の一覧から、機種ごとのページへ行けます。</p>
+      </div>
     </aside>
     <!-- AUTO_RELATED_END -->
 

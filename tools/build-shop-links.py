@@ -97,14 +97,34 @@ def block(cat, filt, name):
             ) % (vc(dest_url(cat, filt)), lead, SID, PID)
 
 
+def resolve():
+    """slug → (カテゴリ, 絞り込み, 文言)。
+       index.html の EXSHOP を先に見て、無いものだけ DEST で補う。
+       2026-10-19 まで DEST だけを見ていたため、EXSHOP にある9シリーズ
+       （ナイソーシスター・アイビーストッカーなど）の製品ページだけ出口が無かった"""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import _common_page as C
+    out = dict(DEST)
+    ex = C.load_exshop()
+    for p in C.load_products():
+        code = ex.get(p["id"])
+        if not code or not p.get("page"):
+            continue
+        slug = os.path.basename(p["page"])[:-5]
+        cat = "wh" if code.startswith("wh:") else "mo"
+        out[slug] = (cat, ("series", code[3:] if code.startswith("wh:") else code), p["name"])
+    return out
+
+
 def main():
     check = "--check" in sys.argv
     changed = 0
+    table = resolve()
     for f in sorted(glob.glob(os.path.join(PROD, "*.html"))):
         slug = os.path.basename(f)[:-5]
-        if slug not in DEST:
+        if slug not in table:
             continue
-        cat, filt, name = DEST[slug]
+        cat, filt, name = table[slug]
         s = orig = open(f, encoding="utf-8").read()
         href = vc(dest_url(cat, filt))
 

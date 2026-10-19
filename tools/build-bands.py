@@ -44,7 +44,7 @@ def collect():
             continue
         for c, w, d, h in p["sizes"]:
             rows.append(dict(maker=p["maker"], name=p["name"], page=p["page"], cat=p["cat"],
-                             code=c, w=w, d=d, h=h))
+                             sid=p["id"], code=c, w=w, d=d, h=h))
     band = defaultdict(list)
     for r in rows:
         band[(r["w"] // STEP * STEP, r["d"] // STEP * STEP)].append(r)
@@ -117,6 +117,7 @@ def build():
         for r in rows:
             by_maker[r["maker"]].add(k)
     style = C.load_style()
+    EX = C.load_exshop()          # 提携先リンクの出典は index.html の EXSHOP だけ
     cards = []
     for (bw, bd), rows, mks in bands:
         slug = slug_of(bw, bd)
@@ -140,13 +141,23 @@ def build():
 
         per = defaultdict(list)
         for r in rows:
-            per[(r["maker"], r["name"], r["page"])].append(r)
-        sums = "".join(
-            "<p><b>%s %s</b> — %d型番／間口 %s mm・奥行 %s mm</p>"
-            % (C.MAKER_JP[k[0]], C.esc(k[1]), len(v),
-               "・".join("{:,}".format(x) for x in sorted({r["w"] for r in v})),
-               "・".join("{:,}".format(x) for x in sorted({r["d"] for r in v})))
-            for k, v in sorted(per.items(), key=lambda x: -len(x[1])))
+            per[(r["maker"], r["name"], r["page"], r.get("sid") or r.get("id"))].append(r)
+
+        def sum_line(k, v):
+            """シリーズ1行。販売店の登録があるものは、行の終わりに広告の出口を置く。
+               並べる順は型番の多い順で、紹介料では変えない"""
+            ad = EX.get(k[3])
+            tail = ('<a class="band-ad" href="%s" rel="nofollow sponsored" target="_blank">'
+                    '<b>広告</b><span>販売店で見る →</span></a>' % C.aff_url(ad)) if ad else ""
+            return ('<p class="band-row"><span class="band-txt"><b>%s %s</b> — '
+                    '%d型番／間口 %s mm・奥行 %s mm</span>%s</p>'
+                    % (C.MAKER_JP[k[0]], C.esc(k[1]), len(v),
+                       "・".join("{:,}".format(x) for x in sorted({r["w"] for r in v})),
+                       "・".join("{:,}".format(x) for x in sorted({r["d"] for r in v})),
+                       tail))
+
+        sums = "".join(sum_line(k, v)
+                       for k, v in sorted(per.items(), key=lambda x: -len(x[1])))
 
         nav = "".join(
             '<a href="%s.html">%s — %s</a>' % (slug_of(*k), lab, band_name(*k))
@@ -188,6 +199,7 @@ def build():
     </div>
 
     <p class="fine">この一覧は<b>物置のみ</b>です。車庫・ガレージ・バイク保管庫は含めていません。寸法は各メーカーの公表値をもとにしています。ご購入前に必ず公式サイト・最新カタログでご確認ください。</p>
+    <p class="fine">シリーズ名の横の<b>「広告」</b>は販売店（エクスショップ）への提携リンクで、そこから購入・お見積もりがあった場合に紹介料が支払われることがあります。並べる順は<b>型番の多い順</b>で、紹介料では変えていません。販売店に取り扱いの無いシリーズには付きません。くわしくは<a href="../about.html">運営者情報</a>に記しています。</p>
 
     <div class="links">
       <a href="./">寸法から探す</a>

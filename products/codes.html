@@ -190,6 +190,17 @@
   .grp { margin:44px 0 0; padding:14px 16px; border:1px solid var(--line); background:#f4f4f4; }
   .grp h2 { margin:0; font-family:'Shippori Mincho B1',serif; font-weight:700; font-size:17px; line-height:1.6; }
   .grp p { margin:5px 0 0; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; color:var(--mute); }
+  /* BANDAD */
+  /* ───── サイズ帯のシリーズ行に置く、販売店への出口（広告） ───── */
+  .band-row { display:flex; flex-wrap:wrap; align-items:baseline;
+    justify-content:space-between; gap:6px 12px; }
+  .band-txt { flex:1 1 auto; min-width:0; }
+  .band-ad { margin-left:10px; display:inline-flex; align-items:center; gap:7px; min-height:24px;
+    padding:2px 8px; border:1px solid var(--rust); color:var(--rust);
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em;
+    text-decoration:none; white-space:nowrap; }
+  .band-ad b { font-weight:500; }
+  .band-ad:hover { background:var(--rust); color:#fff; }
   .grp a { text-decoration:none; border-bottom:1px solid var(--linesoft); }
   .grp a:hover { color:var(--rust); }
   /* GRPD */

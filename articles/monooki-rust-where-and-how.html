@@ -247,6 +247,19 @@
   .rel-name { display: block; margin-top: 3px; font-family: 'Shippori Mincho B1', serif;
     font-weight: 700; font-size: 15px; line-height: 1.4; }
   .rel-go { flex: 0 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--rust); }
+  /* 記事の末尾に置く、販売店への出口（広告）。本文の中には入れない */
+  .rel-ad { margin: 22px 0 0; border-top: 1px solid var(--linesoft); padding-top: 16px; }
+  .rel-ad-label { margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    letter-spacing: .14em; color: var(--rust); }
+  .rel-ad-list { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .rel-ad-list li { margin: 0; padding: 0; }
+  .rel-ad-list li::before { content: none; }
+  .rel-ad-list a { display: inline-flex; align-items: center; min-height: 24px;
+    border: 1px solid var(--rust); color: var(--rust); padding: 6px 12px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em;
+    text-decoration: none; }
+  .rel-ad-list a:hover { background: var(--rust); color: #fff; }
+  .rel-ad-note { margin: 12px 0 0; font-size: 12.5px; line-height: 1.9; color: var(--mute); }
 /* AUTO_RELATED_CSS_END */
 </style>
 </head>

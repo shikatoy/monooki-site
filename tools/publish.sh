@@ -55,6 +55,7 @@ python3 "$REPO/tools/build-tailwind.py" || echo "[警告] TailwindのCSSを書�
 
 
 python3 "$REPO/tools/check-tailwind.py" || { echo "[中止] TailwindのCSSを書き出してから公開してください。"; exit 1; }
+python3 "$REPO/tools/check-shop.py" || { echo "[中止] 提携先リンクを直してから公開してください。"; exit 1; }
 python3 "$REPO/tools/check-log.py" || { echo "[中止] 更新履歴の台帳を直してから公開してください。"; exit 1; }
 python3 "$REPO/tools/check-claims.py" || { echo "[中止] 本文の数字を直してから公開してください。"; exit 1; }
 python3 "$REPO/tools/check-meta.py" || { echo "[中止] ページの見出し情報を直してから公開してください。"; exit 1; }
