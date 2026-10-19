@@ -18,8 +18,10 @@ OUTP = os.path.join(ROOT, "products", "discontinued.html")
 ITEMS = [
     dict(name="ナイソー 旧SMK型", maker="イナバ", kubun="断熱物置",
          state="2026年8月31日をもって生産終了",
-         after="ナイソー SMX（2026年9月1日発売予定）", after_url="inaba-nyso-smx.html",
-         src="イナバ（稲葉製作所）公式ニュースリリース（2026年7月6日付）", checked="2026-07-11"),
+         after="ナイソー SMX／como lite SML型（どちらも2026年9月1日発売）",
+         after_url="inaba-nyso-smx.html",
+         src="イナバ（稲葉製作所）公式ニュース「新製品『ナイソー』SMX型・『como lite』SML型発売および"
+             "『ナイソー』SMK型生産終了のお知らせ」（2026年7月6日付）", checked="2026-10-19"),
     dict(name="ヨド蔵MD／ヨド蔵SA（品番DZB）", maker="ヨドコウ", kubun="断熱物置",
          state="2024年3月末の受注をもって生産終了",
          after="未発表（現行ラインアップに後継の断熱物置の掲載なし）", after_url="",
@@ -74,6 +76,13 @@ EXTRA = """
   .crumbs a:hover { color:var(--rust); border-bottom-color:currentColor; }
   .crumbs span { margin:0 8px; color:#bababa; }
   .note { margin:22px 0 0; padding:18px 20px; border:1px solid var(--linesoft); background:#f4f4f4; font-size:14px; line-height:2; }
+  /* 見出しと説明（2026-10-19 に部品の保有期間と告知のされ方を足したときに追加） */
+  .sec-h { margin:52px 0 0; font-family:'Shippori Mincho B1',serif; font-weight:700;
+    font-size:clamp(1.25rem,4.4vw,1.7rem); line-height:1.5; }
+  .sec-p { margin:16px 0 0; font-size:14px; line-height:2.1; }
+  .sec-p + .tbl, .sec-h + .tbl { margin-top:20px; }
+  /* メーカー名の列が「ヨド／コウ」と割れるのを防ぐ */
+  .tbl td:first-child, .tbl th:first-child { white-space:nowrap; }
   .dc { margin:34px 0 0; border:1px solid var(--line); }
   .dc-head { padding:16px 18px; border-bottom:1px solid var(--line); background:#f4f4f4; }
   .dc-name { margin:0; font-family:'Shippori Mincho B1',serif; font-weight:700; font-size:18px; line-height:1.6; }
@@ -179,7 +188,7 @@ def build():
     <div class="page-head">
       <p class="page-kicker">Discontinued — 廃盤・生産終了</p>
       <h1 class="page-title">廃盤・生産終了になった物置と、その後継。</h1>
-      <p class="page-lead">販売しているサイトは、終わった商品のページを消していきます。ここは<b>消さずに残します</b>。いま使っている物置の型番を調べたい方、同じシリーズの後継を探している方へ。各メーカーの公式発表をもとに、<b>確認できた日付とあわせて</b>記録しています。</p>
+      <p class="page-lead">販売しているサイトは、終わった商品のページを消していきます。ここは<b>消さずに残します</b>。いま使っている物置の型番を調べたい方、同じシリーズの後継を探している方へ。各メーカーの公式発表をもとに、<b>確認できた日付とあわせて</b>記録しています。<b>廃盤後に部品が何年手に入るか</b>、<b>廃盤がどこで知らされるか</b>も、3社の公式記載を並べました。</p>
     </div>
 
     <div class="note">
@@ -189,6 +198,31 @@ def build():
     </div>
 
 %(blocks)s
+
+    <h2 class="sec-h">廃盤になったあと、部品はいつまで手に入るか</h2>
+    <p class="sec-p">廃盤になった物置を使っている方から見て、後継より先に知りたいのがここだと思います。<b>年数を公式に出しているのは3社のうち1社だけ</b>でした。</p>
+
+    <table class="tbl">
+      <thead><tr><th class="l">メーカー</th><th class="l">公式の記載</th><th class="l">出典</th></tr></thead>
+      <tbody>
+        <tr><td class="l">ヨドコウ</td><td class="l"><b>「商品廃番後、約10年間を基本に保有しております」</b></td><td class="l">公式サイトのよくある質問</td></tr>
+        <tr><td class="l">イナバ</td><td class="l"><b>年数の記載なし。</b>戸車などの部品は販売店とパーツショップで取り寄せ（「一部の部品を除く」）</td><td class="l">公式サイトのよくあるご質問</td></tr>
+        <tr><td class="l">タクボ</td><td class="l"><b>年数の記載なし。</b>部品交換・修理は購入した販売店へ、と案内。保証はエクステリア製品5年、クリーンキーパー（CK型）2年</td><td class="l">公式サイトのQ&amp;A</td></tr>
+      </tbody>
+    </table>
+    <p class="sec-p">保証期間と部品の保有期間は別のものです。タクボが出しているのは保証期間で、廃盤後に部品が何年手に入るかではありません。<b>いずれも2026年10月19日時点で各社の公式ページを確認した結果です。</b>実際に部品があるかは製品と時期によって変わるため、各メーカーへ直接お問い合わせください。</p>
+
+    <h2 class="sec-h">廃盤は、どこで知らされるか</h2>
+    <p class="sec-p">3社で扱いが違います。いずれも2026年10月19日に各社の公式ページを見て確かめた範囲です。</p>
+    <table class="tbl">
+      <thead><tr><th class="l">メーカー</th><th class="l">告知のされ方</th></tr></thead>
+      <tbody>
+        <tr><td class="l">イナバ</td><td class="l">公式ニュースに「生産終了のお知らせ」を出す。ナイソー SMK型がその例で、後継と発売日もあわせて書かれている</td></tr>
+        <tr><td class="l">ヨドコウ</td><td class="l">廃番案内を出す（ヨド蔵がその例）。ただし廃番品をまとめた一覧ページは公式に見当たらない</td></tr>
+        <tr><td class="l">タクボ</td><td class="l">公式インフォメーションに、生産終了・廃番の告知が見当たらない。新製品の発表はあるが、旧機種を置き換えるとは書かれていない</td></tr>
+      </tbody>
+    </table>
+    <p class="sec-p">そのため、いま使っている物置が現行かどうかは、<b>メーカーの現行ラインアップに載っているかどうかで見るのが確実</b>です。型番から引くなら<a href="codes.html">型番から探す</a>に3社の全1,117型番を並べています。ここに無ければ、生産が終わっている可能性があります。</p>
 
     <div class="cta">
       <p class="cta-label">Next — 次に</p>
