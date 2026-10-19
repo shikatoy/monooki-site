@@ -116,6 +116,36 @@ EXTRA_CSS = """
   .grp p { margin:5px 0 0; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; color:var(--mute); }
   .grp a { text-decoration:none; border-bottom:1px solid var(--linesoft); }
   .grp a:hover { color:var(--rust); }
+  /* GRPD */
+  /* ───── 型番索引：シリーズごとに畳む（tools/build-codes.py が生成） ───── */
+  .grpd { margin:0; }
+  .grpd > summary { display:block; cursor:pointer; position:relative; list-style:none; }
+  .grpd > summary::-webkit-details-marker { display:none; }
+  .grpd > summary:hover { background:#ececec; }
+  .grpd > summary:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  .grpd .grpd-mk { display:block; margin:8px 0 0; font-family:'IBM Plex Mono',monospace;
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase; }
+  .grpd > summary .grpd-mk::after { content:'＋ ひらく'; }
+  .grpd[open] > summary .grpd-mk::after { content:'− たたむ'; }
+  .grpd-in { padding:0 0 4px; }
+  .grpd-to { margin:18px 0 0; font-size:14px; }
+  .grpd-to a { text-decoration:none; border-bottom:1px solid var(--linesoft); }
+  .grpd-to a:hover { color:var(--rust); }
+  .grpd-bar { margin:26px 0 0; padding:14px 16px; border:1px solid var(--line);
+    display:flex; flex-wrap:wrap; gap:12px 20px; align-items:center; justify-content:space-between; }
+  .grpd-note { margin:0; font-size:13px; line-height:1.9; color:var(--mute); }
+  .grpd-all { flex:none; border:1px solid var(--ink); background:var(--ink); color:var(--paper);
+    padding:9px 16px; min-height:24px; cursor:pointer; border-radius:0;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; }
+  .grpd-all:hover { background:var(--paper); color:var(--ink); }
+  .jump a { position:relative; }
+  .jump-n { display:block; margin-top:3px; font-family:'Shippori Mincho B1',serif;
+    font-size:11px; letter-spacing:0; color:var(--mute); }
+  .jump a:hover .jump-n { color:inherit; }
+  @media (min-width:768px){
+    .grpd > summary { padding-right:104px; }
+    .grpd .grpd-mk { position:absolute; right:16px; top:14px; margin:0; }
+  }
   .jump { margin:26px 0 0; display:flex; flex-wrap:wrap; gap:8px; }
   .jump a { border:1px solid var(--line); padding:7px 12px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; text-decoration:none; }
   .jump a:hover { background:var(--ink); color:var(--paper); }

@@ -49,23 +49,21 @@ def count_products():
 
 
 def check_log():
-    """更新履歴に、この表に無い廃盤・入替が増えていないか見る"""
-    s = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
-    i = s.find("const UPDATE_LOG")
-    depth = 0; j = s.find("[", i)
-    for k in range(j, len(s)):
-        if s[k] == "[": depth += 1
-        elif s[k] == "]":
-            depth -= 1
-            if depth == 0:
-                end = k + 1; break
-    blk = s[j:end]
+    """更新履歴に、この表に無い廃盤・入替が増えていないか見る。
+       台帳は 2026-10-16 に index.html から data/update-log.json へ移した"""
+    path = os.path.join(ROOT, "data", "update-log.json")
+    if not os.path.exists(path):
+        return ["[中止] data/update-log.json が見つかりません"]
+    with open(path, encoding="utf-8") as f:
+        log = json.load(f)
     known = "".join(x["name"] for x in ITEMS)
     miss = []
-    for d, t, title in re.findall(r"date:'([\d\-]+)', type:'(廃盤|入替)', title:'([^']+)'", blk):
-        core = re.findall(r"『([^』]+)』", title)
+    for e in log:
+        if e.get("type") not in ("廃盤", "入替"):
+            continue
+        core = re.findall(r"『([^』]+)』", e.get("title", ""))
         if core and not any(c in known for c in core):
-            miss.append("%s [%s] %s" % (d, t, title))
+            miss.append("%s [%s] %s" % (e.get("date", "?"), e["type"], e.get("title", "")))
     return miss
 
 

@@ -41,28 +41,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700;800&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['"Noto Sans JP"', 'sans-serif'],
-        serif: ['"Shippori Mincho B1"', 'serif'],
-        mono: ['"IBM Plex Mono"', 'monospace']
-      },
-      colors: {
-        ink: '#161616',
-        paper: '#ffffff',
-        line: '#161616',
-        linesoft: '#e0e0e0',
-        rust: '#a3512b'
-      },
-      letterSpacing: { widest2: '.2em' }
-    }
-  }
-}
-</script>
+<!-- Tailwind のCSS。tools/build-tailwind.py が書き出す。
+     2026-10-16 まで、ブラウザが Play CDN を読んでその場で組み立てていた -->
+<link rel="stylesheet" href="assets/tw.css">
 <style>
   html { scroll-behavior: smooth; }
   body { -webkit-font-smoothing: antialiased; }

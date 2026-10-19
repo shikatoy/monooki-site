@@ -29,27 +29,38 @@ def build():
         total += len(p["sizes"])
     groups.sort(key=lambda g: g[1][0] if g[1] else "zz")
 
-    jump = "".join('<a href="#%s">%s</a>' % (g[0]["id"], C.esc("／".join(g[1]) or g[0]["name"]))
-                   for g in groups)
+    # 接頭辞が同じシリーズが並ぶと見分けが付かないので、重複するものだけ名前を添える
+    labels = ["／".join(g[1]) or g[0]["name"] for g in groups]
+    dup = {x for x in labels if labels.count(x) > 1}
+    jump = "".join(
+        '<a href="#%s">%s%s</a>'
+        % (g[0]["id"], C.esc(lab),
+           ('<span class="jump-n">%s</span>' % C.esc(g[0]["name"])) if lab in dup else "")
+        for g, lab in zip(groups, labels))
 
     body_parts = []
     for p, pre in groups:
-        head = ('<div class="grp" id="%s"><h2>%s</h2><p>%s — %s — %d型番%s</p></div>'
-                % (p["id"],
-                   ('<a href="%s">%s</a>' % (os.path.basename(p["page"]), C.esc(p["name"])))
-                   if p["page"] else C.esc(p["name"]),
+        # 見出しは summary に。全型番は閉じた details の中に残す（HTMLからは消えない）
+        head = ('<summary class="grp"><h2>%s</h2><p>%s — %s — %d型番%s</p>'
+                '<span class="grpd-mk" aria-hidden="true"></span></summary>'
+                % (C.esc(p["name"]),
                    C.MAKER_JP[p["maker"]], C.esc(C.KUBUN.get(p["cat"], p["cat"])), len(p["sizes"]),
                    "（型番の頭：" + "／".join(pre) + "）" if pre else ""))
         rows = "".join(
             '<tr><td class="l m">%s</td><td>%s</td><td>%s</td><td>%s</td></tr>'
             % (C.esc(c), "{:,}".format(w), "{:,}".format(d), "{:,}".format(h))
             for c, w, d, h in sorted(p["sizes"], key=lambda s: s[0]))
+        inner = ""
+        if p["page"]:
+            inner += ('<p class="grpd-to"><a href="%s">%sの寸法と仕様 →</a></p>'
+                      % (os.path.basename(p["page"]), C.esc(p["name"])))
         if p.get("codeNote"):
-            head += '<p class="note">%s</p>' % p["codeNote"]
-        body_parts.append(head +
-                          '<table class="tbl"><thead><tr><th class="l">型番</th>'
-                          '<th>間口 mm</th><th>奥行 mm</th><th>高さ mm</th></tr></thead>'
-                          '<tbody>%s</tbody></table>' % rows)
+            inner += '<p class="note">%s</p>' % p["codeNote"]
+        inner += ('<table class="tbl"><thead><tr><th class="l">型番</th>'
+                  '<th>間口 mm</th><th>奥行 mm</th><th>高さ mm</th></tr></thead>'
+                  '<tbody>%s</tbody></table>' % rows)
+        body_parts.append('<details class="grpd" id="%s">%s<div class="grpd-in">%s</div></details>'
+                          % (p["id"], head, inner))
 
     h1 = "型番から探す"
     desc = ("タクボ・イナバ・ヨドコウの物置 全型番の索引です。見積書やカタログに書かれた型番から、"
@@ -69,7 +80,7 @@ def build():
              placeholder="例：FS-2215S／LMD-2515／GP-115D"
              style="width:100%%;margin-top:10px;padding:12px 2px;border:0;border-bottom:1px solid #161616;background:transparent;font-family:'IBM Plex Mono',monospace;font-size:20px;letter-spacing:.06em;outline:none;border-radius:0">
       <p id="code-hit" style="margin:10px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6b6b6b;min-height:1.2em"></p>
-      <p style="margin:14px 0 0">※打ち込んだ文字を含む型番だけが残ります。シリーズ名でも絞れます。<b>見当たらないときは、生産が終わっている可能性があります。</b><a href="discontinued.html">廃盤・生産終了</a>のページに、公式発表で確認できたものを記録しています。</p>
+      <p style="margin:14px 0 0">※打ち込んだ文字を含む型番だけが残ります。シリーズ名でも絞れます。該当するシリーズはひとりでにひらきます。<b>見当たらないときは、生産が終わっている可能性があります。</b><a href="discontinued.html">廃盤・生産終了</a>のページに、公式発表で確認できたものを記録しています。</p>
       <p style="margin:14px 0 0">※旧型番の寸法は載せていません。買い替え先をさがすときは、<b>いま置いてある物置を実際に測って</b>、<a href="../size/">寸法から探す</a>で当たるのが確実です。型番の数字は、メーカーが違えば指す寸法も違います。</p>
     </div>
 
@@ -81,6 +92,11 @@ def build():
 
     <div class="jump">%(jump)s</div>
 
+    <div class="grpd-bar">
+      <p class="grpd-note">全%(total)d型番は、シリーズごとに畳んであります。見出しを押すとひらきます。</p>
+      <button type="button" id="code-all" class="grpd-all" aria-expanded="false">全部ひらく</button>
+    </div>
+
 %(groups)s
 
     <div class="cta">
@@ -91,29 +107,33 @@ def build():
     </div>
 
     <script>
-    /* 型番の絞り込み。打った文字を含む行だけ残し、残りが無いシリーズは見出しごと隠す */
+    /* 型番の絞り込みと開閉。
+       全型番はHTMLに残したまま、既定では閉じた details の中に置いている。
+       打った文字を含む行だけ残し、該当するシリーズはひらく。残りが無いシリーズは隠す */
     (function(){
-      var q = document.getElementById('code-q');
-      if(!q) return;
+      var q   = document.getElementById('code-q');
       var hit = document.getElementById('code-hit');
-      var secs = [];
-      [].forEach.call(document.querySelectorAll('.grp'), function(g){
-        var els = [g], n = g.nextElementSibling;
-        while(n && !n.classList.contains('grp') && !n.classList.contains('cta') && !n.classList.contains('links')){
-          els.push(n); n = n.nextElementSibling;
-        }
-        var tbl = null;
-        els.forEach(function(e){ if(e.tagName === 'TABLE') tbl = e; });
-        secs.push({
-          els: els,
-          rows: tbl ? [].slice.call(tbl.tBodies[0].rows) : [],
-          name: (g.textContent || '').toUpperCase()
-        });
+      var all = document.getElementById('code-all');
+      var secs = [].map.call(document.querySelectorAll('.grpd'), function(d){
+        var tbl = d.querySelector('table.tbl');
+        var sum = d.querySelector('summary');
+        return { d: d,
+                 rows: tbl ? [].slice.call(tbl.tBodies[0].rows) : [],
+                 name: ((sum || d).textContent || '').toUpperCase() };
       });
-      var norm = function(t){ return t.toUpperCase().replace(/[\s\u3000ー−―‐]/g, ''); };
+      if(!secs.length) return;
+      var norm = function(t){ return t.toUpperCase().replace(/[\s　ー−―‐]/g, ''); };
+      function anyOpen(){ return secs.some(function(s){ return s.d.open && s.d.style.display !== 'none'; }); }
+      function sync(){
+        if(!all) return;
+        var o = anyOpen();
+        all.textContent = o ? '全部たたむ' : '全部ひらく';
+        all.setAttribute('aria-expanded', o ? 'true' : 'false');
+      }
+      var lastV = '';
       function run(){
-        var v = norm(q.value.trim());
-        var n = 0;
+        var v = q ? norm(q.value.trim()) : '';
+        var n = 0, k = 0;
         secs.forEach(function(s){
           var shown = 0;
           var byName = v && s.name.indexOf(v) >= 0;
@@ -123,15 +143,42 @@ def build():
             if(ok) shown++;
           });
           var vis = !v || shown > 0;
-          s.els.forEach(function(e){ e.style.display = vis ? '' : 'none'; });
+          s.d.style.display = vis ? '' : 'none';
+          if(v){ s.d.open = vis; }
+          else if(lastV){ s.d.open = false; }   /* 絞り込みを消したら畳んだ状態に戻す */
           n += shown;
+          if(vis) k++;
         });
-        hit.textContent = v
-          ? (n ? n.toLocaleString() + '型番' : '見当たりません。廃盤のページも見てみてください')
+        lastV = v;
+        if(hit) hit.textContent = v
+          ? (n ? n.toLocaleString() + '型番 ／ ' + k + 'シリーズ'
+               : '見当たりません。廃盤のページも見てみてください')
           : '';
+        sync();
       }
-      q.addEventListener('input', run);
+      if(q) q.addEventListener('input', run);
+      if(all) all.addEventListener('click', function(){
+        var o = anyOpen();
+        secs.forEach(function(s){ if(s.d.style.display !== 'none') s.d.open = !o; });
+        sync();
+      });
+      secs.forEach(function(s){ s.d.addEventListener('toggle', sync); });
+      /* #FS のような指定で来たとき、頭文字のボタンを押したときは、そのシリーズをひらく */
+      function openHash(){
+        var id = location.hash.slice(1);
+        if(!id) return;
+        var el = document.getElementById(id);
+        if(el && el.tagName === 'DETAILS'){ el.open = true; el.scrollIntoView(); sync(); }
+      }
+      [].forEach.call(document.querySelectorAll('.jump a'), function(a){
+        a.addEventListener('click', function(){
+          var el = document.getElementById((a.getAttribute('href') || '').slice(1));
+          if(el && el.tagName === 'DETAILS'){ el.open = true; sync(); }
+        });
+      });
+      window.addEventListener('hashchange', openHash);
       run();
+      openHash();
     })();
     </script>
 
