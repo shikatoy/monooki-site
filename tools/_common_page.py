@@ -120,10 +120,17 @@ EXTRA_CSS = """
 <style>
     @media (max-width: 520px) {
     .tbl { font-size: 13px; }
-    .tbl th, .tbl td { padding: 10px 5px; }
+    .tbl td.na { color:var(--mute); font-size:12px; }
+  .tbl th, .tbl td { padding: 10px 5px; }
   }
-  @media (max-width: 400px) {
+  /* 列の多い表が画面からはみ出し、ページごと横にずれるのを防ぐ。
+     2026-10-19 に 400px から 860px へ広げた。サイズ帯の表に内寸と開口の2列を足したところ、
+     414〜768px でページが横スクロールしていた。列の少ない表は、はみ出さないかぎり見た目は変わらない */
+  @media (max-width: 860px) {
     .tbl { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    /* 横に流れる表では、文字を折り返さない。
+       折り返すとシリーズ名が1文字ずつ縦に並んで、かえって読めなくなる */
+    .tbl th, .tbl td { white-space: nowrap; }
   }
 /* TAPTARGET */
 

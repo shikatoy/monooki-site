@@ -118,6 +118,7 @@ def build():
             by_maker[r["maker"]].add(k)
     style = C.load_style()
     EX = C.load_exshop()          # 提携先リンクの出典は index.html の EXSHOP だけ
+    IN = C.load_inner()           # 型番 → (内寸W, 内寸D, 内寸H, 開口W, 開口H)
     cards = []
     for (bw, bd), rows, mks in bands:
         slug = slug_of(bw, bd)
@@ -131,13 +132,42 @@ def build():
                 % (m(bw), m(bw + STEP), m(bd), m(bd + STEP), len(mks), len(rows),
                    "{:,}".format(hs[0]), "{:,}".format(hs[-1])))
 
+        def mm(v):
+            return "{:,}".format(int(v)) if v is not None and float(v) == int(v) \
+                else ("{:,}".format(v) if v is not None else "&mdash;")
+
+        def inner_cells(code):
+            """内寸と開口部。公式に見当たらない型番は、空欄にせず「記載なし」と書く"""
+            v = IN.get(code)
+            if not v:
+                return '<td class="na" colspan="2">公式に記載なし</td>'
+            return ('<td>%s×%s×%s</td><td>%s×%s</td>'
+                    % (mm(v[0]), mm(v[1]), mm(v[2]), mm(v[3]), mm(v[4])))
+
         trs = "".join(
             '<tr><td class="l">%s</td><td class="l">%s</td><td class="l m">%s</td>'
-            '<td>%s</td><td>%s</td><td>%s</td></tr>'
+            '<td>%s</td><td>%s</td><td>%s</td>%s</tr>'
             % (C.MAKER_JP[r["maker"]],
                ('<a href="../%s">%s</a>' % (r["page"], C.esc(r["name"]))) if r["page"] else C.esc(r["name"]),
-               C.esc(r["code"]), "{:,}".format(r["w"]), "{:,}".format(r["d"]), "{:,}".format(r["h"]))
+               C.esc(r["code"]), "{:,}".format(r["w"]), "{:,}".format(r["d"]), "{:,}".format(r["h"]),
+               inner_cells(r["code"]))
             for r in sorted(rows, key=lambda r: (C.MAKER_JP[r["maker"]], r["w"], r["d"], r["h"])))
+
+        # この帯の内寸の広がり。帯ごとに数字が変わるので、ページの中身の差になる
+        iv = [IN[r["code"]] for r in rows if r["code"] in IN]
+        if iv:
+            iw = sorted(x[0] for x in iv if x[0] is not None)
+            idp = sorted(x[1] for x in iv if x[1] is not None)
+            inner_line = ("この帯の%d型番のうち<b>%d型番は、メーカーが内寸を公表しています。</b>"
+                          "内寸の間口は%s〜%smm、奥行は%s〜%smm。"
+                          "外寸が同じでも、<b>鋼板の厚みや柱の位置で中の広さは変わります。</b>"
+                          "入れたい物の寸法が決まっているときは、外寸ではなくこちらで当たってください。"
+                          % (len(rows), len(iv), mm(iw[0]), mm(iw[-1]), mm(idp[0]), mm(idp[-1]))
+                          if iw and idp else
+                          "この帯の%d型番のうち%d型番は、メーカーが内寸を公表しています。" % (len(rows), len(iv)))
+        else:
+            inner_line = ("この帯の型番は、<b>メーカーが内寸を公表していません。</b>"
+                          "入れたい物の寸法が決まっているときは、外寸だけでは決められません。")
 
         per = defaultdict(list)
         for r in rows:
@@ -177,13 +207,13 @@ def build():
       <p style="margin:0"><b>各社の実寸は同じではありません。</b>この帯に入る間口は %(ws)s mm、奥行は %(ds)s mm と幅があります。カタログの見出しが近くても、<b>数十mm単位で違います。</b>置き場所に余裕がないときは、この差が効いてきます。</p>
       <p style="margin:14px 0 0">%(hline)s%(aline)s</p>
       %(miss_p)s
-      <p style="margin:14px 0 0">※本体の下には基礎用コンクリートブロック（基本 高さ約10cm）を敷きます。<b>実際の高さは「本体高さ＋約10cm」</b>になります。</p>
+      <p style="margin:14px 0 0">%(inner_line)s</p>
     </div>
 
     <div class="grp" style="background:#ffffff">%(sums)s</div>
 
     <table class="tbl">
-      <thead><tr><th class="l">メーカー</th><th class="l">シリーズ</th><th class="l">型番</th><th>間口 mm</th><th>奥行 mm</th><th>高さ mm</th></tr></thead>
+      <thead><tr><th class="l">メーカー</th><th class="l">シリーズ</th><th class="l">型番</th><th>間口 mm</th><th>奥行 mm</th><th>高さ mm</th><th>内寸 W×D×H mm</th><th>開口 W×H mm</th></tr></thead>
       <tbody>%(trs)s</tbody>
     </table>
 
@@ -198,7 +228,7 @@ def build():
       <a class="cta-btn" href="../#shindan">診断をはじめる <span class="arrow">→</span></a>
     </div>
 
-    <p class="fine">この一覧は<b>物置のみ</b>です。車庫・ガレージ・バイク保管庫は含めていません。寸法は各メーカーの公表値をもとにしています。ご購入前に必ず公式サイト・最新カタログでご確認ください。</p>
+    <p class="fine">この一覧は<b>物置のみ</b>です。車庫・ガレージ・バイク保管庫は含めていません。寸法は各メーカーの公表値をもとにしています。内寸は梁下などの一番低いところ、開口の高さは扉のところで測った値のため、開口の高さが内寸の高さを上回る型番があります（公式の表記どおりです）。本体の下には基礎用コンクリートブロック（基本 高さ約10cm）を敷くため、実際の高さは「本体高さ＋約10cm」になります。ご購入前に必ず公式サイト・最新カタログでご確認ください。</p>
     <p class="fine">シリーズ名の横の<b>「広告」</b>は販売店（エクスショップ）への提携リンクで、そこから購入・お見積もりがあった場合に紹介料が支払われることがあります。並べる順は<b>型番の多い順</b>で、紹介料では変えていません。販売店に取り扱いの無いシリーズには付きません。くわしくは<a href="../about.html">運営者情報</a>に記しています。</p>
 
     <div class="links">
@@ -207,7 +237,7 @@ def build():
       <a href="../products/codes.html">型番から探す</a>
       <a href="../products/discontinued.html">廃盤・生産終了</a>
     </div>
-""" % dict(h1=C.esc(h1), nm=len(mks), nc=len(rows), sums=sums, trs=trs, nav=nav,
+""" % dict(h1=C.esc(h1), nm=len(mks), nc=len(rows), sums=sums, trs=trs, nav=nav, inner_line=inner_line,
            hline=height_line(rows), aline=area_line(rows), miss_p=miss_p,
            ws="・".join("{:,}".format(x) for x in ws),
            ds="・".join("{:,}".format(x) for x in ds))
