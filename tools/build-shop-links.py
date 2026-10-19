@@ -36,6 +36,8 @@ CSS = CSSBEG + """
     background:var(--rust); color:#fff; font-size:17px; transition:background .2s ease; }
   .shop:hover .shop-go { background:var(--ink); }
   .shop img[height='1'] { position:absolute; left:0; top:0; width:1px !important; height:1px !important; opacity:0; }
+  .shop-none { margin:32px 0 0; padding:14px 16px; border:1px dashed var(--linesoft);
+    background:#f4f4f4; font-size:13px; line-height:2; color:var(--mute); }
 """ + CSSEND + "\n"
 
 # slug → (カテゴリ, 絞り込み, 出口の文言)
@@ -55,17 +57,26 @@ DEST = {
     "inaba-nyso-smx":             ("mo", ("word",   "ナイソーSMX"), "ナイソー SMX"),
     "inaba-garudia":              ("wh", ("series", "inaba_s3"),   "ガレーディア"),
     "inaba-bike-hokanko":         ("wh", ("series", "inaba_s9"),   "バイク保管庫"),
-    "inaba-arcia-fit":            ("wh", ("word",   "アルシア"),    "アルシア"),
     "yodoko-esmo":                ("mo", ("series", "yodoko_s1"),  "エスモ"),
     "yodoko-elmo":                ("mo", ("series", "yodoko_s3"),  "エルモ"),
-    # ↓ エクスショップ側の行き先がまだ特定できていない。カテゴリ一覧へ逃がしてある。
-    #   見つかったら ('word', '…') か ('series', '…') に差し替えるだけでよい。
-    "inaba-como-lite":            ("mo", None, None),
-    "inaba-takuhai-box":          ("mo", None, None),
-    "takubo-bike-shutterman":     ("wh", None, None),
-    "yodoko-lavige":              ("wh", None, None),
-    "yodoko-elmo-shutter":        ("mo", None, None),
 }
+
+# エクスショップ側に、そのシリーズの一覧を確認できなかったもの。
+# 2026-10-19 まではカテゴリの一覧（物置だけで1,597件）へ逃がしていたが、
+# 押した先で目当ての機種が出てこないので、リンクを置かないことにした。
+#   ・アルシアフィット … 「アルシア 一般型／豪雪地型」はあるが、アルシアフィットは見当たらない
+#   ・como lite／宅配ボックス … イナバの物置シリーズ一覧（10件）に無い
+#   ・バイクシャッターマン／エルモシャッター … シリーズ一覧に見当たらない
+# 見つかったら DEST に ('series', '…') か ('word', '…') で足せばよい。
+NO_DEST = {
+    "inaba-arcia-fit", "inaba-como-lite", "inaba-takuhai-box",
+    "takubo-bike-shutterman", "yodoko-elmo-shutter",
+    # 下の3つは、手で書いた「カテゴリ一覧へ」のリンクだけが残っていた
+    "inaba-forta-large", "inaba-forta-tall", "takubo-mr-shutterman",
+}
+
+NOTE = ('<p class="shop-none">提携先の販売店では、このシリーズの一覧を確認できていません。'
+        'このページでは販売店への案内を出していません。メーカー公式の商品ページは上のリンクから開けます。</p>')
 
 CAT_LABEL = {"mo": "物置・収納", "wh": "倉庫・ガレージ"}
 
@@ -104,7 +115,7 @@ def resolve():
        （ナイソーシスター・アイビーストッカーなど）の製品ページだけ出口が無かった"""
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import _common_page as C
-    out = dict(DEST)
+    out = {k: v for k, v in DEST.items() if k not in NO_DEST}
     ex = C.load_exshop()
     for p in C.load_products():
         code = ex.get(p["id"])
@@ -122,6 +133,27 @@ def main():
     table = resolve()
     for f in sorted(glob.glob(os.path.join(PROD, "*.html"))):
         slug = os.path.basename(f)[:-5]
+        if slug in NO_DEST and slug not in table:
+            s = orig = open(f, encoding="utf-8").read()
+            s = re.sub(re.escape(BEG) + r".*?" + re.escape(END) + r"\s*", "", s, flags=re.S)
+            # 自動生成ではない、手で書かれた提携リンクも外す。
+            # 行き先がカテゴリ全体の一覧になっていて、目当ての機種に着かないため。
+            # エルモシャッターのページは、ここでエルモの写真（YDMO320071）も一緒に外れる。
+            # 扉の形が違う機種の写真が「エルモシャッター」として出ていた（2026-10-19）
+            s = re.sub(r'<a[^>]*ck\.jp\.ap\.valuecommerce[^>]*>.*?</a>\s*', "", s, flags=re.S)
+            if 'class="shop-none"' not in s and '<aside class="cta">' in s:
+                s = s.replace('<aside class="cta">', BEG + NOTE + END + "\n\n        " +
+                              '<aside class="cta">', 1)
+            # 但し書きの見た目が無いページには入れる
+            if 'class="shop-none"' in s and ".shop-none {" not in s and "</style>" in s:
+                s = re.sub(re.escape(CSSBEG) + r".*?" + re.escape(CSSEND) + r"\n?", "", s, flags=re.S)
+                s = s.replace("</style>", CSS + "</style>", 1)
+            if s != orig:
+                changed += 1
+                if not check:
+                    open(f, "w", encoding="utf-8").write(s)
+                print("  %-32s 行き先を確認できないので案内を外した" % slug[:30])
+            continue
         if slug not in table:
             continue
         cat, filt, name = table[slug]
