@@ -16,6 +16,7 @@
 publish.sh から自動で呼ばれる。
 """
 import glob, io, os, re, sys
+RETIRED = "<!-- RETIRED_PAGE -->"   # 取り下げページ。記事向けの自動生成は入れない
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -66,6 +67,8 @@ def main():
     n_files, n_heads = 0, 0
     for f in files:
         s = io.open(f, encoding='utf-8').read()
+        if RETIRED in s:
+            continue
         orig = s
 
         def sub(m):

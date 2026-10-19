@@ -10,6 +10,9 @@
 """
 import os, re, glob, sys
 
+RETIRED = "<!-- RETIRED_PAGE -->"   # 取り下げページ。記事向けの自動生成は入れない
+
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import _common_page as C                                  # noqa: E402
@@ -146,6 +149,8 @@ def main():
         if os.path.basename(f) == "index.html":
             continue
         s = open(f, encoding="utf-8").read()
+        if RETIRED in s:
+            continue
         orig = s
         s = strip_old(s)
         body = plain_body(s)

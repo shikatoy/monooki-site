@@ -12,6 +12,7 @@
 ・何度実行しても同じ結果になる（前回付けたリンクを外してから付け直す）
 """
 import os, re, sys, glob
+RETIRED = "<!-- RETIRED_PAGE -->"   # 取り下げページ。記事向けの自動生成は入れない
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ART = os.path.join(ROOT, "articles")
@@ -108,6 +109,8 @@ def main():
         if slug == "index":
             continue
         s = open(f, encoding="utf-8").read()
+        if RETIRED in s:
+            continue
         orig = s
         s = strip_old(s)
         m = re.search(r'(<div class="article-body">)(.*?)(</div>\s*</article>)', s, re.S)

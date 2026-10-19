@@ -18,6 +18,9 @@ meta と og の文面が違うことは咎めない。トップページのよ�
 """
 import glob, io, json, os, re, sys
 
+RETIRED = "<!-- RETIRED_PAGE -->"   # 取り下げページ。記事向けの自動生成は入れない
+
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 SITE = "https://monooki-erabi.com/"
@@ -96,7 +99,8 @@ def main():
                             "カード文が記事の description と違う: %s\n        カード : %s\n        記事   : %s"
                             % (slug, card[:70], d[:70])))
         have = {os.path.basename(p)[:-5] for p in glob.glob(os.path.join(ROOT, "articles", "*.html"))
-                if not p.endswith("index.html")}
+                if not p.endswith("index.html")
+                and RETIRED not in io.open(p, encoding="utf-8").read()}
         for slug in sorted(have - seen):
             bad.append(("articles/index.html", "記事はあるがカードが無い: " + slug))
 

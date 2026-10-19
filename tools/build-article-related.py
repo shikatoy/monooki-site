@@ -18,6 +18,7 @@ monooki-shutter-vs-slide-opening／takubo-garage-scudo-door-types）。
     python3 tools/build-article-related.py
 """
 import glob, io, os, re, sys
+RETIRED = "<!-- RETIRED_PAGE -->"   # 取り下げページ。記事向けの自動生成は入れない
 from collections import defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -71,6 +72,8 @@ def load():
         if slug == "index":
             continue
         s = io.open(f, encoding="utf-8").read()
+        if RETIRED in s:
+            continue
         kw = re.search(r'<meta name="keywords" content="(.*?)"', s)
         h1 = re.search(r"(?s)<h1[^>]*>(.*?)</h1>", s)
         h2 = re.findall(r"(?s)<h2[^>]*>(.*?)</h2>", s)
