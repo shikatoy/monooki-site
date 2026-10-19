@@ -13,7 +13,7 @@
 **やらないこと**（今回の対象外。見つけても手を出さない）
 - 新しい機種を `PRODUCTS` に足す
 - 他機種の修正
-- 更新履歴（`data/update-log.json`）の追記
+- 更新履歴（`data/update-log.json` / `_ledger/kaitei-log.json`）の追記
 - 記事・他ファイルの変更
 - git コマンド
 

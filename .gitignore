@@ -15,3 +15,5 @@ _scratch*
 # OG画像の生成に使うフォント（2MB。必要なときだけ npm から取る。公開不要）
 tools/_ogfonts/
 tools/_to_delete/
+# 公開しない台帳（サイトの作りを変えたときの記録。リポジトリが公開設定のため git に入れない）
+_ledger/
