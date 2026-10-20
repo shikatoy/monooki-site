@@ -49,6 +49,9 @@ python3 "$REPO/tools/build-llms.py" || echo "[警告] llms.txt の生成に失�
 
 # サイト内リンクが切れていないか（記事を取り下げたあとの取り残しを止める）
 # 計測タグを全ページに入れる（1枚でも漏れると、そのページの数字が消える）
+# git に入れていないもの（_ledger・_output）の控えを取る。外付けが無くても止まらない
+python3 "$REPO/tools/backup-private.py" || echo "[警告] 控えを取れませんでした（続行します）"
+
 # 画面のパンくずから BreadcrumbList の構造化データを作る（記事に入っていなかった）
 python3 "$REPO/tools/build-breadcrumbs.py" || echo "[警告] パンくずの構造化データの生成に失敗しました（続行します）"
 
