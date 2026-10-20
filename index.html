@@ -574,7 +574,7 @@
         <h2 class="mt-6 font-serif font-extrabold leading-tight tracking-tight" style="font-size:clamp(2.4rem, 6vw, 5rem)">更新履歴。</h2>
       </div>
       <p class="md:col-span-4 text-[14px] leading-loose text-neutral-500">
-        メーカー3社の公式情報を確認し、<b>変わったときだけ</b>記録します。変わらなければ増えません。新しく掲載した機種、生産終了になった機種、メーカーの発表、それに<b>当サイトが載せていた内容に誤りがあったときの訂正</b>を出しています。<span class="text-rust font-mono text-[11px]">● NEW</span> の印は、型番を追加・入替したときに45日間付きます。数値の出典はすべてメーカー公式で、公式に見当たらないものは「公式に記載がない」と書いています。実物は見ていません。サイトの作り（配色や画面の組み方）を変えたときの記録は、ここには出していません。</p>
+        メーカー3社の新商品・廃盤・モデルチェンジを確認し、<b>変更が見つかったときだけ</b>記録します。変更がなければ記録は増えません。ここに出しているのは3種類です。<b>新商品・廃盤・入替</b>は当サイトへの型番の追加・削除・入替で、<span class="text-rust font-mono text-[11px]">● NEW</span> の印が45日間付きます。<b>メーカー発表</b>はメーカーが出した発表そのもので、当サイトの掲載内容が変わったという意味ではないため、印は付きません。<b>公開</b>はこのサイトを公開した日の記録です。サイトの作り（配色や画面の組み方）を変えたときの記録は、台帳には残していますが、ここには出していません。</p>
     </div>
   </div>
   <div class="max-w-[1440px] mx-auto px-5 md:px-10">
@@ -2845,11 +2845,13 @@ function renderJournal(){
   const list = document.querySelector('#journal-list');
   if(!list) return;
   const HOT_TYPES = ['新商品', '入替'];
-  /* 掲載するのは、サイトへの追加・削除・入替と初回公開、メーカー発表、それに訂正。
-     サイズ・扉構成などの構成変更（改定）は台帳データには残すが表示しない。
-     訂正は、こちらが載せていた数値が間違っていたときの記録なので必ず出す。
+  /* 出すのは「読者にとって新しい情報」だけ。
+     掲載した機種、生産終了、入替、メーカーの発表、それに初回公開。
+     当サイト自身の誤りを直した記録（訂正）と、サイトの作りを変えた記録（改定）は出さない。
+     どちらも読者に向けた情報ではなく、サイト内の修正履歴だから（2026-10-20 ボス決定）。
+     記録そのものは非公開の台帳に残している。
      ● NEW は HOT_TYPES だけに付く。メーカー発表はサイトの掲載変更ではないので含めない */
-  const SHOWN_TYPES = ['新商品', '廃盤', '入替', '公開', 'メーカー発表', '訂正'];
+  const SHOWN_TYPES = ['新商品', '廃盤', '入替', '公開', 'メーカー発表'];
   const all = UPDATE_LOG.filter(e => SHOWN_TYPES.includes(e.type));
   const shown = journalExpanded ? all : all.slice(0, JOURNAL_PREVIEW);
   const fresh = shown.some(e => (Date.now() - new Date(e.date).getTime()) < 45 * 24 * 3600 * 1000 && HOT_TYPES.includes(e.type));
