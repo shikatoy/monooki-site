@@ -146,6 +146,12 @@ def expected(cid, rows):
 def main():
     rows = dataset()
     pat = re.compile(r'data-claim="([a-z0-9_:+-]+)"[^>]*>\s*([0-9,]+)\s*<')
+    # title や meta の中の数字は span で囲めないので、直後のコメントで印を付ける。
+    #   <title>…全1,117型番…</title><!--claim:codes_all=1,117-->
+    # 2026-10-20 にトップページの title と description へ型番数を入れたときに追加した。
+    # 印だけ残って本文の数字が直っていない事故を防ぐため、
+    # 印の数字がその行（タグ）の中にも出てくることまで確かめる。
+    cpat = re.compile(r'(<(title|meta)\b[^>]*>[^<]*(?:</title>)?)\s*<!--claim:([a-z0-9_:+-]+)=([0-9,]+)-->')
     bad, unknown, n = [], [], 0
     files = sorted(set(glob.glob(os.path.join(ROOT, "*.html"))
                        + glob.glob(os.path.join(ROOT, "*", "*.html"))))
@@ -160,6 +166,18 @@ def main():
             n += 1
             if exp != got:
                 bad.append((rel, cid, got, exp))
+        for m in cpat.finditer(s):
+            tag, cid, raw = m.group(1), m.group(3), m.group(4)
+            got = int(raw.replace(",", ""))
+            exp = expected(cid, rows)
+            rel = os.path.relpath(f, ROOT)
+            if exp is None:
+                unknown.append((rel, cid)); continue
+            n += 1
+            if exp != got:
+                bad.append((rel, cid, got, exp))
+            elif raw not in tag:
+                bad.append((rel, cid + "（印だけで、中に数字が無い）", got, exp))
 
     for rel, cid in unknown:
         print("[注意] %s: 知らない claim id 「%s」。check-claims.py に足すか、綴りを直してください。" % (rel, cid))
