@@ -17,3 +17,5 @@ tools/_ogfonts/
 tools/_to_delete/
 # 公開しない台帳（サイトの作りを変えたときの記録。リポジトリが公開設定のため git に入れない）
 _ledger/
+# 記事の原稿（.md）。公開リポジトリなので下書きは上げない。publish-article.py の入力
+_output/

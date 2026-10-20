@@ -49,6 +49,9 @@ python3 "$REPO/tools/build-llms.py" || echo "[警告] llms.txt の生成に失�
 
 # サイト内リンクが切れていないか（記事を取り下げたあとの取り残しを止める）
 # 計測タグを全ページに入れる（1枚でも漏れると、そのページの数字が消える）
+# 画面のパンくずから BreadcrumbList の構造化データを作る（記事に入っていなかった）
+python3 "$REPO/tools/build-breadcrumbs.py" || echo "[警告] パンくずの構造化データの生成に失敗しました（続行します）"
+
 # 列の多い表が画面からはみ出さないようにする（手書きの製品ページにも届かせる）
 python3 "$REPO/tools/build-table-scroll.py" || echo "[警告] 表の横流しの指定に失敗しました（続行します）"
 

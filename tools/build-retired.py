@@ -89,7 +89,7 @@ def build():
             {"@type": "ListItem", "position": 2, "name": "記事", "item": C.SITE + "articles/"},
             {"@type": "ListItem", "position": 3, "name": h1}]}
         html = C.shell(h1, desc, url, "../",
-                       '<a href="../">トップ</a><span>/</span><a href="./">記事</a><span>/</span>取り下げた記事',
+                       '<a href="../">トップ</a><span>/</span><a href="./">記事</a><span>/</span>' + C.esc(h1),  # 画面のパンくずと構造化データを揃える（2026-10-20）
                        body, style, [json.dumps(crumb, ensure_ascii=False, indent=2)])
         html = html.replace("<body>", "<body>\n" + MARK, 1)
 
