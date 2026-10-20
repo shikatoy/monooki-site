@@ -347,6 +347,15 @@
   .pat-body i { width: 15px; height: 15px; border: 1px solid var(--linesoft); font-style: normal; }
   .pat-note { margin: 18px 0 0; font-size: 13px; line-height: 1.95; color: var(--mute); }
 /* AUTO_PEINTE_CSS_END */
+/* TABLESCROLL_START */
+  /* 画面が狭いとき、表は自分の箱の中で横に流す。ページごと横にずれるのを防ぐ。
+     折り返さないのは、折り返すとシリーズ名や型番が1文字ずつ縦に並ぶため。
+     .spec は長い文章が入るので対象にしない */
+  @media (max-width: 860px) {
+    .tbl, .sizes { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .tbl th, .tbl td, .sizes th, .sizes td { white-space: nowrap; }
+  }
+/* TABLESCROLL_END */
 </style>
 </head>
 <body>

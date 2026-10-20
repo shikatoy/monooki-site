@@ -34,6 +34,14 @@ RULES = [
 
 SKIP = {"404.html"}
 
+# サイトマップに載せないページ。ページもリンクも残したまま、申告からだけ外す。
+#   size/band-*.html … 2026-10-19 時点で42ページ。Search Console の3か月で合計4表示、
+#   50ページが「検出 - インデックス未登録」だった。出たときの順位は4〜12位と悪くないので、
+#   ページの出来ではなく「間口2.1m×奥行1.5m」という形の検索がほとんど無いことが理由と見ている。
+#   申告の半分近くをGoogleが見送っている状態だと、サイトマップのレポートが読めなくなるため外す。
+#   寸法の面は size/index.html と、しきい値ページ（depth-600 など。順位8.5で表示あり）で申告する。
+SKIP_PREFIX = ("size/band-",)
+
 
 def main():
     seen, rows = set(), []
@@ -41,6 +49,8 @@ def main():
         for p in sorted(glob.glob(os.path.join(ROOT, pat))):
             rel = os.path.relpath(p, ROOT).replace(os.sep, "/")
             if rel in seen or os.path.basename(rel) in SKIP:
+                continue
+            if rel.startswith(SKIP_PREFIX):
                 continue
             seen.add(rel)
             mt = datetime.date.fromtimestamp(os.path.getmtime(p)).isoformat()
