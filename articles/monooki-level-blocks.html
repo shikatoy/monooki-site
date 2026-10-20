@@ -11,15 +11,61 @@
   gtag('js', new Date());
   gtag('config', 'G-B5453D0GBM');
   /* 提携先（バリューコマース経由）のクリックを数える。
-     読者が最後まで進んだかを見る唯一の出口なので、ここだけは必ず取る。 */
+     読者が最後まで進んだかを見る唯一の出口なので、ここだけは必ず取る。
+     2026-10-20 まで page_path と URL しか送っておらず、
+     「どのページ種別の、どの置き場所で、どのシリーズが押されたか」が分からなかった。
+     提携リンクは33ページから90ページに増えたので、ここを分けないと次の判断ができない。 */
+  function adPageType(p) {
+    if (p === '/' || p === '/index.html') return 'top';
+    if (p.indexOf('/articles/') === 0) return 'article';
+    if (p === '/products/codes.html') return 'codes';
+    if (p === '/products/discontinued.html') return 'discontinued';
+    if (p.indexOf('/products/') === 0) return 'product';
+    if (p.indexOf('/size/band-') === 0) return 'size_band';
+    if (p.indexOf('/size/') === 0) return 'size';
+    return 'other';
+  }
+  function adPlacement(a) {
+    var c = ' ' + (a.getAttribute('class') || '') + ' ';
+    if (c.indexOf(' band-ad ') >= 0) return 'band_row';      /* サイズ帯のシリーズ行 */
+    if (c.indexOf(' vis-tag ') >= 0) return 'index_tag';     /* 索引カードの絵の右上 */
+    if (c.indexOf(' aff-quiz ') >= 0) return 'quiz_result';  /* 診断の結果 */
+    if (c.indexOf(' hero-photo ') >= 0) return 'hero_photo'; /* 製品ページの写真 */
+    if (c.indexOf(' shop ') >= 0) return 'product_exit';     /* 製品ページの出口 */
+    if (a.closest && a.closest('.rel-ad-list')) return 'article_tail';
+    return 'other';
+  }
+  function adDest(href) {
+    /* 行き先は vc_url に入っている。何重かエンコードされているので戻してから読む */
+    var s = String(href), i, d;
+    for (i = 0; i < 4; i++) {
+      try { d = decodeURIComponent(s); } catch (err) { break; }
+      if (d === s) break;
+      s = d;
+    }
+    var m = s.match(/se_series=series:([A-Za-z0-9_]+)/);
+    var series = m ? m[1] : '';
+    if (!series) { m = s.match(/search_word_like_ex=([^&]+)/); if (m) series = 'word:' + m[1]; }
+    return {
+      series: series.slice(0, 100),
+      cat: /public_item_wh_/.test(s) ? 'wh' : (/public_item_mo_/.test(s) ? 'mo' : '')
+    };
+  }
   document.addEventListener('click', function (e) {
-    var t = e.target;
-    var a = (t && t.closest) ? t.closest('a[href]') : null;
-    if (!a || !/valuecommerce\.com/.test(a.href)) return;
-    gtag('event', 'affiliate_click', {
-      page_path: location.pathname,
-      link_url: String(a.href).slice(0, 100)
-    });
+    try {
+      var t = e.target;
+      var a = (t && t.closest) ? t.closest('a[href]') : null;
+      if (!a || !/valuecommerce\.com/.test(a.href)) return;
+      var d = adDest(a.href);
+      gtag('event', 'affiliate_click', {
+        page_path: location.pathname,
+        page_type: adPageType(location.pathname),
+        ad_placement: adPlacement(a),
+        ad_series: d.series,
+        ad_cat: d.cat,
+        link_url: String(a.href).slice(0, 100)
+      });
+    } catch (err) { /* 計測で本文の動きを止めない */ }
   }, true);
 </script>
 <!-- ANALYTICS_END -->
