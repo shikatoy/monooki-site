@@ -19,6 +19,9 @@ MSG="${1:-site: 記事とデータを更新 $(date '+%Y-%m-%d')}"
 # 取りこぼし検知で止まる作りなので、ここは警告で流さず公開を止める
 python3 "$REPO/tools/build-product-index.py" || { echo "[中止] 製品一覧の生成に失敗しました。上の理由を直してから公開してください。"; exit 1; }
 python3 "$REPO/tools/build-product-head.py" || { echo "[中止] 製品ページの見出し情報の生成に失敗しました。上の理由を直してから公開してください。"; exit 1; }
+# 製品ページ下部のナビ（比較に追加のID・メーカー公式の飛び先）をそろえる
+# ひな形を複製して作る作りなので、ここで上書きしないと前の製品の値が残る
+python3 "$REPO/tools/build-product-nav.py" || { echo "[中止] 製品ページのナビの生成に失敗しました。上の理由を直してから公開してください。"; exit 1; }
 python3 "$REPO/tools/build-product-sizes.py" || { echo "[中止] 製品ページのサイズ表の生成に失敗しました。上の理由を直してから公開してください。"; exit 1; }
 python3 "$REPO/tools/build-product-spec.py" || { echo "[中止] 製品ページの仕様・特徴の生成に失敗しました。上の理由を直してから公開してください。"; exit 1; }
 python3 "$REPO/tools/build-product-inner.py" || echo "[警告] 内寸と開口部の表の生成に失敗しました（続行します）"

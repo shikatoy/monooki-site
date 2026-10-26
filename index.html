@@ -46,9 +46,11 @@
     var m = s.match(/se_series=series:([A-Za-z0-9_]+)/);
     var series = m ? m[1] : '';
     if (!series) { m = s.match(/search_word_like_ex=([^&]+)/); if (m) series = 'word:' + m[1]; }
+    if (!series) { m = s.match(/item_id=(\d+)/); if (m) series = 'item:' + m[1]; }
     return {
       series: series.slice(0, 100),
-      cat: /public_item_wh_/.test(s) ? 'wh' : (/public_item_mo_/.test(s) ? 'mo' : '')
+      cat: /public_item_wh_/.test(s) ? 'wh'
+         : (/public_item_xz_/.test(s) ? 'xz' : (/public_item_mo_/.test(s) ? 'mo' : ''))
     };
   }
   document.addEventListener('click', function (e) {
@@ -684,11 +686,16 @@ const PHOTO = {
   't-tp':'TKMO3700001', /* Mr.ストックマン プラスアルファ シリーズ */
   't-nde':'TKMO4510004', /* Mr.ストックマンダンディ シャッター扉タイプ 一般型 シリーズ */
   'y-vgc':'YDWH010003', /* ラヴィージュIII */
+  /* 2026-10-26 追加。お問い合わせ商品の枠（xz）にある3シリーズ */
+  't-bs':'INXZ999012',  /* バイクシャッターマン 床付 */
+  'i-dm':'INXZ999116',  /* バイクガレージ アルシアフィットDM */
+  'i-sml':'INXZ260027', /* como lite 守衛室 GMタイプ */
+  't-ws':'INXZ999011',  /* Mr.シャッターマンダンディ 土間仕様 */
 };
 function photoUrl(p){
   const c = PHOTO[p.id];
   if(!c) return '';
-  const dir = c.slice(2, 4).toLowerCase() === 'wh' ? 'wh' : 'mo';   /* INWH… はガレージ側 */
+  const dir = c.slice(2, 4).toLowerCase();   /* 3〜4文字目が販売店側の区分。mo=物置・収納、wh=倉庫・ガレージ、xz=お問い合わせ商品 */
   return `https://www.ex-shop.net/public/img/img_item/${dir}/${c}/basic/${c}_360.jpg`;
 }
 
@@ -719,20 +726,33 @@ const EXSHOP = {
   't-nde':'takubo_s18', /* Mr.ストックマンダンディ シャッター扉タイプ 一般型 */
   'i-ff':'wh:inaba_s1', /* ドマール 一般型（倉庫・ガレージ） */
   'y-vgc':'wh:yodoko_s4', /* ラヴィージュ 一般型（倉庫・ガレージ） */
+  /* 2026-10-26 追加。販売店側では「お問い合わせ商品」の枠に入っていて、
+     物置・収納／倉庫・ガレージのシリーズ一覧には出てこない */
+  't-bs':'xz:item:8162',        /* バイクシャッターマン 床付 バイク保管庫（1件） */
+  'i-dm':'xz:item:20947',       /* バイクガレージ アルシアフィットDM（1件） */
+  'i-sml':'xz:word:como lite',  /* マルチスペース como lite */
+  't-ws':'xz:item:8161',        /* Mr.シャッターマンダンディ 土間仕様（1件） */
 };
 function affUrl(code){
-  /* 書き方は3通り。
-       'inaba_s5'      … 物置・収納のシリーズ一覧
-       'wh:inaba_s1'   … 倉庫・ガレージのシリーズ一覧
-       'word:ペインタ' … 商品名で絞った一覧（販売店側にシリーズの枠が無いとき）
+  /* 書き方は（カテゴリ:）＋（種類:）＋値。カテゴリを省くと物置・収納（mo）。
+       'inaba_s5'          … 物置・収納のシリーズ一覧
+       'wh:inaba_s1'       … 倉庫・ガレージのシリーズ一覧
+       'word:ペインタ'     … 商品名で絞った一覧（販売店側にシリーズの枠が無いとき）
+       'xz:word:como lite' … お問い合わせ商品を商品名で絞った一覧
+       'xz:item:8162'      … お問い合わせ商品の見積もりページ（その商品1件しか無いとき）
      識別子はカテゴリごとに振られているので、mo と wh で同じ番号でも別のシリーズを指す */
-  const wh = code.indexOf('wh:') === 0;
-  const wd = code.indexOf('word:') === 0;
-  const act = wh ? 'public_item_wh_search_execute' : 'public_item_mo_search_execute';
-  const q = wd
-    ? '&search_word_like_ex=' + encodeURIComponent(code.slice(5))
-    : '&se_series=series%3A' + (wh ? code.slice(3) : code);
-  const dest = 'https://www.ex-shop.net/index.php?action=' + act + q;
+  let s = code, cat = 'mo';
+  const mc = s.match(/^(mo|wh|xz):/);
+  if(mc){ cat = mc[1]; s = s.slice(mc[0].length); }
+  let dest;
+  if(s.indexOf('item:') === 0){
+    dest = 'https://www.ex-shop.net/index.php?action=public_item_' + cat + '_estimate_input&item_id=' + encodeURIComponent(s.slice(5));
+  } else {
+    const q = s.indexOf('word:') === 0
+      ? '&search_word_like_ex=' + encodeURIComponent(s.slice(5))
+      : '&se_series=series%3A' + s;
+    dest = 'https://www.ex-shop.net/index.php?action=public_item_' + cat + '_search_execute' + q;
+  }
   return '//ck.jp.ap.valuecommerce.com/servlet/referral?sid=' + VC.sid + '&pid=' + VC.pid + '&vc_url=' + encodeURIComponent(dest);
 }
 function affLink(p){

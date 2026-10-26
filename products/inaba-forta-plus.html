@@ -46,9 +46,11 @@
     var m = s.match(/se_series=series:([A-Za-z0-9_]+)/);
     var series = m ? m[1] : '';
     if (!series) { m = s.match(/search_word_like_ex=([^&]+)/); if (m) series = 'word:' + m[1]; }
+    if (!series) { m = s.match(/item_id=(\d+)/); if (m) series = 'item:' + m[1]; }
     return {
       series: series.slice(0, 100),
-      cat: /public_item_wh_/.test(s) ? 'wh' : (/public_item_mo_/.test(s) ? 'mo' : '')
+      cat: /public_item_wh_/.test(s) ? 'wh'
+         : (/public_item_xz_/.test(s) ? 'xz' : (/public_item_mo_/.test(s) ? 'mo' : ''))
     };
   }
   document.addEventListener('click', function (e) {
@@ -444,8 +446,8 @@
     <nav class="nav-links">
       <a href="./">← 製品一覧へ</a>
       <a href="../#archive">索引で他の製品を見る</a>
-      <a href="../#c=i-tbj">この製品を比較に追加 →</a>
-      <a href="https://www.inaba-ss.co.jp/monooki/lineup/tbj/" target="_blank" rel="noopener noreferrer">メーカー公式 ↗</a>
+      <a href="../#c=i-fp">この製品を比較に追加 →</a>
+      <a href="https://www.inaba-ss.co.jp/monooki/lineup/fp/" target="_blank" rel="noopener noreferrer">メーカー公式 ↗</a>
       <a href="../articles/">記事一覧</a>
       <a href="../contact.html">お問い合わせ</a>
       <a href="../about.html">運営者情報</a>

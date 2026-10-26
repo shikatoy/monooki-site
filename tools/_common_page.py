@@ -33,18 +33,27 @@ def load_exshop():
 
 
 def exshop_url(code):
-    """販売店（エクスショップ）の一覧のURL。書き方は index.html の affUrl と同じ3通り。
-         'inaba_s5'      物置・収納のシリーズ一覧
-         'wh:inaba_s1'   倉庫・ガレージのシリーズ一覧
-         'word:ペインタ' 商品名で絞った一覧（販売店側にシリーズの枠が無いとき）"""
-    cat = "wh" if code.startswith("wh:") else "mo"
-    if code.startswith("word:"):
-        q = "&search_word_like_ex=" + urllib.parse.quote(code[5:], safe="")
+    """販売店（エクスショップ）の行き先。書き方は index.html の affUrl と同じ。
+       （カテゴリ:）＋（種類:）＋値。カテゴリを省くと物置・収納（mo）。
+         'inaba_s5'            物置・収納のシリーズ一覧
+         'wh:inaba_s1'         倉庫・ガレージのシリーズ一覧
+         'word:ペインタ'       商品名で絞った一覧（販売店側にシリーズの枠が無いとき）
+         'xz:word:como lite'   お問い合わせ商品を商品名で絞った一覧
+         'xz:item:8162'        お問い合わせ商品の見積もりページ（その商品1件しか無いとき）"""
+    cat = "mo"
+    s = code
+    for c in ("mo:", "wh:", "xz:"):
+        if s.startswith(c):
+            cat, s = c[:-1], s[len(c):]
+            break
+    base = "https://www.ex-shop.net/index.php?action=public_item_%s_" % cat
+    if s.startswith("item:"):
+        return base + "estimate_input&item_id=" + urllib.parse.quote(s[5:], safe="")
+    if s.startswith("word:"):
+        q = "&search_word_like_ex=" + urllib.parse.quote(s[5:], safe="")
     else:
-        slug = code[3:] if code.startswith("wh:") else code
-        q = "&se_series=" + urllib.parse.quote("series:" + slug, safe="")
-    return "https://www.ex-shop.net/index.php?action=public_item_%s_search_execute%s" % (cat, q)
-
+        q = "&se_series=" + urllib.parse.quote("series:" + s, safe="")
+    return base + "search_execute" + q
 
 def aff_url(code):
     """提携（バリューコマース）を通した行き先。生のURLは使わない"""

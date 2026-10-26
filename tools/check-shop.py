@@ -30,12 +30,12 @@ def main():
     for pid, code in sorted(ex.items()):
         if pid not in prods:
             bad.append("%s は PRODUCTS にありません" % pid)
-        if not re.fullmatch(r"(wh:)?[a-z]+_s\d+|word:.+", code):
+        if not re.fullmatch(r"(mo:|wh:|xz:)?([a-z]+_s\d+|word:.+|item:\d+)", code):
             bad.append("%s の書き方が分かりません（%s）" % (pid, code))
 
     seen = defaultdict(list)
     for pid, code in ex.items():
-        if code.startswith("word:"):
+        if ":word:" in code or code.startswith("word:"):
             continue
         seen[code].append(prods.get(pid, {}).get("name", pid))
     for code, names in sorted(seen.items()):
@@ -50,9 +50,11 @@ def main():
         return 1
 
     n_wh = sum(1 for c in ex.values() if c.startswith("wh:"))
+    n_xz = sum(1 for c in ex.values() if c.startswith("xz:"))
     n_wd = sum(1 for c in ex.values() if c.startswith("word:"))
-    print("[提携先リンク] %d シリーズ（物置・収納 %d / 倉庫・ガレージ %d / 商品名で絞る %d）"
-          % (len(ex), len(ex) - n_wh - n_wd, n_wh, n_wd))
+    print("[提携先リンク] %d シリーズ"
+          "（物置・収納 %d / 倉庫・ガレージ %d / お問い合わせ商品 %d / 商品名で絞る %d）"
+          % (len(ex), len(ex) - n_wh - n_xz - n_wd, n_wh, n_xz, n_wd))
     return 0
 
 

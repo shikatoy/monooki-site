@@ -46,9 +46,11 @@
     var m = s.match(/se_series=series:([A-Za-z0-9_]+)/);
     var series = m ? m[1] : '';
     if (!series) { m = s.match(/search_word_like_ex=([^&]+)/); if (m) series = 'word:' + m[1]; }
+    if (!series) { m = s.match(/item_id=(\d+)/); if (m) series = 'item:' + m[1]; }
     return {
       series: series.slice(0, 100),
-      cat: /public_item_wh_/.test(s) ? 'wh' : (/public_item_mo_/.test(s) ? 'mo' : '')
+      cat: /public_item_wh_/.test(s) ? 'wh'
+         : (/public_item_xz_/.test(s) ? 'xz' : (/public_item_mo_/.test(s) ? 'mo' : ''))
     };
   }
   document.addEventListener('click', function (e) {
@@ -446,6 +448,13 @@
       <ul class="rel-list">
         <li><a href="../products/inaba-como-lite.html"><span class="rel-txt"><span class="rel-kicker">イナバ — 断熱物置</span><span class="rel-name">como lite</span></span><span class="rel-go">&rarr;</span></a></li>
       </ul>
+      <div class="rel-ad">
+        <p class="rel-ad-label">広告 — 販売店（エクスショップ）で見る</p>
+        <ul class="rel-ad-list">
+        <li><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3777863&pid=892682808&vc_url=https%3A%2F%2Fwww.ex-shop.net%2Findex.php%3Faction%3Dpublic_item_xz_search_execute%26search_word_like_ex%3Dcomo%2520lite" rel="nofollow sponsored" target="_blank">como liteの価格・見積もりを見る &rarr;</a></li>
+        </ul>
+        <p class="rel-ad-note">提携リンクです。ここから購入・お見積もりがあった場合に紹介料が支払われることがあります。並びは本文に出てきた順で、紹介料では変えていません。販売店に取り扱いの無いシリーズと、4件を超えたぶんは出していません。上の一覧から、機種ごとのページへ行けます。</p>
+      </div>
     </aside>
     <!-- AUTO_RELATED_END -->
 
