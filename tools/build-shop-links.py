@@ -61,34 +61,50 @@ DEST = {
     "yodoko-elmo":                ("mo", ("series", "yodoko_s3"),  "エルモ"),
 }
 
-# エクスショップ側に、そのシリーズの一覧を確認できなかったもの。
+# エクスショップ側に、その機種を確認できなかったもの。
 # 2026-10-19 まではカテゴリの一覧（物置だけで1,597件）へ逃がしていたが、
 # 押した先で目当ての機種が出てこないので、リンクを置かないことにした。
-#   ・アルシアフィット … 「アルシア 一般型／豪雪地型」はあるが、アルシアフィットは見当たらない
-#   ・como lite／宅配ボックス … イナバの物置シリーズ一覧（10件）に無い
-#   ・バイクシャッターマン／エルモシャッター … シリーズ一覧に見当たらない
-# 見つかったら DEST に ('series', '…') か ('word', '…') で足せばよい。
+#   ・宅配ボックス（TBJ） … 先方に見当たらない
+#   ・エルモシャッター … 先方にあるのはブラックエルモシャッター40件だけで、黒以外は見当たらない
+#   ・フォルタ大型（FB） … 先方のFORTA一覧にある幅3,580〜5,260mmの18件は、
+#                          寸法を突き合わせると全てフォルタ（FS-3618H〜FS-5218H）
+#   ・フォルタ縦長大型（FT） … 奥行3,580mm以上が先方に無い
+# 見つかったら index.html の EXSHOP に足せばよい（ここに書く必要はない）。
 NO_DEST = {
-    "inaba-arcia-fit", "inaba-como-lite", "inaba-takuhai-box",
-    "takubo-bike-shutterman", "yodoko-elmo-shutter",
-    # 下の3つは、手で書いた「カテゴリ一覧へ」のリンクだけが残っていた
-    "inaba-forta-large", "inaba-forta-tall", "takubo-mr-shutterman",
+    "inaba-takuhai-box", "yodoko-elmo-shutter",
+    "inaba-forta-large", "inaba-forta-tall",
 }
 
 NOTE = ('<p class="shop-none">提携先の販売店では、このシリーズの一覧を確認できていません。'
         'このページでは販売店への案内を出していません。メーカー公式の商品ページは上のリンクから開けます。</p>')
 
-CAT_LABEL = {"mo": "物置・収納", "wh": "倉庫・ガレージ"}
+CAT_LABEL = {"mo": "物置・収納", "wh": "倉庫・ガレージ", "xz": "お問い合わせ商品"}
 
 
-def dest_url(cat, filt):
-    act = "public_item_%s_search_execute" % cat
-    q = "action=" + act
-    if filt and filt[0] == "series":
-        q += "&se_series=" + urllib.parse.quote("series:" + filt[1], safe="")
-    elif filt and filt[0] == "word":
-        q += "&search_word_like_ex=" + urllib.parse.quote(filt[1], safe="")
-    return "https://www.ex-shop.net/index.php?" + q
+def _common():
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import _common_page as C
+    return C
+
+
+def code_of(cat, filt):
+    """DEST の書き方を、index.html の EXSHOP と同じ書き方に直す"""
+    if filt is None:
+        return None
+    kind, val = filt
+    pre = "" if cat == "mo" else cat + ":"
+    return pre + ("word:" + val if kind == "word" else val)
+
+
+def dest_url(cat, code):
+    """行き先のURL。書き方の解釈は tools/_common_page.py の exshop_url だけが持つ。
+       ここで組み立て直すと、書き方を増やしたときに必ず食い違う。
+       2026-10-26 に実際そうなった。EXSHOP に 'xz:item:8161'（お問い合わせ商品の
+       見積もりページ）を足したあと、このファイルだけが古い解釈のまま
+       se_series=series:xz:item:8161 という行き先を書き出していた"""
+    if code is None:
+        return "https://www.ex-shop.net/index.php?action=public_item_%s_search_execute" % cat
+    return _common().exshop_url(code)
 
 
 def vc(url):
@@ -96,7 +112,7 @@ def vc(url):
             % (SID, PID, urllib.parse.quote(url, safe="")))
 
 
-def block(cat, filt, name):
+def block(cat, code, name):
     lead = ("%sの価格・無料見積もりを見る" % name if name
             else "エクスショップで%sを探す" % CAT_LABEL[cat])
     return (BEG + '<a class="shop" href="%s" rel="nofollow sponsored" target="_blank">'
@@ -105,25 +121,30 @@ def block(cat, filt, name):
             '<span class="shop-go" aria-hidden="true">→</span>'
             '<img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=%s&pid=%s" '
             'height="1" width="0" border="0" alt=""></a>' + END
-            ) % (vc(dest_url(cat, filt)), lead, SID, PID)
+            ) % (vc(dest_url(cat, code)), lead, SID, PID)
 
 
 def resolve():
-    """slug → (カテゴリ, 絞り込み, 文言)。
+    """slug → (カテゴリ, EXSHOPの書き方, 文言)。
        index.html の EXSHOP を先に見て、無いものだけ DEST で補う。
        2026-10-19 まで DEST だけを見ていたため、EXSHOP にある9シリーズ
        （ナイソーシスター・アイビーストッカーなど）の製品ページだけ出口が無かった"""
-    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    import _common_page as C
-    out = {k: v for k, v in DEST.items() if k not in NO_DEST}
+    C = _common()
+    out = {}
+    for k, v in DEST.items():
+        if k in NO_DEST:
+            continue
+        cat, filt, name = v
+        out[k] = (cat, code_of(cat, filt), name)
     ex = C.load_exshop()
     for p in C.load_products():
         code = ex.get(p["id"])
         if not code or not p.get("page"):
             continue
         slug = os.path.basename(p["page"])[:-5]
-        cat = "wh" if code.startswith("wh:") else "mo"
-        out[slug] = (cat, ("series", code[3:] if code.startswith("wh:") else code), p["name"])
+        head = code.split(":")[0]
+        cat = head if head in CAT_LABEL else "mo"
+        out[slug] = (cat, code, p["name"])
     return out
 
 
@@ -156,9 +177,9 @@ def main():
             continue
         if slug not in table:
             continue
-        cat, filt, name = table[slug]
+        cat, code, name = table[slug]
         s = orig = open(f, encoding="utf-8").read()
-        href = vc(dest_url(cat, filt))
+        href = vc(dest_url(cat, code))
 
         # 既にあるリンクは href だけ差し替える（文言・写真はそのまま）
         n = len(re.findall(r'href="//ck\.jp\.ap\.valuecommerce\.com[^"]*"', s))
@@ -172,7 +193,7 @@ def main():
             anchor = '<aside class="cta">'
             if anchor not in s:
                 print("  飛ばす（差し込み位置が無い）:", slug); continue
-            s = s.replace(anchor, block(cat, filt, name) + "\n\n        " + anchor, 1)
+            s = s.replace(anchor, block(cat, code, name) + "\n\n        " + anchor, 1)
             note = "出口を新しく入れた" + ("" if name else "（カテゴリ一覧へ）")
 
         # 見た目の指定が無いページには入れる（出口だけあって崩れるのを防ぐ）
