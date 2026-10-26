@@ -89,17 +89,28 @@ if compgen -G "$REPO/.git/index.lock*" >/dev/null; then
 fi
 
 CHANGED=$(git status --porcelain -- "${TARGETS[@]}")
-if [ -z "$CHANGED" ]; then
+# push していないコミットの数。push に失敗した回の取り残しを拾う
+AHEAD=$(git rev-list --count '@{u}..HEAD' 2>/dev/null || echo 0)
+
+if [ -z "$CHANGED" ] && [ "$AHEAD" = "0" ]; then
   echo "変更はありません。何もせず終了します。"
   exit 0
 fi
 
-echo "--- 反映する変更 ---"
-echo "$CHANGED"
-echo "--------------------"
+if [ -z "$CHANGED" ]; then
+  # 直すところは無いが、前回 push に失敗して commit だけ残っている状態。
+  # ここで「変更はありません」と抜けてしまうと、直したつもりのものがサイトに
+  # 出ないまま、次に何か変えるまで誰も気づけない（2026-10-26 に実際そうなった）
+  echo "[注意] 新しい変更はありませんが、push していないコミットが ${AHEAD} 件あります。push だけ行います。"
+else
+  echo "--- 反映する変更 ---"
+  echo "$CHANGED"
+  echo "--------------------"
 
-git add -A -- "${TARGETS[@]}" || { echo "[中止] git add に失敗"; exit 1; }
-git commit -m "$MSG" || { echo "[中止] commit に失敗"; exit 1; }
+  git add -A -- "${TARGETS[@]}" || { echo "[中止] git add に失敗"; exit 1; }
+  git commit -m "$MSG" || { echo "[中止] commit に失敗"; exit 1; }
+fi
+
 git push origin main || { echo "[中止] push に失敗しました（認証を確認してください）"; exit 1; }
 
 echo ""
