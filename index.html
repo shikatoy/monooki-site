@@ -75,8 +75,8 @@
   }, true);
 </script>
 <!-- ANALYTICS_END -->
-<title>物置のサイズ一覧｜イナバ・ヨド・タクボ全1,117型番を寸法から比較</title><!--claim:codes_all=1,117-->
-<meta name="description" content="置き場所の間口・奥行・高さを入れると、収まる物置が3メーカー全1,117型番から絞り込めます。屋根の張り出しと基礎ブロック分も含めて計算。公式の寸法表がもとで、見積書の型番からの逆引きもできます。"><!--claim:codes_all=1,117-->
+<title>物置のサイズ一覧｜イナバ・ヨド・タクボ全1,141型番を寸法から比較</title><!--claim:codes_all=1,141-->
+<meta name="description" content="置き場所の間口・奥行・高さを入れると、収まる物置が3メーカー全1,141型番から絞り込めます。屋根の張り出しと基礎ブロック分も含めて計算。公式の寸法表がもとで、見積書の型番からの逆引きもできます。"><!--claim:codes_all=1,141-->
 <meta name="theme-color" content="#161616">
 <meta name="google-site-verification" content="UyOuUgdHmuNVYiGnNzDQvFTut000UJ1k8QNdAMbVAC8" />
 <!-- OGP/canonical: 公開URL設定済み（https://monooki-erabi.com/） -->
@@ -695,6 +695,10 @@ const PHOTO = {
   'i-dm':'INXZ999116',  /* バイクガレージ アルシアフィットDM */
   'i-sml':'INXZ260027', /* como lite 守衛室 GMタイプ */
   't-ws':'INXZ999011',  /* Mr.シャッターマンダンディ 土間仕様 */
+  /* 2026-10-27 追加。ヨドコウのブラック3シリーズ */
+  'y-eseb':'YDMO250125', /* ブラックエスモ 一般型 */
+  'y-lmdb':'YDMO250026', /* ブラックエルモ 一般型 */
+  'y-lodb':'YDXZ000001', /* ブラックエルモシャッター 一般型 床タイプ */
 };
 function photoUrl(p){
   const c = PHOTO[p.id];
@@ -736,6 +740,10 @@ const EXSHOP = {
   'i-dm':'xz:item:20947',       /* バイクガレージ アルシアフィットDM（1件） */
   'i-sml':'xz:word:como lite',  /* マルチスペース como lite */
   't-ws':'xz:item:8161',        /* Mr.シャッターマンダンディ 土間仕様（1件） */
+  /* 2026-10-27 追加。ヨドコウのブラック3シリーズ */
+  'y-eseb':'yodoko_s11',   /* ブラックエスモ */
+  'y-lmdb':'yodoko_s13',   /* ブラックエルモ 一般型 */
+  'y-lodb':'xz:word:ブラックエルモシャッター',
 };
 function affUrl(code){
   /* 書き方は（カテゴリ:）＋（種類:）＋値。カテゴリを省くと物置・収納（mo）。
@@ -1084,7 +1092,37 @@ const PRODUCTS = [
     features:['UVインクジェット塗装で扉のデザインが選べる意匠系物置','外壁材と調和するサイディング調・ウッド調の6柄','本体色はアイボリーブラックとムーンホワイトの2色から選べます'],
     base:'外壁のサイディングや木目にやさしく調和する、扉のデザインが選べる意匠系の小型物置です。',
     link:'https://www.e-ty.co.jp/seihin/p/',
-    sizes:[ { code:'PY-155B', w:1488, d:530, h:1600 }, { code:'PY-155A', w:1488, d:530, h:1900 }, { code:'PY-156B', w:1488, d:650, h:1600 }, { code:'PY-156A', w:1488, d:650, h:1900 }, { code:'PY-157B', w:1488, d:750, h:1600 }, { code:'PY-157A', w:1488, d:750, h:1900 }, { code:'PY-159B', w:1488, d:900, h:1600 }, { code:'PY-159A', w:1488, d:900, h:1900 }, { code:'PY-175B', w:1695, d:530, h:1600 }, { code:'PY-175A', w:1695, d:530, h:1900 }, { code:'PY-176B', w:1695, d:650, h:1600 }, { code:'PY-176A', w:1695, d:650, h:1900 }, { code:'PY-177B', w:1695, d:750, h:1600 }, { code:'PY-177A', w:1695, d:750, h:1900 }, { code:'PY-179B', w:1695, d:900, h:1600 }, { code:'PY-179A', w:1695, d:900, h:1900 }, { code:'PY-195B', w:1879, d:530, h:1600 }, { code:'PY-195A', w:1879, d:530, h:1900 }, { code:'PY-196B', w:1879, d:650, h:1600 }, { code:'PY-196A', w:1879, d:650, h:1900 }, { code:'PY-197B', w:1879, d:750, h:1600 }, { code:'PY-197A', w:1879, d:750, h:1900 }, { code:'PY-199B', w:1879, d:900, h:1600 }, { code:'PY-199A', w:1879, d:900, h:1900 } ], sizesComplete:true }
+    sizes:[ { code:'PY-155B', w:1488, d:530, h:1600 }, { code:'PY-155A', w:1488, d:530, h:1900 }, { code:'PY-156B', w:1488, d:650, h:1600 }, { code:'PY-156A', w:1488, d:650, h:1900 }, { code:'PY-157B', w:1488, d:750, h:1600 }, { code:'PY-157A', w:1488, d:750, h:1900 }, { code:'PY-159B', w:1488, d:900, h:1600 }, { code:'PY-159A', w:1488, d:900, h:1900 }, { code:'PY-175B', w:1695, d:530, h:1600 }, { code:'PY-175A', w:1695, d:530, h:1900 }, { code:'PY-176B', w:1695, d:650, h:1600 }, { code:'PY-176A', w:1695, d:650, h:1900 }, { code:'PY-177B', w:1695, d:750, h:1600 }, { code:'PY-177A', w:1695, d:750, h:1900 }, { code:'PY-179B', w:1695, d:900, h:1600 }, { code:'PY-179A', w:1695, d:900, h:1900 }, { code:'PY-195B', w:1879, d:530, h:1600 }, { code:'PY-195A', w:1879, d:530, h:1900 }, { code:'PY-196B', w:1879, d:650, h:1600 }, { code:'PY-196A', w:1879, d:650, h:1900 }, { code:'PY-197B', w:1879, d:750, h:1600 }, { code:'PY-197A', w:1879, d:750, h:1900 }, { code:'PY-199B', w:1879, d:900, h:1600 }, { code:'PY-199A', w:1879, d:900, h:1900 } ], sizesComplete:true },
+  { id:'y-eseb', maker:'yodoko', name:'ブラックエスモ', cat:'小型物置', added:'2026-10-27',
+    steel:'ガルバリウム鋼板', doorKind:'door3', door:'3枚扉・両開き。扉カラーは6色（扉色「ウッディマロン」は本体色ブラックのみの取扱い）', found:'ブロック基礎 対応',
+    doorSpec:{ front:['door','door','door'], handles:[{p:0,e:'l'},{p:2,e:'r'}], opening:'両開き' },
+    tags:{ small:2, medium:1, door3:3, design:3, rustproof:2, daily:1 },
+    features:['エスモの本体色をブラックにしたタイプ','公式のサイズ表では高さは1,913mmの1種類だけで、全5機種','転倒防止は付属のアンカープレートと屋根後部の本体支持金具を使う（公式の案内）'],
+    base:'エスモの本体色をブラックにした3枚扉の小型物置です。公式のサイズ表では高さが1,913mmの1種類だけで、間口1,500mmから2,100mmまでの5機種です。',
+    link:'https://www.yodomonooki.jp/products/lumberroom/esumo_black/',
+    codeNote:'品番はエスモの3枚扉タイプ（<b>ESF-</b>…<b>A</b>）の末尾に <b>-BK</b> が付きます。公式のサイズ表に載る5件の外形寸法は、当サイトが持つ同じ品番のエスモの寸法と5件とも一致しました。',
+    sizesComplete:true,
+    sizes:[ { code:'ESF-1507A-BK', w:1500, d:750, h:1913 }, { code:'ESF-1807A-BK', w:1800, d:750, h:1913 }, { code:'ESF-1809A-BK', w:1800, d:900, h:1913 }, { code:'ESF-1909A-BK', w:1950, d:900, h:1913 }, { code:'ESF-2109A-BK', w:2100, d:900, h:1913 } ] },
+  { id:'y-lmdb', maker:'yodoko', name:'ブラックエルモ', cat:'中・大型物置', added:'2026-10-27',
+    steel:'ガルバリウム鋼板', doorKind:'slide', door:'引き戸。扉色はブラックとショコラウッドの2色。間口1,863mmと2,213mmは2連片引き戸、2,564mmはセンター引き分け戸（公式のサイズ表の区分）', found:'ブロック基礎 対応',
+    doorSpec:{ front:['door','door','fix'], handles:[{p:0,e:'l'}], opening:'片開き' },
+    tags:{ medium:3, large:1, slide:2, design:3, rustproof:3, coastal:3, premium:2, tires:1, garden:1 },
+    features:['エルモの本体色をブラックにしたタイプ','間口3サイズ・奥行3サイズ・高さ1サイズの計9サイズ','ブラック色のトイセットがオプションにある。軒トイは断面 高さ60×幅80mm、タテトイは42φ（公式の記載）'],
+    base:'エルモの本体色をブラックにした引き戸の物置です。公式のサイズ表は間口3サイズ・奥行3サイズ・高さ1サイズの計9サイズで、一般型のほかに積雪型と豪雪型の設定があります。',
+    link:'https://www.yodomonooki.jp/products/lumberroom/erumo_black/',
+    codeNote:'品番はエルモの品番の末尾に <b>-BK</b> が付きます。公式のサイズ表に載る9件の外形寸法は、当サイトが持つ同じ品番のエルモの寸法と9件とも一致しました。積雪型・豪雪型は公式の耐荷重の欄に設定がありますが、品番は公式のサイズ表に見当たりません。',
+    sizesComplete:true,
+    sizes:[ { code:'LMD-1811-BK', w:1863, d:1162, h:2121 }, { code:'LMD-1815-BK', w:1863, d:1512, h:2120 }, { code:'LMD-1818-BK', w:1863, d:1863, h:2119 }, { code:'LMD-2211-BK', w:2213, d:1162, h:2121 }, { code:'LMD-2215-BK', w:2213, d:1512, h:2120 }, { code:'LMD-2218-BK', w:2213, d:1863, h:2119 }, { code:'LMD-2511-BK', w:2564, d:1162, h:2121 }, { code:'LMD-2515-BK', w:2564, d:1512, h:2120 }, { code:'LMD-2518-BK', w:2564, d:1863, h:2119 } ] },
+  { id:'y-lodb', maker:'yodoko', name:'ブラックエルモシャッター', cat:'中・大型物置', added:'2026-10-27',
+    steel:'公式の商品ページに記載がない', doorKind:'shutter', door:'シャッター扉。床タイプと土間タイプがある', found:'床タイプ／土間タイプ 選択可',
+    look:{ seen:false },
+    tags:{ medium:2, large:3, tires:3, design:3, premium:2 },
+    features:['エルモシャッターの本体色をブラックにしたタイプ','間口4サイズ・奥行3サイズ・高さ1サイズの計10サイズ','全サイズとも連棟できる（受注生産）。間口違いの連棟もできるが、本体に左端用・中間用・右端用の区別がある（公式の注記）'],
+    base:'エルモシャッターの本体色をブラックにしたシャッター式の物置です。公式のサイズ表は間口4サイズ・奥行3サイズ・高さ1サイズの計10サイズです。',
+    link:'https://www.yodomonooki.jp/products/lumberroom/erumo_sh_bk/',
+    codeNote:'品番はエルモシャッターの品番（末尾に <b>H</b> が付くもの）に <b>-BK</b> が付きます。品番のあとの（F・D）は床タイプと土間タイプの別で、外形寸法は変わりません。<b>公式のサイズ表は、2026年10月27日の時点で品番の欄が10行とも同じ表記（LOD-1811H（F・D）-BK）になっています。</b>各行の寸法10件は、当サイトが持つエルモシャッターの寸法と10件とも一致したため、その品番を当てています。',
+    sizesComplete:true,
+    sizes:[ { code:'LOD-1811H-BK', w:1863, d:1162, h:2361 }, { code:'LOD-1825H-BK', w:1863, d:2564, h:2356 }, { code:'LOD-1829H-BK', w:1863, d:2914, h:2356 }, { code:'LOD-2211H-BK', w:2213, d:1162, h:2361 }, { code:'LOD-2225H-BK', w:2213, d:2564, h:2356 }, { code:'LOD-2229H-BK', w:2213, d:2914, h:2356 }, { code:'LOD-2525H-BK', w:2564, d:2564, h:2356 }, { code:'LOD-2529H-BK', w:2564, d:2914, h:2356 }, { code:'LOD-2925H-BK', w:2914, d:2564, h:2356 }, { code:'LOD-2929H-BK', w:2914, d:2914, h:2356 } ] },
 ];
 /* ===== PRODUCTS_END ===== */
 
@@ -1599,6 +1637,9 @@ const PRODUCT_PAGES = {
   'y-lod': 'products/yodoko-elmo-shutter.html',
   'y-vgc': 'products/yodoko-lavige.html',
   't-pe': 'products/takubo-peinte.html',
+  'y-eseb': 'products/yodoko-esmo-black.html',
+  'y-lmdb': 'products/yodoko-elmo-black.html',
+  'y-lodb': 'products/yodoko-elmo-shutter-black.html',
 };
 
 /* ===== ARTICLES_START =====

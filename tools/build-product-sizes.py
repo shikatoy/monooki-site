@@ -13,27 +13,21 @@ import os, re, io, json
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
-# PRODUCTS の id → products/ のファイル名
-PAGES = {
-    "t-gp": "takubo-grand-prestage-jump", "t-nd": "takubo-mr-stockman-dandy",
-    "t-jn": "takubo-mr-tallman-dandy",    "t-bs": "takubo-bike-shutterman",
-    "t-belos": "takubo-belos",            "t-lsn": "takubo-leisure",
-    "t-pe": "takubo-peinte",
-    "i-mjx": "inaba-simply",              "i-fs": "inaba-forta",
-    "i-fxn": "inaba-bike-hokanko",        "i-grn": "inaba-garudia",
-    "i-tbj": "inaba-takuhai-box",         "i-dm": "inaba-arcia-fit",
-    "y-ese": "yodoko-esmo",               "y-lmd": "yodoko-elmo",
-    "y-lod": "yodoko-elmo-shutter",
-    "y-vgc": "yodoko-lavige",
-    "i-smx": "inaba-nyso-smx",            "i-sml": "inaba-como-lite",
-    "i-bjx": "inaba-ivy-stocker",         "i-bjt": "inaba-tire-stocker",
-    "t-tp": "takubo-mr-stockman-plus-alpha",
-    "i-ff": "inaba-domaru",            "i-fw": "inaba-forta-with",
-    "i-kmw": "inaba-nyso-sister",       "i-fp": "inaba-forta-plus",
-    "i-fk": "inaba-forta-roof-slope",   "i-fb": "inaba-forta-large",
-    "i-ft": "inaba-forta-tall",
-    "t-nde": "takubo-mr-stockman-shutter", "t-ws": "takubo-mr-shutterman",
-}
+# PRODUCTS の id → products/ のファイル名。
+# 2026-10-27 まで、ここに同じ表を手で持っていた。index.html の PRODUCT_PAGES と
+# 二重管理になっていて、製品を足すたびに片方だけ直して止まっていた。
+# （同じ型の食い違いを build-shop-links.py でも起こしている。表は1か所に持つ）
+def _pages():
+    s = io.open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+    i = s.find("const PRODUCT_PAGES")
+    if i < 0:
+        raise SystemExit("[中止] index.html の PRODUCT_PAGES を読めませんでした")
+    j = s.find("};", i)
+    return {pid: os.path.basename(path)[:-5]
+            for pid, path in re.findall(r"'([a-z0-9-]+)':\s*'(products/[^']+)'", s[i:j])}
+
+
+PAGES = _pages()
 
 # 表がまだ無いページに差し込むときの目印。型番0件で作ったページは
 # 「サイズ一覧」の下がこの注記1行だけになっている。
@@ -81,9 +75,9 @@ def main():
     missing = [pid for pid, (sizes, _) in data.items()
                if sizes and pid not in PAGES]
     if missing:
-        raise SystemExit("[中止] PAGES に無い機種に型番が入っています: %s。"
-                         "tools/build-product-sizes.py の PAGES に"
-                         "製品ページのファイル名を足してください。" % "／".join(missing))
+        raise SystemExit("[中止] 製品ページの割り当てが無い機種に型番が入っています: %s。"
+                         "index.html の PRODUCT_PAGES に製品ページのファイル名を"
+                         "足してください。" % "／".join(missing))
     n = 0
     for pid, slug in PAGES.items():
         if pid not in data: continue
