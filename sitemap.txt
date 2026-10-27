@@ -70,4 +70,5 @@ https://monooki-erabi.com/size/height-1900.html
 https://monooki-erabi.com/size/width-1200.html
 https://monooki-erabi.com/size/width-1500.html
 https://monooki-erabi.com/about.html
+https://monooki-erabi.com/contact.html
 https://monooki-erabi.com/privacy.html
