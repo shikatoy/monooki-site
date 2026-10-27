@@ -11,7 +11,7 @@ sitemap に載らないことがあった（2026-09-17：サイズ帯ページ�
 
     python3 tools/build-sitemap.py
 """
-import os, io, glob, datetime
+import os, io, glob, datetime, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -42,15 +42,34 @@ SKIP = {"404.html"}
 #   寸法の面は size/index.html と、しきい値ページ（depth-600 など。順位8.5で表示あり）で申告する。
 SKIP_PREFIX = ("size/band-",)
 
+# noindex を書いたページ。サイトマップは「インデックスしてほしいURLの申告」なので、
+# noindex と同時に出すと Search Console で矛盾として扱われる。
+#   contact.html … 2026-10-27 時点で「noindex タグによって除外されました」1件がこれ。
+#   どちらを取るかはページ側の noindex を正とし、申告からだけ自動で外す。
+NOINDEX = re.compile(r'<meta\s+name=["\']robots["\'][^>]*noindex', re.I)
+
+
+def is_noindex(path):
+    try:
+        with io.open(path, encoding="utf-8") as f:
+            return bool(NOINDEX.search(f.read(4000)))
+    except Exception:
+        return False
+
+
 
 def main():
     seen, rows = set(), []
+    skipped_noindex = []
     for pat, pri, freq in RULES:
         for p in sorted(glob.glob(os.path.join(ROOT, pat))):
             rel = os.path.relpath(p, ROOT).replace(os.sep, "/")
             if rel in seen or os.path.basename(rel) in SKIP:
                 continue
             if rel.startswith(SKIP_PREFIX):
+                continue
+            if is_noindex(p):
+                skipped_noindex.append(rel)
                 continue
             seen.add(rel)
             mt = datetime.date.fromtimestamp(os.path.getmtime(p)).isoformat()
@@ -74,6 +93,8 @@ def main():
     import collections
     c = collections.Counter(r[0].replace(SITE, "").split("/")[0] or "(直下)" for r in rows)
     print("[sitemap] %d URL  %s" % (len(rows), dict(c)))
+    if skipped_noindex:
+        print("[sitemap] noindex のため申告から外した: %s" % "、".join(skipped_noindex))
     return 0
 
 

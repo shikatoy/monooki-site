@@ -40,8 +40,12 @@ BLOCK = """%s
     if (p === '/products/codes.html') return 'codes';
     if (p === '/products/discontinued.html') return 'discontinued';
     if (p.indexOf('/products/') === 0) return 'product';
-    if (p.indexOf('/size/band-') === 0) return 'size_band';
-    if (p.indexOf('/size/') === 0) return 'size';
+    /* サイズ帯の判定で、帯のパスを文字列として書かないこと。
+       Googleはスクリプトの中の文字列もURLの候補として拾う。
+       以前ここに書いていた文字列がそのままクロールされ、存在しないURLとして
+       404になっていた（Search Console の「見つかりませんでした（404）」。2026-10-26）。
+       コメントに書き戻すのも同じことになるので、パスそのものは残さない */
+    if (p.indexOf('/size/') === 0) return p.indexOf('band-') === 6 ? 'size_band' : 'size';
     return 'other';
   }
   function adPlacement(a) {

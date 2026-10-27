@@ -6,6 +6,11 @@
 # その記事へのリンクが3週間そのままになっていた。取り下げ側で
 # 流入リンクを消していなかったのが原因。以後は publish.sh で毎回見る。
 #
+# 2026-10-26：スクリプトの中に書いた文字列も見るようにした。
+# 計測タグの判定に書いていた文字列を Google が URL として拾い、
+# 存在しないページをクロールして404にしていた。
+# 画面に出るリンクではないので、上の検査では見つからなかった。
+#
 #     python3 tools/check-links.py
 import os, re, io, glob, sys
 
@@ -29,9 +34,31 @@ def main():
                                               href.lstrip("/")))
             if not os.path.exists(t):
                 bad.setdefault(href, []).append(os.path.relpath(p, ROOT))
-    if not bad:
+    # スクリプトの中の、パスに見える文字列。Googleはここも URL の候補として拾う
+    jsbad = {}
+    jspat = re.compile(r"<script\b[^>]*>(.*?)</script>", re.S)
+    strpat = re.compile(r"""['"](/[A-Za-z0-9._/-]*)['"]""")
+    for p in pages:
+        s = io.open(p, encoding="utf-8").read()
+        for body in jspat.findall(s):
+            for v in set(strpat.findall(body)):
+                if v == "/" or v.startswith("//"):
+                    continue
+                t = os.path.join(ROOT, v.lstrip("/"))
+                if os.path.exists(t) or os.path.exists(t.rstrip("/")):
+                    continue
+                jsbad.setdefault(v, []).append(os.path.relpath(p, ROOT))
+
+    if not bad and not jsbad:
         print("[リンク] %d ページ／切れリンクなし" % len(pages))
         return 0
+    for v, where in sorted(jsbad.items()):
+        print("[中止] スクリプトの中に、実在しないパスの文字列があります: %s（%d ページ）"
+              % (v, len(where)))
+        for w in where[:5]:
+            print("         ", w)
+        print("          Google がこれを URL として拾い、404 をクロールします。"
+              "パスを文字列で書かない形に直してください。")
     for href, where in sorted(bad.items()):
         print("[中止] リンク切れ %s（%d 箇所）" % (href, len(where)))
         for w in where[:10]:

@@ -18,6 +18,7 @@ https://monooki-erabi.com/articles/monooki-okenai-basho.html
 https://monooki-erabi.com/articles/monooki-one-step-dimension.html
 https://monooki-erabi.com/articles/monooki-options-and-anchor.html
 https://monooki-erabi.com/articles/monooki-parts-after-discontinued.html
+https://monooki-erabi.com/articles/monooki-removal-and-replacement.html
 https://monooki-erabi.com/articles/monooki-rust-where-and-how.html
 https://monooki-erabi.com/articles/monooki-shutter-vs-slide-opening.html
 https://monooki-erabi.com/articles/monooki-size-and-placement.html
@@ -69,5 +70,4 @@ https://monooki-erabi.com/size/height-1900.html
 https://monooki-erabi.com/size/width-1200.html
 https://monooki-erabi.com/size/width-1500.html
 https://monooki-erabi.com/about.html
-https://monooki-erabi.com/contact.html
 https://monooki-erabi.com/privacy.html
