@@ -148,11 +148,50 @@ def short_lead(desc, limit=120):
     return s or desc[:limit]
 
 
-def build_page(fm, h1, body_html, tag):
+# 雛形のどこを差し替えるか。どれも「ちょうど1か所」見つかることが前提。
+#
+# この表は tools/check-article-template.py からも読む。写しを2つ持たない。
+# 2026-10-29 まで、この正規表現は下の build_page の中に直書きだった。
+# build-breadcrumbs.py が雛形にも BreadcrumbList を足して ld+json が2つに増え、
+# どの記事を流しても「差し替え箇所が 2 件」で止まる状態が10日続いた。
+# publish.sh から呼ばれないスクリプトなので、公開のたびの検査では触れられず、
+# 記事を出そうとした人だけが落ちる形になっていた。
+SLOTS = [
+    ("title", r"<title>.*?</title>"),
+    ("description", r'<meta name="description" content=".*?">'),
+    ("keywords", r'<meta name="keywords" content=".*?">'),
+    ("canonical", r'<link rel="canonical" href=".*?">'),
+    ("og:title", r'<meta property="og:title" content=".*?">'),
+    ("og:description", r'<meta property="og:description" content=".*?">'),
+    ("og:url", r'<meta property="og:url" content=".*?">'),
+    ("og:image", r'<meta property="og:image" content=".*?">'),
+    # ld+json は雛形に複数ある（BreadcrumbList もここに入る）。Article の塊だけを指す
+    ("JSON-LD（Article）",
+     r'<script type="application/ld\+json">(?:(?!</script>).)*?"@type": "Article"'
+     r'(?:(?!</script>).)*</script>'),
+    ("パンくず",
+     r'(<nav class="crumbs" aria-label="パンくずリスト">\s*<a href="\.\./">トップ</a>'
+     r'<span>/</span><a href="\./">記事</a><span>/</span>).*?(\s*</nav>)'),
+    ("kicker", r'<p class="article-kicker">.*?</p>'),
+    ("h1", r'<h1 class="article-title">.*?</h1>'),
+    ("lead", r'<p class="article-lead">.*?</p>'),
+    ("date", r'<time datetime=".*?">.*?</time>'),
+    ("tags", r'<div class="tags">.*?</div>'),
+    ("本文", r'(<div class="article-body">)\s*.*?(\s*</div>\s*</article>)'),
+]
+
+
+def template_shell():
+    """雛形から、前回の生成物（記事末尾の導線）を取り除いたもの。
+       SLOTS を数えるときは必ずこれを通す。検査スクリプトからも同じものを使う。"""
     shell = open(TEMPLATE, encoding="utf-8").read()
-    # 前回の生成物（記事末尾の導線）はテンプレ側から取り除く
     shell = re.sub(r"<!-- AUTO_RELATED_START -->.*?<!-- AUTO_RELATED_END -->\s*", "", shell, flags=re.S)
     shell = re.sub(r"/\* AUTO_RELATED_CSS_START \*/.*?/\* AUTO_RELATED_CSS_END \*/\n?", "", shell, flags=re.S)
+    return shell
+
+
+def build_page(fm, h1, body_html, tag):
+    shell = template_shell()
 
     slug = fm["slug"]
     url = SITE + "articles/" + slug + ".html"
@@ -166,28 +205,27 @@ def build_page(fm, h1, body_html, tag):
         ogimg = SITE + "images/og-%s.png" % slug
     crumb = fm.get("crumb") or re.sub(r"^.*?[｜|]", "", title).strip() or title
 
-    def one(pat, rep, label):
+    pats = dict(SLOTS)
+
+    def one(label, rep):
         nonlocal shell
+        pat = pats[label]
         n = len(re.findall(pat, shell, flags=re.S))
         if n != 1:
-            raise SystemExit("[中止] 差し替え箇所が %d 件: %s" % (n, label))
+            raise SystemExit(
+                "[中止] 記事の雛形で差し替え箇所が %d 件になっています: %s\n"
+                "       tools/_article_template.html を確かめてください。"
+                "（tools/check-article-template.py で同じ検査ができます）" % (n, label))
         shell = re.sub(pat, lambda _m: rep, shell, count=1, flags=re.S)
 
-    one(r"<title>.*?</title>", "<title>%s｜%s</title>" % (esc(title), NAME), "title")
-    one(r'<meta name="description" content=".*?">',
-        '<meta name="description" content="%s">' % esc_attr(desc), "description")
-    one(r'<meta name="keywords" content=".*?">',
-        '<meta name="keywords" content="%s">' % esc_attr(kw), "keywords")
-    one(r'<link rel="canonical" href=".*?">',
-        '<link rel="canonical" href="%s">' % url, "canonical")
-    one(r'<meta property="og:title" content=".*?">',
-        '<meta property="og:title" content="%s">' % esc_attr(title), "og:title")
-    one(r'<meta property="og:description" content=".*?">',
-        '<meta property="og:description" content="%s">' % esc_attr(desc), "og:description")
-    one(r'<meta property="og:url" content=".*?">',
-        '<meta property="og:url" content="%s">' % url, "og:url")
-    one(r'<meta property="og:image" content=".*?">',
-        '<meta property="og:image" content="%s">' % ogimg, "og:image")
+    one("title", "<title>%s｜%s</title>" % (esc(title), NAME))
+    one("description", '<meta name="description" content="%s">' % esc_attr(desc))
+    one("keywords", '<meta name="keywords" content="%s">' % esc_attr(kw))
+    one("canonical", '<link rel="canonical" href="%s">' % url)
+    one("og:title", '<meta property="og:title" content="%s">' % esc_attr(title))
+    one("og:description", '<meta property="og:description" content="%s">' % esc_attr(desc))
+    one("og:url", '<meta property="og:url" content="%s">' % url)
+    one("og:image", '<meta property="og:image" content="%s">' % ogimg)
 
     ld = ('<script type="application/ld+json">\n{\n'
           '  "@context": "https://schema.org",\n  "@type": "Article",\n'
@@ -198,32 +236,20 @@ def build_page(fm, h1, body_html, tag):
           '  "mainEntityOfPage": "%s",\n  "image": "%s",\n'
           '  "inLanguage": "ja",\n  "keywords": "%s"\n}\n</script>'
           % (esc_attr(title), esc_attr(desc), date, date, NAME, NAME, url, ogimg, esc_attr(kw)))
-    # 差し替えるのは Article の塊だけ。
-    # 2026-10-29 まで「最初の ld+json ひとつ」を当てにしていた。build-breadcrumbs.py が
-    # 雛形にも BreadcrumbList を足したことで塊が2つになり、記事の公開が
-    # 「差し替え箇所が 2 件」で必ず止まる状態になっていた。
-    one(r'<script type="application/ld\+json">(?:(?!</script>).)*?"@type": "Article"'
-        r'(?:(?!</script>).)*</script>', ld, "JSON-LD（Article）")
+    one("JSON-LD（Article）", ld)
 
-    one(r'(<nav class="crumbs" aria-label="パンくずリスト">\s*<a href="\.\./">トップ</a><span>/</span><a href="\./">記事</a><span>/</span>).*?(\s*</nav>)',
-        '<nav class="crumbs" aria-label="パンくずリスト">\n      <a href="../">トップ</a><span>/</span><a href="./">記事</a><span>/</span>%s\n    </nav>' % esc(crumb),
-        "パンくず")
+    one("パンくず",
+        '<nav class="crumbs" aria-label="パンくずリスト">\n      <a href="../">トップ</a><span>/</span><a href="./">記事</a><span>/</span>%s\n    </nav>' % esc(crumb))
 
-    one(r'<p class="article-kicker">.*?</p>',
-        '<p class="article-kicker">Article — %s</p>' % esc(tag), "kicker")
-    one(r'<h1 class="article-title">.*?</h1>',
-        '<h1 class="article-title">%s</h1>' % inline(h1 or title), "h1")
-    one(r'<p class="article-lead">.*?</p>',
-        '<p class="article-lead">%s</p>' % esc(desc), "lead")
-    one(r'<time datetime=".*?">.*?</time>',
-        '<time datetime="%s">%s</time>' % (date, date), "date")
-    one(r'<div class="tags">.*?</div>',
+    one("kicker", '<p class="article-kicker">Article — %s</p>' % esc(tag))
+    one("h1", '<h1 class="article-title">%s</h1>' % inline(h1 or title))
+    one("lead", '<p class="article-lead">%s</p>' % esc(desc))
+    one("date", '<time datetime="%s">%s</time>' % (date, date))
+    one("tags",
         '<div class="tags">\n          %s\n        </div>'
-        % "\n          ".join('<span class="tag">%s</span>' % esc(k) for k in fm.get("keywords", [])),
-        "tags")
-    one(r'(<div class="article-body">)\s*.*?(\s*</div>\s*</article>)',
-        '<div class="article-body">\n\n%s\n\n      </div>\n    </article>' % body_html,
-        "本文")
+        % "\n          ".join('<span class="tag">%s</span>' % esc(k) for k in fm.get("keywords", [])))
+    one("本文",
+        '<div class="article-body">\n\n%s\n\n      </div>\n    </article>' % body_html)
     return shell
 
 

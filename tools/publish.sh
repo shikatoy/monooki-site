@@ -73,6 +73,12 @@ python3 "$REPO/tools/check-log.py" || { echo "[中止] 更新履歴の台帳を�
 python3 "$REPO/tools/check-claims.py" || { echo "[中止] 本文の数字を直してから公開してください。"; exit 1; }
 python3 "$REPO/tools/check-meta.py" || { echo "[中止] ページの見出し情報を直してから公開してください。"; exit 1; }
 python3 "$REPO/tools/check-links.py" || { echo "[中止] リンク切れを直してから公開してください。"; exit 1; }
+# 記事の雛形がまだ使える形か（2026-10-29）
+# 上の build-* は雛形も書き換える。実際 build-breadcrumbs.py が雛形の ld+json を
+# 2つに増やし、publish-article.py が10日のあいだ1本も記事を出せない状態だった。
+# publish-article.py は publish.sh から呼ばれないので、ここで見ておかないと
+# 次に記事を出そうとした人が落ちるまで誰も気づけない。
+python3 "$REPO/tools/check-article-template.py" || { echo "[中止] 記事の雛形を直してから公開してください。このままだと記事を1本も出せません。"; exit 1; }
 
 # .git/index.lock の取り残し対策（2026-09-29）
 # エージェントが git を叩いたあとロックだけ残ることがあり、
