@@ -9,10 +9,12 @@ SMX のサイズ数が、データとページで食い違ったまま公開さ�
 
     python3 tools/build-product-spec.py
 """
-import os, re, io, sys
+import importlib.util, os, re, io, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
+_s = importlib.util.spec_from_file_location("c", os.path.join(HERE, "_common_page.py"))
+C = importlib.util.module_from_spec(_s); _s.loader.exec_module(C)
 MAKER_JP = {"takubo": "タクボ", "inaba": "イナバ", "yodoko": "ヨドコウ"}
 ROWS = ("メーカー", "区分", "鋼板", "扉", "基礎")
 
@@ -69,8 +71,14 @@ def main():
             raise SystemExit("[中止] %s に仕様表または特徴の並びがありません。"
                              "雛形を変えたなら、このスクリプトも直してください。" % p["page"])
 
+        # 耐荷重まわりは3社で項目名も単位も違う。公式の項目名のまま1行足す。
+        # タクボはここには出ない（型番ごとに値が違うのでサイズ表に列で出す）。
+        pairs = [(k, p["vals"][k]) for k in ROWS if p["vals"][k]]
+        extra = C.load_spec_row(p["id"])
+        if extra:
+            pairs.append(extra)
         body = "\n".join("          <tr><th>%s</th><td>%s</td></tr>"
-                         % (k, esc(p["vals"][k])) for k in ROWS if p["vals"][k])
+                         % (k, esc(v)) for k, v in pairs)
         new_tbl = ('<table class="spec">\n          <tbody>\n%s\n'
                    '          </tbody>\n        </table>' % body)
         items = "\n".join("        <li>%s</li>" % esc(x) for x in p["feats"])
@@ -83,8 +91,7 @@ def main():
         if s2 != s:
             io.open(f, "w", encoding="utf-8").write(s2)
             print("  %-36s 仕様%d行 / 特徴%d"
-                  % (os.path.basename(p["page"]),
-                     sum(1 for k in ROWS if p["vals"][k]), len(p["feats"])))
+                  % (os.path.basename(p["page"]), len(pairs), len(p["feats"])))
             n += 1
     print("[製品ページの仕様・特徴] %d ページを更新しました" % n)
     return 0

@@ -18,6 +18,7 @@ OUT = os.path.join(C.ROOT, "products", "codes.html")
 
 def build():
     prods = C.load_products()
+    LOAD = C.floor_load()
     groups = []
     total = 0
     for p in sorted(prods, key=lambda x: (x["maker"], x["name"])):
@@ -46,9 +47,13 @@ def build():
                 % (C.esc(p["name"]),
                    C.MAKER_JP[p["maker"]], C.esc(C.KUBUN.get(p["cat"], p["cat"])), len(p["sizes"]),
                    "（型番の頭：" + "／".join(pre) + "）" if pre else ""))
+        # 床耐荷重（タクボ公式の型番ページ）。そのシリーズの型番が全部そろって
+        # いるときだけ列にする。一部だけだと空欄が0kgに見える。
+        kg = all(c in LOAD for c, *_ in p["sizes"])
         rows = "".join(
-            '<tr><td class="l m">%s</td><td>%s</td><td>%s</td><td>%s</td></tr>'
-            % (C.esc(c), "{:,}".format(w), "{:,}".format(d), "{:,}".format(h))
+            '<tr><td class="l m">%s</td><td>%s</td><td>%s</td><td>%s</td>%s</tr>'
+            % (C.esc(c), "{:,}".format(w), "{:,}".format(d), "{:,}".format(h),
+               ('<td>%skg</td>' % "{:,}".format(LOAD[c])) if kg else "")
             for c, w, d, h in sorted(p["sizes"], key=lambda s: s[0]))
         inner = ""
         if p["page"]:
@@ -56,9 +61,13 @@ def build():
                       % (os.path.basename(p["page"]), C.esc(p["name"])))
         if p.get("codeNote"):
             inner += '<p class="note">%s</p>' % p["codeNote"]
+        if kg:
+            inner += ('<p class="note">床耐荷重はタクボ公式の型番ページに載っている値です。'
+                      '物置1棟あたりの合計で、面積あたりの値ではありません。</p>')
         inner += ('<table class="tbl"><thead><tr><th class="l">型番</th>'
-                  '<th>間口 mm</th><th>奥行 mm</th><th>高さ mm</th></tr></thead>'
-                  '<tbody>%s</tbody></table>' % rows)
+                  '<th>間口 mm</th><th>奥行 mm</th><th>高さ mm</th>%s</tr></thead>'
+                  '<tbody>%s</tbody></table>'
+                  % ('<th>床耐荷重</th>' if kg else "", rows))
         body_parts.append('<details class="grpd" id="%s">%s<div class="grpd-in">%s</div></details>'
                           % (p["id"], head, inner))
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """生成ページ共通の読み込み・雛形。build-*.py から使う。"""
-import os, re, urllib.parse
+import json, os, re, urllib.parse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://monooki-erabi.com/"
@@ -117,6 +117,67 @@ def load_inner():
             raise SystemExit("[中止] INNER の %s が5つの値になっていません" % m.group(1))
         out[m.group(1)] = tuple(v)
     return out
+
+
+def load_load():
+    """tools/_load.json を読む。耐荷重まわりの公式値はここが唯一の出典。
+
+    3社で測っているものも単位も違う。横に並べて数値を比べる使い方はしない。
+      タクボ   … 床耐荷重。1棟あたりの合計（kg）。型番ごとに値がある
+      ヨドコウ … 屋根・棚・床の耐荷重。面積あたり（N/m2）。シリーズと型区分ごと
+      イナバ   … 積雪強度。屋根にかかる雪（N/m2）。シリーズと型区分ごと
+    """
+    p = os.path.join(ROOT, "tools", "_load.json")
+    if not os.path.exists(p):
+        raise SystemExit("[中止] tools/_load.json がありません。"
+                         "耐荷重の値はこのファイルが唯一の出典です。")
+    with open(p, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def floor_load():
+    """タクボの型番 → 床耐荷重（kg）。公式に記載のない型番は入っていない。"""
+    return {c: v["kg"] for c, v in load_load()["takubo"]["型番"].items()}
+
+
+def _nm(v):
+    return "{:,}N/m²".format(v)
+
+
+def load_spec_row(pid):
+    """製品ページの仕様表に足す1行。(項目名, 値) か None を返す。
+
+    タクボはここでは返さない。型番ごとに値が違うので、サイズ表に列で出す。
+    """
+    d = load_load()
+
+    y = d["yodoko"]["シリーズ"].get(pid)
+    if y:
+        if "型区分なし" in y:
+            v = y["型区分なし"]
+            return ("耐荷重", "屋根 %s（積雪約%dcm）／棚 %s／床 %s"
+                    % (_nm(v["屋根"]), v["積雪cm"], _nm(v["棚"]), _nm(v["床"])))
+        order = [k for k in ("一般型", "積雪型", "豪雪型") if k in y]
+        # 型区分どうしは「・」、屋根／棚／床のあいだは「／」。
+        # 両方を「／」でつなぐと、どこまでが屋根の値か読めなくなる。
+        roof = "・".join("%s %s（積雪約%dcm）" % (k, _nm(y[k]["屋根"]), y[k]["積雪cm"])
+                         for k in order)
+        base = y[order[0]]
+        if "棚" not in base:
+            return ("屋根の耐荷重", roof)
+        return ("耐荷重", "屋根 %s／棚 %s／床 %s"
+                % (roof, _nm(base["棚"]), _nm(base["床"])))
+
+    i = d["inaba"]["シリーズ"].get(pid)
+    if i:
+        order = [k for k in ("一般型", "多雪型", "豪雪型") if k in i]
+        if order:
+            return ("積雪強度", "／".join("%s %s" % (k, _nm(i[k])) for k in order))
+        if "値" in i:
+            return ("積雪強度",
+                    "・".join(_nm(v) for v in i["値"])
+                    + "（どの型番がどれに当たるかは公式に記載がありません）")
+    return None
 
 
 def load_style():

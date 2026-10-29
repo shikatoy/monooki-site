@@ -8,10 +8,12 @@
 
     python3 tools/build-product-sizes.py
 """
-import os, re, io, json
+import importlib.util, os, re, io, json
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
+_s = importlib.util.spec_from_file_location("c", os.path.join(HERE, "_common_page.py"))
+C = importlib.util.module_from_spec(_s); _s.loader.exec_module(C)
 
 # PRODUCTS の id → products/ のファイル名。
 # 2026-10-27 まで、ここに同じ表を手で持っていた。index.html の PRODUCT_PAGES と
@@ -33,6 +35,32 @@ PAGES = _pages()
 # 「サイズ一覧」の下がこの注記1行だけになっている。
 PLACEHOLDER = re.compile(
     r'<p class="note">現時点でサイズ表は公開されていません。[^<]*</p>')
+
+# サイズ表のすぐ下の注記。段落ごと作り直す（床耐荷重の列を足すと文面も変わるため）
+NOTE_RE = re.compile(
+    r'<p class="note">(?:(?!</p>).)*?寸法は本体の外寸（mm）です。(?:(?!</p>).)*</p>', re.S)
+
+BASE_NOTE = ("寸法は本体の外寸（mm）です。実際の設置高さは、"
+             "基礎ブロック分（基本 高さ約10cm）を足した値になります。")
+KG_NOTE = ("床耐荷重はタクボ公式の型番ページに載っている値です。"
+           "物置1棟あたりの合計で、面積あたりの値ではありません。")
+
+
+def _table(sizes, kg):
+    """サイズ表のHTML。kg が渡ったときだけ床耐荷重の列を足す。"""
+    cols = '<th>型番</th><th>間口 W</th><th>奥行 D</th><th>高さ H</th>'
+    if kg:
+        cols += '<th>床耐荷重</th>'
+    rows = []
+    for c, w, d, h in sorted(sizes, key=lambda x: (x[1], x[2], x[3])):
+        tds = ("<td>%s</td><td>%s</td><td>%s</td><td>%s</td>"
+               % (c, format(w, ","), format(d, ","), format(h, ",")))
+        if kg:
+            tds += "<td>%skg</td>" % format(kg[c], ",")
+        rows.append("          <tr>%s</tr>" % tds)
+    return ('<table class="sizes">\n        <thead>\n          <tr>%s</tr>\n'
+            '        </thead>\n        <tbody>\n%s\n        </tbody>\n      </table>'
+            % (cols, "\n".join(rows)))
 
 
 def _mm(v):
@@ -72,6 +100,7 @@ def products():
 
 def main():
     data = products()
+    LOAD = C.floor_load()
     missing = [pid for pid, (sizes, _) in data.items()
                if sizes and pid not in PAGES]
     if missing:
@@ -87,10 +116,17 @@ def main():
         if not os.path.exists(p): continue
         s = io.open(p, encoding="utf-8").read()
 
-        rows = "\n".join(
-            "          <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>"
-            % (c, format(w, ","), format(d, ","), format(h, ","))
-            for c, w, d, h in sorted(sizes, key=lambda x: (x[1], x[2], x[3])))
+        # 床耐荷重は、その製品の型番が全部そろっているときだけ列にする。
+        # 一部だけ公式に記載がある状態で列を作ると、空欄が0kgに見える。
+        kg = ({c: LOAD[c] for c, *_ in sizes}
+              if all(c in LOAD for c, *_ in sizes) else None)
+
+        note = ("全 %d 型番を掲載しています。" % len(sizes) if complete
+                else "公式で確認できた %d 型番を掲載しています。"
+                     "<strong>これ以外の型番もあります。</strong>" % len(sizes))
+        note += BASE_NOTE
+        if kg:
+            note += KG_NOTE
 
         body = re.search(r"(<table class=\"sizes\">.*?</table>)", s, re.S)
         if not body:
@@ -98,35 +134,20 @@ def main():
             body = PLACEHOLDER.search(s)
             if not body:
                 print("  [飛ばす] 表も差し込み位置も見つかりません:", slug); continue
-            note = ("全 %d 型番を掲載しています。" % len(sizes) if complete
-                    else "公式で確認できた %d 型番を掲載しています。"
-                         "<strong>これ以外の型番もあります。</strong>" % len(sizes))
-            rows = "\n".join(
-                "          <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>"
-                % (c, format(w, ","), format(d, ","), format(h, ","))
-                for c, w, d, h in sorted(sizes, key=lambda x: (x[1], x[2], x[3])))
-            block = ('<table class="sizes">\n        <thead>\n'
-                     '          <tr><th>型番</th><th>間口 W</th><th>奥行 D</th>'
-                     '<th>高さ H</th></tr>\n        </thead>\n        <tbody>\n'
-                     '%s\n        </tbody>\n      </table>\n'
-                     '<p class="note">%s寸法は本体の外寸（mm）です。'
-                     '実際の設置高さは、基礎ブロック分（基本 高さ約10cm）を'
-                     '足した値になります。</p>' % (rows, note))
+            block = _table(sizes, kg) + '\n<p class="note">%s</p>' % note
             io.open(p, "w", encoding="utf-8").write(s[:body.start()] + block + s[body.end():])
             print("  %-34s %3d型番%s ← 表を新しく作りました"
                   % (slug, len(sizes), "（全型番）" if complete else ""))
             n += 1
             continue
-        tbl = ('<table class="sizes">\n        <thead>\n'
-               '          <tr><th>型番</th><th>間口 W</th><th>奥行 D</th><th>高さ H</th></tr>\n'
-               '        </thead>\n        <tbody>\n%s\n        </tbody>\n      </table>' % rows)
-        s2 = s[:body.start(1)] + tbl + s[body.end(1):]
+        s2 = s[:body.start(1)] + _table(sizes, kg) + s[body.end(1):]
 
-        # 表のすぐ下の注記も、掲載が全型番かどうかで書き分ける
-        head = ("全 %d 型番を掲載しています。" % len(sizes) if complete
-                else "公式で確認できた %d 型番を掲載しています。<strong>これ以外の型番もあります。</strong>" % len(sizes))
-        s2 = re.sub(r'(<p class="note">).*?(寸法は本体の外寸（mm）です。)',
-                    lambda m: m.group(1) + head + m.group(2), s2, count=1, flags=re.S)
+        # 表のすぐ下の注記も作り直す。
+        # 掲載が全型番かどうかと、床耐荷重の列を出すかどうかで文面が変わる。
+        if not NOTE_RE.search(s2):
+            raise SystemExit("[中止] %s にサイズ表の注記が見つかりません。"
+                             "雛形を変えたなら、このスクリプトも直してください。" % slug)
+        s2 = NOTE_RE.sub(lambda m: '<p class="note">%s</p>' % note, s2, count=1)
 
         if s2 != s:
             io.open(p, "w", encoding="utf-8").write(s2)

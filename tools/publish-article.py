@@ -198,7 +198,12 @@ def build_page(fm, h1, body_html, tag):
           '  "mainEntityOfPage": "%s",\n  "image": "%s",\n'
           '  "inLanguage": "ja",\n  "keywords": "%s"\n}\n</script>'
           % (esc_attr(title), esc_attr(desc), date, date, NAME, NAME, url, ogimg, esc_attr(kw)))
-    one(r'<script type="application/ld\+json">.*?</script>', ld, "JSON-LD")
+    # 差し替えるのは Article の塊だけ。
+    # 2026-10-29 まで「最初の ld+json ひとつ」を当てにしていた。build-breadcrumbs.py が
+    # 雛形にも BreadcrumbList を足したことで塊が2つになり、記事の公開が
+    # 「差し替え箇所が 2 件」で必ず止まる状態になっていた。
+    one(r'<script type="application/ld\+json">(?:(?!</script>).)*?"@type": "Article"'
+        r'(?:(?!</script>).)*</script>', ld, "JSON-LD（Article）")
 
     one(r'(<nav class="crumbs" aria-label="パンくずリスト">\s*<a href="\.\./">トップ</a><span>/</span><a href="\./">記事</a><span>/</span>).*?(\s*</nav>)',
         '<nav class="crumbs" aria-label="パンくずリスト">\n      <a href="../">トップ</a><span>/</span><a href="./">記事</a><span>/</span>%s\n    </nav>' % esc(crumb),
