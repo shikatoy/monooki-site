@@ -274,8 +274,6 @@
     .disclaimer { padding: 32px; }
     .footer-meta { flex-direction: row; justify-content: space-between; }
   }
-/* AUTO_ARTREL_CSS */
-  .rel.artrel { margin-top: 18px; }
   /* TAPTARGET */
   /* ───── タップの的を24px以上に（WCAG 2.2 / 2.5.8）
      下線の位置を変えないよう、当たり判定だけ ::before で広げる ───── */
@@ -288,6 +286,8 @@
     { content: ''; position: absolute; left: 0; right: 0;
     top: 50%; transform: translateY(-50%); height: 24px; }
   .crumbs { line-height: 2; }
+/* AUTO_ARTREL_CSS */
+  .rel.artrel { margin-top: 18px; }
 /* AUTO_PLINK_CSS_START */
   /* ───── 本文から製品ページへのリンク（tools/build-product-mentions.py が生成） ───── */
   .p-link { border-bottom: 1px solid var(--linesoft); text-decoration: none; }
@@ -404,13 +404,13 @@
       <div class="article-body">
 
         <p>スタッドレスに履き替えたタイヤを4本、あるいは2台分の8本。物置に入るかどうかを知りたいとき、公式サイトに何本と書いてあるかを探すことになります。</p>
-        <p><strong>3社を当たったところ、本数や台数を書いているのは1シリーズだけでした。</strong> イナバのタイヤストッカーです。</p>
+        <p>3社を当たったところ、本数や台数を書いているのは1シリーズだけでした。イナバのタイヤストッカーです。</p>
 
         <h2><span class="pb">書いてあるのは、</span><span class="pb">タイヤストッカーだけ</span></h2>
         <p>イナバの<a class="p-link" href="../products/inaba-tire-stocker.html">タイヤストッカー</a>［BJX-T］の公式ページには、こうあります。</p>
         <p class="note">車2〜3台分のタイヤを収納。最大でタイヤ12本までの収納が可能</p>
         <p>タイヤバー2本と、転がり防止用のフックが標準装備だとも書かれています。</p>
-        <p>ほかはどうか。</p>
+        <p>ほかはどうか。自転車やタイヤを置くための製品を、3社から当たりました。</p>
         <div class="table-wrap">
         <table>
           <thead><tr><th>当たったもの</th><th>台数・本数の記載</th></tr></thead>
@@ -418,11 +418,14 @@
             <tr><td>イナバ 自転車置場［BP／BT／BYX／BM／BFX］</td><td>記載なし（シリーズページ・型番ページとも）</td></tr>
             <tr><td>イナバ フォルタ ウィズ［FW］（開放スペース併設物置）</td><td>記載なし</td></tr>
             <tr><td>タクボ Mr.ストックマン プラスアルファ（駐輪スペース付き物置）</td><td>記載なし</td></tr>
+            <tr><td>ヨドコウ 自転車置場</td><td>記載なし</td></tr>
+            <tr><td>ヨドコウ サイクルスペース</td><td>記載なし</td></tr>
           </tbody>
         </table>
         </div>
-        <p>自転車を置くための製品にも、台数は書かれていません。イナバはフォルタ ウィズを「開放スペース併設物置」と呼んでいて、駐輪専用とは言っていません。</p>
-        <p>なお、タイヤストッカーの「最大12本」は<strong>シリーズ全体の記述</strong>です。型番ごとのページにも同じ文が載っていますが、間口900mmのものと1,320mmのもので書き分けられてはいません。</p>
+        <p><strong>自転車を置くための製品にも、台数は書かれていません。</strong> イナバはフォルタ ウィズを「開放スペース併設物置」と呼んでいて、駐輪専用とは言っていません。ヨドコウの自転車置場のページにあるのは「ヨドコウ独自のシルエットが8タイプ」という機種数で、置ける台数ではありません。サイクルスペースのほうは2段式スタンドで、「上段と下段で1セットの独立タイプ」と書かれていますが、これも組の単位であって台数ではありません。</p>
+        <p>ヨドコウの2つは、ページの中身が図で作られています。<strong>テキストで確認できる範囲に台数がない、ということです。</strong></p>
+        <p>なお、タイヤストッカーの「最大12本」はシリーズ全体の記述です。型番ごとのページにも同じ文が載っていますが、間口900mmのものと1,320mmのもので書き分けられてはいません。</p>
 
         <h2><span class="pb">タイヤストッカーは、</span><span class="pb">普通の</span><span class="pb">収納庫と</span><span class="pb">同じ箱</span></h2>
         <p>ここでもう一つ分かることがあります。タイヤストッカー［BJX-T］<span data-claim="codes_i-bjt">12</span>型番の外形寸法は、<strong>ドア型収納庫の<a class="p-link" href="../products/inaba-ivy-stocker.html">アイビーストッカー</a>［BJX］<span data-claim="codes_i-bjx">29</span>型番の中に、すべて同じものがあります</strong>。公式のダウンロードページにある寸法の一覧を突き合わせると、12型番すべてに同じ寸法の相手がいました。</p>
@@ -437,26 +440,27 @@
           </tbody>
         </table>
         </div>
-        <p>型番も、末尾に <strong>T</strong> が付くかどうかの違いです。公式の記述で違うのは、タイヤバー2本と転がり防止フックが標準装備かどうか。箱そのものは同じものです。</p>
-        <p>タイヤ用の<a class="x-link" href="monooki-narrow-space-maker.html">奥行</a>は755mmと905mmの2種類で、間口は900・1,100・1,320mm、高さは1,603mmと1,903mm。アイビーストッカーにはこれに加えて奥行515mmと高さ903mm・1,303mmの段があり、そちらにはT付きがありません。<strong>浅い側と低い側には、タイヤ用の設定が無い</strong>ということです。</p>
+        <p>型番も、末尾に T が付くかどうかの違いです。公式の記述で違うのは、タイヤバー2本と転がり防止フックが標準装備かどうか。箱そのものは同じものです。</p>
+        <p>タイヤ用の<a class="x-link" href="monooki-narrow-space-maker.html">奥行</a>は755mmと905mmの2種類で、間口は900・1,100・1,320mm、高さは1,603mmと1,903mm。アイビーストッカーにはこれに加えて奥行515mmと高さ903mm・1,303mmの段があり、そちらにはT付きがありません。浅い側と低い側には、タイヤ用の設定が無いということです。</p>
 
         <h2><span class="pb">本数を</span><span class="pb">決めているのは、</span><span class="pb">寸法の</span><span class="pb">ほう</span></h2>
         <p>公式が本数を書かない以上、入るかどうかは自分のタイヤの寸法と突き合わせることになります。見る数字は3つです。</p>
         <ul>
-        <li><strong>奥行</strong> ── 755mmか905mm。タイヤを立てて並べるか、寝かせて積むかで効く向きが変わります</li>
-        <li><strong>間口</strong> ── 900／1,100／1,320mm。並べられる数に直接効きます</li>
-        <li><strong>高さ</strong> ── 1,603mmか1,903mm。タイヤバー2本の位置を変えられると公式にあります</li>
+        <li>奥行 ── 755mmか905mm。タイヤを立てて並べるか、寝かせて積むかで効く向きが変わります</li>
+        <li>間口 ── 900／1,100／1,320mm。並べられる数に直接効きます</li>
+        <li>高さ ── 1,603mmか1,903mm。タイヤバー2本の位置を変えられると公式にあります</li>
         </ul>
         <p>扉は前開きの全面開口なので、間口がそのまま入口の幅になります。ここが引き戸の物置と大きく違うところです。</p>
-        <p>引き戸の物置にタイヤをしまう場合は、<a href="monooki-shutter-vs-slide-opening.html">入口が間口の5割台しか開かない</a>ことが効いてきます。間口1,832mmのMr.ストックマン ダンディでも、通せる幅は992mmです。カタログの間口ではなく、開口部の数字で見ることになります。</p>
+        <p>引き戸の物置にタイヤをしまう場合は、入口が間口の5割台しか開かないことが効いてきます。間口1,832mmのMr.ストックマン ダンディでも、通せる幅は992mmです。カタログの間口ではなく、開口部の数字で見ることになります。</p>
 
         <h2>まとめ</h2>
         <ul>
         <li>タイヤの本数・自転車の台数を公式に書いているのは、イナバのタイヤストッカーだけ。「車2〜3台分」「最大12本」</li>
         <li>その12本は型番ごとに書き分けられていない。シリーズ全体の記述</li>
-        <li>自転車置場にも、駐輪スペース付きの物置にも、台数の記載は無い</li>
+        <li>自転車置場にも、駐輪スペース付きの物置にも、台数の記載は無い。<strong>3社とも同じ</strong></li>
         <li>タイヤストッカーは、アイビーストッカーと外形寸法が12型番すべて同じ。違うのはタイヤバーと転がり防止フック</li>
         <li>入るかどうかは、奥行755／905mm、間口900／1,100／1,320mm、高さ1,603／1,903mm と、自分のタイヤの寸法との突き合わせで決まる</li>
+        <li>イナバとタクボは2026年10月8日、ヨドコウは2026年10月30日に公式を確認しました。ご購入前に必ず公式サイト・最新カタログでご確認ください</li>
         </ul>
 
       </div>
@@ -492,8 +496,8 @@
       <p class="rel-label">Related — あわせて読む</p>
       <ul class="rel-list">
         <li><a href="monooki-floor-load.html"><span class="rel-txt"><span class="rel-kicker">記事</span><span class="rel-name">物置の床は何kgまで？ 3社の数字は、そのままでは比べられない</span></span><span class="rel-go">&rarr;</span></a></li>
+        <li><a href="monooki-door-opening-side.html"><span class="rel-txt"><span class="rel-kicker">選び方</span><span class="rel-name">物置の扉は右開き？ 左開き？ そう書いているのは1社だけ</span></span><span class="rel-go">&rarr;</span></a></li>
         <li><a href="monooki-front-clearance.html"><span class="rel-txt"><span class="rel-kicker">記事</span><span class="rel-name">物置の前にどれだけ空けるか、どのメーカーも書いていない</span></span><span class="rel-go">&rarr;</span></a></li>
-        <li><a href="black-monooki-size-lineup.html"><span class="rel-txt"><span class="rel-kicker">記事</span><span class="rel-name">黒い物置は、選べる寸法が先に決まる</span></span><span class="rel-go">&rarr;</span></a></li>
       </ul>
     </aside>
     <!-- AUTO_ARTREL_END -->
