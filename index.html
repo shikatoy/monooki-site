@@ -767,13 +767,20 @@ function affUrl(code){
   }
   return '//ck.jp.ap.valuecommerce.com/servlet/referral?sid=' + VC.sid + '&pid=' + VC.pid + '&vc_url=' + encodeURIComponent(dest);
 }
+/* 行き先に価格が出るか。お問い合わせ商品（xz:）は価格を出さず、見積もりの入口になる。
+   tools/_common_page.py の shows_price と同じ決まり。両方を直すこと */
+function showsPrice(code){ return String(code || '').indexOf('xz:') !== 0; }
+function ctaText(name, code){
+  return showsPrice(code) ? `${name}の価格・無料見積もりを見る`
+                          : `${name}の無料見積もりを依頼する`;
+}
 function affLink(p){
   const code = EXSHOP[p.id];
   if(!code) return '';
   return `<a href="${affUrl(code)}" rel="nofollow sponsored" target="_blank"
      class="aff-quiz block border-t border-line bg-rust text-paper px-5 md:px-7 py-4 text-center font-serif font-bold text-base md:text-lg hover:bg-ink transition-colors duration-300"
      ><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=${VC.sid}&pid=${VC.pid}" height="1" width="0" border="0" alt=""
-     >${esc(p.name)}の価格・無料見積もりを見る <span class="font-mono">→</span><span class="block mt-1 font-sans font-normal text-[11px] tracking-widest2 opacity-80">広告 — エクスショップ</span></a>`;
+     >${ctaText(esc(p.name), code)} <span class="font-mono">→</span><span class="block mt-1 font-sans font-normal text-[11px] tracking-widest2 opacity-80">広告 — エクスショップ</span></a>`;
 }
 
 /* ---------- 製品アーカイブ ---------- */
@@ -2211,7 +2218,7 @@ function visualWrap(p, inner, boxCls){
   const page = PRODUCT_PAGES[p.id];
   const code = EXSHOP[p.id];
   const adTag = code
-    ? `<a href="${affUrl(code)}" rel="nofollow sponsored" target="_blank" class="vis-tag font-mono text-[11px] tracking-widest uppercase bg-rust text-paper px-2 py-1" title="販売店で価格・お見積もりを見る（広告）">広告<span class="vis-tag-more"> — 価格を見る →</span></a>`
+    ? `<a href="${affUrl(code)}" rel="nofollow sponsored" target="_blank" class="vis-tag font-mono text-[11px] tracking-widest uppercase bg-rust text-paper px-2 py-1" title="${showsPrice(code) ? '販売店で価格・お見積もりを見る（広告）' : '販売店へ無料見積もりを依頼する（広告）'}">広告<span class="vis-tag-more"> — ${showsPrice(code) ? '価格を見る' : '無料見積もりへ'} →</span></a>`
     : '';
   const makerTag = p.link
     ? `<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer" class="vis-tag font-mono text-[11px] tracking-widest uppercase bg-ink text-paper px-2 py-1" title="メーカー公式の商品ページを開く">公式<span class="vis-tag-more">メーカーページ </span>↗</a>`

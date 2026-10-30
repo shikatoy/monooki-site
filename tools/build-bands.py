@@ -177,8 +177,11 @@ def build():
             """シリーズ1行。販売店の登録があるものは、行の終わりに広告の出口を置く。
                並べる順は型番の多い順で、紹介料では変えない"""
             ad = EX.get(k[3])
+            # 2026-10-30 まで「販売店で見る」で、何が見えるかを言っていなかった。
+            # 価格の出ない行き先では「価格」を名乗らない（C.cta_short）
             tail = ('<a class="band-ad" href="%s" rel="nofollow sponsored" target="_blank">'
-                    '<b>広告</b><span>販売店で見る →</span></a>' % C.aff_url(ad)) if ad else ""
+                    '<b>広告</b><span>%s →</span></a>'
+                    % (C.aff_url(ad), C.cta_short(ad))) if ad else ""
             return ('<p class="band-row"><span class="band-txt"><b>%s %s</b> — '
                     '%d型番／間口 %s mm・奥行 %s mm</span>%s</p>'
                     % (C.MAKER_JP[k[0]], C.esc(k[1]), len(v),

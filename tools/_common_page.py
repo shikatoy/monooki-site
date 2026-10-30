@@ -61,6 +61,32 @@ def aff_url(code):
             % (SID, PID, urllib.parse.quote(exshop_url(code), safe="")))
 
 
+def shows_price(code):
+    """その行き先に価格が出るか。
+
+    エクスショップの「お問い合わせ商品」（書き方の頭が xz:）は価格を出さない。
+    2026-10-30 に xz:item:8162（バイクシャッターマン）を開いて確かめた。
+    工事対応エリアの欄が「お問い合わせください。」で、価格の表示そのものが無い。
+    通常の一覧（mo・wh）には「30%OFF 136,200円～」のように価格が並ぶ。
+
+    価格の出ないページへ「価格を見る」と書くと、行き先が守らない約束になる。
+    文言を決めるのはこの1か所だけにする。
+    """
+    return not str(code or "").startswith("xz:")
+
+
+def cta_text(name, code):
+    """提携リンクの文言（製品名つき）。行き先が価格を出すかどうかで変える。"""
+    if shows_price(code):
+        return "%sの価格・無料見積もりを見る" % name
+    return "%sの無料見積もりを依頼する" % name
+
+
+def cta_short(code):
+    """提携リンクの文言（製品名を置く場所が無いとき）。"""
+    return "販売店で価格を見る" if shows_price(code) else "無料見積もりを依頼"
+
+
 def load_products():
     s = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
     i = s.find("const PRODUCTS = [")

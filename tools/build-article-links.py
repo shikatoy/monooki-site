@@ -108,9 +108,13 @@ def ad_block(hits, ex):
     rows = [(p, ex[p["id"]]) for p in hits if p["id"] in ex][:MAX_ADS]
     if not rows:
         return ""
+    # 文言は C.cta_text に寄せる（2026-10-30）。
+    # それまでここだけ「価格・見積もりを見る」で、製品ページの出口の
+    # 「価格・無料見積もりを見る」と違う言い方になっていた。
+    # 価格の出ない行き先（お問い合わせ商品）では「価格」を名乗らない。
     lis = "\n        ".join(
-        '<li><a href="%s" rel="nofollow sponsored" target="_blank">%sの価格・見積もりを見る &rarr;</a></li>'
-        % (C.aff_url(code), p["name"]) for p, code in rows)
+        '<li><a href="%s" rel="nofollow sponsored" target="_blank">%s &rarr;</a></li>'
+        % (C.aff_url(code), C.cta_text(p["name"], code)) for p, code in rows)
     return ('      <div class="rel-ad">\n'
             '        <p class="rel-ad-label">広告 — 販売店（エクスショップ）で見る</p>\n'
             '        <ul class="rel-ad-list">\n        %s\n        </ul>\n'

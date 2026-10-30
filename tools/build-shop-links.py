@@ -112,9 +112,15 @@ def vc(url):
             % (SID, PID, urllib.parse.quote(url, safe="")))
 
 
-def block(cat, code, name):
-    lead = ("%sの価格・無料見積もりを見る" % name if name
+def lead_text(cat, code, name):
+    """出口の文言。価格の出ない行き先（お問い合わせ商品）では「価格」を名乗らない。
+       決まりは tools/_common_page.py の cta_text に置く（2026-10-30）"""
+    return (_common().cta_text(name, code) if name
             else "エクスショップで%sを探す" % CAT_LABEL[cat])
+
+
+def block(cat, code, name):
+    lead = lead_text(cat, code, name)
     return (BEG + '<a class="shop" href="%s" rel="nofollow sponsored" target="_blank">'
             '<span class="shop-txt"><span class="shop-lead">%s</span>'
             '<span class="shop-sub"><b>広告</b> — エクスショップ（提携先）</span></span>'
@@ -181,12 +187,22 @@ def main():
         s = orig = open(f, encoding="utf-8").read()
         href = vc(dest_url(cat, code))
 
-        # 既にあるリンクは href だけ差し替える（文言・写真はそのまま）
+        # 既にあるリンクは href を差し替える（写真はそのまま）
         n = len(re.findall(r'href="//ck\.jp\.ap\.valuecommerce\.com[^"]*"', s))
         if n:
             s = re.sub(r'href="//ck\.jp\.ap\.valuecommerce\.com[^"]*"',
                        'href="%s"' % href.replace("\\", "\\\\"), s)
             note = "href を %d 本そろえた" % n
+            # 文言もそろえる（2026-10-30）。
+            # それまで href だけ差し替えていたため、文言の決まりを直しても
+            # 一度入れた出口は古い言い方のまま残っていた。実際、価格の出ない
+            # 行き先の5シリーズが「価格・無料見積もりを見る」のままだった。
+            # 置き換えるのは出口（a.shop）の中の shop-lead だけ。
+            lead = lead_text(cat, code, name)
+            s, k = re.subn(r'(<span class="shop-lead">)[^<]*(</span>)',
+                           lambda m: m.group(1) + lead + m.group(2), s)
+            if k:
+                note += "／文言を %d か所そろえた" % k
         else:
             # 出口が無いページ → まとめ（aside.cta）の直前に1本入れる
             s = re.sub(re.escape(BEG) + r".*?" + re.escape(END) + r"\s*", "", s, flags=re.S)
