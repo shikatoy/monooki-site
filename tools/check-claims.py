@@ -179,6 +179,26 @@ def main():
             elif raw not in tag:
                 bad.append((rel, cid + "（印だけで、中に数字が無い）", got, exp))
 
+    # llms.txt は span を置けないので、行の形を決め打ちで見る。
+    # 2026-10-29 まで製品索引の行が手書きのままで、実数が34製品・1,141型番に
+    # なっても「全18製品」と書いたままだった。build-llms.py が毎回書き直す形に
+    # したが、その生成は publish.sh で警告どまりなので、ここでも数える。
+    lp = os.path.join(ROOT, "llms.txt")
+    if os.path.exists(lp):
+        s = io.open(lp, encoding="utf-8").read()
+        for cid, rx in (("series_all", r"^- 製品索引:.*?全([0-9,]+)製品"),
+                        ("codes_all", r"^- 製品索引:.*?製品・([0-9,]+)型番"),
+                        ("codes_all", r"^- 型番から探す（3社の全([0-9,]+)型番")):
+            m = re.search(rx, s, re.M)
+            if not m:
+                bad.append(("llms.txt", cid + "（行が見当たりません）", 0,
+                            expected(cid, rows) or 0))
+                continue
+            n += 1
+            got, exp = int(m.group(1).replace(",", "")), expected(cid, rows)
+            if exp != got:
+                bad.append(("llms.txt", cid, got, exp))
+
     for rel, cid in unknown:
         print("[注意] %s: 知らない claim id 「%s」。check-claims.py に足すか、綴りを直してください。" % (rel, cid))
     if bad:
