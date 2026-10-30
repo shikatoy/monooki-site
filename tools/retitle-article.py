@@ -58,6 +58,8 @@ def main():
     ap.add_argument("--title")
     ap.add_argument("--description")
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--sync", action="store_true",
+                    help="記事ページを正として、ARTICLES とカードをそろえる")
     a = ap.parse_args()
 
     art = os.path.join(ROOT, "articles", a.slug + ".html")
@@ -65,7 +67,11 @@ def main():
         raise SystemExit("[中止] 記事がありません: articles/%s.html" % a.slug)
     s = read(art)
 
-    cur_title = re.search(r"<title>(.*?)｜", s, re.S)
+    # <title> は「見出し｜サイト名」。見出し自体に｜が入るものがあるので、
+    # 最初の｜で切ってはいけない（2026-10-30 に点検スクリプトでこれを間違えた）
+    cur_title = re.search(r"<title>(.*?)</title>", s, re.S)
+    if cur_title:
+        cur_title = re.match("(.*)", cur_title.group(1).rsplit("｜", 1)[0].strip())
     cur_desc = re.search(r'<meta name="description" content="(.*?)">', s, re.S)
     cur_date = re.search(r'<time datetime="([^"]*)"', s)
     print("いまの見出し : %s" % (cur_title.group(1) if cur_title else "（読めません）"))
@@ -83,6 +89,21 @@ def main():
 
     if a.check:
         return 0
+
+    if a.sync:
+        # 記事ページを正として、ARTICLES とカードをそろえる。記事ページは触らない。
+        # 2026-10-30、ARTICLES だけが古い記事が5本見つかった。中には、置き換えられた
+        # 前の記事の見出しと説明文がそのまま残っているものもあった。
+        if a.title or a.description:
+            raise SystemExit("[中止] --sync のときは --title / --description を渡さないでください。")
+        if not cur_title or not cur_desc:
+            raise SystemExit("[中止] 記事ページから見出しか説明文を読めませんでした。")
+        a.title, a.description = cur_title.group(1), cur_desc.group(1)
+        if ("'" in a.title) or ("'" in a.description):
+            raise SystemExit("[中止] 記事ページの見出しか説明文に半角のアポストロフィが入っています。"
+                             "index.html の中で文字列を囲っているため、そのままでは入れられません。")
+        print("\n  （--sync）記事ページの値で ARTICLES とカードをそろえます。")
+
     if not a.title or not a.description:
         raise SystemExit("[中止] --title と --description の両方を渡してください。")
     if "'" in a.title or "'" in a.description:
@@ -92,27 +113,30 @@ def main():
     title, desc = a.title, a.description
     date = cur_date.group(1) if cur_date else ent.group(1)
 
-    # 1. 記事ページ
-    s = one(s, r"<title>.*?</title>",
-            "<title>%s｜%s</title>" % (PUB.esc(title), PUB.NAME), "title", art)
-    s = one(s, r'<meta name="description" content=".*?">',
-            '<meta name="description" content="%s">' % PUB.esc_attr(desc), "description", art)
-    s = one(s, r'<meta property="og:title" content=".*?">',
-            '<meta property="og:title" content="%s">' % PUB.esc_attr(title), "og:title", art)
-    s = one(s, r'<meta property="og:description" content=".*?">',
-            '<meta property="og:description" content="%s">' % PUB.esc_attr(desc),
-            "og:description", art)
-    s = one(s, r'"headline": ".*?",', '"headline": "%s",' % PUB.esc_attr(title),
-            "JSON-LD の headline", art)
-    s = one(s, r'"description": ".*?",', '"description": "%s",' % PUB.esc_attr(desc),
-            "JSON-LD の description", art)
-    # 見出しは素の文字で置く。文節の区切り（.pb）は build-headline-breaks.py が付け直す
-    s = one(s, r'<h1 class="article-title">.*?</h1>',
-            '<h1 class="article-title">%s</h1>' % PUB.esc(title), "h1", art)
-    s = one(s, r'<p class="article-lead">.*?</p>',
-            '<p class="article-lead">%s</p>' % PUB.esc(desc), "リード文", art)
-    write(art, s)
-    print("\n  更新: articles/%s.html （8か所）" % a.slug)
+    # 1. 記事ページ（--sync のときは正なので触らない）
+    if a.sync:
+        print("  飛ばす: articles/%s.html （--sync では触りません）" % a.slug)
+    else:
+        s = one(s, r"<title>.*?</title>",
+                "<title>%s｜%s</title>" % (PUB.esc(title), PUB.NAME), "title", art)
+        s = one(s, r'<meta name="description" content=".*?">',
+                '<meta name="description" content="%s">' % PUB.esc_attr(desc), "description", art)
+        s = one(s, r'<meta property="og:title" content=".*?">',
+                '<meta property="og:title" content="%s">' % PUB.esc_attr(title), "og:title", art)
+        s = one(s, r'<meta property="og:description" content=".*?">',
+                '<meta property="og:description" content="%s">' % PUB.esc_attr(desc),
+                "og:description", art)
+        s = one(s, r'"headline": ".*?",', '"headline": "%s",' % PUB.esc_attr(title),
+                "JSON-LD の headline", art)
+        s = one(s, r'"description": ".*?",', '"description": "%s",' % PUB.esc_attr(desc),
+                "JSON-LD の description", art)
+        # 見出しは素の文字で置く。文節の区切り（.pb）は build-headline-breaks.py が付け直す
+        s = one(s, r'<h1 class="article-title">.*?</h1>',
+                '<h1 class="article-title">%s</h1>' % PUB.esc(title), "h1", art)
+        s = one(s, r'<p class="article-lead">.*?</p>',
+                '<p class="article-lead">%s</p>' % PUB.esc(desc), "リード文", art)
+        write(art, s)
+        print("\n  更新: articles/%s.html （8か所）" % a.slug)
 
     # 2. index.html の ARTICLES
     lead = PUB.short_lead(desc)
