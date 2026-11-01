@@ -296,6 +296,18 @@
   .sizes tbody tr:hover { background: #f4f4f4; }
   .note { margin: 22px 0 0; padding: 18px 20px; border: 1px solid var(--linesoft); background: #f4f4f4; font-size: 14px; line-height: 2; }
   @media (min-width: 768px) { .spec th, .spec td { font-size: 15px; } .sizes th, .sizes td { font-size: 14px; } }
+  /* TAPTARGET */
+  /* ───── タップの的を24px以上に（WCAG 2.2 / 2.5.8）
+     下線の位置を変えないよう、当たり判定だけ ::before で広げる ───── */
+  .crumbs a, .footer-meta a, .header-link,
+  .tbl a, .grp a, .sizes td a,
+  h2 > a, h3 > a, dd > a { position: relative; }
+  .crumbs a::before, .footer-meta a::before, .header-link::before,
+  .tbl a::before, .grp a::before, .sizes td a::before,
+  h2 > a::before, h3 > a::before, dd > a::before
+    { content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 24px; }
+  .crumbs { line-height: 2; }
 /* AUTO_SHOP_CSS_START */
   .shop { position:relative; display:flex; align-items:stretch; margin:32px 0 0; border:1px solid var(--line);
     background:#fff; text-decoration:none; overflow:hidden;
@@ -310,18 +322,6 @@
   .shop:hover .shop-go { background:var(--ink); }
   .shop img[height='1'] { position:absolute; left:0; top:0; width:1px !important; height:1px !important; opacity:0; }
 /* AUTO_SHOP_CSS_END */
-  /* TAPTARGET */
-  /* ───── タップの的を24px以上に（WCAG 2.2 / 2.5.8）
-     下線の位置を変えないよう、当たり判定だけ ::before で広げる ───── */
-  .crumbs a, .footer-meta a, .header-link,
-  .tbl a, .grp a, .sizes td a,
-  h2 > a, h3 > a, dd > a { position: relative; }
-  .crumbs a::before, .footer-meta a::before, .header-link::before,
-  .tbl a::before, .grp a::before, .sizes td a::before,
-  h2 > a::before, h3 > a::before, dd > a::before
-    { content: ''; position: absolute; left: 0; right: 0;
-    top: 50%; transform: translateY(-50%); height: 24px; }
-  .crumbs { line-height: 2; }
 /* TABLESCROLL_START */
   /* 画面が狭いとき、表は自分の箱の中で横に流す。ページごと横にずれるのを防ぐ。
      折り返さないのは、折り返すとシリーズ名や型番が1文字ずつ縦に並ぶため。
