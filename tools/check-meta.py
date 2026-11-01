@@ -123,6 +123,18 @@ def main():
             for slug in sorted({u for u in urls if urls.count(u) > 1}):
                 bad.append(("index.html", "ARTICLES に同じ記事が %d 回入っています: %s"
                             % (urls.count(slug), slug)))
+            # 逆向き。2026-11-01 に追加。
+            #
+            # ここまでは ARTICLES の各行について「記事があるか・合っているか」
+            # しか見ていなかった。「記事はあるが ARTICLES に無い」は誰も見ていない。
+            # そのため publish-article.py が隣の記事まで消していたのに気づけず、
+            # 生きている記事22本のうち5本しか残らない状態になっていた。
+            # トップの「記事をすべて見る（n本）」も、構造化データの BlogPosting も、
+            # どちらも ARTICLES の件数をそのまま出すので、5本と名乗っていた。
+            # カードは両方向を見ていたので22本すべて残っていた。
+            for slug in sorted(have - set(urls)):
+                bad.append(("index.html", "記事はあるが ARTICLES に無い: " + slug
+                            + "（tools/build-top-articles.py で作り直せます）"))
             for date, _tag, title, lead, slug in re.findall(
                     r"\{ date:'([^']*)', tag:'([^']*)',\s*title:'([^']*)',\s*"
                     r"lead:'([^']*)',\s*url:'articles/([^']+)\.html' \}", blk, re.S):

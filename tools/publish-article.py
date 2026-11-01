@@ -253,14 +253,37 @@ def build_page(fm, h1, body_html, tag):
     return shell
 
 
+def drop_articles_entry(s, slug):
+    """index.html の ARTICLES から、その slug の1件だけを落とす。
+
+    2026-11-01 まで、ここは正規表現だった。
+        r"\n?  \{ date:'...', tag:'...',\n(?:[^\n]*\n)*?[^\n]*url:'articles/<slug>\.html' \},\n?"
+    `(?:[^\n]*\n)*?` に上限が無いため、目当ての記事が10番目にあると
+    1番目から10番目までがひとつの塊として一致し、まとめて消えていた。
+    生きている記事22本のうち、ARTICLES に残っていたのは5本だった。
+    区切って1件だけ落とす形にする。行をまたいで食い合うことがない。
+    """
+    m = re.search(r"(const ARTICLES = \[)(.*?)(\];)", s, re.S)
+    if not m:
+        return s
+    body = m.group(2)
+    parts = re.split(r"(?=\n  \{ date:')", body)
+    mark = "url:'articles/%s.html'" % slug
+    keep = [p for p in parts if mark not in p]
+    gone = len(parts) - len(keep)
+    if gone > 1:
+        raise SystemExit("[中止] ARTICLES から %d 件消えようとしました（1件のはず）: %s"
+                         % (gone, slug))
+    return s[:m.start(2)] + "".join(keep) + s[m.end(2):]
+
+
 def upsert(path, block, slug, anchor_pat, label):
     """slug の既存分を消してから、anchor の直後に差し込む"""
     s = open(path, encoding="utf-8").read()
     before = s
     s = re.sub(r"\n?[ \t]*<li class=\"card\">\s*<a class=\"card-inner\" href=\"%s\.html\">.*?</li>\n?" % re.escape(slug),
                "\n", s, flags=re.S)
-    s = re.sub(r"\n?  \{ date:'[^']*', tag:'[^']*',\n(?:[^\n]*\n)*?[^\n]*url:'articles/%s\.html' \},\n?" % re.escape(slug),
-               "\n", s, flags=re.S)
+    s = drop_articles_entry(s, slug)
     s = re.sub(r"\n?  <url>\s*<loc>[^<]*articles/%s\.html</loc>.*?</url>\n?" % re.escape(slug),
                "\n", s, flags=re.S)
     s = re.sub(r"\n?  - 「[^」]*」\(/articles/%s\.html[^\n]*\n" % re.escape(slug), "\n", s)

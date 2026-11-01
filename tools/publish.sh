@@ -41,6 +41,13 @@ python3 "$REPO/tools/build-crosslinks.py" || echo "[警告] 記事どうしの�
 python3 "$REPO/tools/build-retired.py" || echo "[警告] 取り下げページの生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-article-links.py" || echo "[警告] 記事導線の生成に失敗しました（続行します）"
 python3 "$REPO/tools/build-article-related.py" || echo "[警告] あわせて読むの生成に失敗しました（続行します）"
+
+# トップの記事一覧（ARTICLES）を記事一覧ページのカードから作り直す（2026-11-01）
+# ARTICLES はトップの一覧と構造化データ（Blog / BlogPosting）の元になっている。
+# publish-article.py の削除の正規表現が隣の記事まで巻き込んで消していて、
+# 生きている記事22本のうち5本しか残っていなかった。手で足すのをやめ、
+# カードから作り直す（カード文は check-meta.py が記事の description と突き合わせている）
+python3 "$REPO/tools/build-top-articles.py" || { echo "[中止] トップの記事一覧の生成に失敗しました。"; exit 1; }
 python3 "$REPO/tools/build-headline-breaks.py" || echo "[警告] 見出しの折り返しの生成に失敗しました（続行します）"
 
 # 廃盤・生産終了ページを作り直す（手で直さなくてよい）
